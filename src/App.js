@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
+import Authenticated from "components/Routes/Authenticated";
+import { createBrowserHistory } from "history";
+import Forgot from "pages/Forgot";
+import Index from "pages/Index";
+import { Route, Router, Switch } from "react-router-dom";
+import Gate from "./components/Routes/Gate";
+import Unauthenticated from "./pages/401";
+import NotFound from "./pages/404";
+import Login from "./pages/Login";
 
 function App() {
+  const history = createBrowserHistory({ basename: process.env.PUBLIC_URL });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router history={history}>
+        <Switch>
+          <Gate path="/login" component={Login}></Gate>
+          <Gate path="/private" component={Unauthenticated}></Gate>
+          <Route path="/forgot" component={Forgot}></Route>
+
+          <Authenticated path="/" component={Index}></Authenticated>
+          <Route path="*" component={NotFound}></Route>
+        </Switch>
+      </Router>
+    </>
   );
 }
 
