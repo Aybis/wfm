@@ -45,6 +45,11 @@ const CheckIn = () => {
     width: "100%",
     height: "55%",
   };
+  
+  const center = {
+    lat: -6.2302258,
+    lng: 106.8160106,
+  };
 
   const options = {
     disableDefaultUI: true,
@@ -53,7 +58,12 @@ const CheckIn = () => {
 
   const onLoad = useCallback(function callback(map) {
     const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
+    map.setZoom(13); 
+    map.setCenter(bounds.getCenter());
+    let listener =  window.google.maps.event.addListener(map, "idle", function() { 
+      if (map.getZoom() > 16) map.setZoom(16); 
+      window.google.maps.event.removeListener(listener); 
+    });
   }, []);
 
   const onClickPopPuP = () => {
@@ -73,13 +83,14 @@ const CheckIn = () => {
   };
 
   const inputPhoto = (event) => {
-    console.log(event.target.files[0]);
     let image = event.target.files[0] ? event.target.files[0] : null;
 
     if (image) {
       let source = URL.createObjectURL(image);
       setPhoto(source);
     }
+    setPhoto(image);
+
   };
 
   const getLocation = () => {
@@ -104,9 +115,9 @@ const CheckIn = () => {
   };
 
   useEffect(() => {
-    getLocation();
-
     setTimeout(() => {
+     getLocation();
+
       setPopup(true);
     }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -120,17 +131,20 @@ const CheckIn = () => {
         style={{ top: `${popup ? "44%" : "11%"}` }}>
         <ChevronLeftIcon className="h-8 w-8 bg-white rounded p-1" />
       </Link>
+
       <button
         className="absolute z-40 right-4 transition-all duration-500 rounded-full"
         onClick={() => getLocation()}
         style={{ top: `${popup ? "44%" : "11%"}` }}>
         <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-blue-500" />
       </button>
+
+
       <div className="fixed bg-white top-0 inset-x-0 h-screen">
-        {isLoaded ? (
+        {isLoaded  ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
-            center={longLat}
+            center={center}
             zoom={13}
             onLoad={onLoad}
             options={options}>
@@ -151,10 +165,9 @@ const CheckIn = () => {
                   <h2>
                     <span role="img" aria-label="bear">
                       🐻
-                    </span>{" "}
-                    Alert
+                    </span>
+                    Ini Adalah Anda xixixi
                   </h2>
-                  <p>Spotted </p>
                 </div>
               </InfoWindow>
             ) : null}

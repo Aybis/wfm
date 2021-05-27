@@ -97,7 +97,7 @@ export default function Presensi({ history }) {
           className="w-20 border-2 border-gray-600 bg-gray-600 rounded-full mx-auto mb-2"
           onClick={() => setPopUp(!popUp)}
         />
-        <div className="grid grid-cols-1 gap-4 overflow-auto h-full mt-4">
+        <div className="grid grid-cols-1 gap-4 overflow-auto hidden-scroll h-full mt-4">
           {reports.map((report, index) => (
             <CardDay
               key={index}

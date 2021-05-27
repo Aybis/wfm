@@ -106,7 +106,7 @@ const Home = ({ user }) => {
         <CardPresence />
         <div className="relative mt-8">
           <Heading heading="Weekly Report" />
-          <div className="overflow-x-auto flex gap-4 mt-4 -ml-6 -mr-3 pl-6 pr-6">
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 -ml-6 -mr-3 pl-6 pr-6">
             {/* card daily */}
             {presensi.map((item) => (
               <CardDaily
@@ -124,7 +124,7 @@ const Home = ({ user }) => {
         {/* card daily team report  */}
         <div className="relative mt-8">
           <Heading heading="Team Report" />
-          <div className="overflow-x-auto flex gap-4 mt-4 ">
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 ">
             {/* card team */}
             {teams.map((team, index) => (
               <CardTeam
