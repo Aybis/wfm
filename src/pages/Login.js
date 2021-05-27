@@ -22,13 +22,12 @@ const Login = ({ history }) => {
 
   const [username, setUsername] = useState(() => "");
   const [password, setPassword] = useState(() => "");
+  const [isPassword, setIsPassword] = useState(true);
 
   const [state, setState] = useForm({
-    email: "",
+    username: "",
     password: "",
   });
-
-  const [isPassword, setIsPassword] = useState(true);
 
   const submitFunction = (event) => {
     event.preventDefault();

@@ -3,7 +3,7 @@
 import { DownloadIcon } from "@heroicons/react/outline";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 import CardDay from "components/molecules/CardDay";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Presensi({ history }) {
   const [popUp, setPopUp] = useState(null);
@@ -51,6 +51,13 @@ export default function Presensi({ history }) {
     },
   ];
 
+  useEffect(() => {
+    setTimeout(() => {
+      setPopUp(!popUp);
+    }, 500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="relative bg-gray-50 min-h-screen h-full p-6">
       <div className="relative items-center text-center p-2">
@@ -83,14 +90,14 @@ export default function Presensi({ history }) {
       </div>
 
       <div
-        className={`fixed bottom-0 inset-x-0  rounded-t-2xl border-t border-gray-100 bg-white p-4 transition-all duration-500 ${
+        className={`fixed bottom-0 inset-x-0  rounded-t-2xl border-t border-gray-100 bg-white p-4 pb-12 transition-all duration-500 ${
           popUp ? "h-3/4" : "h-10"
         }`}>
         <hr
           className="w-20 border-2 border-gray-600 bg-gray-600 rounded-full mx-auto mb-2"
           onClick={() => setPopUp(!popUp)}
         />
-        <div className="grid grid-cols-1 gap-4 overflow-auto h-full mt-4 mb-12">
+        <div className="grid grid-cols-1 gap-4 overflow-auto h-full mt-4">
           {reports.map((report, index) => (
             <CardDay
               key={index}
