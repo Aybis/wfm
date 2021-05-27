@@ -4,7 +4,7 @@ import React from "react";
 import { ChevronRightIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 
-export default function CardOvertime({ date, title, hours, status }) {
+export default function CardOvertime({ date, title, hours, status, border=false }) {
   let classStatus = "bg-pink-100 text-pink-600";
   let valueStatus = "On Duty";
   let longTime = "On Duty";
@@ -23,7 +23,7 @@ export default function CardOvertime({ date, title, hours, status }) {
   }
 
   return (
-    <div className="flex w-full justify-between bg-white p-4 mt-4 rounded-lg">
+    <div className={`flex w-full justify-between bg-white p-4 mt-4 rounded-lg ${border && 'border border-gray-200'}`}>
       <div className="flex flex-col gap-2 text-xs">
         <h4 className="font-medium text-gray-400">{date}</h4>
         <h1 className="font-semibold text-gray-700">{title}</h1>

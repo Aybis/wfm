@@ -18,7 +18,7 @@ import useForm from "helpers/hooks/useForm";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const CheckIn = () => {
+const OvertimeIn = ({history}) => {
   const [popup, setPopup] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -212,103 +212,31 @@ const CheckIn = () => {
                 <p className="font-normal text-gray-400">Loading</p>
               )}
             </div>
-            <div className="grid grid-cols-2  gap-2 text-sm">
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
                 <label htmlFor="lokasi" className="text-gray-600 font-semibold">
-                  Kondisi
+                  Subject
                 </label>
-                <select
-                  className="p-2 border border-gray-200 rounded bg-white"
-                  name="kondisi"
-                  onChange={setState}
-                  value={state.kondisi}>
-                  <option value="sehat">Sehat</option>
-                  <option value="sakit">Sakit</option>
-                  <option value="cuti">Cuti</option>
-                  <option value="ijin">Ijin</option>
-                  <option value="sppd">SPPD</option>
-                </select>
+                <input type="text" className="border border-gray-200 p-2 text-sm text-gray-800 rounded-md" placeholder="Subject Lembur" />
               </div>
-              {state.kondisi === "sehat" ? (
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="kehadiran"
-                    className="text-gray-600 font-semibold">
-                    Kehadiran
-                  </label>
-                  <select
-                    className="p-2 border border-gray-200 rounded bg-white"
-                    name="kehadiran"
-                    onChange={setState}
-                    defaultValue={state.kehadiran}>
-                    <option>Pilih Kehadiran</option>
-                    <option value="wfh">WFH</option>
-                    <option value="wfo">WFO</option>
-                    <option value="satelit">Satelit</option>
-                  </select>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="lokasi"
-                    className="text-gray-600 font-semibold">
-                    Hari
-                  </label>
-                  <input
-                    name="hari"
-                    onChange={setState}
-                    value={state.hari}
-                    type="number"
-                    className="text-sm p-2 border border-gray-300 rounded bg-white"
-                  />
-                </div>
-              )}
-            </div>
-            {state.kondisi !== "sehat" && (
-              <div className="flex flex-col gap-2 text-sm">
+
+              <div className="grid grid-cols-2 gap-2 mt-4 justify-items-center">
+                <div className="flex flex-col items-center gap-1">
                 <label htmlFor="lokasi" className="text-gray-600 font-semibold">
-                  Keterangan
+                  Lemburan Start
                 </label>
-                <textarea
-                  className="p-2 border border-gray-200 rounded bg-white"
-                  name="keterangan"
-                  onChange={setState}
-                  value={state.keterangan}></textarea>
+                <h4 className="text-gray-800 text-sm font-semibold"> 00 : 00</h4>
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                <label htmlFor="lokasi" className="text-gray-600 font-semibold">
+                  Lemburan Finish
+                </label>
+                <h4 className="text-gray-800 text-sm font-semibold"> 00 : 00</h4>
+                </div>
               </div>
-            )}
-
-            <div className="flex flex-col gap-2 text-sm">
-              <label htmlFor="image" className="text-gray-600 font-semibold">
-                Photo
-                {photo ? (
-                  <img
-                    src={photo}
-                    alt="file"
-                    className=" rounded-lg cursor-pointer mt-2"
-                  />
-                ) : (
-                  <UserCircleIcon
-                    tabIndex="0"
-                    className="h-64 w-full rounded-lg bg-gray-100 text-gray-400 p-2 cursor-pointer mt-2 pb-12"
-                  />
-                )}
-              </label>
-
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                capture="camera"
-                id="image"
-                className="hidden"
-                onChange={(event) => inputPhoto(event)}
-              />
-            </div>
-            {photo && (
+           
               <button className="p-3 text-lg font-semibold bg-blue-500 w-full text-center rounded-lg text-white">
-                Check In
+                Start
               </button>
-            )}
           </form>
         </div>
       </div>
@@ -316,4 +244,4 @@ const CheckIn = () => {
   );
 };
 
-export default CheckIn;
+export default OvertimeIn;

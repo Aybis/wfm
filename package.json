@@ -1,7 +1,8 @@
 {
   "name": "wfm",
   "version": "0.1.0",
-  "private": true,
+  "private": true,  
+  "homepage": "https://wfm.pins.co.id",
   "dependencies": {
     "@craco/craco": "^6.1.2",
     "@heroicons/react": "^1.0.1",

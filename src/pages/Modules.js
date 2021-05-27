@@ -32,12 +32,12 @@ const Modules = () => {
             Presensi
           </h4>
         </Link>
-        <div className="flex flex-col bg-pink-100 items-center p-4 justify-center rounded-lg">
+        <Link to="/overtime" className="flex flex-col bg-pink-100 items-center p-4 justify-center rounded-lg">
           <ClockIcon className="p-2 h-16 w-16 text-pink-600 rounded-full bg-white " />
           <h4 className="font-semibold text-pink-600 text-sm text-left mt-2">
             Lemburan
           </h4>
-        </div>
+        </Link>
         <div className="flex flex-col bg-green-100 items-center p-4 justify-center rounded-lg">
           <UserGroupIcon className="p-2 h-16 w-16 text-green-600 rounded-full bg-white " />
           <h4 className="font-semibold text-green-600 text-sm text-left mt-2">

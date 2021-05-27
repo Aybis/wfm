@@ -1,13 +1,29 @@
 /** @format */
 
+import { LogoutIcon } from "@heroicons/react/outline";
 import React from "react";
+import { Redirect } from "react-router";
 
-export default function MobileHeader({ user }) {
+export default function MobileHeader({ user, history }) {
+
+  const logOoutUser = () => {
+    // remove token
+    localStorage.removeItem('WFM:token');
+    // remove cookies
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    // redirect link
+    <Redirect push to="/login" />
+    // reload page 
+    window.location.reload();
+
+  
+  }
+
   return (
     <div className="flex justify-between items-center">
       <div className="flex gap-2 items-center justify-center">
         <div className="relative">
-          {/* {user.avatar ? (
+          {user.avatar ? (
             <img src={user.avatar} alt="avatar" className="h-8 w-8" />
           ) : (
             <img
@@ -15,12 +31,7 @@ export default function MobileHeader({ user }) {
               alt="avatar"
               className="h-10 w-10 rounded-full"
             />
-          )} */}
-          <img
-            src={`https://ui-avatars.com/api/?name=${user.name}&background=7B81EE&color=fff`}
-            alt="avatar"
-            className="h-10 w-10 rounded-full"
-          />
+          )}
         </div>
         <div className="flex flex-col -gap-2">
           <h6 className="text-xs font-bold text-gray-800 transform capitalize">
@@ -32,7 +43,7 @@ export default function MobileHeader({ user }) {
         </div>
       </div>
       <div className="relative">
-        <svg
+        {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6 text-gray-400"
           fill="none"
@@ -45,7 +56,8 @@ export default function MobileHeader({ user }) {
             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
           />
         </svg>
-        <div className="absolute h-2 w-2 rounded-full bg-red-500 top-0 right-1"></div>
+        <div className="absolute h-2 w-2 rounded-full bg-red-500 top-0 right-1"></div> */}
+          <LogoutIcon className="h-5 w-5 text-gray-400 cursor-pointer" onClick={() => logOoutUser()} />
       </div>
     </div>
   );

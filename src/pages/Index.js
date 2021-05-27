@@ -8,6 +8,8 @@ import Dashboard from "./Dashboard";
 import DetailApproval from "./DetailApproval";
 import Home from "./Home";
 import Modules from "./Modules";
+import Overtime from "./Overtime";
+import OvertimeIn from "./OvertimeIn";
 import Presensi from "./Presensi";
 
 const Index = () => {
@@ -36,6 +38,8 @@ const Index = () => {
         <Route exact path="/details" component={DetailApproval}></Route>
         <Route exact path="/check-in" component={CheckIn}></Route>
         <Route exact path="/presensi" component={Presensi}></Route>
+        <Route exact path="/overtime" component={Overtime}></Route>
+        <Route exact path="/overtime/in" component={OvertimeIn}></Route>
       </Switch>
     </>
   ) : (
