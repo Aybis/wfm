@@ -13,21 +13,21 @@ export default function CardDay({
 }) {
   return (
     <div
-      className={`relative w-full gap-4 mt-4 bg-white rounded-lg ${
+      className={`flex flex-col w-full gap-4 mt-4 bg-white rounded-lg ${
         border && "border border-gray-100"
       }`}>
       {date && (
         <div className=" mx-auto text-center -mt-3">
-          <h4 className="px-2 py-1 bg-pink-400 text-white font-light w-32 text-xs rounded mx-auto ">
-            Senin, 13 Mei 2021
+          <h4 className="p-2 bg-pink-500 text-white font-medium max-w-lg text-xs rounded mx-auto ">
+            Saturday, 13 Desember 2021
           </h4>
         </div>
       )}
-      <div className="flex gap-4  w-full p-4 h-auto">
+      <div className="flex gap-4  w-full p-4 h-auto -mt-6">
         {/* in */}
         <div className="flex flex-col gap-2 justify-start w-1/3">
-          <h4 className="font-extrabold text-gray-800">IN</h4>
-          <h6 className="text-xs font-normal text-gray-400">{locIn}</h6>
+          <h4 className="font-extrabold text-gray-800 text-lg">IN</h4>
+          <h6 className="text-sm font-normal text-gray-400">{locIn}</h6>
           <h4 className="font-semibold  text-blue-500">{timeIn}</h4>
         </div>
         {/* icon */}
@@ -49,9 +49,9 @@ export default function CardDay({
         {/* out  */}
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
-          <h4 className="font-extrabold text-gray-800">{type}</h4>
+          <h4 className="font-extrabold text-gray-800 text-lg">{type}</h4>
           <h6
-            className={`text-xs font-nromal text-gray-400 ${
+            className={` font-nromal text-sm text-gray-400 ${
               !timeOut && "animate-pulse "
             }`}>
             {timeOut ? locOut : "On Duty"}

@@ -10,7 +10,8 @@ import {
 import axios from "axios";
 import { React, useCallback, useEffect, useState } from "react";
 
-const SetMaps = ({ popup, sendAddress, sendlongLat }) => {
+const SetMaps = ({ popup, sendAddress, sendlongLat, marker2 }) => {
+  const [didMount, setDidMount] = useState(false);
   const [selected, setSelected] = useState(null);
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
@@ -83,9 +84,15 @@ const SetMaps = ({ popup, sendAddress, sendlongLat }) => {
     setTimeout(() => {
       getLocation();
     }, 500);
+    setDidMount(true);
+    return () => setDidMount(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (!didMount) {
+    return null;
+  }
 
   return (
     <>

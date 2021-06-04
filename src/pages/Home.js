@@ -98,12 +98,14 @@ const Home = ({ user }) => {
   ];
   return user ? (
     <div className="relative bg-gray-50 min-h-screen h-full">
-      <MobileMenu />
       <div className="relative h-full min-h-screen p-6 lg:hidden mb-20">
         <MobileHeader user={user} />
+        <MobileMenu />
 
         {/* card check in  */}
-        <CardPresence />
+        <CardPresence link="/check-in" />
+        <CardPresence link="/check-out" status="out" />
+
         <div className="relative mt-8">
           <Heading heading="Weekly Report" />
           <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 -ml-6 -mr-3 pl-6 pr-6">

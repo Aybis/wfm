@@ -1,13 +1,35 @@
 /** @format */
 
-import { DownloadIcon } from "@heroicons/react/outline";
-import { ChevronLeftIcon } from "@heroicons/react/solid";
+import Download from "components/atoms/Download";
+import Select from "components/atoms/Select";
 import CardDay from "components/molecules/CardDay";
+import CardTitlePage from "components/molecules/CardTitlePage";
+import useForm from "helpers/hooks/useForm";
 import React, { useEffect, useState } from "react";
 
 export default function Presensi({ history }) {
-  const [popUp, setPopUp] = useState(null);
+  const timeStamp = new Date();
+  const [didMount, setDidMount] = useState(false);
 
+  const [{ bulan, tahun }, setState] = useForm({
+    bulan: timeStamp.getMonth() + 1,
+    tahun: timeStamp.getFullYear(),
+  });
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const reports = [
     {
       type: "WFH",
@@ -52,65 +74,58 @@ export default function Presensi({ history }) {
   ];
 
   useEffect(() => {
-    setTimeout(() => {
-      setPopUp(!popUp);
+    const interval = setInterval(() => {
+      setDidMount(!didMount);
     }, 500);
+    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="relative bg-gray-50 min-h-screen h-full p-6">
-      <div className="relative items-center text-center p-2">
-        <h1 className="text-xl font-semibold text-gray-800 tracking-wider">
-          PRESENSI
-        </h1>
-        <ChevronLeftIcon
-          className="absolute top-1 left-0 text-gray-600 bg-white p-1 h-8 w-8 rounded-md cursor-pointer"
-          onClick={history.goBack}
-        />
-      </div>
+      <CardTitlePage goBack={history.goBack} title="presensi" />
 
-      <div className="grid grid-cols-2 mt-8 gap-2 justify-center items-center">
-        <select className="p-2 bg-white border border-gray-100 rounded-lg ">
-          <option value="">May</option>
-          <option value="">June</option>
-          <option value="">July</option>
-          <option value="">Desember</option>
-        </select>
-        <select className="p-2 bg-white border border-gray-100 rounded-lg">
-          <option value="">2020</option>
-          <option value="">2021</option>
-          <option value="">2022</option>
-        </select>
-      </div>
-
-      <div className="flex items-center gap-1 justify-center text-center mt-4 text-blue-600">
-        <DownloadIcon className="h-6 w-6" />
-        <h4 className="text-sm font-medium ">Download</h4>
-      </div>
-
-      <div
-        className={`fixed bottom-0 inset-x-0  rounded-t-2xl border-t border-gray-100 bg-white p-4 pb-12 transition-all duration-500 ${
-          popUp ? "h-3/4" : "h-10"
-        }`}>
-        <hr
-          className="w-20 border-2 border-gray-600 bg-gray-600 rounded-full mx-auto mb-2"
-          onClick={() => setPopUp(!popUp)}
-        />
-        <div className="grid grid-cols-1 gap-4 overflow-auto hidden-scroll h-full mt-4">
-          {reports.map((report, index) => (
-            <CardDay
-              key={index}
-              border
-              date={report.date}
-              locIn={report.locIn}
-              locOut={report.locOut}
-              timeIn={report.in}
-              timeOut={report.out}
-              type={report.type}
-            />
+      <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">
+        <Select
+          fallbackText={monthNames[bulan]}
+          name="bulan"
+          value={bulan}
+          onClick={setState}>
+          {monthNames.map((item, index) => (
+            <option key={index} value={index + 1}>
+              {item}
+            </option>
           ))}
-        </div>
+        </Select>
+        <Select
+          fallbackText={`${tahun}`}
+          name="tahun"
+          value={tahun}
+          onClick={setState}>
+          <option value={timeStamp.getFullYear()}>
+            {timeStamp.getFullYear()}
+          </option>
+          <option value="all">All</option>
+        </Select>
+      </div>
+
+      <div className="flex gap-1 justify-end mt-4">
+        <Download onClick={() => alert("Download excel")} />
+      </div>
+
+      <div className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full">
+        {reports.map((report, index) => (
+          <CardDay
+            key={index}
+            border
+            date={report.date}
+            locIn={report.locIn}
+            locOut={report.locOut}
+            timeIn={report.in}
+            timeOut={report.out}
+            type={report.type}
+          />
+        ))}
       </div>
     </div>
   );

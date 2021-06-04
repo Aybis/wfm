@@ -7,14 +7,12 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/solid";
 import Label from "components/atoms/Label";
-import Select from "components/atoms/Select";
 import SetMaps from "components/atoms/SetMaps";
-import Textarea from "components/atoms/Textarea";
 import ToastHandler from "helpers/hooks/toast";
 import useForm from "helpers/hooks/useForm";
 import React, { useEffect, useState } from "react";
 
-const CheckIn = ({ history }) => {
+const CheckOut = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
@@ -22,13 +20,10 @@ const CheckIn = ({ history }) => {
   const [address, setAddress] = useState(null);
   const [image, setImage] = useState(null);
 
-  const [state, setState] = useForm({
+  const [state] = useForm({
     lokasi: "",
     alamat: "",
     image: "",
-    kehadiran: "",
-    kondisi: "",
-    keterangan: "",
   });
 
   const inputPhoto = (event) => {
@@ -74,7 +69,7 @@ const CheckIn = ({ history }) => {
     }, 500);
     return () => {
       setDidMount(false);
-      clearTimeout(timeOut);
+      clearInterval(timeOut);
     };
   }, []);
 
@@ -104,7 +99,7 @@ const CheckIn = ({ history }) => {
         <div className="flex justify-between text-white bg-yellow-500  px-4 py-2 rounded-t-xl z-10">
           <div className="inline-flex">
             <LightningBoltIcon className="h-5 w-5 " />
-            <h4 className="font-light text-sm ml-2">Check In</h4>
+            <h4 className="font-light text-sm ml-2">Check Out</h4>
           </div>
 
           <ChevronDownIcon
@@ -123,54 +118,6 @@ const CheckIn = ({ history }) => {
               <Label labelName="Lokasi" />
               <p className="font-normal text-gray-400 w-full">{address}</p>
             </div>
-            <div
-              className={`grid gap-4 transition-all duration-500 ease-in-out ${
-                state.kondisi !== "sehat" ? "grid-cols" : "grid-cols-2"
-              } `}>
-              <Select
-                labelName="Kondisi"
-                name="kondisi"
-                border={false}
-                value={state.kondisi}
-                fallbackText="Pilih Kondisi"
-                onClick={setState}>
-                <option value="" selected disabled>
-                  Pilih Kondisi
-                </option>
-                <option value="sehat">Sehat</option>
-                <option value="sakit">Sakit</option>
-                <option value="cuti">Cuti</option>
-                <option value="ijin">Ijin</option>
-                <option value="sppd">SPPD</option>
-              </Select>
-
-              {state.kondisi === "sehat" && (
-                <Select
-                  labelName="Kehadiran"
-                  name="kehadiran"
-                  border={false}
-                  value={state.kehadiran}
-                  fallbackText="Pilih Kehadiran"
-                  onClick={setState}>
-                  <option value="" selected disabled>
-                    Pilih Kehadiran
-                  </option>
-                  <option value="wfh">WFH</option>
-                  <option value="wfo">WFO</option>
-                  <option value="satelit">Satelit</option>
-                </Select>
-              )}
-            </div>
-
-            {state.kondisi !== "" && state.kondisi !== "sehat" && (
-              <Textarea
-                labelName="Keterangan"
-                name="keterangan"
-                value={state.keterangan}
-                onChange={setState}
-                placeholder={`Alasan ${state.kondisi} ? `}
-              />
-            )}
 
             <div className="flex flex-col gap-2 text-sm ">
               <label htmlFor="image" className="text-gray-600 font-semibold">
@@ -201,7 +148,7 @@ const CheckIn = ({ history }) => {
             </div>
             {photo && (
               <button className="p-3 text-lg font-semibold bg-blue-500 w-full text-center rounded-lg text-white">
-                Check In
+                Check Out
               </button>
             )}
           </form>
@@ -211,4 +158,4 @@ const CheckIn = ({ history }) => {
   );
 };
 
-export default CheckIn;
+export default CheckOut;

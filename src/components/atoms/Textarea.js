@@ -20,7 +20,7 @@ export default function Textarea({
           htmlFor={name}
           className={[
             "text-sm font-semibold mb-2",
-            error ? "text-red-500" : "text-gray-600",
+            error ? "text-red-500" : "text-gray-400",
           ].join(" ")}>
           {labelName}
         </label>
@@ -29,11 +29,12 @@ export default function Textarea({
         name={name}
         onChange={onChange}
         type={type}
+        rows="3"
         className={[
-          "bg-white focus:outline-none border w-full p-2 rounded  ",
+          "bg-white focus:outline-none border w-full p-3 rounded font-medium",
           error
             ? "border-red-500 text-red-500"
-            : "focus:border-teal-500 border-gray-300 text-gray-600",
+            : "focus:border-blue-500 border-gray-300 text-gray-800",
           inputClassName,
         ].join(" ")}
         value={value}

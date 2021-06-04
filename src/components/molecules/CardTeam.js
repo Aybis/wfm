@@ -12,7 +12,7 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
   return (
     <div
       className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 ${
-        timeIn ? "bg-blue-50" : "bg-red-50"
+        timeIn ? "bg-blue-50" : "bg-pink-50"
       }`}
       style={{ minWidth: "10rem" }}>
       <div className="flex flex-col items-center">
@@ -20,16 +20,16 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
           src={thumbnail}
           alt={name}
           className={`h-24 w-24 rounded-full border p-1 ${
-            timeIn ? "border-blue-200" : "border-red-200"
+            timeIn ? "border-blue-200" : "border-pink-200"
           }`}
         />
         {timeIn ? (
-          <HomeIcon className=" p-2 text-white h-8 w-8 rounded-full bg-blue-400 text-center -mt-4" />
+          <HomeIcon className=" p-2 text-white h-8 w-8 rounded-full bg-blue-500 text-center -mt-4" />
         ) : (
           <div className="-mt-4 ">
             <PaperAirplaneIcon
               onClick={() => onClickSendWA(name)}
-              className=" p-2 text-white h-8 w-8 rounded-full bg-red-400 transform rotate-45 text-center cursor-pointer "
+              className=" p-2 text-white h-8 w-8 rounded-full bg-pink-500 transform rotate-45 text-center cursor-pointer "
             />
           </div>
         )}
@@ -40,7 +40,7 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
 
         <h2
           className={`text-sm font-semibold mt-1 ${
-            timeIn ? "text-blue-600 " : "text-red-600 animate-pulse"
+            timeIn ? "text-blue-600 " : "text-pink-600 animate-pulse"
           }`}>
           {timeIn ? timeIn : "Belum Absen"}
         </h2>

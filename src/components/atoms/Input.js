@@ -20,7 +20,7 @@ export default function Input({
           htmlFor={name}
           className={[
             "text-sm font-semibold ",
-            error ? "text-red-500" : "text-gray-600",
+            error ? "text-red-500" : "text-gray-400",
           ].join(" ")}>
           {labelName}
         </label>
@@ -31,10 +31,10 @@ export default function Input({
         type={type}
         autoComplete="off"
         className={[
-          "bg-white focus:outline-none border w-full p-2 rounded-md ",
+          "bg-white focus:outline-none border w-full p-3 rounded-md font-medium",
           error
             ? "border-red-500 text-red-500"
-            : "focus:border-teal-500 border-gray-300 text-gray-600",
+            : "focus:border-blue-500 border-gray-300 text-gray-800",
           inputClassName,
         ].join(" ")}
         value={value}

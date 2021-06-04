@@ -1,6 +1,7 @@
 /** @format */
 
 import { ClipboardCheckIcon } from "@heroicons/react/outline";
+import CardTitlePage from "components/molecules/CardTitlePage";
 import { useEffect, useState } from "react";
 
 const { ChevronLeftIcon } = require("@heroicons/react/solid");
@@ -17,18 +18,10 @@ const DetailApproval = ({ history }) => {
   }, []);
 
   return (
-    <div className="relative bg-gray-100 min-h-screen h-full py-6">
-      <div className="relative items-center text-center p-2 mx-6">
-        <h1 className="text-xl font-semibold text-gray-800 tracking-wider">
-          PREVIEW
-        </h1>
-        <ChevronLeftIcon
-          className="absolute top-1 left-0 text-gray-600 bg-white p-1 h-8 w-8 rounded-md cursor-pointer"
-          onClick={history.goBack}
-        />
-      </div>
+    <div className="relative bg-gray-100 min-h-screen h-full p-6">
+      <CardTitlePage title="preview" goBack={history.goBack} />
 
-      <div className="mt-8 flex flex-col justify-between gap-2 bg-white inset-x-0 rounded-lg mx-6">
+      <div className="mt-8 flex flex-col justify-between gap-2 bg-white inset-x-0 rounded-lg ">
         <div className="flex flex-col  gap-4 p-3">
           <div className="flex flex-col items-center">
             <img
