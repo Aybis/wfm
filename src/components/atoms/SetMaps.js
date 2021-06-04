@@ -1,0 +1,133 @@
+/** @format */
+
+import { LocationMarkerIcon } from "@heroicons/react/solid";
+import {
+  GoogleMap,
+  InfoWindow,
+  Marker,
+  useJsApiLoader,
+} from "@react-google-maps/api";
+import axios from "axios";
+import { React, useCallback, useEffect, useState } from "react";
+
+const SetMaps = ({ popup, sendAddress, sendlongLat }) => {
+  const [selected, setSelected] = useState(null);
+  const [longLat, setlongLat] = useState(null);
+  const [address, setAddress] = useState(null);
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: process.env.REACT_APP_PINS_MAPS,
+  });
+
+  const containerStyle = {
+    width: "100%",
+    height: "55%",
+  };
+
+  const center = {
+    lat: -6.2302258,
+    lng: 106.8160106,
+  };
+
+  const options = {
+    disableDefaultUI: true,
+    zoomControl: false,
+  };
+
+  const onLoad = useCallback(function callback(map) {
+    const bounds = new window.google.maps.LatLngBounds();
+    map.setZoom(16);
+    map.setCenter(bounds.getCenter());
+    let listener = window.google.maps.event.addListener(
+      map,
+      "idle",
+      function () {
+        if (map.getZoom() > 16) map.setZoom(16);
+        window.google.maps.event.removeListener(listener);
+      },
+    );
+  }, []);
+
+  const reverseGeo = (lat, lng) => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat}, ${lng}&sensor=true&key=${process.env.REACT_APP_PINS_MAPS}`,
+      )
+      .then((res) => {
+        let resAddress = res.data.results[0].formatted_address;
+        setAddress(resAddress);
+        sendAddress(resAddress);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let localCoord = position.coords;
+        let objLocalCoord = {
+          lat: localCoord.latitude,
+          lng: localCoord.longitude,
+        };
+        reverseGeo(objLocalCoord.lat, objLocalCoord.lng);
+        setlongLat(objLocalCoord);
+        sendlongLat(objLocalCoord);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser");
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      getLocation();
+    }, 500);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <button
+        className="absolute z-40 right-4 transition-all duration-500 rounded-full"
+        onClick={getLocation}
+        style={{ top: `${popup ? "44%" : "11%"}` }}>
+        <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-blue-500" />
+      </button>
+      <div className="fixed bg-white top-0 inset-x-0 h-screen">
+        {isLoaded ? (
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={longLat ? longLat : center}
+            zoom={16}
+            onLoad={onLoad}
+            options={options}>
+            {/* Child components, such as markers, info windows, etc. */}
+            <Marker
+              position={longLat}
+              onClick={() => {
+                setSelected(longLat);
+              }}
+            />
+            {selected ? (
+              <InfoWindow
+                position={longLat}
+                onCloseClick={() => {
+                  setSelected(null);
+                }}>
+                <div className="p-2 text-gray-800 font-medium">
+                  <h2>{address}</h2>
+                </div>
+              </InfoWindow>
+            ) : null}
+          </GoogleMap>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
+  );
+};
+
+export default SetMaps;

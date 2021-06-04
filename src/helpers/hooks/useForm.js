@@ -9,7 +9,6 @@ export default (initialValues) => {
   return [
     state,
     (event) => {
-      console.log(event.target.name);
       setState({
         ...state,
         [event.target.name]: event.target.value,

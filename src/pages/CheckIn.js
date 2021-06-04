@@ -5,122 +5,74 @@ import {
   ChevronDownIcon,
   ChevronLeftIcon,
   UserCircleIcon,
-  LocationMarkerIcon,
 } from "@heroicons/react/solid";
-import {
-  GoogleMap,
-  Marker,
-  useJsApiLoader,
-  InfoWindow,
-} from "@react-google-maps/api";
-import axios from "axios";
+import Label from "components/atoms/Label";
+import Select from "components/atoms/Select";
+import SetMaps from "components/atoms/SetMaps";
+import Textarea from "components/atoms/Textarea";
+import ToastHandler from "helpers/hooks/toast";
 import useForm from "helpers/hooks/useForm";
-import React, { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-const CheckIn = () => {
+const CheckIn = ({ history }) => {
   const [popup, setPopup] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const [selected, setSelected] = useState(null);
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
   const [image, setImage] = useState(null);
 
   const [state, setState] = useForm({
-    lokasi: longLat,
-    alamat: address,
+    lokasi: "",
+    alamat: "",
     image: "",
-    kehadiran: "pilih kehadiran",
-    kondisi: "sehat",
-    hari: "",
+    kehadiran: "",
+    kondisi: "",
     keterangan: "",
   });
-
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-  });
-
-  const containerStyle = {
-    width: "100%",
-    height: "55%",
-  };
-  
-  const center = {
-    lat: -6.2302258,
-    lng: 106.8160106,
-  };
-
-  const options = {
-    disableDefaultUI: true,
-    zoomControl: false,
-  };
-
-  const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.setZoom(16); 
-    map.setCenter(bounds.getCenter());
-    let listener =  window.google.maps.event.addListener(map, "idle", function() { 
-      if (map.getZoom() > 16) map.setZoom(16); 
-      window.google.maps.event.removeListener(listener); 
-    });
-  }, []);
 
   const onClickPopPuP = () => {
     setPopup(!popup);
   };
 
-  const reverseGeo = (lat, lng) => {
-    axios
-      .get(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat}, ${lng}&sensor=true&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
-      )
-      .then((res) => {
-        let resAddress = res.data.results[0].formatted_address;
-        setAddress(resAddress);
-      })
-      .catch((err) => console.log(err));
-  };
-
   const inputPhoto = (event) => {
     let fileValue = event.target.files[0] ? event.target.files[0] : null;
+    console.log(URL.createObjectURL(fileValue));
     setImage(fileValue);
-    console.log(image);
     if (fileValue) {
       let source = URL.createObjectURL(fileValue);
       setPhoto(source);
     }
-
   };
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        let localCoord = position.coords;
-        let objLocalCoord = {
-          lat: localCoord.latitude,
-          lng: localCoord.longitude,
-        };
-        reverseGeo(objLocalCoord.lat, objLocalCoord.lng);
-        setlongLat(objLocalCoord);
-      });
-    } else {
-      alert("Geolocation is not supported by this browser");
-    }
+  const sendlongLat = (value) => {
+    setlongLat(value);
+  };
+
+  const sendAddress = (value) => {
+    setAddress(value);
   };
 
   const submitFunction = (event) => {
     event.preventDefault();
     state.lokasi = longLat;
     state.image = image;
-    state.alamat= address
-    console.log(state);
+    state.alamat = address;
+
+    ToastHandler(
+      "success",
+      `Alamat : ${state.alamat},
+      Kondisi : ${state.kondisi},
+      Kehadiran : ${state.kehadiran},
+      Keterangan : ${state.keterangan},
+      Long : ${state.lokasi?.lng},
+      Lat : ${state.lokasi?.lat},
+
+      `,
+    );
   };
 
   useEffect(() => {
     setTimeout(() => {
-     getLocation();
-
       setPopup(true);
     }, 500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,57 +80,18 @@ const CheckIn = () => {
 
   return (
     <div className={popup ? "pt-20" : "pt-0"}>
-      <Link
-        to="/"
+      <button
+        onClick={history.goBack}
         className="absolute z-40 left-4 rounded-full transition-all duration-500"
         style={{ top: `${popup ? "44%" : "11%"}` }}>
         <ChevronLeftIcon className="h-8 w-8 bg-white rounded p-1" />
-      </Link>
-
-      <button
-        className="absolute z-40 right-4 transition-all duration-500 rounded-full"
-        onClick={() => getLocation()}
-        style={{ top: `${popup ? "44%" : "11%"}` }}>
-        <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-blue-500" />
       </button>
 
-
-      <div className="fixed bg-white top-0 inset-x-0 h-screen">
-        {isLoaded  ? (
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            center={center}
-            zoom={16}
-            onLoad={onLoad}
-            options={options}>
-            {/* Child components, such as markers, info windows, etc. */}
-            <Marker
-              position={longLat}
-              onClick={() => {
-                setSelected(longLat);
-              }}
-            />
-            {selected ? (
-              <InfoWindow
-                position={longLat}
-                onCloseClick={() => {
-                  setSelected(null);
-                }}>
-                <div>
-                  <h2>
-                    <span role="img" aria-label="bear">
-                      🐻
-                    </span>
-                    Ini Adalah Anda xixixi
-                  </h2>
-                </div>
-              </InfoWindow>
-            ) : null}
-          </GoogleMap>
-        ) : (
-          <></>
-        )}
-      </div>
+      <SetMaps
+        popup={popup}
+        sendlongLat={sendlongLat}
+        sendAddress={sendAddress}
+      />
 
       <div
         className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-yellow-500 rounded-t-xl ${
@@ -203,81 +116,57 @@ const CheckIn = () => {
             className="flex flex-col gap-4 mt-2 mb-12"
             onSubmit={submitFunction}>
             <div className="flex flex-col gap-2 text-sm">
-              <label htmlFor="lokasi" className="text-gray-600 font-semibold">
-                Lokasi
-              </label>
-              {longLat ? (
-                <p className="font-normal text-gray-400 w-full">{address}</p>
-              ) : (
-                <p className="font-normal text-gray-400">Loading</p>
+              <Label labelName="Lokasi" />
+              <p className="font-normal text-gray-400 w-full">{address}</p>
+            </div>
+            <div
+              className={`grid gap-4 transition-all duration-500 ease-in-out ${
+                state.kondisi !== "sehat" ? "grid-cols" : "grid-cols-2"
+              } `}>
+              <Select
+                labelName="Kondisi"
+                name="kondisi"
+                value={state.kondisi}
+                fallbackText="Pilih Kondisi"
+                onClick={setState}>
+                <option value="" selected disabled>
+                  Pilih Kondisi
+                </option>
+                <option value="sehat">Sehat</option>
+                <option value="sakit">Sakit</option>
+                <option value="cuti">Cuti</option>
+                <option value="ijin">Ijin</option>
+                <option value="sppd">SPPD</option>
+              </Select>
+
+              {state.kondisi === "sehat" && (
+                <Select
+                  labelName="Kehadiran"
+                  name="kehadiran"
+                  value={state.kehadiran}
+                  fallbackText="Pilih Kehadiran"
+                  onClick={setState}>
+                  <option value="" selected disabled>
+                    Pilih Kehadiran
+                  </option>
+                  <option value="wfh">WFH</option>
+                  <option value="wfo">WFO</option>
+                  <option value="satelit">Satelit</option>
+                </Select>
               )}
             </div>
-            <div className="grid grid-cols-2  gap-2 text-sm">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="lokasi" className="text-gray-600 font-semibold">
-                  Kondisi
-                </label>
-                <select
-                  className="p-2 border border-gray-200 rounded bg-white"
-                  name="kondisi"
-                  onChange={setState}
-                  value={state.kondisi}>
-                  <option value="sehat">Sehat</option>
-                  <option value="sakit">Sakit</option>
-                  <option value="cuti">Cuti</option>
-                  <option value="ijin">Ijin</option>
-                  <option value="sppd">SPPD</option>
-                </select>
-              </div>
-              {state.kondisi === "sehat" ? (
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="kehadiran"
-                    className="text-gray-600 font-semibold">
-                    Kehadiran
-                  </label>
-                  <select
-                    className="p-2 border border-gray-200 rounded bg-white"
-                    name="kehadiran"
-                    onChange={setState}
-                    defaultValue={state.kehadiran}>
-                    <option>Pilih Kehadiran</option>
-                    <option value="wfh">WFH</option>
-                    <option value="wfo">WFO</option>
-                    <option value="satelit">Satelit</option>
-                  </select>
-                </div>
-              ) : (
-                <div className="flex flex-col gap-2">
-                  <label
-                    htmlFor="lokasi"
-                    className="text-gray-600 font-semibold">
-                    Hari
-                  </label>
-                  <input
-                    name="hari"
-                    onChange={setState}
-                    value={state.hari}
-                    type="number"
-                    className="text-sm p-2 border border-gray-300 rounded bg-white"
-                  />
-                </div>
-              )}
-            </div>
-            {state.kondisi !== "sehat" && (
-              <div className="flex flex-col gap-2 text-sm">
-                <label htmlFor="lokasi" className="text-gray-600 font-semibold">
-                  Keterangan
-                </label>
-                <textarea
-                  className="p-2 border border-gray-200 rounded bg-white"
-                  name="keterangan"
-                  onChange={setState}
-                  value={state.keterangan}></textarea>
-              </div>
+
+            {state.kondisi !== "" && state.kondisi !== "sehat" && (
+              <Textarea
+                labelName="Keterangan"
+                name="keterangan"
+                value={state.keterangan}
+                onChange={setState}
+                placeholder={`Alasan ${state.kondisi} ? `}
+              />
             )}
 
-            <div className="flex flex-col gap-2 text-sm">
+            <div className="flex flex-col gap-2 text-sm ">
               <label htmlFor="image" className="text-gray-600 font-semibold">
                 Photo
                 {photo ? (

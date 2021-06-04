@@ -43,7 +43,21 @@ font-family: 'Poppins', sans-serif;
   transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
 }
-
+.display-enter, .display-appear {
+  top: var(--menu-starting-top);
+  width: var(--toggler-width);
+  max-height: var(--toggler-height);
+  color: var(--fade-from-color);
+  background-color: var(--toggler-bg-color);
+}
+.display-enter-active, .display-appear-active {
+  top: var(--menu-ending-top);
+  width: var(--menu-width);
+  max-height: var(--menu-max-height);
+  color: var(--fade-to-color);
+  background-color: var(--menu-bg-color);
+  transition: all var(--timeout);
+}
 /* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

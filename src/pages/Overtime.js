@@ -14,7 +14,7 @@ export default function Overtime({ history }) {
     title: "Make design and flow mobile pop",
     hours: null,
     status: null,
-  }
+  };
 
   const overtimes = [
     {
@@ -35,27 +35,26 @@ export default function Overtime({ history }) {
       title: "Make design and flow mobile pop",
       hours: "5 : 23",
       status: "leader",
-    },{
-        date: "Monday, 17 May",
-        title: "Make design and flow mobile pop",
-        hours: "5 : 23",
-        status: "leader",
-      },
-      {
-        date: "Monday, 17 May",
-        title: "Make design and flow mobile pop",
-        hours: "5 : 23",
-        status: "leader",
-      },
-      {
-        date: "Monday, 17 May",
-        title: "Make design and flow mobile pop",
-        hours: "5 : 23",
-        status: "leader",
-      },
+    },
+    {
+      date: "Monday, 17 May",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+      status: "leader",
+    },
+    {
+      date: "Monday, 17 May",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+      status: "leader",
+    },
+    {
+      date: "Monday, 17 May",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+      status: "leader",
+    },
   ];
-
-    const height = window.innerHeight;
 
   useEffect(() => {
     setTimeout(() => {
@@ -74,19 +73,19 @@ export default function Overtime({ history }) {
         <h1 className="text-xl font-semibold text-gray-800 tracking-wider">
           LEMBURAN
         </h1>
-            <Link to="/overtime/in" className="flex flex-col items-center"> 
-        <DocumentAddIcon className="h-5 w-5 text-gray-800" />
-                {/* <p className="text-xs text-gray-400">Lembur</p> */}
-            </Link>
+        <Link to="/overtime/in" className="flex flex-col items-center">
+          <DocumentAddIcon className="h-5 w-5 text-gray-800" />
+          {/* <p className="text-xs text-gray-400">Lembur</p> */}
+        </Link>
       </div>
-        <div className="">
+      <div className="">
         <CardOvertime
-              date={overtimeDuty.date}
-              hours={overtimeDuty.hours}
-              status={overtimeDuty.status}
-              title={overtimeDuty.title}
-            />
-        </div>
+          date={overtimeDuty.date}
+          hours={overtimeDuty.hours}
+          status={overtimeDuty.status}
+          title={overtimeDuty.title}
+        />
+      </div>
 
       <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">
         <select className="p-2 bg-white border border-gray-100 rounded-lg ">
@@ -109,15 +108,15 @@ export default function Overtime({ history }) {
 
       <div className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full">
         {overtimes.map((item, index) => (
-            <CardOvertime
-              key={index}
-              date={item.date}
-              hours={item.hours}
-              status={item.status}
-              title={item.title}
-            />
-          ))}
-        </div>
+          <CardOvertime
+            key={index}
+            date={item.date}
+            hours={item.hours}
+            status={item.status}
+            title={item.title}
+          />
+        ))}
+      </div>
 
       {/* <div
         className={`fixed bottom-0 inset-x-0  rounded-t-2xl border-t border-gray-100 bg-white p-4  transition-all duration-500 `} style={{

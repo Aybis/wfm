@@ -2,6 +2,7 @@
 import Loading from "components/atoms/Loading";
 import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+
 import Approval from "./Approval";
 import CheckIn from "./CheckIn";
 import Dashboard from "./Dashboard";

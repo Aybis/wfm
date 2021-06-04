@@ -3,21 +3,24 @@
 import { LogoutIcon } from "@heroicons/react/outline";
 import React from "react";
 import { Redirect } from "react-router";
+import notify from "helpers/hooks/toast";
 
 export default function MobileHeader({ user, history }) {
-
   const logOoutUser = () => {
+    notify("info", "Logout success 👋");
     // remove token
-    localStorage.removeItem('WFM:token');
+    localStorage.removeItem("WFM:token");
     // remove cookies
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    document.cookie.split(";").forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    });
     // redirect link
-    <Redirect push to="/login" />
-    // reload page 
+    <Redirect push to="/login" />;
+    // reload page
     window.location.reload();
-
-  
-  }
+  };
 
   return (
     <div className="flex justify-between items-center">
@@ -57,7 +60,10 @@ export default function MobileHeader({ user, history }) {
           />
         </svg>
         <div className="absolute h-2 w-2 rounded-full bg-red-500 top-0 right-1"></div> */}
-          <LogoutIcon className="h-5 w-5 text-gray-400 cursor-pointer" onClick={() => logOoutUser()} />
+        <LogoutIcon
+          className="h-5 w-5 text-gray-400 cursor-pointer"
+          onClick={() => logOoutUser()}
+        />
       </div>
     </div>
   );

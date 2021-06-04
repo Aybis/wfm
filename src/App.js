@@ -4,6 +4,7 @@ import { createBrowserHistory } from "history";
 import Forgot from "pages/Forgot";
 import Index from "pages/Index";
 import { Route, Router, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Gate from "./components/Routes/Gate";
 import Unauthenticated from "./pages/401";
 import NotFound from "./pages/404";
@@ -15,6 +16,8 @@ function App() {
   return (
     <>
       <Router history={history}>
+        <ToastContainer />
+
         <Switch>
           <Gate path="/login" component={Login}></Gate>
           <Gate path="/private" component={Unauthenticated}></Gate>

@@ -29,7 +29,7 @@ const DetailApproval = ({ history }) => {
       </div>
 
       <div className="mt-8 flex flex-col justify-between gap-2 bg-white inset-x-0 rounded-lg mx-6">
-        <div className="grid grid-cols-1 justify-items-center gap-4 p-4">
+        <div className="flex flex-col  gap-4 p-3">
           <div className="flex flex-col items-center">
             <img
               src="https://i.pravatar.cc/300"
@@ -41,7 +41,7 @@ const DetailApproval = ({ history }) => {
             </h4>
             <h4 className="text-sm font-normal text-gray-400">IT Programmer</h4>
           </div>
-          <div className="flex flex-col gap-1 text-center">
+          <div className="flex flex-col gap-1">
             <h4 className="text-xs font-medium text-blue-600">
               Subject Lembur
             </h4>
@@ -49,7 +49,7 @@ const DetailApproval = ({ history }) => {
               Dolor nisi ea labore amet pariatur.
             </p>
           </div>
-          <div className="flex flex-col gap-1 text-center">
+          <div className="flex flex-col gap-1">
             <h4 className="text-xs font-medium text-blue-600">Detail Lembur</h4>
             <p className="text-xs font-light text-gray-400">
               Make Homepage, Make Report Page, Make Admin Page, Make Overtime
@@ -57,7 +57,7 @@ const DetailApproval = ({ history }) => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-3 bg-blue-400 justify-items-center p-2 rounded-b-lg">
+        <div className="grid grid-cols-3 bg-pink-400 justify-items-center p-2 rounded-b-lg">
           <div className="flex flex-col gap-1 text-xs text-center">
             <h4 className="text-gray-100 font-normal ">Start</h4>
             <h6 className="text-sm font-semibold text-white">19 : 03</h6>
