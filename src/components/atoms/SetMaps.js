@@ -9,8 +9,13 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import { React, useCallback, useEffect, useState } from "react";
-
-const SetMaps = ({ popup, sendAddress, sendlongLat, marker2 }) => {
+const SetMaps = ({
+  popup,
+  sendAddress,
+  sendlongLat,
+  showButton = true,
+  height = "55%",
+}) => {
   const [didMount, setDidMount] = useState(false);
   const [selected, setSelected] = useState(null);
   const [longLat, setlongLat] = useState(null);
@@ -23,7 +28,7 @@ const SetMaps = ({ popup, sendAddress, sendlongLat, marker2 }) => {
 
   const containerStyle = {
     width: "100%",
-    height: "55%",
+    height: height,
   };
 
   const center = {
@@ -96,13 +101,15 @@ const SetMaps = ({ popup, sendAddress, sendlongLat, marker2 }) => {
 
   return (
     <>
-      <button
-        className="absolute z-40 right-4 transition-all duration-500 rounded-full"
-        onClick={getLocation}
-        style={{ top: `${popup ? "44%" : "11%"}` }}>
-        <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-blue-500" />
-      </button>
-      <div className="fixed bg-white top-0 inset-x-0 h-screen">
+      {showButton && (
+        <button
+          className="absolute z-40 right-4 transition-all duration-500 rounded-full"
+          onClick={getLocation}
+          style={{ top: `${popup ? "44%" : "11%"}` }}>
+          <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-apps-pink" />
+        </button>
+      )}
+      <div className="absolute bg-white top-0 inset-x-0 h-screen">
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
@@ -117,6 +124,7 @@ const SetMaps = ({ popup, sendAddress, sendlongLat, marker2 }) => {
                 setSelected(longLat);
               }}
             />
+
             {selected ? (
               <InfoWindow
                 position={longLat}

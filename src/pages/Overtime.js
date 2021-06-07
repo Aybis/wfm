@@ -73,30 +73,30 @@ export default function Overtime({ history }) {
   ];
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setTimeout(() => {
       setPopUp(!popUp);
     }, 500);
-    return () => clearInterval(interval);
+    return () => clearTimeout(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="relative bg-gray-50 min-h-screen h-full p-6">
+    <div className="relative bg-coolGray-50-50 min-h-screen h-full p-6 pb-12">
       <CardTitlePage goBack={history.goBack} title="Lemburan" />
 
       <CardStartLembur
         link="/overtime-in"
         type="in"
-        title="Mulai Lembur"
-        desc="Wednesday, 19 May"
-        desc2="WFO"
+        title="Abdul Muchtar Astria"
+        date="Wednesday, 19 May"
+        status={true}
       />
       <CardStartLembur
         link="/overtime-out"
         type="out"
+        date="Wednesday, 19 May"
         title="Make Design and FE for POP"
-        desc="19 : 32"
-        desc2="On Duty"
+        time="19 : 32"
       />
 
       <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Heading = ({ heading, url = "/", title = "" }) => {
   return (
     <div className="flex justify-between items-center">
-      <h2 className="text-gray-700 font-semibold text-lg">{heading}</h2>
+      <h2 className="text-apps-text font-semibold text-lg">{heading}</h2>
       <Link
         to={url}
         className="font-medium text-gray-400"

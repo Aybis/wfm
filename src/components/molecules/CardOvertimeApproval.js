@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 export default function CardOvertimeApproval({ name, title, date, hours }) {
   return (
     <div className="flex w-full justify-between bg-white p-4 rounded-lg">
-      <div className="flex flex-col gap-2 text-xs">
-        <h4 className="font-medium text-gray-400">{name}</h4>
-        <h1 className="font-semibold text-gray-700">{title}</h1>
-        <h4 className="font-semibold text-pink-400">
-          {date} - {hours} Hrs
+      <div className="flex flex-col gap-2 text-sm">
+        <h4 className="font-semibold text-apps-text">{name}</h4>
+        <h1 className="font-medium text-apps-text text-opacity-70 text-xs">
+          {title}
+        </h1>
+        <h4 className="font-light text-apps-primary text-xs text-opacity-40">
+          {date} - {hours} Hour
         </h4>
       </div>
       <div className="flex flex-col justify-between right-0">

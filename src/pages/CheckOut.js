@@ -93,10 +93,10 @@ const CheckOut = ({ history }) => {
       />
 
       <div
-        className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-yellow-500 rounded-t-xl ${
+        className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-apps-yellow rounded-t-xl ${
           popUp ? "h-1/2" : "h-5/6 mt-20"
         }`}>
-        <div className="flex justify-between text-white bg-yellow-500  px-4 py-2 rounded-t-xl z-10">
+        <div className="flex justify-between text-apps-text bg-apps-yellow  px-4 py-2 rounded-t-xl z-10">
           <div className="inline-flex">
             <LightningBoltIcon className="h-5 w-5 " />
             <h4 className="font-light text-sm ml-2">Check Out</h4>
@@ -120,7 +120,9 @@ const CheckOut = ({ history }) => {
             </div>
 
             <div className="flex flex-col gap-2 text-sm ">
-              <label htmlFor="image" className="text-gray-600 font-semibold">
+              <label
+                htmlFor="image"
+                className="text-apps-text text-opacity-70 font-semibold">
                 Photo
                 {photo ? (
                   <img
@@ -147,7 +149,7 @@ const CheckOut = ({ history }) => {
               />
             </div>
             {photo && (
-              <button className="p-3 text-lg font-semibold bg-blue-500 w-full text-center rounded-lg text-white">
+              <button className="p-3 text-lg font-semibold bg-apps-red w-full text-center rounded-lg text-white">
                 Check Out
               </button>
             )}

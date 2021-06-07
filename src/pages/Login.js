@@ -120,7 +120,7 @@ const Login = ({ history }) => {
           <div className="flex flex-col text-center">
             <h1 className="font-semibold text-2xl text-gray-600">
               Welcome to
-              <span className="font-bold text-2xl text-blue-500">POP</span>
+              <span className="font-bold text-2xl text-blue-500"> POP</span>
             </h1>
             <h1 className="text-sm text-gray-400 font-normal mt-2">
               I'm so happy to see. You can continue to login for discipline your
@@ -178,7 +178,7 @@ const Login = ({ history }) => {
               </div>
               <Link
                 to="/forgot"
-                className="text-xs font-semibold text-green-400 text-right cursor-pointer hover:underline transition duration-300">
+                className="text-xs font-semibold text-gray-600 text-right cursor-pointer hover:underline transition duration-300">
                 Forgot password
               </Link>
               {isSubmit ? (

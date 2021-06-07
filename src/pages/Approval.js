@@ -1,70 +1,104 @@
 /** @format */
 
+import Select from "components/atoms/Select";
 import CardOvertimeApproval from "components/molecules/CardOvertimeApproval";
+import useForm from "helpers/hooks/useForm";
 import React from "react";
 import MobileMenu from "section/MobileMenu";
 
-const documents = [
-  {
-    date: "Wednesday, 19 May",
-    name: "Abdul Muchtar Astria",
-    title: "Make design and flow mobile pop",
-    hours: "4:72",
-  },
-  {
-    date: "Tuesday, 18 May",
-    name: "Ahmad Fauzi Hanif",
-    title: "Make design and flow mobile pop and create backend presensi online",
-    hours: "7 : 00",
-  },
-  {
-    date: "Monday, 17 May",
-    name: "Bayu Respati",
-    title: "Make design and flow mobile pop",
-    hours: "5 : 23",
-  },
-  {
-    date: "Monday, 17 May",
-    name: "Bayu Respati",
-    title: "Make design and flow mobile pop",
-    hours: "5 : 23",
-  },
-  {
-    date: "Monday, 17 May",
-    name: "Bayu Respati",
-    title: "Make design and flow mobile pop",
-    hours: "5 : 23",
-  },
-  {
-    date: "Monday, 17 May",
-    name: "Bayu Respati",
-    title: "Make design and flow mobile pop",
-    hours: "5 : 23",
-  },
-];
-
 const Approval = () => {
+  const timeStamp = new Date();
+
+  const [{ bulan, tahun }, setState] = useForm({
+    bulan: timeStamp.getMonth() + 1,
+    tahun: timeStamp.getFullYear(),
+  });
+
+  const documents = [
+    {
+      date: "Wednesday, 19 May",
+      name: "Abdul Muchtar Astria",
+      title: "Make design and flow mobile pop",
+      hours: "4:72",
+    },
+    {
+      date: "Tuesday, 18 May",
+      name: "Ahmad Fauzi Hanif",
+      title:
+        "Make design and flow mobile pop and create backend presensi online",
+      hours: "7 : 00",
+    },
+    {
+      date: "Monday, 17 May",
+      name: "Bayu Respati",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+    },
+    {
+      date: "Monday, 17 May",
+      name: "Bayu Respati",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+    },
+    {
+      date: "Monday, 17 May",
+      name: "Bayu Respati",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+    },
+    {
+      date: "Monday, 17 May",
+      name: "Bayu Respati",
+      title: "Make design and flow mobile pop",
+      hours: "5 : 23",
+    },
+  ];
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   return (
-    <div className="relative bg-gray-50 min-h-screen h-full p-6">
+    <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
       <MobileMenu />
       <div className="relative mt-4 p-4">
-        <h2 className="text-gray-700 font-semibold text-xl">
+        <h2 className="text-apps-text font-semibold text-xl">
           List of Documents
         </h2>
       </div>
 
       <div className="grid grid-cols-2 mt-8 gap-2 justify-center items-center">
-        <select className="p-2 bg-white border border-gray-100 rounded-lg ">
-          <option value="">May</option>
-          <option value="">June</option>
-          <option value="">July</option>
-          <option value="">Desember</option>
-        </select>
-        <select className="p-2 bg-white border border-gray-100 rounded-lg">
-          <option value="">2020</option>
-          <option value="">2021</option>
-          <option value="">2022</option>
-        </select>
+        <Select
+          fallbackText={monthNames[bulan]}
+          name="bulan"
+          value={bulan}
+          onClick={setState}>
+          {monthNames.map((item, index) => (
+            <option key={index} value={index + 1}>
+              {item}
+            </option>
+          ))}
+        </Select>
+        <Select
+          fallbackText={`${tahun}`}
+          name="tahun"
+          value={tahun}
+          onClick={setState}>
+          <option value={timeStamp.getFullYear()}>
+            {timeStamp.getFullYear()}
+          </option>
+          <option value="all">All</option>
+        </Select>
       </div>
 
       <div className="grid grid-cols-1 gap-4 content-center mt-10 mb-20">

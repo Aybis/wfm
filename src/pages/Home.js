@@ -97,8 +97,8 @@ const Home = ({ user }) => {
     },
   ];
   return user ? (
-    <div className="relative bg-gray-50 min-h-screen h-full">
-      <div className="relative h-full min-h-screen p-6 lg:hidden mb-20">
+    <div className="relative bg-apps-card  min-h-screen h-full">
+      <div className="relative h-full min-h-screen p-6 lg:hidden pb-32">
         <MobileHeader user={user} />
         <MobileMenu />
 
@@ -126,7 +126,7 @@ const Home = ({ user }) => {
         {/* card daily team report  */}
         <div className="relative mt-8">
           <Heading heading="Team Report" />
-          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 ">
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 pb-2">
             {/* card team */}
             {teams.map((team, index) => (
               <CardTeam

@@ -10,7 +10,7 @@ export default function CardTitlePage({ goBack, title }) {
         <Back link={goBack} />
       </div>
       <div className="flex w-2/3">
-        <h1 className="text-xl font-semibold text-gray-800 tracking-wider uppercase">
+        <h1 className="text-xl font-semibold text-apps-text tracking-wider uppercase">
           {title}
         </h1>
       </div>

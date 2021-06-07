@@ -11,9 +11,7 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
 
   return (
     <div
-      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 ${
-        timeIn ? "bg-blue-50" : "bg-pink-50"
-      }`}
+      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 bg-white shadow-sm`}
       style={{ minWidth: "10rem" }}>
       <div className="flex flex-col items-center">
         <img
@@ -24,12 +22,12 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
           }`}
         />
         {timeIn ? (
-          <HomeIcon className=" p-2 text-white h-8 w-8 rounded-full bg-blue-500 text-center -mt-4" />
+          <HomeIcon className=" p-2 text-white h-8 w-8 rounded-full bg-apps-primary text-center -mt-4" />
         ) : (
           <div className="-mt-4 ">
             <PaperAirplaneIcon
               onClick={() => onClickSendWA(name)}
-              className=" p-2 text-white h-8 w-8 rounded-full bg-pink-500 transform rotate-45 text-center cursor-pointer "
+              className=" p-2 text-white h-8 w-8 rounded-full bg-apps-red transform rotate-45 text-center cursor-pointer hover:bg-red-600"
             />
           </div>
         )}
@@ -40,7 +38,7 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
 
         <h2
           className={`text-sm font-semibold mt-1 ${
-            timeIn ? "text-blue-600 " : "text-pink-600 animate-pulse"
+            timeIn ? "text-blue-600 " : "text-apps-red animate-pulse"
           }`}>
           {timeIn ? timeIn : "Belum Absen"}
         </h2>

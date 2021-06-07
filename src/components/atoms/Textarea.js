@@ -20,7 +20,7 @@ export default function Textarea({
           htmlFor={name}
           className={[
             "text-sm font-semibold mb-2",
-            error ? "text-red-500" : "text-gray-400",
+            error ? "text-apps-red" : "text-apps-text text-opacity-70",
           ].join(" ")}>
           {labelName}
         </label>
@@ -33,13 +33,13 @@ export default function Textarea({
         className={[
           "bg-white focus:outline-none border w-full p-3 rounded font-medium",
           error
-            ? "border-red-500 text-red-500"
-            : "focus:border-blue-500 border-gray-300 text-gray-800",
+            ? "border-apps-red text-apps-red"
+            : "focus:border-apps-blue border-apps-gray border-opacity-40 text-apps-text",
           inputClassName,
         ].join(" ")}
         value={value}
         placeholder={placeholder ?? "Please change placeholder"}></textarea>
-      <span className="text-red-500 pt-2">{error}</span>
+      <span className="text-apps-red pt-2">{error}</span>
     </div>
   );
 }
