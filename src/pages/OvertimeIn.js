@@ -139,7 +139,7 @@ const OvertimeIn = ({ history }) => {
             </div>
 
             {state.subject && (
-              <button className="p-3 text-lg font-semibold bg-blue-500 w-full text-center rounded-lg text-white mt-2">
+              <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white mt-2">
                 Start
               </button>
             )}

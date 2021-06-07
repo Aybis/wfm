@@ -27,7 +27,7 @@ const CardMapsInOut = ({ mark, address, height = "55%" }) => {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.REACT_APP_PINS_MAPS,
   });
 
   const containerStyle = {

@@ -84,7 +84,7 @@ const OvertimeOut = ({ history }) => {
       </button>
 
       <SetMaps
-        didMount={popup}
+        popup={popup}
         sendlongLat={sendlongLat}
         sendAddress={sendAddress}
       />
@@ -103,7 +103,7 @@ const OvertimeOut = ({ history }) => {
             className={`mr-2 h-6 w-6 transform transition duration-300 rounded-full ${
               popup ? "rotate-180" : "rotate-0"
             }`}
-            onClick={() => setDidMount(!popup)}
+            onClick={() => setpopup(!popup)}
           />
         </div>
 
@@ -144,7 +144,7 @@ const OvertimeOut = ({ history }) => {
             </div>
 
             {state.keterangan && (
-              <button className="p-3 text-lg font-semibold bg-blue-500 w-full text-center rounded-lg text-white mt-2">
+              <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white mt-2">
                 Finish
               </button>
             )}

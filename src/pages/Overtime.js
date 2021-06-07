@@ -6,11 +6,10 @@ import CardOvertime from "components/molecules/CardOvertime";
 import CardStartLembur from "components/molecules/CardStartLembur";
 import CardTitlePage from "components/molecules/CardTitlePage";
 import useForm from "helpers/hooks/useForm";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export default function Overtime({ history }) {
   const timeStamp = new Date();
-  const [popUp, setPopUp] = useState(null);
 
   const [{ bulan, tahun }, setState] = useForm({
     bulan: timeStamp.getMonth() + 1,
@@ -72,16 +71,8 @@ export default function Overtime({ history }) {
     },
   ];
 
-  useEffect(() => {
-    const interval = setTimeout(() => {
-      setPopUp(!popUp);
-    }, 500);
-    return () => clearTimeout(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <div className="relative bg-coolGray-50-50 min-h-screen h-full p-6 pb-12">
+    <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
       <CardTitlePage goBack={history.goBack} title="Lemburan" />
 
       <CardStartLembur

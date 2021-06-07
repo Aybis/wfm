@@ -5,7 +5,7 @@ import React from "react";
 export default function Loading({ height = 12, width = 12 }) {
   return (
     <svg
-      className={`animate-spin -ml-1 mr-3 h-${height} w-${width} text-blue-500`}
+      className={`animate-spin -ml-1 mr-3 h-${height} w-${width} text-apps-primary`}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24">

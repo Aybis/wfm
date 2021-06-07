@@ -40,12 +40,12 @@ export default function MobileHeader({ user, history }) {
           <h6 className="text-sm font-semibold text-apps-text transform capitalize">
             {user ? user.name.toLowerCase() : ""}
           </h6>
-          <h6 className="text-xs font-medium text-apps-text text-opacity-25 transform uppercase">
+          <h6 className="text-xs font-medium text-apps-text text-opacity-40 transform uppercase">
             {user ? user.position.toLowerCase() : ""}
           </h6>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center text-apps-text text-opacity-25">
+      <div className="flex flex-col justify-center items-center text-apps-text text-opacity-40">
         <LogoutIcon
           className="h-5 w-5 cursor-pointer"
           onClick={() => logOoutUser()}

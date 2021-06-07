@@ -95,9 +95,12 @@ const Login = ({ history }) => {
 
   useEffect(() => {
     window.scroll(0, 10);
-    setTimeout(() => {
+    const timeOut = setTimeout(() => {
       setIsReady(true);
     }, 500);
+    return () => {
+      clearTimeout(timeOut);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -105,8 +108,8 @@ const Login = ({ history }) => {
     <div className="flex flex-col gap-12 bg-gray-50 min-h-screen h-full py-4 px-12 justify-center">
       <CSSTransition
         in={isReady}
-        timeout={300}
-        classNames="alert"
+        timeout={500}
+        classNames="fade"
         unmountOnExit
         onEnter={() => setIsReady(true)}>
         <>
@@ -118,11 +121,11 @@ const Login = ({ history }) => {
             } `}
           />
           <div className="flex flex-col text-center">
-            <h1 className="font-semibold text-2xl text-gray-600">
+            <h1 className="font-semibold text-2xl text-apps-text text-opacity-80">
               Welcome to
-              <span className="font-bold text-2xl text-blue-500"> POP</span>
+              <span className="font-bold text-2xl text-apps-primary"> POP</span>
             </h1>
-            <h1 className="text-sm text-gray-400 font-normal mt-2">
+            <h1 className="text-sm text-apps-text text-opacity-50 font-normal mt-2">
               I'm so happy to see. You can continue to login for discipline your
               presence.
             </h1>
@@ -132,7 +135,7 @@ const Login = ({ history }) => {
               <div className="flex flex-col gap-1">
                 <label
                   htmlFor="username"
-                  className="font-medium text-gray-400 text-xs">
+                  className="font-medium text-apps-text text-opacity-40 text-sm">
                   Username
                 </label>
                 <input
@@ -141,13 +144,13 @@ const Login = ({ history }) => {
                   onChange={setState}
                   value={username}
                   placeholder="user.name"
-                  className="w-full text-sm border-b border-gray-200 text-gray-800 p-2 bg-transparent font-medium focus:border-blue-500"
+                  className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary"
                 />
               </div>
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="passwrod"
-                  className="font-medium text-gray-400 text-xs">
+                  className="font-medium text-apps-text text-opacity-40 text-sm">
                   Password
                 </label>
                 <div className="relative">
@@ -157,19 +160,19 @@ const Login = ({ history }) => {
                     onChange={setState}
                     value={password}
                     placeholder="*******"
-                    className="w-full text-sm border-b border-gray-200 text-gray-800 p-2 bg-transparent font-medium focus:border-blue-500"
+                    className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary"
                   />
                   {isPassword ? (
                     <>
                       <span
-                        className="h-4 w-4 absolute top-1 right-5 text-xs text-blue-500 cursor-pointer transition-all ease-in-out duration-300"
+                        className="h-4 w-4 absolute top-1 right-5 text-xs text-apps-primary cursor-pointer transition-all ease-in-out duration-300"
                         onClick={() => setIsPassword(!isPassword)}>
                         <Eye />
                       </span>
                     </>
                   ) : (
                     <span
-                      className="h-4 w-4 absolute top-1 right-5 text-xs text-blue-500 cursor-pointer transition-all ease-in-out duration-300"
+                      className="h-4 w-4 absolute top-1 right-5 text-xs text-apps-primary cursor-pointer transition-all ease-in-out duration-300"
                       onClick={() => setIsPassword(!isPassword)}>
                       <EyeOff />
                     </span>
@@ -178,18 +181,18 @@ const Login = ({ history }) => {
               </div>
               <Link
                 to="/forgot"
-                className="text-xs font-semibold text-gray-600 text-right cursor-pointer hover:underline transition duration-300">
+                className="text-xs font-semibold text-apps-text text-opacity-70 text-right cursor-pointer hover:underline transition duration-300">
                 Forgot password
               </Link>
               {isSubmit ? (
                 <div className="flex items-center justify-center">
                   <Loading height={8} width={8} />
-                  <p className="text-gray-400">Loading ....</p>
+                  <p className="text-apss-text text-opacity-50">Loading ....</p>
                 </div>
               ) : (
                 <button
                   type="submit"
-                  className="bg-blue-500 p-2 rounded-lg text-white font-medium text-xl hover:bg-blue-600 transition duration-300 mt-6">
+                  className="bg-apps-primary p-2 rounded-lg text-white font-medium text-xl hover:bg-blue-700 transition duration-300 mt-6">
                   Login
                 </button>
               )}

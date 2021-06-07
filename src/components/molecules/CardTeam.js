@@ -38,7 +38,7 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
 
         <h2
           className={`text-sm font-semibold mt-1 ${
-            timeIn ? "text-blue-600 " : "text-apps-red animate-pulse"
+            timeIn ? "text-apps-primary " : "text-apps-red animate-pulse"
           }`}>
           {timeIn ? timeIn : "Belum Absen"}
         </h2>

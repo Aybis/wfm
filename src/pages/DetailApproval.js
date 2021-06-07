@@ -92,7 +92,7 @@ const DetailApproval = ({ history }) => {
         <CardMapsInOut mark={markOne} />
       </div>
       <div
-        className="bg-gray-50 -mt-5 rounded-t-3xl px-6 pt-6 flex flex-col gap-8 overflow-scroll z-20 bottom-0 absolute transition-all duration-300 ease-in-out"
+        className="bg-white -mt-5 rounded-t-3xl px-6 pt-6 flex flex-col gap-8 overflow-scroll z-20 bottom-0 absolute transition-all duration-300 ease-in-out"
         style={{ maxHeight: popUp ? heightScreen * 0.58 : heightScreen * 0 }}>
         {/* header  */}
         <div className="flex justify-between items-center gap-2">
