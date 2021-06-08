@@ -97,7 +97,7 @@ const Home = ({ user }) => {
     },
   ];
   return user ? (
-    <div className="relative bg-apps-card  min-h-screen h-full">
+    <div className="relative bg-coolGray-50  min-h-screen h-full">
       <div className="relative h-full min-h-screen p-6 lg:hidden pb-32">
         <MobileHeader user={user} />
         <MobileMenu />
@@ -167,6 +167,25 @@ const Home = ({ user }) => {
           ))}
         </div>
         {/* end card overtime */}
+
+        {/* card holiday  */}
+        <div className="relative mt-8">
+          <Heading heading="Day Off" title="View more" />
+         
+          {overtimes.map((item, index) => (
+            <div key={index} className="flex w-full  items-center bg-white px-4 py-2 mt-4 rounded-md divide-x-2 divide-coolGray-200 divide-dashed">
+            <div className="flex flex-col items-center px-2 pr-4">
+              <h4 className="text-apps-red font-semibold text-opacity-60">15</h4>
+              <h4 className="text-apps-red font-regular text-sm text-opacity-40">Mei</h4>
+            </div>
+            <div className="flex flex-col items-start px-4"> 
+                <h2 className="text-apps-text font-medium text-sm">Hari Raya Idul Fitri 1442 Hijriyah</h2>
+                <h5 className="text-apps-text text-opacity-40 text-xs">Libur Nasional - Jumat</h5>
+            </div>
+        </div>
+          ))}
+        </div>
+        {/* end card holiday */}
       </div>
     </div>
   ) : (
