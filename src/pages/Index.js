@@ -9,6 +9,7 @@ import CheckOut from "./CheckOut";
 import Dashboard from "./Dashboard";
 import DetailApproval from "./DetailApproval";
 import Home from "./Home";
+import Inforekan from "./Inforekan";
 import Modules from "./Modules";
 import Overtime from "./Overtime";
 import OvertimeIn from "./OvertimeIn";
@@ -42,6 +43,7 @@ const Index = () => {
             <Route exact path="/approval" component={Approval}></Route>
             <Route exact path="/dashboard" component={Dashboard}></Route>
             <Route exact path="/details" component={DetailApproval}></Route>
+            <Route exact path="/inforekan" component={Inforekan}></Route>
             <Route exact path="/check-in" component={CheckIn}></Route>
             <Route exact path="/check-out" component={CheckOut}></Route>
             <Route exact path="/presensi" component={Presensi}></Route>

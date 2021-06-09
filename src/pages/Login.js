@@ -105,14 +105,18 @@ const Login = ({ history }) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-12 bg-gray-50 min-h-screen h-full py-4 px-12 justify-center">
-      <CSSTransition
-        in={isReady}
-        timeout={500}
-        classNames="fade"
-        unmountOnExit
-        onEnter={() => setIsReady(true)}>
-        <>
+    <div className="flex justify-center items-center bg-coolGray-50 h-screen">
+      {/* <!--     logo pins --> */}
+      <div className="absolute top-8 right-6">
+        <img
+          src="https://www.pins.co.id/img/logo.png"
+          alt="logo"
+          className="md:h-24 md:w-36 h-10 transition-all duration-500 ease-in-out"
+        />
+      </div>
+      {/* <!--     end logo pins --></div> */}
+      <div className="flex flex-col justify-center bg-white p-8 rounded-xl sm:h-auto sm:w-2/3 md:w-2/3 lg:w-1/2 h-full w-full transition-all duration-500 ease-in-out">
+        <div className="flex flex-col  sm:hidden">
           <img
             src={Ilustrasi2SVG}
             alt="bg"
@@ -120,7 +124,7 @@ const Login = ({ history }) => {
               isReady ? "md:h-48 h-50 " : "h-0 "
             } `}
           />
-          <div className="flex flex-col text-center">
+          <div className="flex flex-col text-center mt-8 transition-all duration-500 ease-in-out">
             <h1 className="font-semibold text-2xl text-apps-text text-opacity-80">
               Welcome to
               <span className="font-bold text-2xl text-apps-primary"> POP</span>
@@ -130,76 +134,89 @@ const Login = ({ history }) => {
               presence.
             </h1>
           </div>
-          <div className="flex flex-col ">
-            <form onSubmit={submitFunction} className=" flex flex-col gap-5">
-              <div className="flex flex-col gap-1">
-                <label
-                  htmlFor="username"
-                  className="font-medium text-apps-text text-opacity-40 text-sm">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  onChange={setState}
-                  value={username}
-                  placeholder="user.name"
-                  className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label
-                  htmlFor="passwrod"
-                  className="font-medium text-apps-text text-opacity-40 text-sm">
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    name="password"
-                    type={isPassword ? "password" : "text"}
-                    onChange={setState}
-                    value={password}
-                    placeholder="*******"
-                    className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary"
-                  />
-                  {isPassword ? (
-                    <>
-                      <span
-                        className="h-4 w-4 absolute top-1 right-5 text-xs text-apps-primary cursor-pointer transition-all ease-in-out duration-300"
-                        onClick={() => setIsPassword(!isPassword)}>
-                        <Eye />
-                      </span>
-                    </>
-                  ) : (
-                    <span
-                      className="h-4 w-4 absolute top-1 right-5 text-xs text-apps-primary cursor-pointer transition-all ease-in-out duration-300"
-                      onClick={() => setIsPassword(!isPassword)}>
-                      <EyeOff />
-                    </span>
-                  )}
-                </div>
-              </div>
-              <Link
-                to="/forgot"
-                className="text-xs font-semibold text-apps-text text-opacity-70 text-right cursor-pointer hover:underline transition duration-300">
-                Forgot password
-              </Link>
-              {isSubmit ? (
-                <div className="flex items-center justify-center">
-                  <Loading height={8} width={8} />
-                  <p className="text-apss-text text-opacity-50">Loading ....</p>
-                </div>
-              ) : (
-                <button
-                  type="submit"
-                  className="bg-apps-primary p-2 rounded-lg text-white font-medium text-xl hover:bg-blue-700 transition duration-300 mt-6">
-                  Login
-                </button>
-              )}
-            </form>
+        </div>
+        <div className="sm:flex lg:mb-12 flex-col hidden transition-all duration-500 ease-in-out">
+          <h1 className="text-apps-text text-3xl font-bold tracking-wide">
+            Login <span className="text-apps-primary">POP</span>
+          </h1>
+          <h4 className="text-apps-text  text-opacity-40 mt-4">
+            I'm so happy to see. You can continue to login for discipline your
+            presence.
+          </h4>
+        </div>
+        <form onSubmit={submitFunction} className=" flex flex-col gap-5 mt-4">
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="username"
+              className="font-medium text-apps-text text-opacity-40 text-sm">
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              onChange={setState}
+              value={username}
+              placeholder="user.name"
+              className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary text-lg focus:outline-none"
+            />
           </div>
-        </>
-      </CSSTransition>
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="password"
+              className="font-medium text-apps-text text-opacity-40 text-sm">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                name="password"
+                type={isPassword ? "password" : "text"}
+                onChange={setState}
+                value={password}
+                placeholder="*******"
+                className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary text-lg focus:outline-none"
+              />
+              {isPassword && (
+                <span
+                  className="h-4 w-4 absolute top-1 right-5 text-xs text-apps-primary cursor-pointer transition-all ease-in-out duration-300"
+                  onClick={() => setIsPassword(!isPassword)}>
+                  <Eye />
+                </span>
+              )}
+              <CSSTransition
+                in={!isPassword}
+                timeout={500}
+                classNames="fade"
+                unmountOnExit
+                onEnter={() => setIsPassword(false)}
+                onExit={() => setIsPassword(true)}>
+                <span
+                  className="h-4 w-4 absolute top-1 right-5 text-xs text-apps-primary cursor-pointer transition-all ease-in-out duration-300"
+                  onClick={() => setIsPassword(!isPassword)}>
+                  <EyeOff />
+                </span>
+              </CSSTransition>
+            </div>
+          </div>
+          <Link
+            to="/forgot"
+            className="text-xs font-semibold text-apps-text text-opacity-70 text-right cursor-pointer hover:underline transition duration-300">
+            Forgot password
+          </Link>
+          {isSubmit ? (
+            <div className="flex items-center justify-center">
+              <Loading height={8} width={8} />
+              <p className="text-apss-text text-opacity-50">Loading ....</p>
+            </div>
+          ) : (
+            <button
+              type="submit"
+              className="bg-apps-primary p-2 rounded-lg text-white font-medium text-xl hover:bg-blue-700 transition duration-300 mt-6">
+              Login
+            </button>
+          )}
+        </form>
+        <p></p>
+      </div>
     </div>
   );
 };

@@ -42,12 +42,14 @@ const Modules = () => {
             Lemburan
           </h4>
         </Link>
-        <div className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
+        <Link
+          to="/inforekan"
+          className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <UserGroupIcon className="p-2 h-16 w-16 text-apps-green rounded-lg bg-apps-green bg-opacity-10 " />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
             Inforekan
           </h4>
-        </div>
+        </Link>
         <div className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <LightningBoltIcon className="p-2 h-16 w-16 text-apps-yellow rounded-lg bg-apps-yellow bg-opacity-10 " />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2">

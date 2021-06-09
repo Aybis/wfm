@@ -11,17 +11,17 @@ const CardDaily = ({ day, timeIn, timeOut, type }) => {
   const ShowIconDaily = () => {
     if (type === "wfh") {
       return (
-        <HomeIcon className="h-12 w-12 rounded-md p-2 fill-current text-apps-orange bg-apps-orange bg-opacity-10" />
+        <HomeIcon className="h-8 w-8 rounded-full p-1 fill-current text-white bg-apps-pink " />
       );
     }
     if (type === "wfo") {
       return (
-        <OfficeBuildingIcon className="h-12 w-12 rounded-md p-2 fill-current text-apps-purple bg-apps-purple bg-opacity-10" />
+        <OfficeBuildingIcon className="h-8 w-8 rounded-full p-1 fill-current text-white bg-apps-orange " />
       );
     }
     if (type === "satelit") {
       return (
-        <LibraryIcon className="h-12 w-12 rounded-md p-2 fill-current text-apps-green bg-apps-green bg-opacity-10" />
+        <LibraryIcon className="h-8 w-8 rounded-full p-1 fill-current text-white bg-apps-purple" />
       );
     }
   };
@@ -29,10 +29,10 @@ const CardDaily = ({ day, timeIn, timeOut, type }) => {
   return (
     <div
       className={`flex flex-none flex-col rounded-lg w-32 gap-4 p-4 bg-white`}>
-      <div className="flex flex-col items-start gap-2">
+      <div className="flex flex-col items-start gap-4">
         <ShowIconDaily />
         <div className="flex flex-col">
-          <h3 className={`font-semibold text-apps-text uppercase`}>{type}</h3>
+          <h3 className={`font-semibold text-apps-text capitalize`}>{type}</h3>
           <h3 className={` text-apps-text text-opacity-40 text-sm -mt-1`}>
             {day}
           </h3>

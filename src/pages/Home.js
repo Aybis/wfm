@@ -3,6 +3,7 @@ import Heading from "components/atoms/Heading";
 import Loading from "components/atoms/Loading";
 import CardDaily from "components/molecules/CardDaily";
 import CardDay from "components/molecules/CardDay";
+import CardDayOff from "components/molecules/CardDayOff";
 import CardOvertime from "components/molecules/CardOvertime";
 import CardPresence from "components/molecules/CardPresence";
 import CardTeam from "components/molecules/CardTeam";
@@ -96,6 +97,38 @@ const Home = ({ user }) => {
       status: "leader",
     },
   ];
+
+  const dayOff = [
+    {
+      date: 13,
+      title: "Hari Raya Idul Fitri 1442 Hijriyah",
+      detail: "Libur Nasional",
+      month: "Mei",
+      day: "Kamis",
+    },
+    {
+      date: 14,
+      title: "Hari Kenaikan Isa Al Masih",
+      detail: "Libur Nasional",
+      month: "Mei",
+      day: "Kamis",
+    },
+    {
+      date: 26,
+      title: "Hari Raya Waisak",
+      detail: "Libur Nasional",
+      month: "Mei",
+      day: "Rabu",
+    },
+    {
+      date: 1,
+      title: "Hari Lahir pancasila",
+      detail: "Libur Nasional",
+      month: "Juni",
+      day: "Selasa",
+    },
+  ];
+
   return user ? (
     <div className="relative bg-coolGray-50  min-h-screen h-full">
       <div className="relative h-full min-h-screen p-6 lg:hidden pb-32">
@@ -103,8 +136,10 @@ const Home = ({ user }) => {
         <MobileMenu />
 
         {/* card check in  */}
-        <CardPresence link="/check-in" />
-        <CardPresence link="/check-out" status="out" />
+        <div className="mt-8">
+          <CardPresence link="/check-in" />
+          <CardPresence link="/check-out" status="out" />
+        </div>
 
         <div className="relative mt-8">
           <Heading heading="Weekly Report" />
@@ -171,18 +206,16 @@ const Home = ({ user }) => {
         {/* card holiday  */}
         <div className="relative mt-8">
           <Heading heading="Day Off" title="View more" />
-         
-          {overtimes.map((item, index) => (
-            <div key={index} className="flex w-full  items-center bg-white px-4 py-2 mt-4 rounded-md divide-x-2 divide-coolGray-200 divide-dashed">
-            <div className="flex flex-col items-center px-2 pr-4">
-              <h4 className="text-apps-red font-semibold text-opacity-60">15</h4>
-              <h4 className="text-apps-red font-regular text-sm text-opacity-40">Mei</h4>
-            </div>
-            <div className="flex flex-col items-start px-4"> 
-                <h2 className="text-apps-text font-medium text-sm">Hari Raya Idul Fitri 1442 Hijriyah</h2>
-                <h5 className="text-apps-text text-opacity-40 text-xs">Libur Nasional - Jumat</h5>
-            </div>
-        </div>
+
+          {dayOff.map((item, index) => (
+            <CardDayOff
+              key={index}
+              date={item.date}
+              day={item.day}
+              detail={item.detail}
+              month={item.month}
+              title={item.title}
+            />
           ))}
         </div>
         {/* end card holiday */}
