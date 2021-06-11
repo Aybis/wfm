@@ -1,9 +1,10 @@
 {
   "name": "wfm",
   "version": "0.1.0",
-  "private": true,  
+  "private": true,
   "homepage": "https://wfm.pins.co.id",
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.19",
     "@craco/craco": "^6.1.2",
     "@heroicons/react": "^1.0.1",
     "@react-google-maps/api": "^2.2.0",

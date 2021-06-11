@@ -11,17 +11,17 @@ const CardDaily = ({ day, timeIn, timeOut, type }) => {
   const ShowIconDaily = () => {
     if (type === "wfh") {
       return (
-        <HomeIcon className="h-8 w-8 rounded-full p-1 fill-current text-white bg-apps-pink " />
+        <HomeIcon className="h-10 w-10 rounded-md p-2 fill-current text-apps-pink bg-apps-pink bg-opacity-10 " />
       );
     }
     if (type === "wfo") {
       return (
-        <OfficeBuildingIcon className="h-8 w-8 rounded-full p-1 fill-current text-white bg-apps-orange " />
+        <OfficeBuildingIcon className="h-10 w-10 rounded-md p-2 fill-current text-apps-orange bg-apps-orange bg-opacity-10" />
       );
     }
     if (type === "satelit") {
       return (
-        <LibraryIcon className="h-8 w-8 rounded-full p-1 fill-current text-white bg-apps-purple" />
+        <LibraryIcon className="h-10 w-10 rounded-md p-2 fill-current text-apps-purple bg-apps-purple bg-opacity-10" />
       );
     }
   };

@@ -14,6 +14,7 @@ const SetMaps = ({
   sendAddress,
   sendlongLat,
   showButton = true,
+  className,
   height = "55%",
 }) => {
   const [didMount, setDidMount] = useState(false);
@@ -109,7 +110,10 @@ const SetMaps = ({
           <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-apps-pink" />
         </button>
       )}
-      <div className="absolute bg-white top-0 inset-x-0 h-screen">
+      <div
+        className={[
+          className ? className : "absolute h-screen top-0 inset-x-0",
+        ].join(" ")}>
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}

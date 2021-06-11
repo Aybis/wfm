@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -155,6 +153,7 @@ const Login = ({ history }) => {
               type="text"
               name="username"
               onChange={setState}
+              autoComplete="off"
               value={username}
               placeholder="user.name"
               className="w-full  border-b border-gray-200 text-apps-text p-2 bg-transparent font-medium focus:border-apps-primary text-lg focus:outline-none"

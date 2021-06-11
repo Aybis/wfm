@@ -1,5 +1,3 @@
-/** @format */
-
 import {
   CashIcon,
   ClockIcon,
@@ -16,7 +14,7 @@ import MobileMenu from "section/MobileMenu";
 
 const Modules = () => {
   return (
-    <div className="relative bg-gray-50 min-h-screen h-full p-6">
+    <div className="relative bg-gray-50 min-h-screen h-full p-6 pb-12">
       <MobileMenu />
 
       <div className="relative mt-4 p-4">

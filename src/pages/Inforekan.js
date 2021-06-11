@@ -1,12 +1,9 @@
-/** @format */
-
 import { SearchIcon } from "@heroicons/react/outline";
 import {
   ArrowUpIcon,
   PaperAirplaneIcon,
   UserCircleIcon,
 } from "@heroicons/react/solid";
-import Heading from "components/atoms/Heading";
 import Loading from "components/atoms/Loading";
 import CardTitlePage from "components/molecules/CardTitlePage";
 // import { setAuthorizationHeader } from "configs/axios";
