@@ -138,12 +138,11 @@ const Home = ({ user }) => {
         {/* card check in  */}
         <div className="mt-8">
           <CardPresence link="/check-in" />
-          <CardPresence link="/check-out" status="out" />
         </div>
 
         <div className="relative mt-8">
           <Heading heading="Weekly Report" />
-          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 -ml-6 -mr-3 pl-6 pr-6">
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
             {/* card daily */}
             {presensi.map((item) => (
               <CardDaily
@@ -161,7 +160,7 @@ const Home = ({ user }) => {
         {/* card daily team report  */}
         <div className="relative mt-8">
           <Heading heading="Team Report" />
-          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 pb-2">
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
             {/* card team */}
             {teams.map((team, index) => (
               <CardTeam

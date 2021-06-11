@@ -11,7 +11,7 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
 
   return (
     <div
-      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 bg-white shadow-sm`}
+      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 bg-white`}
       style={{ minWidth: "10rem" }}>
       <div className="flex flex-col items-center">
         <img

@@ -11,16 +11,16 @@ export default function CardOvertime({
   status,
   border = false,
 }) {
-  let classStatus = "bg-apps-pink text-apps-pink";
+  let classStatus = "bg-apps-pink text-white";
   let valueStatus = "On Duty";
   let longTime = "On Duty";
 
   if (status === "leader") {
-    classStatus = "bg-apps-yellow text-apps-yellow";
+    classStatus = "bg-apps-yellow text-white";
     valueStatus = "Progress";
   }
   if (status === "done") {
-    classStatus = "bg-apps-green text-apps-green";
+    classStatus = "bg-apps-green text-white";
     valueStatus = "Approved";
   }
 
@@ -30,7 +30,7 @@ export default function CardOvertime({
 
   return (
     <div
-      className={`flex w-full justify-between bg-white p-4 mt-4 rounded-lg ${
+      className={`flex w-full justify-between bg-white p-4 mt-4 rounded-lg  ${
         border && "border border-gray-200"
       }`}>
       <div className="flex flex-col gap-2 text-xs">
@@ -44,8 +44,7 @@ export default function CardOvertime({
         </h4>
       </div>
       <div className="flex flex-col justify-between items-end gap-6 right-0">
-        <h4
-          className={`p-1 bg-opacity-10 rounded text-center text-xs ${classStatus}`}>
+        <h4 className={`p-1 rounded text-center text-xs ${classStatus}`}>
           {valueStatus}
         </h4>
 

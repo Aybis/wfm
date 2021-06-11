@@ -3,7 +3,6 @@ import Download from "components/atoms/Download";
 import Select from "components/atoms/Select";
 import SetMaps from "components/atoms/SetMaps";
 import CardOvertime from "components/molecules/CardOvertime";
-import CardStartLembur from "components/molecules/CardStartLembur";
 import CardTitlePage from "components/molecules/CardTitlePage";
 import useForm from "helpers/hooks/useForm";
 import React, { useEffect, useState } from "react";
@@ -120,7 +119,7 @@ export default function Overtime({ history }) {
             </span>
           </div>
           <div className="flex justify-center items-center">
-            <Link to="/" className="ml-7">
+            <Link to="/overtime-in" className="ml-7">
               <ChevronRightIcon className="h-8 w-8 text-apps-primary   bg-apps-primary bg-opacity-10 p-1 rounded" />
             </Link>
           </div>

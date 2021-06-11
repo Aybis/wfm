@@ -18,7 +18,7 @@ export default function CardDay({
       }`}>
       {date && (
         <div className=" mx-auto text-center -mt-3">
-          <h4 className="p-2 bg-apps-pink text-white font-medium max-w-lg text-xs rounded-md mx-auto ">
+          <h4 className="p-2 bg-apps-blueCard text-apps-text font-medium max-w-lg text-xs rounded-md mx-auto ">
             Saturday, 13 Desember 2021
           </h4>
         </div>
@@ -53,7 +53,7 @@ export default function CardDay({
         {/* out  */}
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
-          <h4 className="font-extrabold text-apps-red text-lg">{type}</h4>
+          <h4 className="font-extrabold text-apps-primary text-lg">{type}</h4>
           <h6
             className={` font-nromal text-sm text-apps-text text-opacity-40 ${
               !timeOut && "animate-pulse "

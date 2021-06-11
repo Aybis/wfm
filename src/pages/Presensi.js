@@ -3,6 +3,7 @@
 import Download from "components/atoms/Download";
 import Select from "components/atoms/Select";
 import CardDay from "components/molecules/CardDay";
+import CardMapCheck from "components/molecules/CardMapCheck";
 import CardTitlePage from "components/molecules/CardTitlePage";
 import useForm from "helpers/hooks/useForm";
 import React, { useEffect, useState } from "react";
@@ -75,16 +76,22 @@ export default function Presensi({ history }) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDidMount(!didMount);
+      setDidMount(true);
     }, 500);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      setDidMount(false);
+      clearInterval(interval);
+    };
   }, []);
+
+  if (!didMount) {
+    return null;
+  }
 
   return (
     <div className="relative bg-gray-50 min-h-screen h-full p-6">
       <CardTitlePage goBack={history.goBack} title="presensi" />
-
+      <CardMapCheck status={true} current="WFH" />
       <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">
         <Select
           fallbackText={monthNames[bulan]}
