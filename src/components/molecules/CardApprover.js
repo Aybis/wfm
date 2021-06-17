@@ -1,11 +1,20 @@
-/** @format */
-
 import { UserCircleIcon } from "@heroicons/react/solid";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function CardApprover({ image, name, status, date, time }) {
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <div className="flex justify-between p-2 border-b border-gray-200">
+    <motion.div
+      variants={item}
+      className="flex justify-between p-2 border-b border-gray-200">
       <div className="flex items-center gap-2">
         {image ? (
           <img src={image} alt="approval" className="h-12 w-12 rounded-full" />
@@ -31,6 +40,6 @@ export default function CardApprover({ image, name, status, date, time }) {
           {time}
         </h4>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -7,8 +7,17 @@ import {
   ExclamationCircleIcon,
   PhoneMissedCallIcon,
 } from "@heroicons/react/solid";
+import { motion } from "framer-motion";
 
 export default function CardReportKehadiran({ name, hari }) {
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   const IconName = () => {
     if (name === "hadir") {
       return (
@@ -42,7 +51,8 @@ export default function CardReportKehadiran({ name, hari }) {
   };
 
   return (
-    <div
+    <motion.div
+      variants={item}
       className={`flex flex-none flex-col rounded-xl w-2/5 sm:w-auto gap-4 p-4 bg-white`}>
       <div className="flex flex-col items-start gap-4">
         <IconName />
@@ -55,6 +65,6 @@ export default function CardReportKehadiran({ name, hari }) {
           </h6>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

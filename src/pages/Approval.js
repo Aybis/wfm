@@ -1,7 +1,6 @@
-/** @format */
-
 import Select from "components/atoms/Select";
 import CardOvertimeApproval from "components/molecules/CardOvertimeApproval";
+import { motion } from "framer-motion";
 import useForm from "helpers/hooks/useForm";
 import React from "react";
 import MobileMenu from "section/MobileMenu";
@@ -68,6 +67,19 @@ const Approval = () => {
     "November",
     "December",
   ];
+
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.09,
+        staggerChildren: 0.05,
+      },
+    },
+  };
+
   return (
     <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
       <MobileMenu />
@@ -77,7 +89,7 @@ const Approval = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-2 mt-8 gap-2 justify-center items-center">
+      <motion.div className="grid grid-cols-2 mt-8 gap-2 justify-center items-center">
         <Select
           fallbackText={monthNames[bulan]}
           name="bulan"
@@ -99,9 +111,13 @@ const Approval = () => {
           </option>
           <option value="all">All</option>
         </Select>
-      </div>
+      </motion.div>
 
-      <div className="grid grid-cols-1 gap-4 content-center mt-10 mb-20">
+      <motion.div
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        className="grid grid-cols-1 gap-4 content-center mt-10 mb-20">
         {documents.map((item, index) => (
           <CardOvertimeApproval
             key={index}
@@ -111,7 +127,7 @@ const Approval = () => {
             title={item.title}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

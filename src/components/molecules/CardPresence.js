@@ -1,5 +1,3 @@
-/** @format */
-
 import React from "react";
 import { Link } from "react-router-dom";
 
@@ -23,9 +21,9 @@ export default function CardPresence({ status, link }) {
       <Link
         to={link}
         className={`p-2 w-full rounded-lg text-white font-semibold text-center  ${btnClass}`}>
-        <span className="animate-pulse text-lg">{name}</span>
+        <span className=" text-lg">{name}</span>
       </Link>
-      <h4 className="font-medium text-apps-text text-opacity-50 text-xs">
+      <h4 className=" text-apps-text text-sm text-center">
         Budayakan disiplin presensi dari sekarang!
       </h4>
     </div>

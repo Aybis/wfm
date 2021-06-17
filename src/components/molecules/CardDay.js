@@ -1,6 +1,5 @@
-/** @format */
-
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function CardDay({
   type,
@@ -11,8 +10,17 @@ export default function CardDay({
   border = false,
   date,
 }) {
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
-    <div
+    <motion.div
+      variants={item}
       className={`flex flex-col w-full gap-4 mt-4 bg-white rounded-xl ${
         border && "border border-gray-100"
       }`}>
@@ -26,13 +34,9 @@ export default function CardDay({
       <div className={`flex gap-4  w-full p-4 h-auto ${date && "-mt-6"}`}>
         {/* in */}
         <div className="flex flex-col gap-2 justify-start w-1/3">
-          <h4 className="font-extrabold text-apps-primary text-lg">IN</h4>
-          <h6 className="text-sm font-normal text-apps-text text-opacity-40">
-            {locIn}
-          </h6>
-          <h4 className="font-semibold  text-apps-text text-opacity-80">
-            {timeIn}
-          </h4>
+          <h2 className="font-extrabold text-apps-primary text-lg">IN</h2>
+          <h3 className="text-sm font-normal text-apps-text">{locIn}</h3>
+          <h3 className="font-semibold  text-apps-text">{timeIn}</h3>
         </div>
         {/* icon */}
         <div className="flex items-center justify-center w-1/3">
@@ -54,20 +58,14 @@ export default function CardDay({
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
           <h4 className="font-extrabold text-apps-primary text-lg">{type}</h4>
-          <h6
-            className={` font-nromal text-sm text-apps-text text-opacity-40 ${
-              !timeOut && "animate-pulse "
-            }`}>
+          <h6 className={`text-sm text-apps-text`}>
             {timeOut ? locOut : "On Duty"}
           </h6>
-          <h4
-            className={`font-semibold text-apps-text text-opacity-80  ${
-              !timeOut && "animate-pulse"
-            }`}>
+          <h4 className={`font-semibold text-apps-text `}>
             {timeOut ? timeOut : "On Duty"}
           </h4>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

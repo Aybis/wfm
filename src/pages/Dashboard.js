@@ -5,8 +5,8 @@ import MobileMenu from "section/MobileMenu";
 import Heading from "components/atoms/Heading";
 import FilterDate from "components/molecules/FilterDate";
 import Loading from "components/atoms/Loading";
-const ChartPie = lazy(() => import("components/atoms/ChartPie"));
-const ChartBar = lazy(() => import("components/atoms/ChartBar"));
+const ChartPie = lazy(() => import("components/atoms/ChartPie"), 500);
+const ChartBar = lazy(() => import("components/atoms/ChartBar"), 500);
 
 export default function Dashboard({ history }) {
   const [didMount, setdidMount] = useState(false);
@@ -61,9 +61,12 @@ export default function Dashboard({ history }) {
   ];
 
   useEffect(() => {
-    setdidMount(true);
+    const timeOut = setTimeout(() => {
+      setdidMount(true);
+    }, 500);
     return () => {
       setdidMount(false);
+      clearTimeout(timeOut);
     };
   }, []);
 
@@ -115,13 +118,27 @@ export default function Dashboard({ history }) {
                 </div>
               }>
               <ChartPie data={dataPie} title="Report Daily" id="daily" />
+            </Suspense>
 
+            <Suspense
+              fallback={
+                <div className="flex justify-center items-center">
+                  <Loading />
+                </div>
+              }>
               <ChartBar
                 data={dataBar}
                 title="Report Daily Direktorat"
                 id="dailyBar"
               />
+            </Suspense>
 
+            <Suspense
+              fallback={
+                <div className="flex justify-center items-center">
+                  <Loading />
+                </div>
+              }>
               <ChartBar data={dataBar} title="Report Monthly" id="monthly" />
             </Suspense>
           </div>

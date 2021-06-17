@@ -1,4 +1,3 @@
-/** @format */
 import Heading from "components/atoms/Heading";
 import Loading from "components/atoms/Loading";
 import CardDaily from "components/molecules/CardDaily";
@@ -10,6 +9,7 @@ import CardTeam from "components/molecules/CardTeam";
 import React from "react";
 import MobileHeader from "section/MobileHeader";
 import MobileMenu from "section/MobileMenu";
+import { motion } from "framer-motion";
 
 const Home = ({ user }) => {
   const presensi = [
@@ -129,8 +129,20 @@ const Home = ({ user }) => {
     },
   ];
 
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   return user ? (
-    <div className="relative bg-coolGray-50  min-h-screen h-full">
+    <div className="relative bg-gradient-to-b from-coolGray-50 to-coolGray-100  min-h-screen h-full">
       <div className="relative h-full min-h-screen p-6 lg:hidden pb-32">
         <MobileHeader user={user} />
         <MobileMenu />
@@ -142,7 +154,11 @@ const Home = ({ user }) => {
 
         <div className="relative mt-8">
           <Heading heading="Weekly Report" />
-          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
             {/* card daily */}
             {presensi.map((item) => (
               <CardDaily
@@ -154,13 +170,17 @@ const Home = ({ user }) => {
               />
             ))}
             {/* end card daily */}
-          </div>
+          </motion.div>
         </div>
 
         {/* card daily team report  */}
         <div className="relative mt-8">
           <Heading heading="Team Report" />
-          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
             {/* card team */}
             {teams.map((team, index) => (
               <CardTeam
@@ -171,11 +191,15 @@ const Home = ({ user }) => {
               />
             ))}
             {/* end card team */}
-          </div>
+          </motion.div>
         </div>
 
         {/* card daily progress  */}
-        <div className="relative mt-8">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="relative mt-8">
           <Heading heading="Daily Progress" />
           <CardDay
             type={dayPresent.type}
@@ -184,11 +208,15 @@ const Home = ({ user }) => {
             timeIn={dayPresent.in}
             timeOut={dayPresent.out}
           />
-        </div>
+        </motion.div>
         {/* end card daily progress   */}
 
         {/* card overtime  */}
-        <div className="relative mt-8">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="relative mt-8">
           <Heading heading="Overtime" title="View more" />
           {overtimes.map((item, index) => (
             <CardOvertime
@@ -199,23 +227,28 @@ const Home = ({ user }) => {
               title={item.title}
             />
           ))}
-        </div>
+        </motion.div>
         {/* end card overtime */}
 
         {/* card holiday  */}
         <div className="relative mt-8">
           <Heading heading="Day Off" title="View more" />
-
-          {dayOff.map((item, index) => (
-            <CardDayOff
-              key={index}
-              date={item.date}
-              day={item.day}
-              detail={item.detail}
-              month={item.month}
-              title={item.title}
-            />
-          ))}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1">
+            {dayOff.map((item, index) => (
+              <CardDayOff
+                key={index}
+                date={item.date}
+                day={item.day}
+                detail={item.detail}
+                month={item.month}
+                title={item.title}
+              />
+            ))}
+          </motion.div>
         </div>
         {/* end card holiday */}
       </div>

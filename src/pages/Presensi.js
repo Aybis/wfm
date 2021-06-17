@@ -6,18 +6,33 @@ import CardReportKehadiran from "components/molecules/CardReportKehadiran";
 import CardReportWork from "components/molecules/CardReportWork";
 import CardTitlePage from "components/molecules/CardTitlePage";
 import useForm from "helpers/hooks/useForm";
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense } from "react";
+import { motion } from "framer-motion";
 // import CardMapCheck from "components/molecules/CardMapCheck";
-const CardMapCheck = lazy(() => import("components/molecules/CardMapCheck"));
+const CardMapCheck = lazy(
+  () => import("components/molecules/CardMapCheck"),
+  500,
+);
 
 export default function Presensi({ history }) {
   const timeStamp = new Date();
-  const [didMount, setDidMount] = useState(false);
 
   const [{ bulan, tahun }, setState] = useForm({
     bulan: timeStamp.getMonth() + 1,
     tahun: timeStamp.getFullYear(),
   });
+
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
   const monthNames = [
     "January",
@@ -119,20 +134,6 @@ export default function Presensi({ history }) {
     },
   ];
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDidMount(true);
-    }, 500);
-    return () => {
-      setDidMount(false);
-      clearInterval(interval);
-    };
-  }, []);
-
-  if (!didMount) {
-    return null;
-  }
-
   return (
     <div className="relative bg-gray-50 min-h-screen h-full p-6">
       <CardTitlePage goBack={history.goBack} title="presensi" />
@@ -171,7 +172,11 @@ export default function Presensi({ history }) {
 
       <div className="flex flex-col mt-4">
         <h2 className="font-semibold text-apps-text ">Resume Presence</h2>
-        <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {reportMe.map((item, index) => (
             <CardReportKehadiran
@@ -181,18 +186,22 @@ export default function Presensi({ history }) {
             />
           ))}
           {/* end card daily */}
-        </div>
+        </motion.div>
       </div>
 
       <div className="flex flex-col mt-8">
         <h2 className="font-semibold text-apps-text ">Resume Work</h2>
-        <div className="gap-4 mt-4 grid grid-cols-1 transition-all duration-300 ease-in-out">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="gap-4 mt-4 grid grid-cols-3 justify-items-center transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.status} />
           ))}
           {/* end card daily */}
-        </div>
+        </motion.div>
       </div>
 
       <div className="relative mt-8">
@@ -201,7 +210,11 @@ export default function Presensi({ history }) {
           <Download onClick={() => alert("Download excel")} />
         </div>
 
-        <div className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full mt-4">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full mt-4">
           {reports.map((report, index) => (
             <CardDay
               key={index}
@@ -214,7 +227,7 @@ export default function Presensi({ history }) {
               type={report.type}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );

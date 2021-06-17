@@ -27,7 +27,7 @@ export default function MobileHeader({ user, history }) {
       <div className="flex gap-2 items-center justify-center">
         <div className="relative">
           {user.avatar ? (
-            <img src={user.avatar} alt="avatar" className="h-8 w-8" />
+            <img src={user.avatar} alt="avatar" className="h-10 w-10 rounded" />
           ) : (
             <img
               src={`https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`}
@@ -37,20 +37,20 @@ export default function MobileHeader({ user, history }) {
           )}
         </div>
         <div className="flex flex-col -gap-2">
-          <h6 className="text-sm font-semibold text-apps-text transform capitalize">
+          <h2 className="font-semibold text-apps-text transform capitalize">
             {user ? user.name.toLowerCase() : ""}
-          </h6>
-          <h6 className="text-xs font-medium text-apps-text text-opacity-40 transform uppercase">
+          </h2>
+          <h3 className="text-xs font-medium text-apps-text transform uppercase">
             {user ? user.position.toLowerCase() : ""}
-          </h6>
+          </h3>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center text-apps-text text-opacity-40">
+      <div className="flex flex-col justify-center items-center text-apps-text text-opacity-50">
         <LogoutIcon
           className="h-5 w-5 cursor-pointer"
           onClick={() => logOoutUser()}
         />
-        <p className="text-xs font-light">Logout</p>
+        <p className="text-xs font-medium ">Logout</p>
       </div>
     </div>
   );

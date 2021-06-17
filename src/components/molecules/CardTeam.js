@@ -2,23 +2,34 @@
 
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
+import imageUser from "../../assets/image/img.jpeg";
 import React from "react";
+import { motion } from "framer-motion";
 
-const CardTeam = ({ name, timeIn, thumbnail }) => {
+const CardTeam = ({ name, timeIn }) => {
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   const onClickSendWA = (name) => {
     alert(`auto Send WA ke ${name}`);
   };
 
   return (
-    <div
+    <motion.div
+      variants={item}
       className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 bg-white`}
       style={{ minWidth: "10rem" }}>
       <div className="flex flex-col items-center">
         <img
-          src={thumbnail}
+          src={imageUser}
           alt={name}
           className={`h-24 w-24 rounded-full border p-1 ${
-            timeIn ? "border-blue-200" : "border-pink-200"
+            timeIn ? "border-apps-primary" : "border-apps-red"
           }`}
         />
         {timeIn ? (
@@ -32,18 +43,18 @@ const CardTeam = ({ name, timeIn, thumbnail }) => {
           </div>
         )}
 
-        <h3 className="text-sm font-medium text-gray-800 transform capitalize mt-2">
+        <h3 className="text-sm font-semibold text-apps-text transform capitalize mt-2">
           {name.toLowerCase()}
         </h3>
 
         <h2
           className={`text-sm font-semibold mt-1 ${
-            timeIn ? "text-apps-primary " : "text-apps-red animate-pulse"
+            timeIn ? "text-apps-primary " : "text-apps-red"
           }`}>
           {timeIn ? timeIn : "Belum Absen"}
         </h2>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

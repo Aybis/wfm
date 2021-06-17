@@ -1,16 +1,19 @@
-import { ChevronRightIcon } from "@heroicons/react/solid";
 import Download from "components/atoms/Download";
 import Select from "components/atoms/Select";
-import SetMaps from "components/atoms/SetMaps";
 import CardOvertime from "components/molecules/CardOvertime";
 import CardTitlePage from "components/molecules/CardTitlePage";
 import useForm from "helpers/hooks/useForm";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { lazy, Suspense } from "react";
+import { motion } from "framer-motion";
+import CardReportWork from "components/molecules/CardReportWork";
+
+const CardMapCheck = lazy(
+  () => import("components/molecules/CardMapCheck"),
+  500,
+);
 
 export default function Overtime({ history }) {
   const timeStamp = new Date();
-  const [didMount, setDidMount] = useState(false);
 
   const [{ bulan, tahun }, setState] = useForm({
     bulan: timeStamp.getMonth() + 1,
@@ -71,60 +74,39 @@ export default function Overtime({ history }) {
       status: "leader",
     },
   ];
-
-  const sendAddress = (value) => {
-    console.log(value);
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
   };
-
-  const sendLonglat = (value) => {
-    console.log(value);
-  };
-
-  useEffect(() => {
-    setDidMount(true);
-    return () => {
-      setDidMount(false);
-    };
-  }, []);
-
-  if (!didMount) {
-    return null;
-  }
+  const workMe = [
+    {
+      name: "Done",
+      hari: 8,
+    },
+    {
+      name: "Progress",
+      hari: 4,
+    },
+    {
+      name: "Lembur",
+      hari: 36,
+    },
+  ];
 
   return (
     <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
       <CardTitlePage goBack={history.goBack} title="Lemburan" />
 
-      <div className="relative grid grid-cols-1 bg-white rounded-md mb-8 mt-4 shadow-md">
-        <SetMaps
-          height="100%"
-          className="relative h-28 rounded-t-lg z-0"
-          sendAddress={sendAddress}
-          sendlongLat={sendLonglat}
-          showButton={false}
-        />
-        <div className="rounded-b-md flex bg-white justify-between py-3 px-4 z-10 -mt-5">
-          <div className="flex flex-col gap-1">
-            <h4 className="text-xs font-medium text-apps-text text-opacity-40">
-              Current
-            </h4>
-            <h4 className="text-xs font-semibold text-apps-text">WFO</h4>
-          </div>
-          <div className="flex flex-col gap-1">
-            <h4 className="text-xs font-medium text-apps-text text-opacity-40">
-              Status
-            </h4>
-            <span className="text-xs font-semibold text-apps-green rounded-md w-16">
-              Available
-            </span>
-          </div>
-          <div className="flex justify-center items-center">
-            <Link to="/overtime-in" className="ml-7">
-              <ChevronRightIcon className="h-8 w-8 text-apps-primary   bg-apps-primary bg-opacity-10 p-1 rounded" />
-            </Link>
-          </div>
-        </div>
-      </div>
+      <Suspense fallback={<p>Loading ....</p>}>
+        <CardMapCheck status={true} current="WFO" link="/overtime-in" />
+      </Suspense>
 
       <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">
         <Select
@@ -150,20 +132,42 @@ export default function Overtime({ history }) {
         </Select>
       </div>
 
-      <div className="flex gap-1 justify-end mt-4">
-        <Download onClick={() => alert("Download excel")} />
+      <div className="flex flex-col mt-4">
+        <h2 className="font-semibold text-apps-text ">Resume Work</h2>
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="gap-4 mt-4 grid grid-cols-3 justify-items-center transition-all duration-300 ease-in-out">
+          {/* card daily */}
+          {workMe.map((item, index) => (
+            <CardReportWork key={index} day={item.hari} name={item.name} />
+          ))}
+          {/* end card daily */}
+        </motion.div>
       </div>
 
-      <div className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full">
-        {overtimes.map((item, index) => (
-          <CardOvertime
-            key={index}
-            date={item.date}
-            hours={item.hours}
-            status={item.status}
-            title={item.title}
-          />
-        ))}
+      <div className="relative mt-8">
+        <div className="flex gap-1 justify-between items-center">
+          <h2 className="font-semibold text-apps-text ">List Overtime</h2>
+          <Download onClick={() => alert("Download excel")} />
+        </div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full">
+          {overtimes.map((item, index) => (
+            <CardOvertime
+              key={index}
+              date={item.date}
+              hours={item.hours}
+              status={item.status}
+              title={item.title}
+            />
+          ))}
+        </motion.div>
       </div>
     </div>
   );
