@@ -28,7 +28,7 @@ const CardDaily = ({ day, timeIn, timeOut, type }) => {
 
   return (
     <div
-      className={`flex flex-none flex-col rounded-lg w-32 gap-4 p-4 bg-white shadow`}>
+      className={`flex flex-none flex-col rounded-lg w-32 gap-4 p-4 bg-white`}>
       <div className="flex flex-col items-start gap-4">
         <ShowIconDaily />
         <div className="flex flex-col">

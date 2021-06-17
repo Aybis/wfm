@@ -18,7 +18,7 @@ export default function MobileMenu() {
           to="/"
           exact={true}
           className=" p-2 text-center text-apps-primary text-opacity-20 rounded-md hover:bg-apps-card transition-all duration-300 ease-in-out"
-          activeClassName="text-apps-primary text-opacity-100 font-bold ">
+          activeClassName="text-apps-primary text-opacity-100 font-semibold ">
           <HomeIcon className="h-6 w-6 mx-auto" />
           <p className="text-sm mt-1">Home</p>
         </NavLink>

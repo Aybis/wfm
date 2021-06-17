@@ -18,7 +18,7 @@ export default function CardDay({
       }`}>
       {date && (
         <div className=" mx-auto text-center -mt-3">
-          <h4 className="p-2 bg-apps-blueCard text-apps-text font-medium max-w-lg text-xs rounded-md mx-auto ">
+          <h4 className="p-2 bg-apps-blueCard bg-opacity-70 text-apps-text text-opacity-70 font-medium max-w-lg text-xs rounded-md mx-auto ">
             Saturday, 13 Desember 2021
           </h4>
         </div>
@@ -38,7 +38,7 @@ export default function CardDay({
         <div className="flex items-center justify-center w-1/3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 text-apps-text text-opacity-40 "
+            className="h-10 w-10 text-apps-primary text-opacity-40 "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor">

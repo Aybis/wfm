@@ -1,12 +1,14 @@
-/** @format */
-
 import Download from "components/atoms/Download";
+import Loading from "components/atoms/Loading";
 import Select from "components/atoms/Select";
 import CardDay from "components/molecules/CardDay";
-import CardMapCheck from "components/molecules/CardMapCheck";
+import CardReportKehadiran from "components/molecules/CardReportKehadiran";
+import CardReportWork from "components/molecules/CardReportWork";
 import CardTitlePage from "components/molecules/CardTitlePage";
 import useForm from "helpers/hooks/useForm";
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
+// import CardMapCheck from "components/molecules/CardMapCheck";
+const CardMapCheck = lazy(() => import("components/molecules/CardMapCheck"));
 
 export default function Presensi({ history }) {
   const timeStamp = new Date();
@@ -31,6 +33,49 @@ export default function Presensi({ history }) {
     "November",
     "December",
   ];
+
+  const reportMe = [
+    {
+      status: "hadir",
+      hari: 13,
+    },
+    {
+      status: "telat",
+      hari: 13,
+    },
+    {
+      status: "izin",
+      hari: 13,
+    },
+    {
+      status: "sakit",
+      hari: 13,
+    },
+    {
+      status: "sppd",
+      hari: 13,
+    },
+    {
+      status: "cuti",
+      hari: 13,
+    },
+  ];
+
+  const workMe = [
+    {
+      status: "WFH",
+      hari: 15,
+    },
+    {
+      status: "WFO",
+      hari: 4,
+    },
+    {
+      status: "Satelit",
+      hari: 1,
+    },
+  ];
+
   const reports = [
     {
       type: "WFH",
@@ -91,7 +136,15 @@ export default function Presensi({ history }) {
   return (
     <div className="relative bg-gray-50 min-h-screen h-full p-6">
       <CardTitlePage goBack={history.goBack} title="presensi" />
-      <CardMapCheck status={true} current="WFH" />
+      <Suspense
+        fallback={
+          <div className="flex justify-center items-center">
+            <Loading />
+          </div>
+        }>
+        <CardMapCheck status={true} current="WFH" />
+      </Suspense>
+
       <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">
         <Select
           fallbackText={monthNames[bulan]}
@@ -116,23 +169,52 @@ export default function Presensi({ history }) {
         </Select>
       </div>
 
-      <div className="flex gap-1 justify-end mt-4">
-        <Download onClick={() => alert("Download excel")} />
+      <div className="flex flex-col mt-4">
+        <h2 className="font-semibold text-apps-text ">Resume Presence</h2>
+        <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
+          {/* card daily */}
+          {reportMe.map((item, index) => (
+            <CardReportKehadiran
+              key={index}
+              hari={item.hari}
+              name={item.status}
+            />
+          ))}
+          {/* end card daily */}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full">
-        {reports.map((report, index) => (
-          <CardDay
-            key={index}
-            border
-            date={report.date}
-            locIn={report.locIn}
-            locOut={report.locOut}
-            timeIn={report.in}
-            timeOut={report.out}
-            type={report.type}
-          />
-        ))}
+      <div className="flex flex-col mt-8">
+        <h2 className="font-semibold text-apps-text ">Resume Work</h2>
+        <div className="gap-4 mt-4 grid grid-cols-1 transition-all duration-300 ease-in-out">
+          {/* card daily */}
+          {workMe.map((item, index) => (
+            <CardReportWork key={index} day={item.hari} name={item.status} />
+          ))}
+          {/* end card daily */}
+        </div>
+      </div>
+
+      <div className="relative mt-8">
+        <div className="flex gap-1 justify-between items-center">
+          <h2 className="font-semibold text-apps-text ">List Presence</h2>
+          <Download onClick={() => alert("Download excel")} />
+        </div>
+
+        <div className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full mt-4">
+          {reports.map((report, index) => (
+            <CardDay
+              key={index}
+              border
+              date={report.date}
+              locIn={report.locIn}
+              locOut={report.locOut}
+              timeIn={report.in}
+              timeOut={report.out}
+              type={report.type}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
