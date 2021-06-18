@@ -6,8 +6,7 @@ import {
 } from "@heroicons/react/solid";
 import Loading from "components/atoms/Loading";
 import CardTitlePage from "components/molecules/CardTitlePage";
-// import { setAuthorizationHeader } from "configs/axios";
-// import users from "constants/api/users";
+import users from "constants/api/users";
 import React, { useEffect, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 
@@ -19,24 +18,12 @@ const Inforekan = ({ history }) => {
   const [isLoad, setIsLoading] = useState(false);
   const [top, settop] = useState(false);
 
-  //   const getDataKaryawan = () => {
-  //     let token = JSON.parse(localStorage.getItem("WFM:token"));
-  //     setAuthorizationHeader(`Bearer ${token.token}`);
-
-  //     users.allTroops().then((res) => {});
-  //   };
-
-  //   useEffect(() => {
-  //     getDataKaryawan();
-  //     // return () => {
-  //     //     cleanup
-  //     // }
-  //   }, []);
-
   const fetchData = () => {
-    fetch(`https://api.instantwebtools.net/v1/passenger?page=${page}&size=10`)
-      .then((res) => res.json())
-      .then((json) => setState([...state, ...json.data]));
+    users.allTroops(page).then((res) => {
+      if (res.data.length > 0) {
+        setState([...state, ...res.data]);
+      }
+    });
   };
 
   const scrollToEnd = () => {
@@ -119,13 +106,13 @@ const Inforekan = ({ history }) => {
                   </div>
 
                   <h3 className="text-xs font-medium text-gray-800 transform capitalize mt-2">
-                    {el.name}
+                    {el.am.name}
                   </h3>
                   <h4 className="text-xs font-light text-apps-text text-opacity-40">
-                    {el.airline.name}
+                    {el.customer.name}
                   </h4>
                   <h4 className="text-xs font-light text-apps-text text-opacity-40">
-                    {el.airline.id}
+                    {el.end_customer}
                   </h4>
                 </div>
               </div>

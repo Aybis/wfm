@@ -27,11 +27,21 @@ export default function MobileHeader({ user, history }) {
       <div className="flex gap-2 items-center justify-center">
         <div className="relative">
           {user.avatar ? (
-            <img src={user.avatar} alt="avatar" className="h-10 w-10 rounded" />
+            <img
+              loading="lazy"
+              height={10}
+              width={10}
+              src={user.avatar}
+              alt="avatar"
+              className="h-10 w-10 rounded"
+            />
           ) : (
             <img
               src={`https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`}
               alt="avatar"
+              loading="lazy"
+              height={10}
+              width={10}
               className="h-10 w-10 rounded-full"
             />
           )}

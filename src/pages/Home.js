@@ -12,6 +12,8 @@ import MobileMenu from "section/MobileMenu";
 import { motion } from "framer-motion";
 
 const Home = ({ user }) => {
+  window.scroll(0, 0);
+
   const presensi = [
     {
       name: "Senin",
@@ -143,7 +145,7 @@ const Home = ({ user }) => {
 
   return user ? (
     <div className="relative bg-gradient-to-b from-coolGray-50 to-coolGray-100  min-h-screen h-full">
-      <div className="relative h-full min-h-screen p-6 lg:hidden pb-32">
+      <div className="relative h-full min-h-screen p-6 pb-32">
         <MobileHeader user={user} />
         <MobileMenu />
 

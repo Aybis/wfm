@@ -18,30 +18,26 @@ export default function errorHandler(error) {
         const session = localStorage["WFM:token"]
           ? JSON.parse(localStorage["WFM:token"])
           : null;
-        return users
-          .refresh({
-            refresh_token: session.refresh_token,
-            email: session.email,
-          })
-          .then((res) => {
-            if (res.data) {
-              setAuthorizationHeader(res.data.token);
-              localStorage.setItem(
-                "WFM:token",
-                JSON.stringify({
-                  ...session,
-                  token: res.data.token,
-                }),
-              );
+        return users.refresh().then((res) => {
+          if (res.data) {
+            setAuthorizationHeader(`Bearer ${res.data.token}`);
 
-              originalRequest.headers.authorization = res.data.token;
+            localStorage.setItem(
+              "WFM:token",
+              JSON.stringify({
+                ...session,
+                token: res.data.token,
+              }),
+            );
 
-              return axios(originalRequest);
-            } else {
-              window.location.href = "/login";
-              localStorage.removeItem("WFM:token");
-            }
-          });
+            originalRequest.headers.authorization = res.data.token;
+
+            return axios(originalRequest);
+          } else {
+            window.location.href = "/login";
+            localStorage.removeItem("WFM:token");
+          }
+        });
       } else {
         message = error.response.data.message;
       }

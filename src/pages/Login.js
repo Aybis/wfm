@@ -5,7 +5,6 @@ import { Eye, EyeOff } from "react-feather";
 import { CSSTransition } from "react-transition-group";
 import { setAuthorizationHeader } from "configs/axios";
 
-import Ilustrasi2SVG from "../assets/svg/ilustrasi_pop.svg";
 import users from "../constants/api/users";
 import { populateProfile } from "store/actions/users";
 import useForm from "helpers/hooks/useForm";
@@ -47,6 +46,7 @@ const Login = ({ history }) => {
               JSON.stringify({
                 token: res.data.access_token,
                 username: username,
+                refresh_token: res.data.refresh_token,
               }),
             );
 
@@ -71,7 +71,7 @@ const Login = ({ history }) => {
              * tanggal + 7hari * 24jam * 60menit * 60detik * 1000ms
              */
             const expires = new Date(
-              new Date().getTime() + 7 * 24 * 60 * 60 * 1000,
+              new Date().getTime() + 1 * 24 * 60 * 60 * 1000,
             );
 
             document.cookie = `WFM:user=${JSON.stringify(
@@ -107,7 +107,8 @@ const Login = ({ history }) => {
       {/* <!--     logo pins --> */}
       <div className="absolute top-8 right-6">
         <img
-          src="https://www.pins.co.id/img/logo.png"
+          src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
+          loading="lazy"
           alt="logo"
           className="md:h-24 md:w-36 h-10 transition-all duration-500 ease-in-out"
         />
@@ -116,7 +117,8 @@ const Login = ({ history }) => {
       <div className="flex flex-col justify-center bg-white p-8 rounded-xl sm:h-auto sm:w-2/3 md:w-2/3 lg:w-1/2 h-full w-full transition-all duration-500 ease-in-out">
         <div className="flex flex-col  sm:hidden">
           <img
-            src={Ilustrasi2SVG}
+            loading="lazy"
+            src={`${process.env.PUBLIC_URL}/assets/svg/ilustrasi_pop.svg`}
             alt="bg"
             className={`transition-all duration-500 ease-in-out${
               isReady ? "md:h-48 h-50 " : "h-0 "

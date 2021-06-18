@@ -9,9 +9,29 @@ import Gate from "./components/Routes/Gate";
 import Unauthenticated from "./pages/401";
 import NotFound from "./pages/404";
 import Login from "./pages/Login";
+import { setAuthorizationHeader } from "configs/axios";
+import { populateProfile } from "store/actions/users";
+import users from "constants/api/users";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 function App() {
-  const history = createBrowserHistory({ basename: process.env.PUBLIC_URL });
+  const dispatch = useDispatch();
+  const history = createBrowserHistory({
+    basename: process.env.PUBLIC_URL,
+  });
+
+  useEffect(() => {
+    let session = null;
+    if (localStorage.getItem("WFM:token")) {
+      session = JSON.parse(localStorage.getItem("WFM:token"));
+      setAuthorizationHeader(`Bearer ${session.token}`);
+
+      users.details().then((details) => {
+        dispatch(populateProfile(details.data));
+      });
+    }
+  }, [dispatch]);
 
   return (
     <>

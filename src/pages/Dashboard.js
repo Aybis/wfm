@@ -1,15 +1,17 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
-import { ExclamationIcon } from "@heroicons/react/solid";
+import React, { lazy, Suspense } from "react";
 
 import MobileMenu from "section/MobileMenu";
 import Heading from "components/atoms/Heading";
 import FilterDate from "components/molecules/FilterDate";
-import Loading from "components/atoms/Loading";
-const ChartPie = lazy(() => import("components/atoms/ChartPie"), 500);
-const ChartBar = lazy(() => import("components/atoms/ChartBar"), 500);
+import CardReportKehadiran from "components/molecules/CardReportKehadiran";
+import CardReportWork from "components/molecules/CardReportWork";
+
+const ChartPie = lazy(() => import("components/atoms/ChartPie"));
+const ChartBar = lazy(() => import("components/atoms/ChartBar"));
 
 export default function Dashboard({ history }) {
-  const [didMount, setdidMount] = useState(false);
+  window.scroll(0, 0);
+
   const dataBar = [
     {
       status: "OPR",
@@ -60,19 +62,47 @@ export default function Dashboard({ history }) {
     },
   ];
 
-  useEffect(() => {
-    const timeOut = setTimeout(() => {
-      setdidMount(true);
-    }, 500);
-    return () => {
-      setdidMount(false);
-      clearTimeout(timeOut);
-    };
-  }, []);
+  const reportMe = [
+    {
+      status: "hadir",
+      hari: 13,
+    },
+    {
+      status: "telat",
+      hari: 13,
+    },
+    {
+      status: "izin",
+      hari: 13,
+    },
+    {
+      status: "sakit",
+      hari: 13,
+    },
+    {
+      status: "sppd",
+      hari: 13,
+    },
+    {
+      status: "cuti",
+      hari: 13,
+    },
+  ];
 
-  if (!didMount) {
-    return null;
-  }
+  const workMe = [
+    {
+      status: "WFH",
+      hari: 15,
+    },
+    {
+      status: "WFO",
+      hari: 4,
+    },
+    {
+      status: "Satelit",
+      hari: 1,
+    },
+  ];
 
   return (
     <div className="relative bg-coolGray-50  min-h-screen h-full">
@@ -87,22 +117,25 @@ export default function Dashboard({ history }) {
 
         <div className="flex flex-col mt-8">
           <Heading heading="Presensi Daily" />
-          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 -ml-6 -mr-3 pl-6 pr-6">
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
             {/* card daily */}
-            {Array.from(Array(6), (item, index) => (
-              <div
+            {reportMe.map((item, index) => (
+              <CardReportKehadiran
                 key={index}
-                className={`flex flex-none flex-col rounded-lg w-40 gap-4 p-4 bg-white`}>
-                <div className="flex flex-col items-start gap-4">
-                  <ExclamationIcon className="h-10 w-10 rounded-md text-apps-orange bg-apps-orange bg-opacity-10 p-2" />
-                  <div className="flex flex-col">
-                    <h4 className="font-semibold text-apps-text">Terlambat</h4>
-                    <h6 className="text-apps-text text-opacity-40 text-sm">
-                      123 Person
-                    </h6>
-                  </div>
-                </div>
-              </div>
+                hari={item.hari}
+                name={item.status}
+              />
+            ))}
+            {/* end card daily */}
+          </div>
+        </div>
+
+        <div className="flex flex-col mt-8">
+          <h2 className="font-semibold text-apps-text ">Resume Work</h2>
+          <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
+            {/* card daily */}
+            {workMe.map((item, index) => (
+              <CardReportWork key={index} day={item.hari} name={item.status} />
             ))}
             {/* end card daily */}
           </div>
@@ -111,21 +144,11 @@ export default function Dashboard({ history }) {
         <div className="flex flex-col mt-8">
           <Heading heading="Direktorat" />
           <div className="grid gap-4 mt-4">
-            <Suspense
-              fallback={
-                <div className="flex justify-center items-center">
-                  <Loading />
-                </div>
-              }>
+            <Suspense fallback={<p>Loading ....</p>}>
               <ChartPie data={dataPie} title="Report Daily" id="daily" />
             </Suspense>
 
-            <Suspense
-              fallback={
-                <div className="flex justify-center items-center">
-                  <Loading />
-                </div>
-              }>
+            <Suspense fallback={<p>Loading ....</p>}>
               <ChartBar
                 data={dataBar}
                 title="Report Daily Direktorat"
@@ -133,12 +156,7 @@ export default function Dashboard({ history }) {
               />
             </Suspense>
 
-            <Suspense
-              fallback={
-                <div className="flex justify-center items-center">
-                  <Loading />
-                </div>
-              }>
+            <Suspense fallback={<p>Loading ....</p>}>
               <ChartBar data={dataBar} title="Report Monthly" id="monthly" />
             </Suspense>
           </div>

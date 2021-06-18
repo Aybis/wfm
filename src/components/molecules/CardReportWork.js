@@ -49,7 +49,7 @@ export default function CardReportWork({ day, name }) {
   return (
     <motion.div
       variants={item}
-      className={`flex flex-none flex-col rounded-xl w-full p-2 bg-white`}>
+      className={`flex flex-none flex-col rounded-xl w-2/5 p-2 bg-white`}>
       <div className="flex flex-col items-start gap-4">
         <IconName />
         <div className="flex flex-col">

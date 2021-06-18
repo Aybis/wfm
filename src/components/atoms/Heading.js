@@ -8,7 +8,7 @@ const Heading = ({ heading, url = "/", title = "" }) => {
     <div className="flex justify-between items-center">
       <h2 className="text-apps-text font-semibold text-lg">{heading}</h2>
       <Link
-        aria-label={title}
+        aria-label={title ? title : "/url-name"}
         to={url}
         className="font-medium text-gray-400"
         style={{ fontSize: "0.6rem" }}>

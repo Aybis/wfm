@@ -15,6 +15,8 @@ const CardMapCheck = lazy(
 );
 
 export default function Presensi({ history }) {
+  window.scroll(0, 0);
+
   const timeStamp = new Date();
 
   const [{ bulan, tahun }, setState] = useForm({
@@ -195,7 +197,7 @@ export default function Presensi({ history }) {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="gap-4 mt-4 grid grid-cols-3 justify-items-center transition-all duration-300 ease-in-out">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.status} />

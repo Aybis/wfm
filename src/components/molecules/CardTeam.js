@@ -1,8 +1,5 @@
-/** @format */
-
 import { PaperAirplaneIcon } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
-import imageUser from "../../assets/image/img.jpeg";
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -26,7 +23,10 @@ const CardTeam = ({ name, timeIn }) => {
       style={{ minWidth: "10rem" }}>
       <div className="flex flex-col items-center">
         <img
-          src={imageUser}
+          loading="lazy"
+          width="24"
+          height="24"
+          src={`${process.env.PUBLIC_URL}/assets/images/img.jpeg`}
           alt={name}
           className={`h-24 w-24 rounded-full border p-1 ${
             timeIn ? "border-apps-primary" : "border-apps-red"

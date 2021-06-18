@@ -6,6 +6,8 @@ import React from "react";
 import MobileMenu from "section/MobileMenu";
 
 const Approval = () => {
+  window.scroll(0, 0);
+
   const timeStamp = new Date();
 
   const [{ bulan, tahun }, setState] = useForm({

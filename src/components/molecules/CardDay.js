@@ -57,10 +57,10 @@ export default function CardDay({
         {/* out  */}
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
-          <h4 className="font-extrabold text-apps-primary text-lg">{type}</h4>
-          <h6 className={`text-sm text-apps-text`}>
+          <h2 className="font-extrabold text-apps-primary text-lg">{type}</h2>
+          <h3 className={`text-sm text-apps-text`}>
             {timeOut ? locOut : "On Duty"}
-          </h6>
+          </h3>
           <h4 className={`font-semibold text-apps-text `}>
             {timeOut ? timeOut : "On Duty"}
           </h4>

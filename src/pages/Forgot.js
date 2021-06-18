@@ -9,7 +9,6 @@ import useForm from "helpers/hooks/useForm";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
-import Ilustrasi2SVG from "../assets/svg/ilustrasi_pop.svg";
 
 const Forgot = ({ history }) => {
   const [isLoad, setisLoad] = useState(false);
@@ -123,7 +122,7 @@ const Forgot = ({ history }) => {
       {/* <!--     logo pins --> */}
       <div className="absolute top-8 right-8">
         <img
-          src="https://www.pins.co.id/img/logo.png"
+          src={`${process.env.PUBLIC_URL}/assets/image/logo.png`}
           alt="logo"
           className="md:h-20 md:w-32 h-10"
         />
@@ -137,7 +136,7 @@ const Forgot = ({ history }) => {
         }`}>
         <div className="p-2 flex items-center justify-center ml-4 sm:hidden">
           <img
-            src={Ilustrasi2SVG}
+            src={`${process.env.PUBLIC_URL}/assets/svg/ilustrasi_pop.svg`}
             alt="bg"
             className={`transition-all duration-500 ease-in-out${
               isLoad ? "h-44 " : "h-0 "
