@@ -1,7 +1,7 @@
-import React from "react";
-import { ChevronRightIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import React from 'react';
+import { ChevronRightIcon } from '@heroicons/react/solid';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function CardOvertime({
   date,
@@ -17,17 +17,17 @@ export default function CardOvertime({
       opacity: 1,
     },
   };
-  let classStatus = "bg-apps-pink text-white";
-  let valueStatus = "On Duty";
-  let longTime = "On Duty";
+  let classStatus = 'bg-apps-pink text-white';
+  let valueStatus = 'On Duty';
+  let longTime = 'On Duty';
 
-  if (status === "leader") {
-    classStatus = "bg-apps-yellow text-apps-text";
-    valueStatus = "Progress";
+  if (status === 'leader') {
+    classStatus = 'bg-apps-yellow text-apps-text';
+    valueStatus = 'Progress';
   }
-  if (status === "done") {
-    classStatus = "bg-apps-green text-white";
-    valueStatus = "Approved";
+  if (status === 'done') {
+    classStatus = 'bg-apps-green text-white';
+    valueStatus = 'Approved';
   }
 
   if (hours) {
@@ -38,14 +38,14 @@ export default function CardOvertime({
     <motion.div
       variants={item}
       className={`flex w-full justify-between bg-white p-4 mt-4 rounded-lg  ${
-        border && "border border-gray-200"
+        border && 'border border-gray-200'
       }`}>
-      <div className="flex flex-col gap-2 text-xs">
+      <div className="flex flex-col gap-2 text-sm">
         <p className="text-apps-text">{date}</p>
         <h2 className="font-semibold text-apps-text">{title}</h2>
         <h3
           className={`font-semibold  ${
-            hours ? "text-apps-primary" : "text-apps-pink"
+            hours ? 'text-apps-primary' : 'text-apps-pink'
           } `}>
           {longTime}
         </h3>

@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function CardDay({
   type,
@@ -22,20 +22,20 @@ export default function CardDay({
     <motion.div
       variants={item}
       className={`flex flex-col w-full gap-4 mt-4 bg-white rounded-xl ${
-        border && "border border-gray-100"
+        border && 'border border-gray-100'
       }`}>
       {date && (
         <div className=" mx-auto text-center -mt-3">
-          <h4 className="p-2 bg-apps-blueCard bg-opacity-70 text-apps-text text-opacity-70 font-medium max-w-lg text-xs rounded-md mx-auto ">
-            Saturday, 13 Desember 2021
+          <h4 className="p-2 bg-apps-blueCard bg-opacity-70 text-apps-text font-medium max-w-lg text-sm rounded-md mx-auto ">
+            {date}
           </h4>
         </div>
       )}
-      <div className={`flex gap-4  w-full p-4 h-auto ${date && "-mt-6"}`}>
+      <div className={`flex gap-4  w-full p-4 h-auto ${date && '-mt-6'}`}>
         {/* in */}
         <div className="flex flex-col gap-2 justify-start w-1/3">
           <h2 className="font-extrabold text-apps-primary text-lg">IN</h2>
-          <h3 className="text-sm font-normal text-apps-text">{locIn}</h3>
+          <h3 className=" font-normal text-apps-text">{locIn}</h3>
           <h3 className="font-semibold  text-apps-text">{timeIn}</h3>
         </div>
         {/* icon */}
@@ -58,11 +58,9 @@ export default function CardDay({
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
           <h2 className="font-extrabold text-apps-primary text-lg">{type}</h2>
-          <h3 className={`text-sm text-apps-text`}>
-            {timeOut ? locOut : "On Duty"}
-          </h3>
+          <h3 className={` text-apps-text`}>{timeOut ? locOut : 'On Duty'}</h3>
           <h4 className={`font-semibold text-apps-text `}>
-            {timeOut ? timeOut : "On Duty"}
+            {timeOut ? timeOut : 'On Duty'}
           </h4>
         </div>
       </div>

@@ -8,11 +8,11 @@ import {
   MapIcon,
   PhoneMissedCallIcon,
   UserGroupIcon,
-} from "@heroicons/react/solid";
-import React from "react";
-import { Link } from "react-router-dom";
-import MobileMenu from "section/MobileMenu";
-import { motion } from "framer-motion";
+} from '@heroicons/react/solid';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import MobileMenu from 'section/MobileMenu';
+import { motion } from 'framer-motion';
 
 const Modules = () => {
   window.scroll(0, 0);
@@ -38,16 +38,16 @@ const Modules = () => {
   };
 
   return (
-    <div className="relative bg-gray-50 min-h-screen h-full p-6 pb-20">
+    <div className="relative">
       <MobileMenu />
 
-      <div className="relative mt-4 p-4">
-        <h2 className="text-apps-text font-semibold text-xl">
+      <div className="relative">
+        <h2 className="text-apps-text font-semibold text-2xl">
           List of Modules
         </h2>
       </div>
       <motion.div
-        className="grid grid-cols-2 gap-4 content-center mt-10 pb-20"
+        className="grid grid-cols-2 lg:grid-cols-3 gap-6 content-center mt-8 pb-12"
         variants={container}
         initial="hidden"
         animate="visible">
@@ -55,8 +55,8 @@ const Modules = () => {
           <Link
             to="/presensi"
             className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <FingerPrintIcon className="p-2 h-16 w-16 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 " />
-            <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+            <FingerPrintIcon className="p-2 h-16 w-16 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 lg:h-24 lg:w-24" />
+            <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Presensi
             </h4>
           </Link>
@@ -65,8 +65,8 @@ const Modules = () => {
           <Link
             to="/overtime"
             className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <ClockIcon className="p-2 h-16 w-16 text-apps-pink rounded-lg bg-apps-pink bg-opacity-10 " />
-            <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+            <ClockIcon className="p-2 h-16 w-16 text-apps-pink rounded-lg bg-apps-pink bg-opacity-10 lg:h-24 lg:w-24" />
+            <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Lemburan
             </h4>
           </Link>
@@ -75,8 +75,8 @@ const Modules = () => {
           <Link
             to="/inforekan"
             className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <UserGroupIcon className="p-2 h-16 w-16 text-apps-green rounded-lg bg-apps-green bg-opacity-10 " />
-            <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+            <UserGroupIcon className="p-2 h-16 w-16 text-apps-green rounded-lg bg-apps-green bg-opacity-10 lg:h-24 lg:w-24" />
+            <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Inforekan
             </h4>
           </Link>
@@ -84,48 +84,48 @@ const Modules = () => {
         <motion.div
           variants={item}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-          <LightningBoltIcon className="p-2 h-16 w-16 text-apps-yellow rounded-lg bg-apps-yellow bg-opacity-10 " />
-          <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+          <LightningBoltIcon className="p-2 h-16 w-16 text-apps-yellow rounded-lg bg-apps-yellow bg-opacity-10 lg:h-24 lg:w-24" />
+          <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
             Hari Libur
           </h4>
         </motion.div>
         <motion.div
           variants={item}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-          <CashIcon className="p-2 h-16 w-16 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10 " />
-          <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+          <CashIcon className="p-2 h-16 w-16 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10  lg:h-24 lg:w-24" />
+          <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
             Reimburse
           </h4>
         </motion.div>
         <motion.div
           variants={item}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-          <PhoneMissedCallIcon className="p-2 h-16 w-16 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10" />
-          <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+          <PhoneMissedCallIcon className="p-2 h-16 w-16 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 lg:h-24 lg:w-24" />
+          <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
             Cuti
           </h4>
         </motion.div>
         <motion.div
           variants={item}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-          <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 " />
-          <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+          <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 lg:h-24 lg:w-24 " />
+          <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
             SPPD
           </h4>
         </motion.div>
         <motion.div
           variants={item}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-          <KeyIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 " />
-          <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+          <KeyIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24 " />
+          <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
             Driver
           </h4>
         </motion.div>
         <motion.div
           variants={item}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-          <IdentificationIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 " />
-          <h4 className="font-semibold text-apps-text text-sm text-left mt-2">
+          <IdentificationIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24" />
+          <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
             Me
           </h4>
         </motion.div>

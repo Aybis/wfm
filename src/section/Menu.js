@@ -2,16 +2,44 @@ import {
   ChartBarIcon,
   ClipboardListIcon,
   HomeIcon,
+  LogoutIcon,
   ViewGridIcon,
 } from '@heroicons/react/outline';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import notify from 'helpers/hooks/toast';
 
-export default function MobileMenu() {
+export default function Menu() {
+  const logOoutUser = () => {
+    notify('info', 'Logout success 👋');
+    // remove token
+    localStorage.removeItem('WFM:token');
+    // remove cookies
+    document.cookie.split(';').forEach(function (c) {
+      document.cookie = c
+        .replace(/^ +/, '')
+        .replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+    });
+    // redirect link
+    <Redirect push to="/login" />;
+    // reload page
+    window.location.reload();
+  };
+
   return (
-    <div className="fixed z-50 bottom-8 inset-x-0 ">
-      {/* <!--   mobile menu bar  --> */}
-      <div className="bg-white shadow-sm flex justify-between items-center  lg:hidden  mx-4 mt-4 mb-0 p-2 rounded-2xl ">
+    <nav className="transition-all duration-300 ease-in-out fixed hidden lg:flex rounded-2xl z-50 inset-x-0 mx-8 lg:bottom-0 lg:h-auto lg:inset-y-0 lg:w-32 lg:flex-col lg:justify-between bg-white lg:my-4 lg:ml-4 ">
+      <div className="hidden md:flex flex-col items-center gap-2 justify-center p-2 pt-8">
+        <img
+          className="h-8 w-8"
+          src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
+          alt="logo"
+        />
+        <h1 className="text-apps-text font-semibold tracking-wider text-lg">
+          POP
+        </h1>
+      </div>
+      <div className="flex md:flex-col p-2 md:gap-8 md:justify-center justify-between items-center transition-all duration-300 ease-in-out w-full">
         <NavLink
           to="/"
           exact={true}
@@ -42,6 +70,12 @@ export default function MobileMenu() {
           <p className="text-sm mt-1">Dashboard</p>
         </NavLink>
       </div>
-    </div>
+      <div
+        className="hidden md:flex items-center gap-1 p-4 text-apps-text text-opacity-40 cursor-pointer hover:bg-apps-blueCard"
+        onClick={() => logOoutUser()}>
+        <LogoutIcon className="h-8 w-8 p-1" />
+        <h4 className="font-semibold">Logout</h4>
+      </div>
+    </nav>
   );
 }

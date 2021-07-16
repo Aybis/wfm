@@ -6,6 +6,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.19",
     "@craco/craco": "^6.1.2",
+    "@csstools/normalize.css": "github:csstools/normalize.css",
     "@heroicons/react": "^1.0.1",
     "@react-google-maps/api": "^2.2.0",
     "@testing-library/jest-dom": "^5.11.4",
@@ -13,6 +14,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
     "framer-motion": "^4.1.17",
+    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",

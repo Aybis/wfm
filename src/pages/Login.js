@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { Eye, EyeOff } from "react-feather";
-import { CSSTransition } from "react-transition-group";
-import { setAuthorizationHeader } from "configs/axios";
+import React, { useEffect, useState } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Eye, EyeOff } from 'react-feather';
+import { CSSTransition } from 'react-transition-group';
+import { setAuthorizationHeader } from 'configs/axios';
 
-import users from "../constants/api/users";
-import { populateProfile } from "store/actions/users";
-import useForm from "helpers/hooks/useForm";
-import Loading from "components/atoms/Loading";
-import ToastHandler from "helpers/hooks/toast";
+import users from '../constants/api/users';
+import { populateProfile } from 'store/actions/users';
+import useForm from 'helpers/hooks/useForm';
+import Loading from 'components/atoms/Loading';
+import ToastHandler from 'helpers/hooks/toast';
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -18,8 +18,8 @@ const Login = ({ history }) => {
   const [isSubmit, setIsSubmit] = useState(false);
 
   const [{ username, password }, setState] = useForm({
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   });
 
   const submitFunction = (event) => {
@@ -32,7 +32,7 @@ const Login = ({ history }) => {
       .then((res) => {
         // set authorization with bearer token
         setAuthorizationHeader(`Bearer ${res.data.access_token}`);
-        ToastHandler("info", "Login Success 👋", 1000);
+        ToastHandler('info', 'Login Success 👋', 1000);
 
         // api get details users
         users
@@ -42,7 +42,7 @@ const Login = ({ history }) => {
 
             // store data token to local storage
             localStorage.setItem(
-              "WFM:token",
+              'WFM:token',
               JSON.stringify({
                 token: res.data.access_token,
                 username: username,
@@ -50,7 +50,7 @@ const Login = ({ history }) => {
               }),
             );
 
-            const redirect = localStorage.getItem("WFM:redirect");
+            const redirect = localStorage.getItem('WFM:redirect');
 
             // store data user to cookies
             const userCookie = {
@@ -79,7 +79,7 @@ const Login = ({ history }) => {
             )}; expires=${expires.toUTCString()}; path:/`;
 
             // redirect link
-            history.push(redirect || "/");
+            history.push(redirect || '/');
             setIsSubmit(false);
           })
           .catch((error) => {
@@ -121,7 +121,7 @@ const Login = ({ history }) => {
             src={`${process.env.PUBLIC_URL}/assets/svg/ilustrasi_pop.svg`}
             alt="bg"
             className={`transition-all duration-500 ease-in-out${
-              isReady ? "md:h-48 h-50 " : "h-0 "
+              isReady ? 'md:h-48 h-50 ' : 'h-0 '
             } `}
           />
           <div className="flex flex-col text-center mt-8 transition-all duration-500 ease-in-out">
@@ -170,7 +170,7 @@ const Login = ({ history }) => {
             <div className="relative">
               <input
                 name="password"
-                type={isPassword ? "password" : "text"}
+                type={isPassword ? 'password' : 'text'}
                 onChange={setState}
                 value={password}
                 placeholder="*******"

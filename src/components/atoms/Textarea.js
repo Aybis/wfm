@@ -1,7 +1,7 @@
 /** @format */
 
-import React from "react";
-import propTypes from "prop-types";
+import React from 'react';
+import propTypes from 'prop-types';
 
 export default function Textarea({
   value,
@@ -19,9 +19,9 @@ export default function Textarea({
         <label
           htmlFor={name}
           className={[
-            "text-sm font-semibold mb-2",
-            error ? "text-apps-red" : "text-apps-text text-opacity-70",
-          ].join(" ")}>
+            'text-sm font-semibold mb-2',
+            error ? 'text-apps-red' : 'text-apps-text',
+          ].join(' ')}>
           {labelName}
         </label>
       )}
@@ -31,14 +31,14 @@ export default function Textarea({
         type={type}
         rows="3"
         className={[
-          "bg-white focus:outline-none border w-full p-3 rounded font-medium",
+          'bg-white focus:outline-none border w-full p-3 rounded font-medium',
           error
-            ? "border-apps-red text-apps-red"
-            : "focus:border-apps-blue border-apps-gray border-opacity-40 text-apps-text",
+            ? 'border-apps-red text-apps-red'
+            : 'focus:border-apps-blue border-apps-gray border-opacity-40 text-apps-text',
           inputClassName,
-        ].join(" ")}
+        ].join(' ')}
         value={value}
-        placeholder={placeholder ?? "Please change placeholder"}></textarea>
+        placeholder={placeholder ?? 'Please change placeholder'}></textarea>
       <span className="text-apps-red pt-2">{error}</span>
     </div>
   );
@@ -52,5 +52,5 @@ Textarea.propTypes = {
   placeholder: propTypes.string,
   labelName: propTypes.string,
   inputClassName: propTypes.string,
-  type: propTypes.oneOf(["text", "email", "password", "number"]),
+  type: propTypes.oneOf(['text', 'email', 'password', 'number']),
 };

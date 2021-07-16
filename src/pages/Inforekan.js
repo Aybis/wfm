@@ -1,14 +1,14 @@
-import { SearchIcon } from "@heroicons/react/outline";
+import { SearchIcon } from '@heroicons/react/outline';
 import {
   ArrowUpIcon,
   PaperAirplaneIcon,
   UserCircleIcon,
-} from "@heroicons/react/solid";
-import Loading from "components/atoms/Loading";
-import CardTitlePage from "components/molecules/CardTitlePage";
-import users from "constants/api/users";
-import React, { useEffect, useState } from "react";
-import { CSSTransition } from "react-transition-group";
+} from '@heroicons/react/solid';
+import Loading from 'components/atoms/Loading';
+import CardTitlePage from 'components/molecules/CardTitlePage';
+import users from 'constants/api/users';
+import React, { useEffect, useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
 const PAGE_NUMBER = 1;
 
@@ -60,7 +60,7 @@ const Inforekan = ({ history }) => {
   }, [page]);
 
   return (
-    <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
+    <div className="relative">
       <CardTitlePage goBack={history.goBack} title="Inforekan" />
 
       {top && (
@@ -72,7 +72,7 @@ const Inforekan = ({ history }) => {
           onEnter={() => settop(true)}>
           <button
             className="fixed bottom-8 right-6 p-1 rounded-full bg-apps-primary  items-center justify-center"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <ArrowUpIcon className="h-10 w-10 text-white" />
           </button>
         </CSSTransition>
@@ -100,7 +100,7 @@ const Inforekan = ({ history }) => {
                   <UserCircleIcon className="h-24 w-24 p-2 text-apps-text" />
                   <div className="-mt-4 hidden">
                     <PaperAirplaneIcon
-                      onClick={() => alert("test")}
+                      onClick={() => alert('test')}
                       className=" p-1 text-white h-6 w-6 rounded-full bg-apps-red transform rotate-45 text-center cursor-pointer hover:bg-red-600"
                     />
                   </div>

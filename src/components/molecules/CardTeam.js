@@ -1,7 +1,7 @@
-import { PaperAirplaneIcon } from "@heroicons/react/outline";
-import { HomeIcon } from "@heroicons/react/solid";
-import React from "react";
-import { motion } from "framer-motion";
+import { PaperAirplaneIcon } from '@heroicons/react/outline';
+import { HomeIcon } from '@heroicons/react/solid';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const CardTeam = ({ name, timeIn }) => {
   const item = {
@@ -19,8 +19,8 @@ const CardTeam = ({ name, timeIn }) => {
   return (
     <motion.div
       variants={item}
-      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg p-4 bg-white`}
-      style={{ minWidth: "10rem" }}>
+      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg lg:w-1/5 p-4 bg-white`}
+      style={{ minWidth: '10rem' }}>
       <div className="flex flex-col items-center">
         <img
           loading="lazy"
@@ -29,7 +29,7 @@ const CardTeam = ({ name, timeIn }) => {
           src={`${process.env.PUBLIC_URL}/assets/images/img.jpeg`}
           alt={name}
           className={`h-24 w-24 rounded-full border p-1 ${
-            timeIn ? "border-apps-primary" : "border-apps-red"
+            timeIn ? 'border-apps-primary' : 'border-apps-red'
           }`}
         />
         {timeIn ? (
@@ -49,9 +49,9 @@ const CardTeam = ({ name, timeIn }) => {
 
         <h2
           className={`text-sm font-semibold mt-1 ${
-            timeIn ? "text-apps-primary " : "text-apps-red"
+            timeIn ? 'text-apps-primary ' : 'text-apps-red'
           }`}>
-          {timeIn ? timeIn : "Belum Absen"}
+          {timeIn ? timeIn : 'Belum Absen'}
         </h2>
       </div>
     </motion.div>

@@ -1,21 +1,21 @@
 /** @format */
 
-import { LocationMarkerIcon } from "@heroicons/react/solid";
+import { LocationMarkerIcon } from '@heroicons/react/solid';
 import {
   GoogleMap,
   InfoWindow,
   Marker,
   useJsApiLoader,
-} from "@react-google-maps/api";
-import axios from "axios";
-import { React, useCallback, useEffect, useState } from "react";
+} from '@react-google-maps/api';
+import axios from 'axios';
+import { React, useCallback, useEffect, useState } from 'react';
 const SetMaps = ({
   popup,
   sendAddress,
   sendlongLat,
   showButton = true,
   className,
-  height = "55%",
+  height = '55%',
 }) => {
   const [didMount, setDidMount] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -23,12 +23,12 @@ const SetMaps = ({
   const [address, setAddress] = useState(null);
 
   const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
+    id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_PINS_MAPS,
   });
 
   const containerStyle = {
-    width: "100%",
+    width: '100%',
     height: height,
   };
 
@@ -48,7 +48,7 @@ const SetMaps = ({
     map.setCenter(bounds.getCenter());
     let listener = window.google.maps.event.addListener(
       map,
-      "idle",
+      'idle',
       function () {
         if (map.getZoom() > 16) map.setZoom(16);
         window.google.maps.event.removeListener(listener);
@@ -82,7 +82,7 @@ const SetMaps = ({
         sendlongLat(objLocalCoord);
       });
     } else {
-      alert("Geolocation is not supported by this browser");
+      alert('Geolocation is not supported by this browser');
     }
   };
 
@@ -106,14 +106,14 @@ const SetMaps = ({
         <button
           className="absolute z-40 right-4 transition-all duration-500 rounded-full"
           onClick={getLocation}
-          style={{ top: `${popup ? "44%" : "11%"}` }}>
+          style={{ top: `${popup ? '44%' : '11%'}` }}>
           <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-apps-pink" />
         </button>
       )}
       <div
         className={[
-          className ? className : "absolute h-screen top-0 inset-x-0",
-        ].join(" ")}>
+          className ? className : 'absolute h-screen top-0 inset-x-0',
+        ].join(' ')}>
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}

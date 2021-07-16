@@ -1,16 +1,16 @@
-import Download from "components/atoms/Download";
-import Loading from "components/atoms/Loading";
-import Select from "components/atoms/Select";
-import CardDay from "components/molecules/CardDay";
-import CardReportKehadiran from "components/molecules/CardReportKehadiran";
-import CardReportWork from "components/molecules/CardReportWork";
-import CardTitlePage from "components/molecules/CardTitlePage";
-import useForm from "helpers/hooks/useForm";
-import React, { lazy, Suspense } from "react";
-import { motion } from "framer-motion";
+import Download from 'components/atoms/Download';
+import Loading from 'components/atoms/Loading';
+import Select from 'components/atoms/Select';
+import CardDay from 'components/molecules/CardDay';
+import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
+import CardReportWork from 'components/molecules/CardReportWork';
+import CardTitlePage from 'components/molecules/CardTitlePage';
+import useForm from 'helpers/hooks/useForm';
+import React, { lazy, Suspense } from 'react';
+import { motion } from 'framer-motion';
 // import CardMapCheck from "components/molecules/CardMapCheck";
 const CardMapCheck = lazy(
-  () => import("components/molecules/CardMapCheck"),
+  () => import('components/molecules/CardMapCheck'),
   500,
 );
 
@@ -37,107 +37,107 @@ export default function Presensi({ history }) {
   };
 
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   const reportMe = [
     {
-      status: "hadir",
+      status: 'hadir',
       hari: 13,
     },
     {
-      status: "telat",
+      status: 'telat',
       hari: 13,
     },
     {
-      status: "izin",
+      status: 'izin',
       hari: 13,
     },
     {
-      status: "sakit",
+      status: 'sakit',
       hari: 13,
     },
     {
-      status: "sppd",
+      status: 'sppd',
       hari: 13,
     },
     {
-      status: "cuti",
+      status: 'cuti',
       hari: 13,
     },
   ];
 
   const workMe = [
     {
-      status: "WFH",
+      status: 'WFH',
       hari: 15,
     },
     {
-      status: "WFO",
+      status: 'WFO',
       hari: 4,
     },
     {
-      status: "Satelit",
+      status: 'Satelit',
       hari: 1,
     },
   ];
 
   const reports = [
     {
-      type: "WFH",
-      in: "07 : 14",
-      locIn: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      out: "21 : 32",
-      locOut: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      date: "Wednesday, 19 May",
+      type: 'WFH',
+      in: '07 : 14',
+      locIn: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      out: '21 : 32',
+      locOut: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      date: 'Wednesday, 13 May',
     },
     {
-      type: "WFH",
-      in: "07 : 14",
-      locIn: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      out: "21 : 32",
-      locOut: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      date: "Wednesday, 19 May",
+      type: 'WFH',
+      in: '07 : 14',
+      locIn: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      out: '21 : 32',
+      locOut: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      date: 'Wednesday, 14 May',
     },
     {
-      type: "WFH",
-      in: "07 : 14",
-      locIn: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      out: "21 : 32",
-      locOut: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      date: "Wednesday, 19 May",
+      type: 'WFH',
+      in: '07 : 14',
+      locIn: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      out: '21 : 32',
+      locOut: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      date: 'Wednesday, 15 May',
     },
     {
-      type: "WFH",
-      in: "07 : 14",
-      locIn: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      out: "21 : 32",
-      locOut: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      date: "Wednesday, 19 May",
+      type: 'WFH',
+      in: '07 : 14',
+      locIn: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      out: '21 : 32',
+      locOut: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      date: 'Wednesday, 16 May',
     },
     {
-      type: "WFH",
-      in: "07 : 14",
-      locIn: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      out: "21 : 32",
-      locOut: "Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat",
-      date: "Wednesday, 19 May",
+      type: 'WFH',
+      in: '07 : 14',
+      locIn: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      out: '21 : 32',
+      locOut: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
+      date: 'Wednesday, 17 May',
     },
   ];
 
   return (
-    <div className="relative bg-gray-50 min-h-screen h-full p-6">
+    <div className="relative">
       <CardTitlePage goBack={history.goBack} title="presensi" />
       <Suspense
         fallback={
@@ -173,7 +173,7 @@ export default function Presensi({ history }) {
       </div>
 
       <div className="flex flex-col mt-4">
-        <h2 className="font-semibold text-apps-text ">Resume Presence</h2>
+        <h2 className="font-semibold text-apps-text ">Laporan Presensi</h2>
         <motion.div
           variants={container}
           initial="hidden"
@@ -192,7 +192,7 @@ export default function Presensi({ history }) {
       </div>
 
       <div className="flex flex-col mt-8">
-        <h2 className="font-semibold text-apps-text ">Resume Work</h2>
+        <h2 className="font-semibold text-apps-text ">Laporan Status Kerja</h2>
         <motion.div
           variants={container}
           initial="hidden"
@@ -208,15 +208,15 @@ export default function Presensi({ history }) {
 
       <div className="relative mt-8">
         <div className="flex gap-1 justify-between items-center">
-          <h2 className="font-semibold text-apps-text ">List Presence</h2>
-          <Download onClick={() => alert("Download excel")} />
+          <h2 className="font-semibold text-apps-text ">Data Presensi</h2>
+          <Download onClick={() => alert('Download excel')} />
         </div>
 
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full mt-4">
+          className="grid grid-cols-1 lg:grid-cols-2 lg:col-start-2 lg:col-end-3 gap-1 lg:gap-4 overflow-auto hidden-scroll h-full mt-4 ">
           {reports.map((report, index) => (
             <CardDay
               key={index}

@@ -1,14 +1,14 @@
-import Download from "components/atoms/Download";
-import Select from "components/atoms/Select";
-import CardOvertime from "components/molecules/CardOvertime";
-import CardTitlePage from "components/molecules/CardTitlePage";
-import useForm from "helpers/hooks/useForm";
-import React, { lazy, Suspense } from "react";
-import { motion } from "framer-motion";
-import CardReportWork from "components/molecules/CardReportWork";
+import Download from 'components/atoms/Download';
+import Select from 'components/atoms/Select';
+import CardOvertime from 'components/molecules/CardOvertime';
+import CardTitlePage from 'components/molecules/CardTitlePage';
+import useForm from 'helpers/hooks/useForm';
+import React, { lazy, Suspense } from 'react';
+import { motion } from 'framer-motion';
+import CardReportWork from 'components/molecules/CardReportWork';
 
 const CardMapCheck = lazy(
-  () => import("components/molecules/CardMapCheck"),
+  () => import('components/molecules/CardMapCheck'),
   500,
 );
 
@@ -23,59 +23,60 @@ export default function Overtime({ history }) {
   });
 
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   const overtimes = [
     {
-      date: "Wednesday, 19 May",
-      title: "Make design and flow mobile pop",
-      hours: "7 : 00",
-      status: "done",
+      date: 'Wednesday, 19 May',
+      title: 'Make design and flow mobile pop',
+      hours: '7 : 00',
+      status: 'done',
     },
     {
-      date: "Tuesday, 18 May",
+      date: 'Tuesday, 18 May',
       title:
-        "Make design and flow mobile pop and create backend presensi online",
-      hours: "7 : 00",
-      status: "done",
+        'Make design and flow mobile pop and create backend presensi online',
+      hours: '7 : 00',
+      status: 'done',
     },
     {
-      date: "Monday, 17 May",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
-      status: "leader",
+      date: 'Monday, 17 May',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+      status: 'leader',
     },
     {
-      date: "Monday, 17 May",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
-      status: "leader",
+      date: 'Monday, 17 May',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+      status: 'leader',
     },
     {
-      date: "Monday, 17 May",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
-      status: "leader",
+      date: 'Monday, 17 May',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+      status: 'leader',
     },
     {
-      date: "Monday, 17 May",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
-      status: "leader",
+      date: 'Monday, 17 May',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+      status: 'leader',
     },
   ];
+
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -87,23 +88,24 @@ export default function Overtime({ history }) {
       },
     },
   };
+
   const workMe = [
     {
-      name: "Done",
+      name: 'Done',
       hari: 8,
     },
     {
-      name: "Progress",
+      name: 'Progress',
       hari: 4,
     },
     {
-      name: "Lembur",
+      name: 'Lembur',
       hari: 36,
     },
   ];
 
   return (
-    <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
+    <div className="relative -mt-4">
       <CardTitlePage goBack={history.goBack} title="Lemburan" />
 
       <Suspense fallback={<p>Loading ....</p>}>
@@ -135,7 +137,9 @@ export default function Overtime({ history }) {
       </div>
 
       <div className="flex flex-col mt-4">
-        <h2 className="font-semibold text-apps-text ">Resume Work</h2>
+        <h2 className="font-semibold text-apps-text text-xl">
+          Laporan Lemburan
+        </h2>
         <motion.div
           variants={container}
           initial="hidden"
@@ -151,15 +155,20 @@ export default function Overtime({ history }) {
 
       <div className="relative mt-8">
         <div className="flex gap-1 justify-between items-center">
-          <h2 className="font-semibold text-apps-text ">List Overtime</h2>
-          <Download onClick={() => alert("Download excel")} />
+          <h2 className="font-semibold text-apps-text lg:text-xl">
+            Data Lemburan
+          </h2>
+          <div className="flex justify-center items-center gap-2">
+            <Download onClick={() => alert('Download excel')} />
+            <p className="text-apps-text">Download</p>
+          </div>
         </div>
 
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 gap-1 overflow-auto hidden-scroll h-full">
+          className="grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-4 overflow-auto hidden-scroll h-full">
           {overtimes.map((item, index) => (
             <CardOvertime
               key={index}

@@ -1,9 +1,9 @@
-import Select from "components/atoms/Select";
-import CardOvertimeApproval from "components/molecules/CardOvertimeApproval";
-import { motion } from "framer-motion";
-import useForm from "helpers/hooks/useForm";
-import React from "react";
-import MobileMenu from "section/MobileMenu";
+import Select from 'components/atoms/Select';
+import CardOvertimeApproval from 'components/molecules/CardOvertimeApproval';
+import { motion } from 'framer-motion';
+import useForm from 'helpers/hooks/useForm';
+import React from 'react';
+import MobileMenu from 'section/MobileMenu';
 
 const Approval = () => {
   window.scroll(0, 0);
@@ -17,57 +17,57 @@ const Approval = () => {
 
   const documents = [
     {
-      date: "Wednesday, 19 May",
-      name: "Abdul Muchtar Astria",
-      title: "Make design and flow mobile pop",
-      hours: "4:72",
+      date: 'Wednesday, 19 May',
+      name: 'Abdul Muchtar Astria',
+      title: 'Make design and flow mobile pop',
+      hours: '4:72',
     },
     {
-      date: "Tuesday, 18 May",
-      name: "Ahmad Fauzi Hanif",
+      date: 'Tuesday, 18 May',
+      name: 'Ahmad Fauzi Hanif',
       title:
-        "Make design and flow mobile pop and create backend presensi online",
-      hours: "7 : 00",
+        'Make design and flow mobile pop and create backend presensi online',
+      hours: '7 : 00',
     },
     {
-      date: "Monday, 17 May",
-      name: "Bayu Respati",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
     },
     {
-      date: "Monday, 17 May",
-      name: "Bayu Respati",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
     },
     {
-      date: "Monday, 17 May",
-      name: "Bayu Respati",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
     },
     {
-      date: "Monday, 17 May",
-      name: "Bayu Respati",
-      title: "Make design and flow mobile pop",
-      hours: "5 : 23",
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
     },
   ];
 
   const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
 
   const container = {
@@ -83,10 +83,10 @@ const Approval = () => {
   };
 
   return (
-    <div className="relative bg-coolGray-50 min-h-screen h-full p-6 pb-12">
+    <div className="relative">
       <MobileMenu />
-      <div className="relative mt-4 p-4">
-        <h2 className="text-apps-text font-semibold text-xl">
+      <div className="relative">
+        <h2 className="text-apps-text font-semibold text-2xl">
           List of Documents
         </h2>
       </div>
@@ -119,7 +119,7 @@ const Approval = () => {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 gap-4 content-center mt-10 mb-20">
+        className="grid grid-cols-1 gap-4 content-center mt-10 mb-10">
         {documents.map((item, index) => (
           <CardOvertimeApproval
             key={index}
