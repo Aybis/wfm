@@ -1,9 +1,9 @@
 /** @format */
 
-import { ChevronRightIcon } from "@heroicons/react/outline";
-import React from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { ChevronRightIcon } from '@heroicons/react/outline';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function CardOvertimeApproval({ name, title, date, hours }) {
   const item = {
@@ -18,7 +18,7 @@ export default function CardOvertimeApproval({ name, title, date, hours }) {
     <motion.div
       variants={item}
       className="flex w-full justify-between bg-white p-4 rounded-lg">
-      <div className="flex flex-col gap-2 text-sm">
+      <div className="flex flex-col gap-2 text-sm lg:text-base">
         <h4 className="font-semibold text-apps-text">{name}</h4>
         <h1 className=" text-apps-text">{title}</h1>
         <h4 className="font-light text-apps-primary text-xs">
@@ -27,12 +27,12 @@ export default function CardOvertimeApproval({ name, title, date, hours }) {
       </div>
       <div className="flex flex-col justify-between right-0">
         <h4
-          className={`p-1 rounded text-center text-xs bg-apps-yellow text-apps-text`}>
+          className={`p-1 rounded text-center text-xs bg-apps-yellow text-apps-text lg:text-sm`}>
           Waiting
         </h4>
 
         <Link to="/details" className="ml-7" aria-label="detail lembur">
-          <ChevronRightIcon className="h-7 w-7 bg-apps-primary bg-opacity-10 text-apps-primary p-1 rounded" />
+          <ChevronRightIcon className="h-7 w-7 lg:h-8 lg:w-8 bg-apps-primary bg-opacity-10 text-apps-primary p-1 rounded" />
         </Link>
       </div>
     </motion.div>

@@ -161,7 +161,7 @@ const Home = ({ user }) => {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-5 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {presensi.map((item) => (
             <CardDaily

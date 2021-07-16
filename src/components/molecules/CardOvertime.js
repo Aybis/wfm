@@ -40,7 +40,7 @@ export default function CardOvertime({
       className={`flex w-full justify-between bg-white p-4 mt-4 rounded-lg  ${
         border && 'border border-gray-200'
       }`}>
-      <div className="flex flex-col gap-2 text-sm">
+      <div className="flex flex-col gap-2 text-sm lg:text-base">
         <p className="text-apps-text">{date}</p>
         <h2 className="font-semibold text-apps-text">{title}</h2>
         <h3
@@ -51,12 +51,13 @@ export default function CardOvertime({
         </h3>
       </div>
       <div className="flex flex-col justify-between items-end gap-6 right-0">
-        <h4 className={`p-1 rounded text-center text-xs ${classStatus}`}>
+        <h4
+          className={`p-1 rounded text-center text-xs lg:text-base ${classStatus}`}>
           {valueStatus}
         </h4>
 
         <Link to="/details" className="ml-7" aria-label="detail">
-          <ChevronRightIcon className="h-7 w-7 text-apps-primary bg-apps-primary bg-opacity-10 p-1 rounded" />
+          <ChevronRightIcon className="h-7 w-7 lg:h-9 lg:w-9 text-apps-primary bg-apps-primary bg-opacity-10 p-1 rounded" />
         </Link>
       </div>
     </motion.div>

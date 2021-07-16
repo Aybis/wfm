@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   ArchiveIcon,
   BeakerIcon,
@@ -6,8 +6,8 @@ import {
   ClipboardCheckIcon,
   ExclamationCircleIcon,
   PhoneMissedCallIcon,
-} from "@heroicons/react/solid";
-import { motion } from "framer-motion";
+} from '@heroicons/react/solid';
+import { motion } from 'framer-motion';
 
 export default function CardReportKehadiran({ name, hari }) {
   const item = {
@@ -19,33 +19,33 @@ export default function CardReportKehadiran({ name, hari }) {
   };
 
   const IconName = () => {
-    if (name === "hadir") {
+    if (name === 'hadir') {
       return (
-        <ClipboardCheckIcon className="w-10 h-10 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 p-2" />
+        <ClipboardCheckIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 p-2" />
       );
-    } else if (name === "telat") {
+    } else if (name === 'telat') {
       return (
-        <ExclamationCircleIcon className="w-10 h-10 text-apps-red rounded-lg bg-apps-red bg-opacity-10 p-2" />
+        <ExclamationCircleIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-red rounded-lg bg-apps-red bg-opacity-10 p-2" />
       );
-    } else if (name === "sakit") {
+    } else if (name === 'sakit') {
       return (
-        <BeakerIcon className="w-10 h-10 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 p-2" />
+        <BeakerIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 p-2" />
       );
-    } else if (name === "izin") {
+    } else if (name === 'izin') {
       return (
-        <ArchiveIcon className="w-10 h-10 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10 p-2" />
+        <ArchiveIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10 p-2" />
       );
-    } else if (name === "cuti") {
+    } else if (name === 'cuti') {
       return (
-        <PhoneMissedCallIcon className="w-10 h-10 text-apps-pink rounded-lg bg-apps-pink bg-opacity-10 p-2" />
+        <PhoneMissedCallIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-pink rounded-lg bg-apps-pink bg-opacity-10 p-2" />
       );
-    } else if (name === "sppd") {
+    } else if (name === 'sppd') {
       return (
-        <BriefcaseIcon className="w-10 h-10 text-apps-green rounded-lg bg-apps-green bg-opacity-10 p-2" />
+        <BriefcaseIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-green rounded-lg bg-apps-green bg-opacity-10 p-2" />
       );
     } else {
       return (
-        <ClipboardCheckIcon className="w-10 h-10 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 p-2" />
+        <ClipboardCheckIcon className="w-10 h-10 lg:h-14 lg:w-14 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 p-2" />
       );
     }
   };
@@ -57,11 +57,11 @@ export default function CardReportKehadiran({ name, hari }) {
       <div className="flex flex-col items-start gap-4">
         <IconName />
         <div className="flex flex-col">
-          <h4 className="font-semibold text-apps-text capitalize text-sm">
+          <h4 className="font-semibold text-apps-text uppercase text-sm lg:text-lg">
             {name}
           </h4>
-          <h6 className="text-apps-text text-opacity-40 text-sm font-medium">
-            {hari} {name === "Work Hour" ? "Hours" : "Days"}
+          <h6 className="text-apps-text text-opacity-40 text-sm font-medium lg:text-base">
+            {hari} {name === 'Work Hour' ? 'Hours' : 'Days'}
           </h6>
         </div>
       </div>

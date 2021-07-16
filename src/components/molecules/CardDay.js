@@ -26,7 +26,7 @@ export default function CardDay({
       }`}>
       {date && (
         <div className=" mx-auto text-center -mt-3">
-          <h4 className="p-2 bg-apps-blueCard bg-opacity-70 text-apps-text font-medium max-w-lg text-sm rounded-md mx-auto ">
+          <h4 className="p-2 bg-apps-blue bg-opacity-70 text-white font-medium max-w-lg text-sm rounded-md mx-auto ">
             {date}
           </h4>
         </div>

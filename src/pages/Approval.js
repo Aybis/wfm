@@ -91,7 +91,7 @@ const Approval = () => {
         </h2>
       </div>
 
-      <motion.div className="grid grid-cols-2 mt-8 gap-2 justify-center items-center">
+      <motion.div className="grid grid-cols-2 mt-4 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
         <Select
           fallbackText={monthNames[bulan]}
           name="bulan"
@@ -119,7 +119,7 @@ const Approval = () => {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 gap-4 content-center mt-10 mb-10">
+        className="grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-4 overflow-auto hidden-scroll h-full my-10">
         {documents.map((item, index) => (
           <CardOvertimeApproval
             key={index}

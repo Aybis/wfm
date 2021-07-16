@@ -148,7 +148,7 @@ export default function Presensi({ history }) {
         <CardMapCheck status={true} current="WFH" />
       </Suspense>
 
-      <div className="grid grid-cols-2 mt-4 gap-2 justify-center items-center">
+      <div className="grid grid-cols-2 mt-4 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
         <Select
           fallbackText={monthNames[bulan]}
           name="bulan"
@@ -173,7 +173,9 @@ export default function Presensi({ history }) {
       </div>
 
       <div className="flex flex-col mt-4">
-        <h2 className="font-semibold text-apps-text ">Laporan Presensi</h2>
+        <h2 className="font-semibold text-apps-text lg:text-xl">
+          Laporan Presensi
+        </h2>
         <motion.div
           variants={container}
           initial="hidden"
@@ -192,12 +194,14 @@ export default function Presensi({ history }) {
       </div>
 
       <div className="flex flex-col mt-8">
-        <h2 className="font-semibold text-apps-text ">Laporan Status Kerja</h2>
+        <h2 className="font-semibold text-apps-text lg:text-xl">
+          Laporan Status Kerja
+        </h2>
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-3 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.status} />
@@ -208,7 +212,9 @@ export default function Presensi({ history }) {
 
       <div className="relative mt-8">
         <div className="flex gap-1 justify-between items-center">
-          <h2 className="font-semibold text-apps-text ">Data Presensi</h2>
+          <h2 className="font-semibold text-apps-text lg:text-xl">
+            Data Presensi
+          </h2>
           <Download onClick={() => alert('Download excel')} />
         </div>
 
