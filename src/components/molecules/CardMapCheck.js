@@ -65,7 +65,7 @@ export default function CardMapCheck({
                 className={`p-2 text-white rounded hidden lg:block ${
                   type === 'in' ? '    bg-apps-primary' : '   bg-apps-red'
                 }`}>
-                {type === 'in' ? 'Checkin' : 'Checkout'}
+                {type === 'in' ? 'Check In' : 'Check Out'}
               </button>
               <ChevronRightIcon
                 className={`h-8 w-8 bg-opacity-10 p-1 rounded lg:hidden ${

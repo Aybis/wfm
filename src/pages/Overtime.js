@@ -109,7 +109,12 @@ export default function Overtime({ history }) {
       <CardTitlePage goBack={history.goBack} title="Lemburan" />
 
       <Suspense fallback={<p>Loading ....</p>}>
-        <CardMapCheck status={true} current="WFO" link="/overtime-in" />
+        <CardMapCheck
+          status={true}
+          current="WFO"
+          type="in"
+          link="/overtime-in"
+        />
       </Suspense>
 
       <div className="grid grid-cols-2 mt-4 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">

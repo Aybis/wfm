@@ -8,6 +8,7 @@ import SetMaps from 'components/atoms/SetMaps';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const OvertimeIn = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
@@ -75,10 +76,15 @@ const OvertimeIn = ({ history }) => {
 
   return (
     <>
-      <div className="hiddden container lg:flex justify-center items-center">
-        <h1>
+      <div className="hiddden container lg:flex flex-col gap-4 justify-center items-center h-screen transition-all duration-300 ease-in-out">
+        <h1 className="text-4xl font-semibold -mt-8">
           Maaf halaman ini hanya dapat diakses melalui smartphone dan tablet
         </h1>
+        <button
+          className="text-xl underline text-blue-600"
+          onClick={history.goBack}>
+          Kembali
+        </button>
       </div>
       <div className={popUp ? 'pt-20 lg:hidden' : 'pt-0'}>
         <button

@@ -35,8 +35,8 @@ export default function Menu() {
           src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
           alt="logo"
         />
-        <h1 className="text-apps-text font-semibold tracking-wider text-lg">
-          POP
+        <h1 className="text-apps-text font-semibold uppercase tracking-wider text-lg">
+          Almuazaf
         </h1>
       </div>
       <div className="flex md:flex-col p-2 md:gap-8 md:justify-center justify-between items-center transition-all duration-300 ease-in-out w-full">
