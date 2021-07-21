@@ -1,19 +1,18 @@
-/** @format */
-import Authenticated from "components/Routes/Authenticated";
-import { createBrowserHistory } from "history";
-import Forgot from "pages/Forgot";
-import Index from "pages/Index";
-import { Route, Router, Switch } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import Gate from "./components/Routes/Gate";
-import Unauthenticated from "./pages/401";
-import NotFound from "./pages/404";
-import Login from "./pages/Login";
-import { setAuthorizationHeader } from "configs/axios";
-import { populateProfile } from "store/actions/users";
-import users from "constants/api/users";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import Authenticated from 'components/Routes/Authenticated';
+import { createBrowserHistory } from 'history';
+import Forgot from 'pages/Forgot';
+import Index from 'pages/Index';
+import { Route, Router, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import Gate from './components/Routes/Gate';
+import Unauthenticated from './pages/401';
+import NotFound from './pages/404';
+import Login from './pages/Login';
+import { setAuthorizationHeader } from 'configs/axios';
+import { populateProfile } from 'store/actions/users';
+import users from 'constants/api/users';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,8 +22,8 @@ function App() {
 
   useEffect(() => {
     let session = null;
-    if (localStorage.getItem("WFM:token")) {
-      session = JSON.parse(localStorage.getItem("WFM:token"));
+    if (localStorage.getItem('WFM:token')) {
+      session = JSON.parse(localStorage.getItem('WFM:token'));
       setAuthorizationHeader(`Bearer ${session.token}`);
 
       users.details().then((details) => {

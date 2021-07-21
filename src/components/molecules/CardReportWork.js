@@ -1,11 +1,12 @@
-import { GlobeIcon } from '@heroicons/react/outline';
 import {
   ClipboardCheckIcon,
+  GlobeIcon,
   ClipboardListIcon,
   ClockIcon,
   HomeIcon,
   OfficeBuildingIcon,
-} from '@heroicons/react/solid';
+  XCircleIcon,
+} from '@heroicons/react/outline';
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -37,7 +38,15 @@ export default function CardReportWork({ day, name }) {
       );
     } else if (name === 'Progress') {
       return (
-        <ClipboardListIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 p-2" />
+        <ClipboardListIcon className="w-10 h-10 lg:w-14 lg:h-14 text-yellow-400 rounded-lg bg-yellow-100  p-2" />
+      );
+    } else if (name === 'Lembur') {
+      return (
+        <ClockIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-primary rounded-lg bg-apps-primary bg-opacity-10 p-2" />
+      );
+    } else if (name === 'Reject') {
+      return (
+        <XCircleIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-red rounded-lg bg-apps-red bg-opacity-10 p-2" />
       );
     } else {
       return (
@@ -57,7 +66,7 @@ export default function CardReportWork({ day, name }) {
             {name}
           </h4>
           <h6 className="text-apps-text text-opacity-40 text-xs font-medium lg:text-base">
-            {day} {name === 'Lembur' ? 'Hours' : 'Days'}
+            {day} {name === 'Lembur' ? 'Hours' : 'Document'}
           </h6>
         </div>
       </div>

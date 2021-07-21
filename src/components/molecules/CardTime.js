@@ -1,15 +1,15 @@
 /** @format */
 
-import { ClockIcon, LoginIcon, LogoutIcon } from "@heroicons/react/solid";
-import React from "react";
+import { ClockIcon, LoginIcon, LogoutIcon } from '@heroicons/react/outline';
+import React from 'react';
 
 export default function CardTime({ title, time }) {
   const IconCardTime = () => {
-    if (title === "in") {
+    if (title === 'in') {
       return (
         <LoginIcon className="h-9 w-9 bg-apps-primary bg-opacity-10 text-apps-primary p-2 rounded" />
       );
-    } else if (title === "out") {
+    } else if (title === 'out') {
       return (
         <LogoutIcon className="h-9 w-9 text-apps-red bg-apps-red bg-opacity-10 p-2 rounded" />
       );
@@ -25,7 +25,7 @@ export default function CardTime({ title, time }) {
       <IconCardTime />
 
       <div className="flex flex-col text-sm">
-        <h4 className="text-apps-text text-opacity-40 font-normal uppercase">
+        <h4 className="text-apps-text font-medium text-opacity-40 uppercase">
           {title}
         </h4>
         <h6 className=" font-semibold text-apps-text">{time}</h6>

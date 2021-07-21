@@ -6,8 +6,9 @@ import CardDayOff from 'components/molecules/CardDayOff';
 import CardOvertime from 'components/molecules/CardOvertime';
 import CardPresence from 'components/molecules/CardPresence';
 import CardTeam from 'components/molecules/CardTeam';
-import React from 'react';
 import { motion } from 'framer-motion';
+import React from 'react';
+import absensi from '../constants/api/absensi';
 
 const Home = ({ user }) => {
   window.scroll(0, 0);
@@ -148,6 +149,17 @@ const Home = ({ user }) => {
     },
   };
 
+  const dailyPersonal = () => {
+    absensi.all().then((res) => {
+      console.log('absensi all', res);
+    });
+
+    absensi.dailyPersonal(134).then((res) => {
+      console.log('daily personal', res);
+    });
+  };
+
+  dailyPersonal();
   return user ? (
     <div className="relative mb-12 ">
       {/* card check in  */}

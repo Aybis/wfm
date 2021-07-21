@@ -1,11 +1,11 @@
 import Download from 'components/atoms/Download';
 import Select from 'components/atoms/Select';
-import CardOvertime from 'components/molecules/CardOvertime';
 import CardTitlePage from 'components/molecules/CardTitlePage';
 import useForm from 'helpers/hooks/useForm';
 import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import CardReportWork from 'components/molecules/CardReportWork';
+import CardOvertimeApproval from 'components/molecules/CardOvertimeApproval';
 
 const CardMapCheck = lazy(
   () => import('components/molecules/CardMapCheck'),
@@ -55,25 +55,25 @@ export default function Overtime({ history }) {
       date: 'Monday, 17 May',
       title: 'Make design and flow mobile pop',
       hours: '5 : 23',
-      status: 'leader',
+      status: 'progress',
     },
     {
       date: 'Monday, 17 May',
       title: 'Make design and flow mobile pop',
       hours: '5 : 23',
-      status: 'leader',
+      status: 'progress',
     },
     {
       date: 'Monday, 17 May',
       title: 'Make design and flow mobile pop',
       hours: '5 : 23',
-      status: 'leader',
+      status: 'progress',
     },
     {
       date: 'Monday, 17 May',
       title: 'Make design and flow mobile pop',
       hours: '5 : 23',
-      status: 'leader',
+      status: 'reject',
     },
   ];
 
@@ -97,6 +97,10 @@ export default function Overtime({ history }) {
     {
       name: 'Progress',
       hari: 4,
+    },
+    {
+      name: 'Reject',
+      hari: 2,
     },
     {
       name: 'Lembur',
@@ -149,7 +153,7 @@ export default function Overtime({ history }) {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-3 transition-all duration-300 ease-in-out">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-4 md:grid-cols-4 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.name} />
@@ -173,12 +177,13 @@ export default function Overtime({ history }) {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-4 overflow-auto hidden-scroll h-full">
+          className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-8 overflow-auto hidden-scroll h-full">
           {overtimes.map((item, index) => (
-            <CardOvertime
+            <CardOvertimeApproval
               key={index}
               date={item.date}
               hours={item.hours}
+              name={item.name}
               status={item.status}
               title={item.title}
             />

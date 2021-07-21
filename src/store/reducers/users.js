@@ -1,6 +1,4 @@
-/** @format */
-
-import { POPULATE_PROFILE } from "constants/types/users";
+import { POPULATE_PROFILE } from 'constants/types/users';
 
 const initialState = null;
 

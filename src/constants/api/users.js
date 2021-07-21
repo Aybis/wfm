@@ -1,13 +1,11 @@
-/** @format */
-
-import axios from "configs/axios";
+import axios from 'configs/axios';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  login: (credentials) => axios.post("auth/token/request", credentials),
-  getotp: (credentials) => axios.post("auth/otp/generate", credentials),
-  verifotp: (credentials) => axios.post("auth/otp/verification", credentials),
+  login: (credentials) => axios.post('auth/token/request', credentials),
+  getotp: (credentials) => axios.post('auth/otp/generate', credentials),
+  verifotp: (credentials) => axios.post('auth/otp/verification', credentials),
   allTroops: (page) => axios.get(`crm/inisiasi/won?page=${page}`),
-  details: () => axios.get("auth/token/detail"),
-  refresh: () => axios.post("auth/token/refresh"),
+  details: () => axios.get('auth/token/detail'),
+  refresh: () => axios.post('auth/token/refresh'),
 };

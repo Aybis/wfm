@@ -53,6 +53,54 @@ const Approval = () => {
       title: 'Make design and flow mobile pop',
       hours: '5 : 23',
     },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
+    {
+      date: 'Monday, 17 May',
+      name: 'Bayu Respati',
+      title: 'Make design and flow mobile pop',
+      hours: '5 : 23',
+    },
   ];
 
   const monthNames = [
@@ -86,12 +134,12 @@ const Approval = () => {
     <div className="relative">
       <MobileMenu />
       <div className="relative">
-        <h2 className="text-apps-text font-semibold text-2xl">
-          List of Documents
+        <h2 className="text-apps-text font-semibold text-2xl mt-8 lg:mt-0">
+          List Dokumen Approval
         </h2>
       </div>
 
-      <motion.div className="grid grid-cols-2 mt-4 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
+      <motion.div className="grid grid-cols-2 mt-8 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
         <Select
           fallbackText={monthNames[bulan]}
           name="bulan"
@@ -119,7 +167,7 @@ const Approval = () => {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 lg:grid-cols-2 gap-1 lg:gap-4 overflow-auto hidden-scroll h-full my-10">
+        className="grid grid-cols-1 my-10 lg:grid-cols-4 gap-4 lg:gap-4 ">
         {documents.map((item, index) => (
           <CardOvertimeApproval
             key={index}

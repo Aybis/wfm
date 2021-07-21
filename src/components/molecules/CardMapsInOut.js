@@ -5,12 +5,12 @@ import {
   InfoWindow,
   Marker,
   useJsApiLoader,
-} from "@react-google-maps/api";
-import { React, useCallback, useState } from "react";
+} from '@react-google-maps/api';
+import { React, useCallback, useState } from 'react';
 
-const CardMapsInOut = ({ mark, address, height = "55%" }) => {
+const CardMapsInOut = ({ mark, address, className, height = '100%' }) => {
   const [selected, setSelected] = useState(false);
-  const [addres, setaddres] = useState("Anda Disini");
+  const [addres, setaddres] = useState('Anda Disini');
 
   const MarkInOut = () => {
     return mark.map((item, index) => (
@@ -26,12 +26,12 @@ const CardMapsInOut = ({ mark, address, height = "55%" }) => {
   };
 
   const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
+    id: 'google-map-script',
     googleMapsApiKey: process.env.REACT_APP_PINS_MAPS,
   });
 
   const containerStyle = {
-    width: "100%",
+    width: '100%',
     height: height,
   };
 
@@ -51,7 +51,7 @@ const CardMapsInOut = ({ mark, address, height = "55%" }) => {
     map.setCenter(bounds.getCenter());
     let listener = window.google.maps.event.addListener(
       map,
-      "idle",
+      'idle',
       function () {
         if (map.getZoom() > 18) map.setZoom(18);
         window.google.maps.event.removeListener(listener);
@@ -60,7 +60,7 @@ const CardMapsInOut = ({ mark, address, height = "55%" }) => {
   }, []);
 
   return (
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div className={[className, 'relative top-0'].join(' ')}>
       {isLoaded ? (
         <GoogleMap
           mapContainerStyle={containerStyle}

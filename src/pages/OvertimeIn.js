@@ -1,5 +1,3 @@
-/** @format */
-
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronLeftIcon } from '@heroicons/react/solid';
 import Input from 'components/atoms/Input';
@@ -8,7 +6,6 @@ import SetMaps from 'components/atoms/SetMaps';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 const OvertimeIn = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
