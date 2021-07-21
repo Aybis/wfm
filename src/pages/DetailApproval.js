@@ -84,8 +84,10 @@ const DetailApproval = ({ history }) => {
 
       <div className="flex flex-col mt-8 gap-6 lg:gap-8">
         {/* Card Map  */}
-        <div className="flex flex-col w-full gap-2 bg-white p-4 rounded-md">
-          <h1 className="font-semibold text-apps-text">Locations</h1>
+        <div className="flex flex-col w-full bg-white p-4 rounded-md">
+          <h1 className="font-semibold text-apps-text mb-4">
+            Overtime Locations
+          </h1>
           <div className="rounded-md">
             <CardMapsInOut mark={markOne} className="w-full min-h-full h-96" />
           </div>
@@ -124,8 +126,8 @@ const DetailApproval = ({ history }) => {
             </div>
           </div>
           <div className="flex flex-col justify-between bg-white rounded-md">
-            <div className="grid grid-cols-1 gap-2 p-4">
-              <h1 className="font-semibold text-apps-text mb-4">
+            <div className="grid grid-cols-1 gap-4 p-4">
+              <h1 className="font-semibold text-apps-text mb-2">
                 Overtime Approval
               </h1>
               {dataApproval.map((item, index) => (
@@ -139,17 +141,22 @@ const DetailApproval = ({ history }) => {
                 />
               ))}
             </div>
-            <div className="p-4">
-              <Textarea labelName="Comment" placeholder="Oke..." />
-            </div>
-            <div className="flex">
+          </div>
+          <div className="flex flex-col rounded-md lg:col-start-1 lg:col-end-3 bg-white p-4 mt-4">
+            <Textarea
+              inputClassName="W-full"
+              labelName="Comment"
+              placeholder="Oke..."
+            />
+
+            <div className="mt-2">
               <button
-                className="uppercase bg-apps-red p-2 rounded-bl-md text-white font-semibold h-12  lg:h-16 w-1/2"
+                className="uppercase bg-apps-red p-2 rounded-bl-md text-white font-semibold h-10 rounded w-28"
                 onClick={onReject}>
                 Reject
               </button>
               <button
-                className="uppercase bg-apps-primary p-2 hover:bg-apps-primary transition-all duration-300 ease-in-out rounded-br-md text-white font-semibold h-12  lg:h-16 w-1/2"
+                className="ml-2 uppercase bg-apps-primary p-2 rounded text-white font-semibold h-10 w-28"
                 onClick={onSubmit}>
                 Approve
               </button>
