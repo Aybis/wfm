@@ -2,7 +2,7 @@ import Authenticated from 'components/Routes/Authenticated';
 import { createBrowserHistory } from 'history';
 import Forgot from 'pages/Forgot';
 import Index from 'pages/Index';
-import { Route, Router, Switch } from 'react-router-dom';
+import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Gate from './components/Routes/Gate';
 import Unauthenticated from './pages/401';
@@ -26,9 +26,30 @@ function App() {
       session = JSON.parse(localStorage.getItem('WFM:token'));
       setAuthorizationHeader(`Bearer ${session.token}`);
 
-      users.details().then((details) => {
-        dispatch(populateProfile(details.data));
-      });
+      users
+        .details()
+        .then((details) => {
+          dispatch(populateProfile(details.data));
+        })
+        .catch((err) => {
+          if (err) {
+            // remove token
+            localStorage.removeItem('WFM:token');
+            // remove cookies
+            document.cookie.split(';').forEach(function (c) {
+              document.cookie = c
+                .replace(/^ +/, '')
+                .replace(
+                  /=.*/,
+                  '=;expires=' + new Date().toUTCString() + ';path=/',
+                );
+            });
+            // redirect link
+            <Redirect push to="/login" />;
+            // reload page
+            window.location.reload();
+          }
+        });
     }
   }, [dispatch]);
 

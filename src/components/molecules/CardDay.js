@@ -35,8 +35,12 @@ export default function CardDay({
         {/* in */}
         <div className="flex flex-col gap-2 justify-start w-1/3">
           <h2 className="font-extrabold text-apps-primary text-lg">IN</h2>
-          <h3 className=" font-normal text-apps-text">{locIn}</h3>
-          <h3 className="font-semibold  text-apps-text">{timeIn}</h3>
+          <h3 className="text-sm lg:text-base font-normal text-apps-text">
+            {locIn}
+          </h3>
+          <h3 className="text-sm lg:text-base font-semibold mt-2 text-apps-text">
+            {timeIn}
+          </h3>
         </div>
         {/* icon */}
         <div className="flex items-center justify-center w-1/3">
@@ -58,8 +62,11 @@ export default function CardDay({
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
           <h2 className="font-extrabold text-apps-primary text-lg">{type}</h2>
-          <h3 className={` text-apps-text`}>{timeOut ? locOut : 'On Duty'}</h3>
-          <h4 className={`font-semibold text-apps-text `}>
+          <h3 className={`text-sm lg:text-base text-apps-text`}>
+            {timeOut ? locOut : 'On Duty'}
+          </h3>
+          <h4
+            className={`text-sm lg:text-base font-semibold mt-2 text-apps-text `}>
             {timeOut ? timeOut : 'On Duty'}
           </h4>
         </div>

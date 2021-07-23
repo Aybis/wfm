@@ -1,5 +1,3 @@
-/** @format */
-
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import {
   ChevronDownIcon,
@@ -8,58 +6,81 @@ import {
 } from '@heroicons/react/solid';
 import Label from 'components/atoms/Label';
 import SetMaps from 'components/atoms/SetMaps';
+import absensi from 'constants/api/absensi';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const CheckOut = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
-  const [image, setImage] = useState(null);
+  const { id } = useParams();
+  const date = new Date();
+
+  const dateTime =
+    date.getFullYear() +
+    '-' +
+    (date.getMonth() + 1) +
+    '-' +
+    date.getDate() +
+    ' ' +
+    date.getHours() +
+    ':' +
+    date.getMinutes() +
+    ':' +
+    date.getSeconds();
 
   const [state] = useForm({
     lokasi: '',
-    alamat: '',
+    long_lat: '',
     image: '',
+    jam: dateTime,
+    absensi_id: id,
   });
 
   const inputPhoto = (event) => {
     let fileValue = event.target.files[0] ? event.target.files[0] : null;
-    setImage(fileValue);
+    createImage(fileValue);
+
     if (fileValue) {
       let source = URL.createObjectURL(fileValue);
       setPhoto(source);
     }
   };
 
+  const createImage = (file) => {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      state.image = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const sendlongLat = (value) => {
-    setlongLat(value);
+    state.long_lat = value;
   };
 
   const sendAddress = (value) => {
     setAddress(value);
+    state.lokasi = value;
   };
 
   const submitFunction = (event) => {
     event.preventDefault();
-    state.lokasi = longLat;
-    state.image = image;
-    state.alamat = address;
-    console.log(state);
-    ToastHandler(
-      'success',
-      `Alamat : ${state.alamat},
-      Kondisi : ${state.kondisi},
-      Kehadiran : ${state.kehadiran},
-      Keterangan : ${state.keterangan},
-      Long : ${state.lokasi?.lng},
-      Lat : ${state.lokasi?.lat},
 
-      `,
-    );
+    absensi
+      .checkOut(state, id)
+      .then((res) => {
+        ToastHandler('success', res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.response.data);
+        ToastHandler('error', err.response.data ? err.response.data : err);
+      });
   };
 
   useEffect(() => {

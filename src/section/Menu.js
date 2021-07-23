@@ -28,7 +28,7 @@ export default function Menu() {
   };
 
   return (
-    <nav className="transition-all duration-300 ease-in-out fixed hidden lg:flex rounded-2xl z-50 inset-x-0 mx-8 lg:bottom-0 lg:h-auto lg:inset-y-0 lg:w-32 lg:flex-col lg:justify-between bg-white lg:my-4 lg:ml-4 ">
+    <nav className="transition-all duration-300 ease-in-out fixed hidden lg:flex rounded-2xl z-30 inset-x-0 mx-8 lg:bottom-0 lg:h-auto lg:inset-y-0 lg:w-32 lg:flex-col lg:justify-between bg-white lg:my-4 lg:ml-4 ">
       <div className="hidden md:flex flex-col items-center gap-2 justify-center p-2 pt-8">
         <img
           className="h-8 w-8"

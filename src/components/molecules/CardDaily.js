@@ -1,3 +1,4 @@
+import { ClockIcon } from '@heroicons/react/outline';
 import {
   GlobeAltIcon,
   HomeIcon,
@@ -16,19 +17,21 @@ const CardDaily = ({ day, timeIn, timeOut, type }) => {
   };
 
   const ShowIconDaily = () => {
-    if (type === 'wfh') {
+    if (type === 'WFH') {
       return (
         <HomeIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-pink bg-apps-pink bg-opacity-10 " />
       );
-    }
-    if (type === 'wfo') {
+    } else if (type === 'WFO') {
       return (
         <OfficeBuildingIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-orange bg-apps-orange bg-opacity-10" />
       );
-    }
-    if (type === 'satelit') {
+    } else if (type === 'Satelit') {
       return (
         <GlobeAltIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-purple bg-apps-purple bg-opacity-10" />
+      );
+    } else {
+      return (
+        <ClockIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-primary bg-apps-primary bg-opacity-10" />
       );
     }
   };

@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function MobileMenu() {
   return (
-    <div className="fixed z-50 bottom-8 inset-x-0 ">
+    <div className="fixed z-30 bottom-8 inset-x-0 ">
       {/* <!--   mobile menu bar  --> */}
       <div className="bg-white shadow-sm flex justify-between items-center  lg:hidden  mx-4 mt-4 mb-0 p-2 rounded-2xl ">
         <NavLink

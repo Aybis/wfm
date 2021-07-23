@@ -1,11 +1,12 @@
-/** @format */
+import React from 'react';
 
-import React from "react";
-
-export default function Loading({ height = 12, width = 12 }) {
+export default function Loading({ height = 12, width = 12, inputClass }) {
   return (
     <svg
-      className={`animate-spin -ml-1 mr-3 h-${height} w-${width} text-apps-primary`}
+      className={[
+        `animate-spin -ml-1 mr-3 h-${height} w-${width} text-apps-primary`,
+        inputClass,
+      ].join('')}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24">

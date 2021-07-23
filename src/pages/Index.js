@@ -55,7 +55,7 @@ const Index = () => {
             <Route exact path="/inforekan" component={Inforekan}></Route>
             <Route exact path="/presensi" component={Presensi}></Route>
             <Route exact path="/check-in" component={CheckIn}></Route>
-            <Route exact path="/check-out" component={CheckOut}></Route>
+            <Route exact path="/check-out/:id" component={CheckOut}></Route>
             <Route exact path="/overtime" component={Overtime}></Route>
             <Route exact path="/overtime-in" component={OvertimeIn}></Route>
             <Route exact path="/overtime-out" component={OvertimeOut}></Route>

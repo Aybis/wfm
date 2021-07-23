@@ -1,104 +1,55 @@
-/** @format */
+import React from 'react';
+import { CSSTransition } from 'react-transition-group';
 
-import React, { useState, useEffect, useRef } from "react";
-import propTypes from "prop-types";
-import { createPortal } from "react-dom";
-
-import { CSSTransition } from "react-transition-group";
-
-export default function Modal(props) {
-  const [Ready, setReady] = useState(() => false);
-  const [Display, setDisplay] = useState(() => false);
-  const [Allow, setAllow] = useState(() => true);
-
-  const ModalRef = useRef(null);
-  const idModal = "modal";
-
-  function toggleAllow() {
-    setAllow(!Allow);
-  }
-
-  function toggle() {
-    if (props.toggleModal) props.toggleModal();
-    else setDisplay(!Display);
-  }
-
-  function handleClickOutside(event) {
-    if (
-      ModalRef?.current &&
-      !ModalRef?.current?.contains?.(event.target) &&
-      Allow
-    )
-      toggle();
-  }
-
-  useEffect(() => {
-    const rootContainer = document.createElement("div");
-    rootContainer.setAttribute("id", idModal);
-    setReady(true);
-
-    if (!document.getElementById(idModal))
-      document.body.appendChild(rootContainer);
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
-
-  useEffect(() => {
-    if (Display || props.in) {
-      document.querySelector("body").classList.add("modal-open");
-    }
-    return () => {
-      document.querySelector("body").classList.remove("modal-open");
-    };
-  }, [Display, props.in]);
-
-  if (!Ready) return null;
-
+export default function Modal({ children, title, isShowModal, show }) {
   return (
-    <>
-      {props.children(toggle)}
-      {document && document.getElementById(idModal) && (
-        <div>
-          {createPortal(
-            <CSSTransition
-              in={props.in ?? Display}
-              timeout={500}
-              onExit={toggleAllow}
-              onExited={toggleAllow}
-              classNames="overlay"
-              unmountOnExit>
-              <div className="overlay fixed inset-0 h-screen z-50">
-                <div className="bg-black opacity-25 inset-0 absolute z-10"></div>
-                <div className="absolute z-20 flex items-center justify-center inset-0">
-                  <div
-                    style={props.modalStyle}
-                    ref={ModalRef}
-                    className="bg-white shadow-2xl max-w-3xl max-h-2xl">
-                    <div className="relative">
-                      <span className="modal-close" onClick={toggle}></span>
-                    </div>
-
-                    {props.content(toggle)}
-                  </div>
-                </div>
+    <CSSTransition
+      in={show}
+      timeout={400}
+      classNames="alert"
+      unmountOnExit
+      onExited={isShowModal}>
+      <>
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 mx-4 lg:mx-0 z-50 outline-none focus:outline-none">
+          <div className="relative w-auto my-6 mx-auto max-w-6xl">
+            {/*content*/}
+            <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              {/*header*/}
+              <div className="flex items-center justify-between p-5 border-b border-solid border-coolGray-200 rounded-t">
+                <h3 className="text-xl lg:text-3xl font-semibold">{title}</h3>
+                <button
+                  className="p-1 ml-auto bg-transparent border-0 text-black opacity-50 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                  onClick={isShowModal}>
+                  <span className="bg-transparent text-black h-6 w-6 text-2xl block outline-none focus:outline-none">
+                    X
+                  </span>
+                </button>
               </div>
-            </CSSTransition>,
-            document.getElementById(idModal),
-          )}
+              {/*body*/}
+              <div className="relative p-6 flex-auto">{children}</div>
+              {/*footer*/}
+              <div className="flex items-center justify-end p-6 border-t border-solid border-coolGray-200 rounded-b">
+                <button
+                  className="text-apps-red background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                  onClick={isShowModal}>
+                  Close
+                </button>
+                {/* <button
+              className="bg-apps-primary text-white font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              onClick={() => setShowModal(false)}>
+              Save Changes
+            </button> */}
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-    </>
+        <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+      </>
+    </CSSTransition>
+    // show && (
+
+    // )
   );
 }
-
-Modal.defaultProps = {};
-Modal.propTypes = {
-  in: propTypes.bool,
-  toggleModal: propTypes.func,
-  content: propTypes.func.isRequired,
-};

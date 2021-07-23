@@ -9,14 +9,12 @@ import {
   PhoneMissedCallIcon,
   UserGroupIcon,
 } from '@heroicons/react/solid';
+import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import MobileMenu from 'section/MobileMenu';
-import { motion } from 'framer-motion';
 
 const Modules = () => {
-  window.scroll(0, 0);
-
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {

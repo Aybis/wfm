@@ -1,11 +1,10 @@
-import Back from 'components/atoms/Back';
 import Textarea from 'components/atoms/Textarea';
 import CardApprover from 'components/molecules/CardApprover';
 import CardMapsInOut from 'components/molecules/CardMapsInOut';
 import CardTime from 'components/molecules/CardTime';
 import CardTitlePage from 'components/molecules/CardTitlePage';
 import LabelValueHorizontal from 'components/molecules/LabelValueHorizontal';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const DetailApproval = ({ history }) => {
   const markOne = [
@@ -82,7 +81,7 @@ const DetailApproval = ({ history }) => {
     <div className="relative -mb-20">
       <CardTitlePage goBack={history.goBack} title="Detail Lemburan" />
 
-      <div className="flex flex-col mt-8 gap-6 lg:gap-8">
+      <div className="flex flex-col mt-8 gap-4 lg:gap-6">
         {/* Card Map  */}
         <div className="flex flex-col w-full bg-white p-4 rounded-md">
           <h1 className="font-semibold text-apps-text mb-4">
@@ -94,7 +93,7 @@ const DetailApproval = ({ history }) => {
         </div>
         {/* End Card Map */}
         {/* Card Detail Lemburan  */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div className="flex flex-col justify-between bg-white rounded-md">
             <div className="flex flex-col gap-3 p-4">
               <h1 className="font-semibold text-apps-text mb-4">
@@ -112,7 +111,7 @@ const DetailApproval = ({ history }) => {
               />
               <LabelValueHorizontal
                 label="Deskripsi"
-                value="  Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+                value="Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
               perspiciatis nam labore officia, nulla vel sequi! Dolor nisi ad
               quaerat quae. Lorem ipsum dolor sit amet consectetur adipisicing
               elit. Harum perspiciatis nam labore officia, nulla vel sequi!
@@ -142,7 +141,7 @@ const DetailApproval = ({ history }) => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col rounded-md lg:col-start-1 lg:col-end-3 bg-white p-4 mt-4">
+          <div className="flex flex-col rounded-md lg:col-start-1 lg:col-end-3 bg-white p-4">
             <Textarea
               inputClassName="W-full"
               labelName="Comment"

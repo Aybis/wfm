@@ -1,5 +1,3 @@
-/** @format */
-
 import { LocationMarkerIcon } from '@heroicons/react/solid';
 import {
   GoogleMap,

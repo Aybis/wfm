@@ -1,5 +1,3 @@
-/** @format */
-
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import {
   ChevronDownIcon,
@@ -13,6 +11,7 @@ import Textarea from 'components/atoms/Textarea';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
+import absensi from '../constants/api/absensi';
 
 const CheckIn = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
@@ -21,23 +20,48 @@ const CheckIn = ({ history }) => {
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
   const [image, setImage] = useState(null);
+  const date = new Date();
+
+  const dateTime =
+    date.getFullYear() +
+    '-' +
+    (date.getMonth() + 1) +
+    '-' +
+    date.getDate() +
+    ' ' +
+    date.getHours() +
+    ':' +
+    date.getMinutes() +
+    ':' +
+    date.getSeconds();
 
   const [state, setState] = useForm({
+    user_id: 134,
     lokasi: '',
-    alamat: '',
+    long_lat: '',
     image: '',
     kehadiran: '',
     kondisi: '',
     keterangan: '',
+    jam: '',
   });
 
   const inputPhoto = (event) => {
     let fileValue = event.target.files[0] ? event.target.files[0] : null;
-    setImage(fileValue);
+    createImage(fileValue);
+
     if (fileValue) {
       let source = URL.createObjectURL(fileValue);
       setPhoto(source);
     }
+  };
+
+  const createImage = (file) => {
+    let reader = new FileReader();
+    reader.onload = (e) => {
+      setImage(e.target.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const sendlongLat = (value) => {
@@ -50,21 +74,29 @@ const CheckIn = ({ history }) => {
 
   const submitFunction = (event) => {
     event.preventDefault();
-    state.lokasi = longLat;
+    state.long_lat = longLat;
     state.image = image;
-    state.alamat = address;
-    console.log(state);
-    ToastHandler(
-      'success',
-      `Alamat : ${state.alamat},
-      Kondisi : ${state.kondisi},
-      Kehadiran : ${state.kehadiran},
-      Keterangan : ${state.keterangan},
-      Long : ${state.lokasi?.lng},
-      Lat : ${state.lokasi?.lat},
+    state.lokasi = address;
+    state.jam = dateTime;
 
-      `,
-    );
+    const config = {
+      headers: {
+        'Content-Type':
+          ' multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
+      },
+    };
+
+    absensi
+      .checkIn(state, config)
+      .then((res) => {
+        ToastHandler('success', res);
+        setTimeout(() => {
+          history.push('/');
+        }, 300);
+      })
+      .catch((err) => {
+        ToastHandler('error', err.response.data);
+      });
   };
 
   useEffect(() => {
@@ -169,9 +201,9 @@ const CheckIn = ({ history }) => {
                     <option value="" selected disabled>
                       Pilih Kehadiran
                     </option>
-                    <option value="wfh">WFH</option>
-                    <option value="wfo">WFO</option>
-                    <option value="satelit">Satelit</option>
+                    <option value="WFH">WFH</option>
+                    <option value="WFO">WFO</option>
+                    <option value="Satelit">Satelit</option>
                   </Select>
                 )}
               </div>

@@ -1,6 +1,7 @@
 /** @format */
 
 import {
+  Circle,
   GoogleMap,
   InfoWindow,
   Marker,
@@ -11,6 +12,7 @@ import { React, useCallback, useState } from 'react';
 const CardMapsInOut = ({ mark, address, className, height = '100%' }) => {
   const [selected, setSelected] = useState(false);
   const [addres, setaddres] = useState('Anda Disini');
+  const markRadius = mark[0].longLat;
 
   const MarkInOut = () => {
     return mark.map((item, index) => (
@@ -69,7 +71,14 @@ const CardMapsInOut = ({ mark, address, className, height = '100%' }) => {
           onLoad={onLoad}
           options={options}>
           {/* Child components, such as markers, info windows, etc. */}
-          <MarkInOut />
+          <>
+            <MarkInOut />
+            <Circle
+              center={markRadius}
+              radius={500}
+              options={{ strokeColor: '#ff0000' }}
+            />
+          </>
           {selected ? (
             <InfoWindow
               position={selected}

@@ -1,58 +1,24 @@
 import Heading from 'components/atoms/Heading';
 import Loading from 'components/atoms/Loading';
+import Modal from 'components/atoms/Modal';
 import CardDaily from 'components/molecules/CardDaily';
 import CardDay from 'components/molecules/CardDay';
 import CardDayOff from 'components/molecules/CardDayOff';
 import CardOvertime from 'components/molecules/CardOvertime';
 import CardPresence from 'components/molecules/CardPresence';
 import CardTeam from 'components/molecules/CardTeam';
+import Carousel from 'components/molecules/Carousel';
 import { motion } from 'framer-motion';
-import React from 'react';
+import ToastHandler from 'helpers/hooks/toast';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import absensi from '../constants/api/absensi';
 
 const Home = ({ user }) => {
   window.scroll(0, 0);
-
-  const presensi = [
-    {
-      name: 'Senin',
-      in: '07 : 14',
-      out: '21 : 14',
-      type: 'satelit',
-    },
-    {
-      name: 'Selasa',
-      in: '07 : 14',
-      out: '21 : 14',
-      type: 'wfh',
-    },
-    {
-      name: 'Rabu',
-      in: '07 : 14',
-      out: '21 : 14',
-      type: 'wfo',
-    },
-    {
-      name: 'Kamis',
-      in: '07 : 14',
-      out: '21 : 14',
-      type: 'wfo',
-    },
-    {
-      name: 'Jumat',
-      in: '07 : 14',
-      out: '21 : 14',
-      type: 'wfh',
-    },
-  ];
-
-  const dayPresent = {
-    type: 'WFH',
-    in: '07 : 14',
-    locIn: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
-    out: '21 : 32',
-    locOut: 'Jalan Delima 3, H4/23, Kabupaten Karawang, Jawa Barat',
-  };
+  const [dataPersonal, setdataPersonal] = useState(null);
+  const [dataWeeklyPersonal, setdataWeeklyPersonal] = useState(null);
+  const [showModal, setshowModal] = useState(false);
 
   const teams = [
     {
@@ -149,53 +115,123 @@ const Home = ({ user }) => {
     },
   };
 
-  const dailyPersonal = () => {
-    absensi.all().then((res) => {
-      console.log('absensi all', res);
-    });
-
-    absensi.dailyPersonal(134).then((res) => {
-      console.log('daily personal', res);
-    });
+  const CardCheckInStatus = (absensi) => {
+    if (!absensi) {
+      return <CardPresence link="/check-in" />;
+    } else if (absensi.id) {
+      if (absensi.detail_absensi[0]) {
+        return <CardPresence status="in" link={`/check-out/${absensi.id}`} />;
+      }
+    } else {
+      return <CardPresence status="out" />;
+    }
   };
 
-  dailyPersonal();
+  const getDataWeeklyPersonal = () => {
+    absensi
+      .weeklyPersonal(134)
+      .then((res) => {
+        setdataWeeklyPersonal(res.length > 0 ? res : null);
+      })
+      .catch((err) => {
+        ToastHandler('err', err.response);
+      });
+  };
+
+  const getDataDailyPersonal = () => {
+    absensi
+      .dailyPersonal(134)
+      .then((res) => {
+        setdataPersonal(res.user_id ? res : null);
+      })
+      .catch((err) => {
+        ToastHandler('err', err.response);
+      });
+  };
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      getDataDailyPersonal();
+      getDataWeeklyPersonal();
+      setshowModal(true);
+    }, 500);
+    return () => {
+      clearTimeout(timeOut);
+    };
+  }, []);
+
   return user ? (
     <div className="relative mb-12 ">
       {/* card check in  */}
       <div className="mt-8">
-        <CardPresence link="/check-in" />
+        <CardCheckInStatus absensi={dataPersonal} />
       </div>
+      {/* card daily progress  */}
+      <Modal
+        title="Berita Hari Ini"
+        isShowModal={() => setshowModal(false)}
+        show={showModal}>
+        <Carousel />
+      </Modal>
 
-      <div className="relative mt-8">
-        <Heading heading="Presensi Mingguan" />
+      <div className="relative mt-4 lg:mt-8">
+        <Heading heading="Presensi Hari Ini" />
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-5 transition-all duration-300 ease-in-out">
+          className="-mt-2">
+          {dataPersonal && (
+            <>
+              <CardDay
+                type={dataPersonal.kehadiran}
+                locIn={dataPersonal.detail_absensi[0].lokasi}
+                timeIn={dataPersonal.detail_absensi[0].jam}
+                locOut={
+                  dataPersonal.detail_absensi[1]
+                    ? dataPersonal.detail_absensi[1].lokasi
+                    : 'On Duty'
+                }
+                timeOut={
+                  dataPersonal.detail_absensi[1]
+                    ? dataPersonal.detail_absensi[1].jam
+                    : 'On Duty'
+                }
+              />
+            </>
+          )}
+        </motion.div>
+      </div>
+      {/* end card daily progress   */}
+
+      <div className="relative mt-4 lg:mt-8">
+        <Heading heading="Presensi Mingguan" />
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate="visible"
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-2 sm:grid sm:grid-cols-3 md:grid-cols-5 transition-all duration-300 ease-in-out">
           {/* card daily */}
-          {presensi.map((item) => (
-            <CardDaily
-              key={item.name}
-              day={item.name}
-              timeIn={item.in}
-              timeOut={item.out}
-              type={item.type}
-            />
-          ))}
+          {dataWeeklyPersonal && (
+            <>
+              {dataWeeklyPersonal.map((item, index) => (
+                <CardDaily key={index} day={item.hari} type={item.kehadiran} />
+              ))}
+            </>
+          )}
           {/* end card daily */}
         </motion.div>
       </div>
 
       {/* card daily team report  */}
-      <div className="relative mt-8">
+      <div className="relative mt-4 lg:mt-8">
         <Heading heading="Presenti Team" />
         <motion.div
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 p-2">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-2 p-2">
           {/* card team */}
           {teams.map((team, index) => (
             <CardTeam
@@ -209,26 +245,9 @@ const Home = ({ user }) => {
         </motion.div>
       </div>
 
-      {/* card daily progress  */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="visible"
-        className="relative mt-8">
-        <Heading heading="Presensi Hari Ini" />
-        <CardDay
-          type={dayPresent.type}
-          locIn={dayPresent.locIn}
-          locOut={dayPresent.locOut}
-          timeIn={dayPresent.in}
-          timeOut={dayPresent.out}
-        />
-      </motion.div>
-      {/* end card daily progress   */}
-
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-10 lg:mt-4">
         {/* card overtime  */}
-        <div className="relative mt-8">
+        <div className="relative mt-4 lg:mt-8">
           <motion.div
             variants={container}
             initial="hidden"
