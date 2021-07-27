@@ -180,7 +180,7 @@ export default function Presensi({ history }) {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {reportMe.map((item, index) => (
             <CardReportKehadiran
@@ -201,7 +201,7 @@ export default function Presensi({ history }) {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-3 transition-all duration-300 ease-in-out">
+          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 lg:grid lg:grid-cols-3 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.status} />

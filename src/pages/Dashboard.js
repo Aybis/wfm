@@ -64,7 +64,7 @@ export default function Dashboard({ history }) {
 
   const reportMe = [
     {
-      status: 'hadir',
+      status: 'presensi',
       hari: 13,
     },
     {
@@ -72,19 +72,7 @@ export default function Dashboard({ history }) {
       hari: 13,
     },
     {
-      status: 'izin',
-      hari: 13,
-    },
-    {
-      status: 'sakit',
-      hari: 13,
-    },
-    {
-      status: 'sppd',
-      hari: 13,
-    },
-    {
-      status: 'cuti',
+      status: 'tidak absen',
       hari: 13,
     },
   ];
@@ -113,8 +101,8 @@ export default function Dashboard({ history }) {
       <FilterDate />
 
       <div className="flex flex-col mt-8">
-        <Heading heading="Presensi Daily" />
-        <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-6 transition-all duration-300 ease-in-out">
+        <Heading heading="Report Absensi" />
+        <div className="overflow-x-auto hidden-scroll flex gap-4 py-3 mt-4 lg:grid lg:grid-cols-3 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {reportMe.map((item, index) => (
             <CardReportKehadiran
@@ -128,8 +116,8 @@ export default function Dashboard({ history }) {
       </div>
 
       <div className="flex flex-col mt-8">
-        <h2 className="font-semibold text-apps-text ">Resume Work</h2>
-        <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-3 md:grid-cols-3 transition-all duration-300 ease-in-out">
+        <Heading heading="Report Kehadiran" />
+        <div className="overflow-x-auto hidden-scroll flex gap-4 py-3 mt-4 sm:grid sm:grid-cols-3 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.status} />
@@ -140,23 +128,7 @@ export default function Dashboard({ history }) {
 
       <div className="flex flex-col mt-8">
         <Heading heading="Direktorat" />
-        <div className="grid lg:grid-cols-2 gap-4 mt-4">
-          <Suspense fallback={<p>Loading ....</p>}>
-            <ChartPie data={dataPie} title="Report Daily" id="daily" />
-          </Suspense>
-
-          <Suspense fallback={<p>Loading ....</p>}>
-            <ChartBar
-              data={dataBar}
-              title="Report Daily Direktorat"
-              id="dailyBar"
-            />
-          </Suspense>
-
-          <Suspense fallback={<p>Loading ....</p>}>
-            <ChartBar data={dataBar} title="Report Monthly" id="monthly" />
-          </Suspense>
-        </div>
+        <div className="grid lg:grid-cols-2 gap-4 mt-4"></div>
       </div>
     </div>
   );

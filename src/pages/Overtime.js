@@ -153,7 +153,7 @@ export default function Overtime({ history }) {
           variants={container}
           initial="hidden"
           animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 mt-4 sm:grid sm:grid-cols-4 md:grid-cols-4 transition-all duration-300 ease-in-out">
+          className="overflow-x-auto hidden-scroll flex gap-4 py-3 mt-4 lg:grid lg:grid-cols-4 transition-all duration-300 ease-in-out">
           {/* card daily */}
           {workMe.map((item, index) => (
             <CardReportWork key={index} day={item.hari} name={item.name} />
