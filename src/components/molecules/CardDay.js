@@ -21,12 +21,12 @@ export default function CardDay({
   return (
     <motion.div
       variants={item}
-      className={`flex flex-col w-full gap-4 mt-4 bg-white rounded-xl ${
+      className={`flex flex-col w-full gap-4 bg-white rounded-xl ${
         border && 'border border-gray-100'
       }`}>
       {date && (
         <div className=" mx-auto text-center -mt-3">
-          <h4 className="p-2 bg-apps-blue bg-opacity-70 text-white font-medium max-w-lg text-sm rounded-md mx-auto ">
+          <h4 className="p-2 bg-apps-primary text-white font-medium max-w-lg text-sm rounded-md mx-auto ">
             {date}
           </h4>
         </div>

@@ -75,10 +75,11 @@ const CheckOut = ({ history }) => {
       .checkOut(state, id)
       .then((res) => {
         ToastHandler('success', res);
+        setTimeout(() => {
+          history.push('/');
+        }, 300);
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.response.data);
         ToastHandler('error', err.response.data ? err.response.data : err);
       });
   };

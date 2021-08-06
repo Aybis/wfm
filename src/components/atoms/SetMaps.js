@@ -7,6 +7,7 @@ import {
 } from '@react-google-maps/api';
 import axios from 'axios';
 import { React, useCallback, useEffect, useState } from 'react';
+import Loading from './Loading';
 const SetMaps = ({
   popup,
   sendAddress,
@@ -110,9 +111,11 @@ const SetMaps = ({
       )}
       <div
         className={[
-          className ? className : 'absolute h-screen top-0 inset-x-0',
+          className
+            ? className
+            : 'absolute h-screen top-0 inset-x-0 transition-all duration-300 ease-in-out',
         ].join(' ')}>
-        {isLoaded ? (
+        {isLoaded && didMount ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={longLat ? longLat : center}
@@ -140,7 +143,7 @@ const SetMaps = ({
             ) : null}
           </GoogleMap>
         ) : (
-          <></>
+          <Loading />
         )}
       </div>
     </>

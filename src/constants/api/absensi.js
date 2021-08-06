@@ -6,7 +6,8 @@ export default {
   checkIn: (data) => axios.post('absensi/check-in', data),
   checkOut: (data, absensi) => axios.post(`absensi/check-out/${absensi}`, data),
   dailyPersonal: (user) => axios.get(`absensi/daily-personal?user_id=${user}`),
-  reportPersonal: (user) => axios.get('report-personal', user),
+  reportPersonal: (user) =>
+    axios.get(`absensi/report-personal?user_id=${user}`),
   reportUserByUnit: () => axios.get('report-user-by-unit'),
   weeklyPersonal: (user) =>
     axios.get(`absensi/weekly-personal?user_id=${user}`),

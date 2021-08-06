@@ -1,24 +1,15 @@
-import React from 'react';
-import SetMaps from 'components/atoms/SetMaps';
-import { Link } from 'react-router-dom';
 import { ChevronRightIcon } from '@heroicons/react/solid';
-import { motion } from 'framer-motion';
+import SetMaps from 'components/atoms/SetMaps';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function CardMapCheck({
   status,
   current,
   type,
-  time,
   link = '/',
+  state,
 }) {
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
   const sendAddress = (value) => {
     return value;
   };
@@ -28,9 +19,7 @@ export default function CardMapCheck({
   };
 
   return (
-    <motion.div
-      variants={item}
-      className="relative grid grid-cols-1 bg-white rounded-md mb-8 mt-4 shadow-md">
+    <div className="relative grid grid-cols-1 bg-white rounded-md mb-8 mt-8 shadow-md">
       <SetMaps
         height="100%"
         className="relative h-28 lg:h-64 rounded-t-lg z-0"
@@ -60,7 +49,12 @@ export default function CardMapCheck({
         </div>
         {status ? (
           <div className="flex justify-center items-center text-xs lg:text-sm">
-            <Link to={link} className="ml-7">
+            <Link
+              to={{
+                pathname: link,
+                state: state,
+              }}
+              className="ml-7">
               <button
                 className={`p-2 text-white rounded hidden lg:block ${
                   type === 'in' ? '    bg-apps-primary' : '   bg-apps-red'
@@ -80,6 +74,6 @@ export default function CardMapCheck({
           <div className="w-16"></div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 }

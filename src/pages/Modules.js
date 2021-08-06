@@ -10,11 +10,14 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import MobileMenu from 'section/MobileMenu';
 
 const Modules = () => {
+  const users = useSelector((state) => state.user);
+
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -34,7 +37,7 @@ const Modules = () => {
       opacity: 1,
     },
   };
-
+  useEffect(() => {}, [users]);
   return (
     <div className="relative">
       <MobileMenu />

@@ -4,55 +4,64 @@ import {
   HomeIcon,
   OfficeBuildingIcon,
 } from '@heroicons/react/solid';
-import { motion } from 'framer-motion';
 import React from 'react';
+import { isDesktop } from 'react-device-detect';
+import { MoreVertical } from 'react-feather';
+import { Link } from 'react-router-dom';
 
-const CardDaily = ({ day, timeIn, timeOut, type }) => {
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
+const CardDaily = ({ kehadiran, hari, url = '/' }) => {
+  let nameOfKehadiran;
+
+  if (kehadiran === 'WFH') {
+    nameOfKehadiran = 'At Home';
+  } else if (kehadiran === 'WFO') {
+    nameOfKehadiran = 'At Office';
+  } else if (kehadiran === 'Satelit') {
+    nameOfKehadiran = 'At Satelit';
+  } else {
+    nameOfKehadiran = 'Day Off';
+  }
 
   const ShowIconDaily = () => {
-    if (type === 'WFH') {
+    if (kehadiran === 'WFH') {
+      nameOfKehadiran = 'At Home';
       return (
-        <HomeIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-pink bg-apps-pink bg-opacity-10 " />
+        <HomeIcon className="h-10 w-10 p-2 text-apps-primary bg-apps-primary bg-opacity-20 rounded-full" />
       );
-    } else if (type === 'WFO') {
+    } else if (kehadiran === 'WFO') {
       return (
-        <OfficeBuildingIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-orange bg-apps-orange bg-opacity-10" />
+        <OfficeBuildingIcon className="h-10 w-10 p-2 text-apps-green bg-apps-green bg-opacity-20 rounded-full" />
       );
-    } else if (type === 'Satelit') {
+    } else if (kehadiran === 'Satelit') {
+      nameOfKehadiran = 'At Satelit';
+
       return (
-        <GlobeAltIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-purple bg-apps-purple bg-opacity-10" />
+        <GlobeAltIcon className="h-10 w-10 p-2 text-apps-orange bg-apps-orange bg-opacity-20 rounded-full" />
       );
     } else {
       return (
-        <ClockIcon className="h-10 w-10 lg:h-12 lg:w-12 rounded-md p-2 fill-current text-apps-primary bg-apps-primary bg-opacity-10" />
+        <ClockIcon className="h-10 w-10 p-2 text-apps-primary bg-apps-primary bg-opacity-20 rounded-full" />
       );
     }
   };
 
   return (
-    <motion.div
-      variants={item}
-      className={`flex flex-none flex-col rounded-xl w-2/5 sm:w-auto gap-4 p-4 bg-white`}>
-      <div className="flex flex-col lg:flex-row items-start gap-4">
+    <Link
+      to={url}
+      className={`flex items-start gap-8 flex-col justify-between flex-none bg-white rounded-lg p-4 ${
+        isDesktop ? 'w-full' : 'w-1/3'
+      }`}>
+      <div className="flex justify-between  w-full">
         <ShowIconDaily />
-        <div className="flex flex-col">
-          <h3
-            className={`font-semibold text-apps-text lg:text-lg ${
-              type === 'satelit' ? 'capitalize' : 'uppercase'
-            }`}>
-            {type}
-          </h3>
-          <h3 className={` text-apps-text text-sm lg:text-base`}>{day}</h3>
-        </div>
+        <MoreVertical className="h-5 w-5 text-apps-gray -mr-2" />
       </div>
-    </motion.div>
+      <div className="flex flex-col items-start justify-center ">
+        <h2 className="font-semibold text-apps-text tracking-wide text-sm">
+          {nameOfKehadiran}
+        </h2>
+        <h2 className="font-medium text-sm text-gray-400">{hari}</h2>
+      </div>
+    </Link>
   );
 };
 

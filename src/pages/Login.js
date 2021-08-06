@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Eye, EyeOff } from 'react-feather';
-import { CSSTransition } from 'react-transition-group';
+import LoadingCircle from 'components/atoms/LoadingCircle';
 import { setAuthorizationHeader } from 'configs/axios';
-
-import users from '../constants/api/users';
-import { populateProfile } from 'store/actions/users';
-import useForm from 'helpers/hooks/useForm';
-import Loading from 'components/atoms/Loading';
 import ToastHandler from 'helpers/hooks/toast';
+import useForm from 'helpers/hooks/useForm';
+import React, { useEffect, useState } from 'react';
+import { Eye, EyeOff } from 'react-feather';
+import { useDispatch } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import { populateProfile } from 'store/actions/users';
+import users from '../constants/api/users';
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -55,6 +54,7 @@ const Login = ({ history }) => {
             // store data user to cookies
             const userCookie = {
               name: details.data.name,
+              user_id: details.data.id,
               email: details.data.email,
               avatar: details.data.image_url
                 ? details.data.image_url
@@ -205,8 +205,7 @@ const Login = ({ history }) => {
           </Link>
           {isSubmit ? (
             <div className="flex items-center justify-center">
-              <Loading height={8} width={8} />
-              <p className="text-apss-text text-opacity-50">Loading ....</p>
+              <LoadingCircle />
             </div>
           ) : (
             <button
