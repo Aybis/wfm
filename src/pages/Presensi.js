@@ -1,3 +1,4 @@
+import { SearchIcon } from '@heroicons/react/outline';
 import Download from 'components/atoms/Download';
 import Heading from 'components/atoms/Heading';
 import LoadingCircle from 'components/atoms/LoadingCircle';
@@ -215,12 +216,22 @@ export default function Presensi({ history }) {
       {/* Start Card Report Data Detail */}
       <div className="flex flex-col mt-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl text-apps-text font-semibold">
+          <h1 className="text-2xl lg:text-3xl text-gray-700 font-semibold">
             List Presence
           </h1>
-          <Download onClick={() => alert('Download excel')} />
         </div>
-        <div className="grid grid-cols-1 overflow-auto hidden-scroll h-full mt-4 gap-2 pt-4">
+        <div className="grid grid-cols-1 overflow-auto hidden-scroll h-full my-4 gap-2 py-4 lg:bg-white rounded-lg">
+          <div className="hidden lg:flex justify-between px-4">
+            <div className="inline-flex items-center justify-center">
+              <SearchIcon className="h-6 w-6 text-gray-400 z-10 ml-2" />
+              <input
+                type="text"
+                className="pl-10 pr-4 py-3 rounded-md bg-gray-100 -ml-8"
+                placeholder="Search"
+              />
+            </div>
+            <Download onClick={() => alert('Download excel')} />
+          </div>
           {dataMonthly ? (
             <>
               {isMobile &&
@@ -235,12 +246,10 @@ export default function Presensi({ history }) {
                     locOut={
                       data.detail_absensi[1]
                         ? data.detail_absensi[1].lokasi
-                        : 'On Duty'
+                        : null
                     }
                     timeOut={
-                      data.detail_absensi[1]
-                        ? data.detail_absensi[1].jam
-                        : 'On Duty'
+                      data.detail_absensi[1] ? data.detail_absensi[1].jam : null
                     }
                   />
                 ))}

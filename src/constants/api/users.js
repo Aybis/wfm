@@ -8,4 +8,5 @@ export default {
   allTroops: (page) => axios.get(`crm/inisiasi/won?page=${page}`),
   details: () => axios.get('auth/token/detail'),
   refresh: () => axios.post('auth/token/refresh'),
+  allUnit: () => axios.get('cms/unit/get'),
 };

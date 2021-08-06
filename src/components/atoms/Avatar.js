@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 
 function Avatar({ user, logOut }) {
-  const aniamtion = {
+  const animation = {
     start: {
       y: '-10%',
     },
@@ -29,20 +29,20 @@ function Avatar({ user, logOut }) {
           onMouseLeave={() => setshow(false)}>
           {show && (
             <motion.ul
-              variants={aniamtion}
+              variants={animation}
               transition={transition}
               initial="start"
               animate="end"
               className="p-2 w-44 border-r bg-white absolute rounded z-40 right-0 shadow mt-14 top-0">
               <motion.li
                 whileHover={{ fontWeight: 600 }}
-                className="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-2 hover:text-apps-primary focus:text-apps-primary focus:outline-none">
+                className="cursor-pointer text-gray-500 text-sm leading-3 tracking-normal py-2 hover:text-apps-primary focus:text-apps-primary focus:outline-none">
                 <div className="flex items-center">
                   <UserIcon className="h-8 w-8 p-1" />
                   <span className="ml-2">My Profile</span>
                 </div>
               </motion.li>
-              <motion.li className="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal mt-2 py-2  flex items-center focus:text-apps-primary focus:outline-none">
+              <motion.li className="cursor-pointer text-gray-400 text-sm leading-3 tracking-normal mt-2 py-2 flex items-center focus:text-apps-primary focus:outline-none">
                 <motion.div
                   whileHover={{ fontWeight: 600 }}
                   className="flex items-center gap-1 text-opacity-70 w-full"
@@ -69,7 +69,7 @@ function Avatar({ user, logOut }) {
               />
             ) : (
               <img
-                src={`https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`}
+                src={`https://ui-avatars.com/api/?name=${user.name}&background=3D28DE&color=fff`}
                 alt="avatar"
                 loading="lazy"
                 height={10}
@@ -77,7 +77,7 @@ function Avatar({ user, logOut }) {
                 className="h-10 w-10 rounded-full"
               />
             )}
-            <p className="text-apps-text dark:text-gray-100 capitalize font-medium ">
+            <p className="text-apps-text dark:text-gray-100 capitalize font-medium hidden">
               {user.name}
             </p>
           </motion.div>

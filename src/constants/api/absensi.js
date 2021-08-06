@@ -12,7 +12,7 @@ export default {
   weeklyPersonal: (user) =>
     axios.get(`absensi/weekly-personal?user_id=${user}`),
   insertHoliday: (data) => axios.post('holiday', data),
-  getHoliday: (page) => axios.get(`holiday?page=${page}`),
+  getHoliday: (page) => axios.get(`holiday`),
   deleteHoliday: (holiday) => axios.delete('holiday/', holiday),
   updateHoliday: (holiday) => axios.put('holiday', holiday),
   overtime: (data) => axios.post('overtime', data),

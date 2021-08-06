@@ -1,25 +1,28 @@
-import Heading from 'components/atoms/Heading';
 import LoadingCircle from 'components/atoms/LoadingCircle';
 import Modal from 'components/atoms/Modal';
-import TableWithoutHeader from 'components/atoms/TableWithoutHeader';
-import CardDaily from 'components/molecules/CardDaily';
 import CardDay from 'components/molecules/CardDay';
+import CardDayOffDesktop from 'components/molecules/CardDayOffDesktop';
+import CardHeadingDesktop from 'components/molecules/CardHeadingDesktop';
+import CardMessages from 'components/molecules/CardMessages';
 import CardPresence from 'components/molecules/CardPresence';
+import CardTesting from 'components/molecules/CardTesting';
+import CardUnit from 'components/molecules/CardUnit';
 import Carousel from 'components/molecules/Carousel';
 import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import MobileHeader from 'section/MobileHeader';
 import MobileMenu from 'section/MobileMenu';
 import absensi from '../constants/api/absensi';
+import apiUser from '../constants/api/users';
 
 const Home = () => {
   const [dataPersonal, setdataPersonal] = useState(false);
-  const [dataWeeklyPersonal, setdataWeeklyPersonal] = useState(null);
   const [showModal, setshowModal] = useState(false);
+  const [dataUnit, setdataUnit] = useState(false);
+  const [dataHoliday, setdataHoliday] = useState(false);
   const users = useSelector((state) => state.users);
 
   const variants = {
@@ -34,6 +37,27 @@ const Home = () => {
     },
   };
 
+  const getDataHoliday = () => {
+    absensi
+      .getHoliday()
+      .then((res) => {
+        setdataHoliday(res.length > 0 ? res : false);
+      })
+      .catch((err) => {
+        ToastHandler('err', err.message);
+      });
+  };
+  const getDataAllUnit = () => {
+    apiUser
+      .allUnit()
+      .then((res) => {
+        setdataUnit(res.data);
+      })
+      .catch((err) => {
+        ToastHandler('err', err.response);
+      });
+  };
+
   const CardCheckInStatus = ({ absensi }) => {
     if (!absensi) {
       return <CardPresence link="/check-in" />;
@@ -44,17 +68,6 @@ const Home = () => {
         return <CardPresence status="in" link={`/check-out/${absensi.id}`} />;
       }
     }
-  };
-
-  const getDataWeeklyPersonal = () => {
-    absensi
-      .weeklyPersonal(users?.id)
-      .then((res) => {
-        setdataWeeklyPersonal(res.length > 0 ? res : null);
-      })
-      .catch((err) => {
-        ToastHandler('err', err.response);
-      });
   };
 
   const getDataDailyPersonal = () => {
@@ -69,11 +82,11 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setshowModal(true);
+    // setshowModal(true);
     const timeOut = setTimeout(() => {
       getDataDailyPersonal();
-      getDataWeeklyPersonal();
-      setshowModal(true);
+      getDataAllUnit();
+      getDataHoliday();
     }, 500);
     return () => {
       clearTimeout(timeOut);
@@ -128,42 +141,97 @@ const Home = () => {
           </div>
         </div>
       ) : (
-        <CardCheckInStatus absensi={dataPersonal} />
+        <LoadingCircle />
       )}
       {/* End Code Block Asynchrounous Data Absensi Today  */}
 
-      {/* Start Code Block Asynchrounous Data Weekly Absensi   */}
+      {/* Start Card Selebs  */}
+      <div className={`${isDesktop ? ' mt-20 pb-6' : 'mt-8 '} relative`}>
+        <CardHeadingDesktop
+          heading="Our Selebs Today"
+          description="List Pegawai Telat Melakukan Absensi"
+        />
+        <div
+          className={`flex overflow-auto ${
+            isMobile ? 'hidden-scroll -my-8' : '-m-8'
+          }`}>
+          <ul className="flex items-center w-full p-8">
+            <CardTesting />
+            <CardTesting />
+            <CardTesting />
+            <CardTesting />
+            <CardTesting />
+            <CardTesting />
+            <CardTesting />
+            <CardTesting />
+          </ul>
+        </div>
+      </div>
+      {/* End Card Selebs  */}
+
+      {/* Start CEO Messages  */}
+      <div className={`${isDesktop ? ' mt-24 pb-6' : 'mt-8 '} relative`}>
+        <CardHeadingDesktop
+          heading="CEO Messages"
+          description="Motivation From Our CEO"
+        />
+        <div
+          className={`flex overflow-auto ${
+            isMobile ? 'hidden-scroll -my-8' : '-m-8'
+          }`}>
+          <ul className="flex items-center w-full p-8">
+            <CardMessages />
+            <CardMessages />
+            <CardMessages />
+            <CardMessages />
+          </ul>
+        </div>
+      </div>
+      {/* End Card CEO Messages  */}
+
+      {/* Start Section Units  */}
       <div
         className={`${
-          isDesktop ? 'mt-24' : 'mt-8'
-        } relative transition-all duration-300 ease-in-out`}>
-        {dataWeeklyPersonal ? (
-          <>
-            {isMobile && <Heading heading="Weekly Report" />}
+          isDesktop ? ' mt-24 border-b border-gray-200' : 'mt-8 '
+        } relative`}>
+        <CardHeadingDesktop
+          heading="Our Units"
+          description="List Unit on This Company"
+        />
+        <div className="overflow-x-auto hidden-scroll flex lg:grid lg:grid-cols-4 gap-3">
+          {dataUnit ? (
+            dataUnit.map((data, index) => (
+              <CardUnit key={index} name={data.name} />
+            ))
+          ) : (
+            <LoadingCircle />
+          )}
+        </div>
+      </div>
+      {/* End Section Units  */}
 
-            <div
-              className={`overflow-x-auto hidden-scroll gap-4 mt-2 py-4 transition-all duration-300 ease-in-out ${
-                isDesktop ? 'grid grid-cols-5' : 'flex '
-              } `}>
-              {dataWeeklyPersonal.map((item, index) => (
-                <CardDaily
-                  key={index}
-                  hari={item.hari}
-                  kehadiran={item.kehadiran}
-                />
+      {/* Start Section Units  */}
+      <div className={`${isDesktop ? ' mt-24' : 'mt-8 '} relative`}>
+        <CardHeadingDesktop
+          heading="Day Off"
+          description="List Day Off in This Year"
+        />
+        {dataHoliday ? (
+          <table
+            className={`${
+              isDesktop ? 'w-full' : 'flex overflow-x-auto hidden-scroll'
+            } whitespace-nowrap`}>
+            <tbody>
+              {dataHoliday.map((data, index) => (
+                <CardDayOffDesktop key={index} data={data} />
               ))}
-            </div>
-          </>
+            </tbody>
+          </table>
         ) : (
-          <div className="mx-24">
-            <Heading heading="Weekly Report" />
-            <p className="mt-2 text-sm text-apps-gray">
-              Anda belum absensi minggu ini ...
-            </p>
-          </div>
+          <LoadingCircle />
         )}
       </div>
-      {/* End Code Block Asynchrounous Data Weekly Absensi */}
+      {/* End Section Units  */}
     </div>
   ) : (
     <div className="flex justify-center items-center h-screen bg-white">

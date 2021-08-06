@@ -83,8 +83,6 @@ const CheckIn = ({ history }) => {
     state.image = image;
     state.lokasi = address;
     state.jam = dateTime;
-
-    console.log('data', state);
     const config = {
       headers: {
         'Content-Type':

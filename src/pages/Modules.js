@@ -16,8 +16,6 @@ import { Link } from 'react-router-dom';
 import MobileMenu from 'section/MobileMenu';
 
 const Modules = () => {
-  const users = useSelector((state) => state.user);
-
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -37,22 +35,22 @@ const Modules = () => {
       opacity: 1,
     },
   };
-  useEffect(() => {}, [users]);
+
   return (
     <div className="relative">
       <MobileMenu />
 
-      <div className="relative">
-        <h2 className="text-apps-text font-semibold text-2xl">
+      <div className="relative lg:mt-12">
+        <h1 className="text-gray-700 lg:text-4xl text-2xl font-semibold">
           List of Modules
-        </h2>
+        </h1>
       </div>
       <motion.div
-        className="grid grid-cols-2 lg:grid-cols-3 gap-6 content-center mt-8 pb-12"
+        className="grid grid-cols-2 lg:grid-cols-3 gap-6 content-center mt-8 pb-12 px-6"
         variants={container}
         initial="hidden"
         animate="visible">
-        <motion.div variants={item}>
+        <motion.div variants={item} whileHover={{ scale: 1.05 }}>
           <Link
             to="/presensi"
             className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
@@ -62,7 +60,7 @@ const Modules = () => {
             </h4>
           </Link>
         </motion.div>
-        <motion.div variants={item}>
+        <motion.div variants={item} whileHover={{ scale: 1.05 }}>
           <Link
             to="/overtime"
             className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
@@ -72,7 +70,7 @@ const Modules = () => {
             </h4>
           </Link>
         </motion.div>
-        <motion.div variants={item}>
+        <motion.div variants={item} whileHover={{ scale: 1.05 }}>
           <Link
             to="/inforekan"
             className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
@@ -84,6 +82,7 @@ const Modules = () => {
         </motion.div>
         <motion.div
           variants={item}
+          whileHover={{ scale: 1.05 }}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <LightningBoltIcon className="p-2 h-16 w-16 text-apps-yellow rounded-lg bg-apps-yellow bg-opacity-10 lg:h-24 lg:w-24" />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
@@ -92,6 +91,7 @@ const Modules = () => {
         </motion.div>
         <motion.div
           variants={item}
+          whileHover={{ scale: 1.05 }}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <CashIcon className="p-2 h-16 w-16 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10  lg:h-24 lg:w-24" />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
@@ -100,6 +100,7 @@ const Modules = () => {
         </motion.div>
         <motion.div
           variants={item}
+          whileHover={{ scale: 1.05 }}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <PhoneMissedCallIcon className="p-2 h-16 w-16 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 lg:h-24 lg:w-24" />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
@@ -108,6 +109,7 @@ const Modules = () => {
         </motion.div>
         <motion.div
           variants={item}
+          whileHover={{ scale: 1.05 }}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 lg:h-24 lg:w-24 " />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
@@ -116,6 +118,7 @@ const Modules = () => {
         </motion.div>
         <motion.div
           variants={item}
+          whileHover={{ scale: 1.05 }}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <KeyIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24 " />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
@@ -124,6 +127,7 @@ const Modules = () => {
         </motion.div>
         <motion.div
           variants={item}
+          whileHover={{ scale: 1.05 }}
           className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
           <IdentificationIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24" />
           <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
