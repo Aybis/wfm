@@ -48,7 +48,7 @@ export default function Menu() {
           <div className="flex flex-col items-center gap-2 justify-center p-2  w-1/5">
             <img
               className="h-6 w-6"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+              src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
               alt="logo"
             />
             <h1 className="text-gray-800 font-bold uppercase tracking-wider text-lg">
@@ -61,26 +61,26 @@ export default function Menu() {
             <NavLink
               to="/"
               exact={true}
-              className=" py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-indigo-600 transition-all duration-300 ease-in-out"
-              activeClassName="text-indigo-600 font-semibold ">
+              className=" py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary transition-all duration-300 ease-in-out"
+              activeClassName="text-apps-primary font-semibold tracking-wide ">
               Home
             </NavLink>
             <NavLink
               to="/modules"
-              className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-indigo-600 transition-all duration-300 ease-in-out"
-              activeClassName="text-indigo-600 font-semibold">
+              className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary transition-all duration-300 ease-in-out"
+              activeClassName="text-apps-primary font-semibold tracking-wide">
               Modules
             </NavLink>
             <NavLink
               to="/approval"
-              className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-indigo-600 transition-all duration-300 ease-in-out"
-              activeClassName="text-indigo-600 font-semibold">
+              className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary transition-all duration-300 ease-in-out"
+              activeClassName="text-apps-primary font-semibold tracking-wide">
               Approval
             </NavLink>
             <NavLink
               to="/dashboard"
-              className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-indigo-600  transition-all duration-300 ease-in-out"
-              activeClassName="text-indigo-600 font-semibold">
+              className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary  transition-all duration-300 ease-in-out"
+              activeClassName="text-apps-primary font-semibold tracking-wide">
               Dashboard
             </NavLink>
           </div>

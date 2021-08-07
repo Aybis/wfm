@@ -39,10 +39,12 @@ export default function Dashboard({ history }) {
   ];
 
   return (
-    <div className="relative">
+    <div className="relative lg:mt-12">
       <MobileMenu />
       <div className="relative">
-        <h2 className="text-apps-text font-semibold text-2xl">Dashboard</h2>
+        <h2 className="text-gray-700 font-semibold text-2xl lg:text-4xl">
+          Dashboard
+        </h2>
       </div>
       <FilterDate />
 

@@ -69,7 +69,7 @@ function Avatar({ user, logOut }) {
               />
             ) : (
               <img
-                src={`https://ui-avatars.com/api/?name=${user.name}&background=3D28DE&color=fff`}
+                src={`https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`}
                 alt="avatar"
                 loading="lazy"
                 height={10}

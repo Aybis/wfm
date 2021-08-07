@@ -10,8 +10,7 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import MobileMenu from 'section/MobileMenu';
 

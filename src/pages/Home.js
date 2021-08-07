@@ -1,11 +1,11 @@
 import LoadingCircle from 'components/atoms/LoadingCircle';
 import Modal from 'components/atoms/Modal';
+import CardCeoMessages from 'components/molecules/CardCeoMessages';
 import CardDay from 'components/molecules/CardDay';
 import CardDayOffDesktop from 'components/molecules/CardDayOffDesktop';
 import CardHeadingDesktop from 'components/molecules/CardHeadingDesktop';
-import CardMessages from 'components/molecules/CardMessages';
 import CardPresence from 'components/molecules/CardPresence';
-import CardTesting from 'components/molecules/CardTesting';
+import CardSelebToday from 'components/molecules/CardSelebToday';
 import CardUnit from 'components/molecules/CardUnit';
 import Carousel from 'components/molecules/Carousel';
 import { motion } from 'framer-motion';
@@ -108,86 +108,39 @@ const Home = () => {
       </Modal>
 
       {/* Code Block Asynchrounous Data Absensi Today  */}
-      {dataPersonal ? (
-        <div
-          className={`${
-            isDesktop ? 'my-24 ' : 'my-0'
-          } relative transition-all duration-300 ease-in-out`}>
-          <CardCheckInStatus absensi={dataPersonal} />
-          <div className="mt-8 relative">
-            <motion.div
-              variants={variants}
-              initial="hidden"
-              animate="visible"
-              className="mt-2">
-              {dataPersonal && isMobile && (
-                <CardDay
-                  type={dataPersonal.kehadiran}
-                  locIn={dataPersonal.detail_absensi[0].lokasi}
-                  timeIn={dataPersonal.detail_absensi[0].jam}
-                  locOut={
-                    dataPersonal.detail_absensi[1]
-                      ? dataPersonal.detail_absensi[1].lokasi
-                      : 'On Duty'
-                  }
-                  timeOut={
-                    dataPersonal.detail_absensi[1]
-                      ? dataPersonal.detail_absensi[1].jam
-                      : 'On Duty'
-                  }
-                />
-              )}
-            </motion.div>
-          </div>
+      <CardCheckInStatus absensi={dataPersonal} />
+
+      {dataPersonal && (
+        <div className="mt-8 relative">
+          <motion.div
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            className="mt-2">
+            {dataPersonal && isMobile && (
+              <CardDay
+                type={dataPersonal.kehadiran}
+                locIn={dataPersonal.detail_absensi[0].lokasi}
+                timeIn={dataPersonal.detail_absensi[0].jam}
+                locOut={
+                  dataPersonal.detail_absensi[1]
+                    ? dataPersonal.detail_absensi[1].lokasi
+                    : null
+                }
+                timeOut={
+                  dataPersonal.detail_absensi[1]
+                    ? dataPersonal.detail_absensi[1].jam
+                    : null
+                }
+              />
+            )}
+          </motion.div>
         </div>
-      ) : (
-        <LoadingCircle />
       )}
       {/* End Code Block Asynchrounous Data Absensi Today  */}
 
-      {/* Start Card Selebs  */}
-      <div className={`${isDesktop ? ' mt-20 pb-6' : 'mt-8 '} relative`}>
-        <CardHeadingDesktop
-          heading="Our Selebs Today"
-          description="List Pegawai Telat Melakukan Absensi"
-        />
-        <div
-          className={`flex overflow-auto ${
-            isMobile ? 'hidden-scroll -my-8' : '-m-8'
-          }`}>
-          <ul className="flex items-center w-full p-8">
-            <CardTesting />
-            <CardTesting />
-            <CardTesting />
-            <CardTesting />
-            <CardTesting />
-            <CardTesting />
-            <CardTesting />
-            <CardTesting />
-          </ul>
-        </div>
-      </div>
-      {/* End Card Selebs  */}
-
-      {/* Start CEO Messages  */}
-      <div className={`${isDesktop ? ' mt-24 pb-6' : 'mt-8 '} relative`}>
-        <CardHeadingDesktop
-          heading="CEO Messages"
-          description="Motivation From Our CEO"
-        />
-        <div
-          className={`flex overflow-auto ${
-            isMobile ? 'hidden-scroll -my-8' : '-m-8'
-          }`}>
-          <ul className="flex items-center w-full p-8">
-            <CardMessages />
-            <CardMessages />
-            <CardMessages />
-            <CardMessages />
-          </ul>
-        </div>
-      </div>
-      {/* End Card CEO Messages  */}
+      <CardCeoMessages />
+      <CardSelebToday />
 
       {/* Start Section Units  */}
       <div
@@ -210,7 +163,7 @@ const Home = () => {
       </div>
       {/* End Section Units  */}
 
-      {/* Start Section Units  */}
+      {/* Start Section Holidays  */}
       <div className={`${isDesktop ? ' mt-24' : 'mt-8 '} relative`}>
         <CardHeadingDesktop
           heading="Day Off"
@@ -231,7 +184,7 @@ const Home = () => {
           <LoadingCircle />
         )}
       </div>
-      {/* End Section Units  */}
+      {/* End Section Holidays  */}
     </div>
   ) : (
     <div className="flex justify-center items-center h-screen bg-white">

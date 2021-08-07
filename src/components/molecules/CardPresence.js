@@ -30,13 +30,16 @@ export default function CardPresence({
     <motion.div variants={item}>
       {isMobile ? (
         <div
-          className={`flex flex-col gap-2 py-4 px-6 rounded-lg mt-4 items-center bg-white transition-all duration-300 ease-in-out lg:hidden`}>
+          className={`flex flex-col gap-2 py-4 px-6 rounded-lg mt-4 items-center bg-white transition-all duration-300 ease-in-out lg:hidden ${
+            status === 'out' &&
+            'bg-gradient-to-br from-lightBlue-400 to-indigo-500'
+          }`}>
           {status !== 'out' ? (
             <h4 className="font-semibold text-gray-800">
               Let's go to {status === null ? 'work' : 'home'}
             </h4>
           ) : (
-            <h4 className="font-semibold text-gray-800">
+            <h4 className="font-semibold text-lg text-white tracking-wide">
               <span className="block text-center">
                 Anda Sudah Presensi Hari Ini.
               </span>
@@ -54,7 +57,10 @@ export default function CardPresence({
             </Link>
           )}
 
-          <h4 className=" text-gray-800 text-sm text-center">
+          <h4
+            className={`${
+              status === 'out' ? 'text-gray-100' : 'text-gray-800'
+            } text-center tracking-wide `}>
             Budayakan disiplin presensi dari sekarang!
           </h4>
         </div>

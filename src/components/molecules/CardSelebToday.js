@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import React, { createRef, useState } from 'react';
-import CardMessages from './CardMessages';
+import CardTesting from './CardTesting';
 
 const datas = [0, 1, 2, 3, 4, 5];
 
-export default function CardCeoMessages() {
+export default function CardSelebToday() {
   // We will start by storing the index of the current image in the state.
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -69,9 +69,9 @@ export default function CardCeoMessages() {
       style={{ top: '50%' }}>
       <span role="img" aria-label={`Arrow ${isLeft ? 'left' : 'right'}`}>
         {isLeft ? (
-          <ChevronLeftIcon className="text-apps-primary h-8 w-8 lg:h-12 lg:w-12 p-1" />
+          <ChevronLeftIcon className="text-apps-pink h-8 w-8 lg:h-12 lg:w-12 p-1" />
         ) : (
-          <ChevronRightIcon className="text-apps-primary h-8 w-8 lg:h-12 lg:w-12 p-1" />
+          <ChevronRightIcon className="text-apps-pink h-8 w-8 lg:h-12 lg:w-12 p-1" />
         )}
       </span>
     </button>
@@ -84,7 +84,7 @@ export default function CardCeoMessages() {
           <div className="w-full">
             <h1
               className={`text-2xl lg:text-4xl text-gray-700 font-semibold mb-2 `}>
-              CEO Messages
+              Our Selebs Today
             </h1>
             <h2 className="text-gray-500 text-sm lg:text-lg">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -101,7 +101,7 @@ export default function CardCeoMessages() {
               key={i}
               ref={refs[i]}
               className="pr-6 transition-all transform hover:scale-105 motion-reduce:transform-non group duration-300 ease-in-out">
-              <CardMessages />
+              <CardTesting />
             </li>
           ))}
         </ul>

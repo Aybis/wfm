@@ -952,7 +952,7 @@ module.exports = {
       opacity: ['disabled'],
       animation: ['motion-reduce'],
       divideColor: ['group-hover'],
-      backgroundColor: ['group-focus'],
+      backgroundColor: ['group-focus', 'even', 'odd'],
     },
     fill: ['responsive'],
     filter: ['responsive'],

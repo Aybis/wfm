@@ -1,9 +1,8 @@
 import {
   CalendarIcon,
+  ChevronRightIcon,
   ClockIcon,
   UserIcon,
-  ChevronRightIcon,
-  DocumentTextIcon,
 } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
 import React from 'react';
@@ -16,11 +15,11 @@ export default function CardOvertimeApproval({
   hours,
   status,
 }) {
-  let classStatus = 'bg-apps-yellow text-apps-text';
+  let classStatus = 'bg-apps-yellow text-gray-700';
   let valueStatus = 'On Progress';
 
   if (status === 'progress') {
-    classStatus = 'bg-apps-yellow text-apps-text';
+    classStatus = 'bg-apps-yellow text-gray-700';
     valueStatus = 'On Progress';
   }
 
@@ -44,15 +43,12 @@ export default function CardOvertimeApproval({
 
   return (
     <motion.div variants={item}>
-      <DocumentTextIcon
-        className={`hidden lg:block lg:relative shadow-md text-white p-2 lg:h-10 lg:w-10 lg:rounded-full lg:ml-4 ${classStatus}`}
-      />
       <Link
         to="/details"
         aria-label="detail lembur"
-        className="group flex justify-between bg-white p-4 lg:px-6 rounded-lg lg:flex-col lg:max-h-full lg:-mt-4 hover:bg-apps-primary hover:shadow-lg transition-all duration-300 ease-in-out">
-        <div className="flex flex-col gap-3 lg:mt-3 w-3/5 lg:w-full">
-          <h1 className="text-sm group-hover:text-white lg:text-base font-medium text-apps-text capitalize">
+        className="group flex justify-between bg-white p-4 lg:px-6 rounded-lg lg:flex-col h-auto hover:bg-apps-primary hover:shadow-lg transition-all duration-300 ease-in-out">
+        <div className="flex flex-col gap-3 lg:mt-3 w-3/5 lg:w-full lg:h-32 lg:gap-4 lg:my-2">
+          <h1 className="text-sm group-hover:text-white lg:text-base font-medium text-gray-700 capitalize max-h-24">
             {title}
           </h1>
           <div className="flex flex-col gap-2 lg:gap-2">
@@ -87,7 +83,7 @@ export default function CardOvertimeApproval({
               Status
             </p>
             <h4
-              className={`p-1 capitalize rounded text-center text-xs ${classStatus} lg:text-sm tracking-wider font-medium`}>
+              className={`px-4 py-2 capitalize rounded text-center text-xs ${classStatus} lg:text-sm tracking-wider font-medium`}>
               {valueStatus}
             </h4>
           </div>
@@ -96,7 +92,7 @@ export default function CardOvertimeApproval({
               Position
             </p>
             <h4
-              className={`rounded text-center text-xs group-hover:text-white font-medium text-apps-text lg:text-sm`}>
+              className={`rounded text-center text-xs group-hover:text-white font-medium text-gray-700 lg:text-sm`}>
               Nia Ramadhani
             </h4>
           </div>

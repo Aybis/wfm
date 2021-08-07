@@ -131,10 +131,10 @@ const Approval = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative lg:mt-12">
       <MobileMenu />
       <div className="relative">
-        <h2 className="text-apps-text font-semibold text-2xl mt-8 lg:mt-0">
+        <h2 className="text-gray-700 font-semibold text-2xl lg:text-4xl mt-8 lg:mt-0">
           List Dokumen Approval
         </h2>
       </div>
@@ -167,7 +167,7 @@ const Approval = () => {
         variants={container}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-1 my-10 lg:grid-cols-4 gap-4 lg:gap-4 ">
+        className="grid grid-cols-1 my-10 lg:grid-cols-4 gap-4 lg:gap-6 ">
         {documents.map((item, index) => (
           <CardOvertimeApproval
             key={index}
