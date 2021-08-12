@@ -43,11 +43,12 @@ const CheckIn = ({ history }) => {
     user_id: null,
     lokasi: '',
     long_lat: '',
-    image: '',
+    photo: '',
     kehadiran: '',
     kondisi: '',
     keterangan: '',
     jam: '',
+    is_shift: 1,
   });
 
   const inputPhoto = (event) => {
@@ -80,9 +81,10 @@ const CheckIn = ({ history }) => {
     event.preventDefault();
     state.long_lat = longLat;
     state.user_id = users.id;
-    state.image = image;
+    state.photo = image;
     state.lokasi = address;
     state.jam = dateTime;
+
     const config = {
       headers: {
         'Content-Type':
@@ -93,6 +95,8 @@ const CheckIn = ({ history }) => {
     absensi
       .checkIn(state, config)
       .then((res) => {
+        console.log(res);
+        // console.log(res.response.data);
         ToastHandler('success', res);
         setTimeout(() => {
           history.push('/');

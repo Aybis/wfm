@@ -34,7 +34,7 @@ export default function Input({
           'bg-white focus:outline-none border w-full p-3 rounded-md font-medium',
           error
             ? 'border-apps-red text-apps-red'
-            : 'focus:border-apps-blue border-apps-gray border-opacity-40 text-apps-text',
+            : 'focus:border-apps-blue border-apps-gray border-opacity-40 text-gray-800',
           inputClassName,
         ].join(' ')}
         value={value}

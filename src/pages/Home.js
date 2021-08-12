@@ -81,12 +81,24 @@ const Home = () => {
       });
   };
 
+  const getDataUserByUnit = () => {
+    absensi
+      .reportUserByUnit()
+      .then((res) => {
+        console.log('succes', res);
+      })
+      .catch((err) => {
+        console.log('err', err);
+      });
+  };
+
   useEffect(() => {
     // setshowModal(true);
     const timeOut = setTimeout(() => {
       getDataDailyPersonal();
       getDataAllUnit();
       getDataHoliday();
+      getDataUserByUnit();
     }, 500);
     return () => {
       clearTimeout(timeOut);
@@ -145,13 +157,18 @@ const Home = () => {
       {/* Start Section Units  */}
       <div
         className={`${
-          isDesktop ? ' mt-24 border-b border-gray-200' : 'mt-8 '
-        } relative`}>
+          isDesktop ? ' mt-24' : 'mt-8 '
+        } relative border-b border-gray-200`}>
         <CardHeadingDesktop
           heading="Our Units"
           description="List Unit on This Company"
         />
-        <div className="overflow-x-auto hidden-scroll flex lg:grid lg:grid-cols-4 gap-3">
+        <div
+          className={` ${
+            isDesktop
+              ? 'grid grid-cols-2 lg:grid-cols-3 gap-3 xl:grid-cols-4'
+              : 'flex overflow-x-auto hidden-scroll py-2 -mt-6'
+          }`}>
           {dataUnit ? (
             dataUnit.map((data, index) => (
               <CardUnit key={index} name={data.name} />

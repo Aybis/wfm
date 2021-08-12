@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
 import React, { createRef, useState } from 'react';
+import { isDesktop } from 'react-device-detect';
 import CardMessages from './CardMessages';
 
 const datas = [0, 1, 2, 3, 4, 5];
@@ -95,7 +96,12 @@ export default function CardCeoMessages() {
             {sliderControl()}
           </div>
         </div>
-        <ul className="carousel py-5 -mt-4">
+        <ul
+          className={
+            isDesktop
+              ? 'carousel py-5 -mt-4'
+              : 'flex overflow-x-auto hidden-scroll pl-4 -mt-4 py-5'
+          }>
           {datas.map((img, i) => (
             <li
               key={i}

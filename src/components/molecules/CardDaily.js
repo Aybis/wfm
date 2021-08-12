@@ -49,17 +49,17 @@ const CardDaily = ({ kehadiran, hari, url = '/' }) => {
     <Link
       to={url}
       className={`flex items-start gap-8 flex-col justify-between flex-none bg-white rounded-lg p-4 ${
-        isDesktop ? 'w-full' : 'w-1/3'
+        isDesktop ? 'w-full' : 'w-52'
       }`}>
       <div className="flex justify-between  w-full">
         <ShowIconDaily />
         <MoreVertical className="h-5 w-5 text-apps-gray -mr-2" />
       </div>
       <div className="flex flex-col items-start justify-center ">
-        <h2 className="font-semibold text-apps-text tracking-wide text-sm">
+        <h2 className="font-semibold text-gray-700 tracking-wide">
           {nameOfKehadiran}
         </h2>
-        <h2 className="font-medium text-sm text-gray-400">{hari}</h2>
+        <h2 className="font-medium text-gray-400 text-sm">{hari}</h2>
       </div>
     </Link>
   );

@@ -36,7 +36,7 @@ const CheckOut = ({ history }) => {
   const [state] = useForm({
     lokasi: '',
     long_lat: '',
-    image: '',
+    photo: '',
     jam: dateTime,
     absensi_id: id,
   });
@@ -54,7 +54,7 @@ const CheckOut = ({ history }) => {
   const createImage = (file) => {
     let reader = new FileReader();
     reader.onload = (e) => {
-      state.image = e.target.result;
+      state.photo = e.target.result;
     };
     reader.readAsDataURL(file);
   };

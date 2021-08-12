@@ -18,15 +18,25 @@ import { useSelector } from 'react-redux';
 import absensi from '../constants/api/absensi';
 
 export default function Presensi({ history }) {
-  const [dataPersonal, setdataPersonal] = useState(false);
-  const [dataMonthly, setdataMonthly] = useState(null);
   const users = useSelector((state) => state.users);
+  const [dataPersonal, setdataPersonal] = useState(false);
+  const [dataMonthly, setdataMonthly] = useState([]);
+  const [dataPresence, setdataPresence] = useState([]);
+  const [dataWork, setdataWork] = useState([]);
   const [isShow, setisShow] = useState(false);
   const timeStamp = new Date();
   const [{ bulan, tahun }, setState] = useForm({
     bulan: timeStamp.getMonth() + 1,
     tahun: timeStamp.getFullYear(),
   });
+
+  const handlerOnChange = (type, value) => {
+    let month = type === 'bulan' ? value : bulan;
+    let year = type === 'tahun' ? value : tahun;
+    getDataReportPersonal(month, year);
+    getDashboardReportPersonal(month, year);
+  };
+
   const monthNames = [
     'January',
     'February',
@@ -40,48 +50,6 @@ export default function Presensi({ history }) {
     'October',
     'November',
     'December',
-  ];
-
-  const reportMe = [
-    {
-      status: 'hadir',
-      hari: 13,
-    },
-    {
-      status: 'telat',
-      hari: 13,
-    },
-    {
-      status: 'izin',
-      hari: 13,
-    },
-    {
-      status: 'sakit',
-      hari: 13,
-    },
-    {
-      status: 'sppd',
-      hari: 13,
-    },
-    {
-      status: 'cuti',
-      hari: 13,
-    },
-  ];
-
-  const workMe = [
-    {
-      status: 'WFH',
-      hari: 15,
-    },
-    {
-      status: 'WFO',
-      hari: 4,
-    },
-    {
-      status: 'Satelit',
-      hari: 1,
-    },
   ];
 
   const CardCheckInStatus = ({ absensi }) => {
@@ -122,11 +90,76 @@ export default function Presensi({ history }) {
       });
   };
 
-  const getDataReportPersonal = () => {
+  const getDashboardReportPersonal = (month, year) => {
     absensi
-      .reportPersonal(users?.id)
+      .dashboardReportPersonal({
+        params: {
+          user_id: users?.id,
+          month: month,
+          year: year,
+        },
+      })
       .then((res) => {
-        setdataMonthly(res.length > 0 ? res : null);
+        let dataPresence = [
+          {
+            name: 'hadir',
+            value: res.Hadir,
+          },
+          {
+            name: 'telat',
+            value: res.Telat,
+          },
+          {
+            name: 'izin',
+            value: res.Izin,
+          },
+          {
+            name: 'sakit',
+            value: res.Sakit,
+          },
+          {
+            name: 'cuti',
+            value: res.Cuti,
+          },
+          {
+            name: 'sppd',
+            value: res.SPPD,
+          },
+        ];
+
+        let dataWork = [
+          {
+            name: 'WFO',
+            value: res.WFO,
+          },
+          {
+            name: 'WFh',
+            value: res.WFH,
+          },
+          {
+            name: 'Satelit',
+            value: res.Satelit,
+          },
+        ];
+        setdataPresence(dataPresence);
+        setdataWork(dataWork);
+      })
+      .catch((err) => {
+        ToastHandler('err', err.response);
+      });
+  };
+
+  const getDataReportPersonal = (month, year) => {
+    absensi
+      .reportPersonal({
+        params: {
+          user_id: users?.id,
+          month: month,
+          year: year,
+        },
+      })
+      .then((res) => {
+        setdataMonthly(res ? res.data : null);
       })
       .catch((err) => {
         ToastHandler('err', err.response);
@@ -136,7 +169,8 @@ export default function Presensi({ history }) {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       getDataDailyPersonal();
-      getDataReportPersonal();
+      getDataReportPersonal(bulan, tahun);
+      getDashboardReportPersonal(bulan, tahun);
       setisShow(true);
     }, 500);
     return () => {
@@ -164,7 +198,8 @@ export default function Presensi({ history }) {
           fallbackText={monthNames[bulan]}
           name="bulan"
           value={bulan}
-          onClick={setState}>
+          onClick={setState}
+          handlerChange={handlerOnChange}>
           {monthNames.map((item, index) => (
             <option key={index} value={index + 1}>
               {item}
@@ -175,7 +210,8 @@ export default function Presensi({ history }) {
           fallbackText={`${tahun}`}
           name="tahun"
           value={tahun}
-          onClick={setState}>
+          onClick={setState}
+          handlerChange={handlerOnChange}>
           <option value={timeStamp.getFullYear()}>
             {timeStamp.getFullYear()}
           </option>
@@ -188,51 +224,68 @@ export default function Presensi({ history }) {
       <div className="flex flex-col mt-4">
         <Heading heading="Report Presence" />
         <div
-          className={`overflow-x-auto hidden-scroll gap-4 mt-4 transition-all duration-300 ease-in-out ${
-            isDesktop ? 'grid grid-cols-6' : 'flex '
+          className={`overflow-x-auto hidden-scroll gap-4 mt-4 py-4 px-2 transition-all duration-300 ease-in-out ${
+            isDesktop
+              ? 'grid grid-cols-3 gap-6 border-b border-gray-200 pb-8'
+              : 'flex '
           } `}>
-          {reportMe.map((item, index) => (
-            <CardReportKehadiran
-              key={index}
-              hari={item.hari}
-              name={item.status}
-            />
-          ))}
+          {dataPresence ? (
+            dataPresence.map((item, index) => (
+              <CardReportKehadiran
+                key={index}
+                hari={item.value}
+                name={item.name}
+              />
+            ))
+          ) : (
+            <LoadingCircle />
+          )}
         </div>
       </div>
       {/* End Card Report Presensi */}
 
       {/* Start Card Report Working  */}
       <div className="flex flex-col mt-8">
-        <Heading heading="Report Wokring" />
-        <div className="overflow-x-auto hidden-scroll flex gap-4 mt-4 lg:grid lg:grid-cols-3 transition-all duration-300 ease-in-out">
-          {workMe.map((item, index) => (
-            <CardReportWork key={index} day={item.hari} name={item.status} />
-          ))}
+        <Heading heading="Report Working" />
+        <div
+          className={`overflow-x-auto hidden-scroll gap-4 mt-4 py-4 px-2 transition-all duration-300 ease-in-out ${
+            isDesktop
+              ? 'grid grid-cols-3 gap-6 border-b border-gray-200 pb-8'
+              : 'flex '
+          } `}>
+          {dataWork ? (
+            dataWork.map((item) => (
+              <CardReportWork
+                key={Math.random()}
+                status="Hari"
+                day={item.value}
+                name={item.name}
+              />
+            ))
+          ) : (
+            <LoadingCircle />
+          )}
         </div>
       </div>
       {/* End Card Report Working */}
 
       {/* Start Card Report Data Detail */}
       <div className="flex flex-col mt-8">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl lg:text-3xl text-gray-700 font-semibold">
-            List Presence
-          </h1>
-        </div>
-        <div className="grid grid-cols-1 overflow-auto hidden-scroll h-full my-4 gap-2 py-4 lg:bg-white rounded-lg">
-          <div className="hidden lg:flex justify-between px-4">
+        <Heading heading="List Presence" />
+
+        <div className="grid grid-cols-1 overflow-auto hidden-scroll h-full my-4 gap-2 py-4 rounded-lg">
+          <div className="hidden lg:flex justify-between px-4 mb-8">
             <div className="inline-flex items-center justify-center">
               <SearchIcon className="h-6 w-6 text-gray-400 z-10 ml-2" />
               <input
                 type="text"
-                className="pl-10 pr-4 py-3 rounded-md bg-gray-100 -ml-8"
+                className="pl-10 pr-4 py-3 rounded-md bg-white -ml-8"
                 placeholder="Search"
               />
             </div>
             <Download onClick={() => alert('Download excel')} />
           </div>
-          {dataMonthly ? (
+          {dataMonthly.length > 0 ? (
             <>
               {isMobile &&
                 dataMonthly.map((data, index) => (
@@ -273,7 +326,7 @@ export default function Presensi({ history }) {
                 ))}
             </>
           ) : (
-            'data kosong'
+            <p>Data Kosong</p>
           )}
         </div>
       </div>

@@ -37,18 +37,18 @@ export default function TableWithoutHeader({
   };
 
   const getDateFullOnly = (date) => {
-    return date.toLocaleDateString('en-En', options);
+    return date.toLocaleDateString('id-ID', options);
   };
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02, shadow: 'shadow-md' }}
-      className="mx-4 my-2 transition-all duration-300 ease-in-out flex border-2 border-gray-200 rounded-lg divide-x-2 divide-opacity-20 justify-between p-4">
+      whileHover={{ scale: 1.02 }}
+      className="bg-white mx-4 hover:shadow-lg my-2 transition-all duration-300 ease-in-out flex border-2 border-gray-100 rounded-lg divide-x-2 divide-opacity-20 justify-between p-4">
       {/* <!--         presensi  --> */}
-      <div className="flex justify-between gap-4 w-3/5 pr-4">
+      <div className="flex justify-between gap-4 w-4/5 pr-4">
         <div className="flex gap-4 w-2/5">
           <div className="flex flex-col gap-2">
-            <h4 className="font-bold text-gray-800 group-hover:text-white">
+            <h4 className="font-bold text-gray-800 group-hover:text-white text-lg">
               HOME
             </h4>
             <h6 className=" text-sm font-medium text-gray-400 group-hover:text-gray-100">
@@ -66,7 +66,7 @@ export default function TableWithoutHeader({
           </div>
         </div>
 
-        <div className="flex items-center justify-start text-indigo-600 group-hover:text-white w-12">
+        <div className="flex items-center justify-start text-apps-primary group-hover:text-white w-12">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-8 w-8"
@@ -108,7 +108,7 @@ export default function TableWithoutHeader({
             className={`${
               timeOut ? '' : 'flex-1'
             } flex flex-col gap-2 text-right`}>
-            <h4 className="font-bold text-gray-800 group-hover:text-white">
+            <h4 className="font-bold text-gray-800 group-hover:text-white text-lg">
               {kehadiran}
             </h4>
             <h6 className=" text-sm font-medium text-gray-400 group-hover:text-gray-100">
@@ -117,68 +117,31 @@ export default function TableWithoutHeader({
           </div>
         </div>
       </div>
-      {/* <!--         time work --> */}
-      <div className="grid grid-cols-2 xl:grid-cols-4 content-center place-items-center gap-4 w-1/5 mx-4 pl-4 ">
-        <div className="flex flex-col text-center">
-          <h5 className="font-semibold text-gray-800 group-hover:text-white ">
-            07:14
-          </h5>
-          <h5 className="text-sm font-semibold text-indigo-400 group-hover:text-gray-300">
-            IN
-          </h5>
-        </div>
-        <div className="flex flex-col text-center">
-          <h5 className="font-semibold text-gray-800 group-hover:text-white ">
-            20:24
-          </h5>
-          <h5 className="text-sm font-semibold text-indigo-400 group-hover:text-gray-300">
-            OUT
-          </h5>
-        </div>
-        <div className="flex flex-col text-center">
-          <h5 className="font-semibold text-gray-800 group-hover:text-white ">
-            8:00
-          </h5>
-          <h5 className="text-sm font-semibold text-indigo-400 group-hover:text-gray-300">
-            WRK
-          </h5>
-        </div>
-        <div className="flex flex-col text-center">
-          <h5 className="font-semibold text-gray-800 group-hover:text-white">
-            3:24
-          </h5>
-          <h5 className="text-sm font-semibold text-indigo-400 group-hover:text-gray-300">
-            OVT
-          </h5>
-        </div>
-      </div>
 
       {/* <!--         status  --> */}
-      <div className="grid grid-cols-1  2xl:grid-cols-2 gap-4 w-1/5 pl-4">
+      <div className="grid grid-cols-2 gap-4 w-1/5 pl-2">
         <div className="flex items-center gap-2">
-          <UserIcon className="h-6 w-6 text-indigo-400 group-hover:text-gray-300" />
-
-          <h4 className="text-gray-800 group-hover:text-white font-semibold">
+          <UserIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
+          <h4 className="text-gray-600 group-hover:text-white font-medium">
             {kondisi}
           </h4>
         </div>
         <div className="flex items-center gap-2">
-          <LoginIcon className="h-6 w-6 text-indigo-400 group-hover:text-gray-300" />
-
-          <h4 className="text-gray-800 group-hover:text-white font-semibold">
+          <LoginIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
+          <h4 className="text-gray-600 group-hover:text-white font-medium">
+            {getTimeOnly(dateIn)}
+          </h4>
+        </div>
+        <div className="flex items-center gap-2">
+          <ClockIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
+          <h4 className="text-gray-600 group-hover:text-white font-medium">
             On Time
           </h4>
         </div>
         <div className="flex items-center gap-2">
-          <ClockIcon className="h-6 w-6 text-indigo-400 group-hover:text-gray-300" />
-          <h4 className="text-gray-800 group-hover:text-white font-semibold">
-            13h 24m
-          </h4>
-        </div>
-        <div className="flex items-center gap-2">
-          <LogoutIcon className="h-6 w-6 text-indigo-400 group-hover:text-gray-300" />
-          <h4 className="text-gray-800 group-hover:text-white font-semibold">
-            Overtime
+          <LogoutIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
+          <h4 className="text-gray-600 group-hover:text-white font-medium">
+            {timeOut ? getTimeOnly(dateOut) : 'On Duty'}
           </h4>
         </div>
       </div>

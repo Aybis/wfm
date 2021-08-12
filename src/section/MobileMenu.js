@@ -5,14 +5,12 @@ import {
   ViewGridIcon,
 } from '@heroicons/react/outline';
 import React from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { isMobile } from 'react-device-detect';
 import { NavLink } from 'react-router-dom';
 
 export default function MobileMenu() {
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px' });
-
   return (
-    isTabletOrMobile && (
+    isMobile && (
       <div className="fixed z-30 bottom-8 inset-x-0 ">
         <div className="bg-white shadow-sm flex justify-between items-center mx-4 mt-4 mb-0 p-2 rounded-2xl ">
           <NavLink

@@ -12,6 +12,7 @@ export default function Select({
   className,
   children,
   onClick,
+  handlerChange,
   fallbackText,
   border = true,
 }) {
@@ -39,18 +40,18 @@ export default function Select({
   const selected = items.find((item) => item.props.value === value);
 
   return (
-    <div className="flex flex-col mb-2">
+    <div className="flex flex-col mb-2 z-20">
       {labelName && (
         <label
           htmlFor=""
-          className="show text-sm mb-2 text-apps-text font-semibold">
+          className="show text-sm mb-2 text-gray-800 font-semibold">
           {labelName}
         </label>
       )}
       <div className="relative" ref={selectWrapper} onClick={toggleSelect}>
         <div
           className={[
-            'flex justify-between cursor-pointer bg-white focus:outline-none transition-all duration-200 border p-3 pr-4 w-full rounded text-apps-text',
+            'flex justify-between cursor-pointer bg-white focus:outline-none transition-all duration-200 border p-3 pr-4 w-full rounded text-gray-800',
             toggle
               ? 'border-apps-primary'
               : `${
@@ -60,14 +61,14 @@ export default function Select({
                 }`,
             className,
           ].join(' ')}>
-          <span className={value === '' ? 'text-gray-600' : 'text-apps-text'}>
+          <span className={value === '' ? 'text-gray-600' : 'text-gray-800'}>
             {selected?.props.children ?? fallbackText}
           </span>
           <div className="transition-all duration-200 border-apps-gray border-opacity-40 border-b-2 border-r-2 transform rotate-45 translate-y-1 w-2 h-2 "></div>
         </div>
         <div
           className={[
-            'absolute left-0 bg-white border border-apps-gray border-opacity-40 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto hidden-scroll shadow-lg',
+            'absolute left-0 bg-white border border-apps-gray border-opacity-40 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg',
             toggle ? '' : 'hidden',
           ].join(' ')}>
           {items.map((item, index) => {
@@ -76,12 +77,13 @@ export default function Select({
                 key={index}
                 className={`flex justify-between cursor-pointer px-4 py-2 bg-white transition-all duration-200 hover:bg-apps-primary mx-1 hover:text-white ${
                   selected.props.value === item.props.value
-                    ? 'text-apps-text font-medium'
-                    : 'text-apps-text text-opacity-40'
+                    ? 'text-gray-800 font-medium'
+                    : 'text-gray-800 text-opacity-40'
                 }`}
-                onClick={() =>
-                  onClick({ target: { name: name, value: item.props.value } })
-                }>
+                onClick={() => {
+                  onClick({ target: { name: name, value: item.props.value } });
+                  handlerChange(name, item.props.value);
+                }}>
                 {item.props.children}{' '}
                 {selected.props.value === item.props.value && (
                   <CheckIcon className="text-apps-primary h-5 w-5" />
