@@ -10,6 +10,7 @@ import absensi from 'constants/api/absensi';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import { useParams } from 'react-router-dom';
 
 const CheckOut = ({ history }) => {
@@ -71,16 +72,21 @@ const CheckOut = ({ history }) => {
   const submitFunction = (event) => {
     event.preventDefault();
 
+    console.log(state);
     absensi
       .checkOut(state, id)
       .then((res) => {
-        ToastHandler('success', res);
-        setTimeout(() => {
-          history.push('/');
-        }, 300);
+        if (res.status === 200) {
+          ToastHandler('success', res.data);
+        }
+        console.log(res);
+        // setTimeout(() => {
+        //   history.push('/');
+        // }, 300);
       })
       .catch((err) => {
-        ToastHandler('error', err.response.data ? err.response.data : err);
+        console.log(err.response);
+        ToastHandler('error', err?.response?.data);
       });
   };
 
@@ -99,18 +105,8 @@ const CheckOut = ({ history }) => {
     return null;
   }
 
-  return (
+  return isMobile ? (
     <>
-      <div className="hiddden container lg:flex flex-col gap-4 justify-center items-center h-screen transition-all duration-300 ease-in-out">
-        <h1 className="text-4xl font-semibold -mt-8">
-          Maaf halaman ini hanya dapat diakses melalui smartphone dan tablet
-        </h1>
-        <button
-          className="text-xl underline text-blue-600"
-          onClick={history.goBack}>
-          Kembali
-        </button>
-      </div>
       <div
         className={`${
           popUp ? 'pt-20 lg:hidden' : 'pt-0'
@@ -194,6 +190,17 @@ const CheckOut = ({ history }) => {
         </div>
       </div>
     </>
+  ) : (
+    <div className="hiddden container lg:flex flex-col gap-4 justify-center items-center h-screen transition-all duration-300 ease-in-out">
+      <h1 className="text-4xl font-semibold -mt-8">
+        Maaf halaman ini hanya dapat diakses melalui smartphone dan tablet
+      </h1>
+      <button
+        className="text-xl underline text-blue-600"
+        onClick={history.goBack}>
+        Kembali
+      </button>
+    </div>
   );
 };
 

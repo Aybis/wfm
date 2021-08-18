@@ -1,5 +1,6 @@
 import {
   IS_CHECK_IN,
+  IS_CHECK_OUT,
   STATUS_PRESENCE,
   MESSAGE_PRESENCE,
 } from 'constants/types/presence';
@@ -27,6 +28,13 @@ export default function (state = initialState, action) {
         data: action.payload ?? {},
         dataIn: action.payload?.detail_absensi?.[0] ?? {},
         dataOut: action.payload?.detail_absensi?.[1] ?? {},
+        status: 'ok',
+      };
+
+    case IS_CHECK_OUT:
+      return {
+        ...state,
+        dataOut: action.payload ?? {},
         status: 'ok',
       };
 

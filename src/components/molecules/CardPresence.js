@@ -60,7 +60,6 @@ export default function CardPresence() {
   };
 
   useEffect(() => {
-    console.log(presence);
     const timeOut = setTimeout(() => {
       getDataPresenceToday();
     }, 300);
@@ -72,7 +71,7 @@ export default function CardPresence() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users]);
 
-  return users && Object.entries(presence.data).length > 0 ? (
+  return users && presence.status === 'ok' ? (
     isMobile ? (
       <motion.div
         variants={item}

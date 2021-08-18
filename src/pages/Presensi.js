@@ -5,6 +5,7 @@ import Select from 'components/atoms/Select';
 import TableWithoutHeader from 'components/atoms/TableWithoutHeader';
 import CardListDay from 'components/molecules/CardListDay';
 import CardMapCheck from 'components/molecules/CardMapCheck';
+import CardPresence from 'components/molecules/CardPresence';
 import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
 import CardReportWork from 'components/molecules/CardReportWork';
 import CardTitlePage from 'components/molecules/CardTitlePage';
@@ -24,6 +25,7 @@ import {
 
 export default function Presensi({ history }) {
   const users = useSelector((state) => state.users);
+  const presenceToday = useSelector((state) => state.presence);
   const dispatch = useDispatch();
   const PRESENCE = useSelector((state) => state.absensi);
   const timeStamp = new Date();
@@ -150,12 +152,16 @@ export default function Presensi({ history }) {
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [users, dispatch]);
+  }, [users, presenceToday, dispatch]);
 
   return (
     <div className="relative mt-4">
       <CardTitlePage goBack={history.goBack} title="presensi" />
-      <CardMapCheck />
+      {Object.entries(presenceToday.dataOut).length > 0 ? (
+        <CardPresence />
+      ) : (
+        <CardMapCheck />
+      )}
       {/* Start Filter Month And Year  */}
       <div className="grid grid-cols-2 mt-8 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
         <Select
