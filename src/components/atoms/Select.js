@@ -12,7 +12,7 @@ export default function Select({
   className,
   children,
   onClick,
-  handlerChange,
+  handlerChange = null,
   fallbackText,
   border = true,
 }) {
@@ -82,7 +82,7 @@ export default function Select({
                 }`}
                 onClick={() => {
                   onClick({ target: { name: name, value: item.props.value } });
-                  handlerChange(name, item.props.value);
+                  handlerChange && handlerChange(name, item.props.value);
                 }}>
                 {item.props.children}{' '}
                 {selected.props.value === item.props.value && (

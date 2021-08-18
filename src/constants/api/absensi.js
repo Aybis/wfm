@@ -9,9 +9,9 @@ export default {
   reportPersonal: (data) => axios.get(`absensi/report-personal`, data),
   dashboardReportPersonal: (data) =>
     axios.get(`absensi/dashbord-report-personal`, data),
-  reportUserByUnit: () => axios.get('absensi/report-user-by-unit'),
   weeklyPersonal: (user) =>
     axios.get(`absensi/weekly-personal?user_id=${user}`),
+  reportUserByUnit: () => axios.get('absensi/report-user-by-unit'),
   insertHoliday: (data) => axios.post('holiday', data),
   getHoliday: (page) => axios.get(`holiday`),
   deleteHoliday: (holiday) => axios.delete('holiday/', holiday),

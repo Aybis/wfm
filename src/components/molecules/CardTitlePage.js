@@ -5,11 +5,11 @@ import React from 'react';
 
 export default function CardTitlePage({ goBack, title }) {
   return (
-    <div className="flex justify-between items-center text-center py-2 ">
+    <div className="grid grid-cols-3 text-center py-2 ">
       <div className="flex">
         <Back className="h-16 w-16" link={goBack} />
       </div>
-      <div className="flex">
+      <div className="flex justify-center">
         <h1 className="text-2xl lg:text-4xl font-semibold text-gray-700 tracking-wide uppercase">
           {title}
         </h1>

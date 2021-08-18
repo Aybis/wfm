@@ -1,5 +1,5 @@
-export const IS_CHECK_IN = 'IS_CHECK_IN';
-export const IS_CHECK_OUT = 'IS_CHECK_OUT';
-export const FETCH_DATA_DAILY = 'IS_WORK';
-export const FETCH_DATA_MONTHLY = 'IS_WORK';
-export const FETCH_DATA_WEEKLY = 'FETCH_DATA_WEEKLY';
+export const FETCH_DATA_PRESENCE = 'FETCH_DATA_PRESENCE';
+export const FETCH_DATA_WORK = 'FETCH_DATA_WORK';
+export const FETCH_DATA = 'FETCH_DATA';
+export const STATUS_DATA = 'STATUS_DATA';
+export const MESSAGE_DATA = 'MESSAGE_DATA';

@@ -12,10 +12,12 @@ import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import absensi from '../constants/api/absensi';
+import { isCheckIn } from 'store/actions/presence';
 
 const CheckIn = ({ history }) => {
+  const dispatch = useDispatch();
   const [didMount, setDidMount] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
@@ -23,7 +25,7 @@ const CheckIn = ({ history }) => {
   const [address, setAddress] = useState(null);
   const [image, setImage] = useState(null);
   const users = useSelector((state) => state.users);
-
+  const presence = useSelector((state) => state.presence);
   const date = new Date();
 
   const dateTime =
@@ -84,26 +86,21 @@ const CheckIn = ({ history }) => {
     state.photo = image;
     state.lokasi = address;
     state.jam = dateTime;
-
-    const config = {
-      headers: {
-        'Content-Type':
-          ' multipart/form-data;boundary=----WebKitFormBoundaryyrV7KO0BoCBuDbTL',
-      },
-    };
+    console.log('data', state);
 
     absensi
-      .checkIn(state, config)
-      .then((res) => {
-        console.log(res);
-        // console.log(res.response.data);
-        ToastHandler('success', res);
+      .checkIn(state)
+      .then((response) => {
+        if (response.status === 201) {
+          dispatch(isCheckIn(response.data.data));
+        }
+        ToastHandler('success', response?.data?.message);
         setTimeout(() => {
           history.push('/');
         }, 300);
       })
       .catch((err) => {
-        ToastHandler('error', err.response.data);
+        ToastHandler('warning', err?.response?.data?.message);
       });
   };
 
@@ -116,7 +113,7 @@ const CheckIn = ({ history }) => {
       setDidMount(false);
       clearTimeout(timeOut);
     };
-  }, [users]);
+  }, [users, presence]);
 
   if (!didMount) {
     return null;

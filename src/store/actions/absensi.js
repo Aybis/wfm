@@ -1,31 +1,32 @@
 import {
-  IS_CHECK_IN,
-  IS_CHECK_OUT,
-  FETCH_DATA_DAILY,
-  FETCH_DATA_MONTHLY,
-  FETCH_DATA_WEEKLY,
+  FETCH_DATA_PRESENCE,
+  FETCH_DATA_WORK,
+  FETCH_DATA,
+  STATUS_DATA,
+  MESSAGE_DATA,
 } from 'constants/types/absensi';
 
-export const isCheckIn = (isCheck) => ({
-  type: IS_CHECK_IN,
-  payload: isCheck,
-});
-
-export const isCheckOut = (isCheck) => ({
-  type: IS_CHECK_OUT,
-  payload: isCheck,
-});
-
-export const fetchDataDaily = (data) => ({
-  type: FETCH_DATA_DAILY,
-  payload: data,
-});
-export const fetchDataWeekly = (data) => ({
-  type: FETCH_DATA_WEEKLY,
+export const dataPresence = (data) => ({
+  type: FETCH_DATA_PRESENCE,
   payload: data,
 });
 
-export const fetchDataMonthly = (data) => ({
-  type: FETCH_DATA_MONTHLY,
+export const dataWork = (data) => ({
+  type: FETCH_DATA_WORK,
+  payload: data,
+});
+
+export const getData = (data) => ({
+  type: FETCH_DATA,
+  payload: data,
+});
+
+export const statusData = (data) => ({
+  type: STATUS_DATA,
+  payload: data,
+});
+
+export const messageData = (data) => ({
+  type: MESSAGE_DATA,
   payload: data,
 });

@@ -12,18 +12,18 @@ import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MobileHeader from 'section/MobileHeader';
 import MobileMenu from 'section/MobileMenu';
 import absensi from '../constants/api/absensi';
 import apiUser from '../constants/api/users';
 
 const Home = () => {
-  const [dataPersonal, setdataPersonal] = useState(false);
   const [showModal, setshowModal] = useState(false);
   const [dataUnit, setdataUnit] = useState(false);
   const [dataHoliday, setdataHoliday] = useState(false);
   const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
 
   const variants = {
     hidden: { opacity: 1, scale: 0 },
@@ -41,7 +41,9 @@ const Home = () => {
     absensi
       .getHoliday()
       .then((res) => {
-        setdataHoliday(res.length > 0 ? res : false);
+        if (res.status === 200) {
+          setdataHoliday(res.data);
+        }
       })
       .catch((err) => {
         ToastHandler('err', err.message);
@@ -51,61 +53,27 @@ const Home = () => {
     apiUser
       .allUnit()
       .then((res) => {
-        setdataUnit(res.data);
+        if (res.status) {
+          setdataUnit(res.data);
+        }
       })
       .catch((err) => {
         ToastHandler('err', err.response);
-      });
-  };
-
-  const CardCheckInStatus = ({ absensi }) => {
-    if (!absensi) {
-      return <CardPresence link="/check-in" />;
-    } else {
-      if (absensi.detail_absensi[1]) {
-        return <CardPresence status="out" />;
-      } else if (absensi.detail_absensi[0]) {
-        return <CardPresence status="in" link={`/check-out/${absensi.id}`} />;
-      }
-    }
-  };
-
-  const getDataDailyPersonal = () => {
-    absensi
-      .dailyPersonal(users?.id)
-      .then((res) => {
-        setdataPersonal(res.user_id ? res : null);
-      })
-      .catch((err) => {
-        ToastHandler('err', err.response);
-      });
-  };
-
-  const getDataUserByUnit = () => {
-    absensi
-      .reportUserByUnit()
-      .then((res) => {
-        console.log('succes', res);
-      })
-      .catch((err) => {
-        console.log('err', err);
       });
   };
 
   useEffect(() => {
-    // setshowModal(true);
+    setshowModal(true);
     const timeOut = setTimeout(() => {
-      getDataDailyPersonal();
       getDataAllUnit();
       getDataHoliday();
-      getDataUserByUnit();
     }, 500);
     return () => {
       clearTimeout(timeOut);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [users]);
+  }, [users, dispatch]);
 
   return users ? (
     <div className="relative mb-12 lg:mb-0">
@@ -119,37 +87,19 @@ const Home = () => {
         <Carousel />
       </Modal>
 
-      {/* Code Block Asynchrounous Data Absensi Today  */}
-      <CardCheckInStatus absensi={dataPersonal} />
+      {/* Presensi Card */}
+      <div className="mt-8 mb-4 relative">
+        <motion.div
+          variants={variants}
+          initial="hidden"
+          animate="visible"
+          className="mt-2">
+          <CardPresence />
 
-      {dataPersonal && (
-        <div className="mt-8 relative">
-          <motion.div
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            className="mt-2">
-            {dataPersonal && isMobile && (
-              <CardDay
-                type={dataPersonal.kehadiran}
-                locIn={dataPersonal.detail_absensi[0].lokasi}
-                timeIn={dataPersonal.detail_absensi[0].jam}
-                locOut={
-                  dataPersonal.detail_absensi[1]
-                    ? dataPersonal.detail_absensi[1].lokasi
-                    : null
-                }
-                timeOut={
-                  dataPersonal.detail_absensi[1]
-                    ? dataPersonal.detail_absensi[1].jam
-                    : null
-                }
-              />
-            )}
-          </motion.div>
-        </div>
-      )}
-      {/* End Code Block Asynchrounous Data Absensi Today  */}
+          {isMobile && <CardDay />}
+        </motion.div>
+      </div>
+      {/* End Presensi Card */}
 
       <CardCeoMessages />
       <CardSelebToday />

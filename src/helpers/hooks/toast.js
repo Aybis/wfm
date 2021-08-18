@@ -1,28 +1,30 @@
-/** @format */
-
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ToastHandler(type, message, time = 2000) {
-  if (type === "success") {
+  if (type === 'success') {
     toast.success(message, {
-      position: "top-center",
+      className: 'bg-apps-primary font-medium',
+      position: 'top-center',
       autoClose: time,
     });
-  } else if (type === "warning") {
-    console.log("ini");
+  } else if (type === 'warning') {
     toast.warn(message, {
-      position: "top-center",
+      className: 'bg-apps-yellow text-black font-medium',
+      bodyClassName: 'text-sm font-white font-med block p-3',
+      position: 'top-center',
       autoClose: time,
     });
-  } else if (type === "error") {
+  } else if (type === 'error') {
     toast.error(message, {
-      position: "top-center",
+      className: 'bg-red-600 font-medium',
+      position: 'top-center',
       autoClose: time,
     });
-  } else if (type === "info") {
+  } else if (type === 'info') {
     toast.info(message, {
-      position: "top-center",
+      className: 'bg-cyan-600 font-medium',
+      position: 'top-center',
       autoClose: time,
     });
   }
