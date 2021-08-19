@@ -110,6 +110,7 @@ const CheckIn = ({ history }) => {
 
   useEffect(() => {
     setDidMount(true);
+    console.log(users);
     const timeOut = setTimeout(() => {
       setPopUp(true);
     }, 500);
