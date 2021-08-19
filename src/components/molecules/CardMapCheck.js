@@ -3,6 +3,7 @@ import SetMaps from 'components/atoms/SetMaps';
 import absensi from 'constants/api/absensi';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';
+import { isDesktop } from 'react-device-detect';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -114,26 +115,30 @@ export default function CardMapCheck() {
         </div>
         {status ? (
           <div className="flex justify-center items-center text-xs lg:text-sm">
-            <Link
-              to={{
-                pathname: link,
-                state: users,
-              }}
-              className="ml-7">
-              <button
-                className={`p-2 text-white rounded hidden lg:block ${
-                  status === 'in' ? '    bg-apps-primary' : '   bg-apps-red'
-                }`}>
-                {status === 'in' ? 'Check In' : 'Check Out'}
-              </button>
-              <ChevronRightIcon
-                className={`h-8 w-8 bg-opacity-10 p-1 rounded lg:hidden ${
-                  status === 'in'
-                    ? ' text-apps-primary   bg-apps-primary'
-                    : ' text-apps-red   bg-apps-red'
-                }`}
-              />
-            </Link>
+            {isDesktop ? (
+              <p className="text-red-600 text-lg">Smartphone Only! </p>
+            ) : (
+              <Link
+                to={{
+                  pathname: link,
+                  state: users,
+                }}
+                className="ml-7">
+                <button
+                  className={`p-2 text-white rounded hidden lg:block ${
+                    status === 'in' ? '    bg-apps-primary' : '   bg-apps-red'
+                  }`}>
+                  {status === 'in' ? `'Check In'` : 'Check Out'}
+                </button>
+                <ChevronRightIcon
+                  className={`h-8 w-8 bg-opacity-10 p-1 rounded lg:hidden ${
+                    status === 'in'
+                      ? ' text-apps-primary   bg-apps-primary'
+                      : ' text-apps-red   bg-apps-red'
+                  }`}
+                />
+              </Link>
+            )}
           </div>
         ) : (
           <div className="w-16"></div>

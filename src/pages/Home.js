@@ -42,13 +42,14 @@ const Home = () => {
       .getHoliday()
       .then((res) => {
         if (res.status === 200) {
-          setdataHoliday(res.data);
+          setdataHoliday(res.data.data);
         }
       })
       .catch((err) => {
         ToastHandler('err', err.message);
       });
   };
+
   const getDataAllUnit = () => {
     apiUser
       .allUnit()

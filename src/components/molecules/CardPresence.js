@@ -81,7 +81,7 @@ export default function CardPresence() {
         }`}>
         {status !== 'out' ? (
           <h4 className="font-semibold text-gray-800">
-            Let's go to {status ? 'work' : 'home'}
+            Let's go to {!status ? 'work' : 'home'}
           </h4>
         ) : (
           <h4 className="font-semibold text-lg text-white tracking-wide">

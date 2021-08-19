@@ -67,50 +67,11 @@ export default function Presensi({ history }) {
           year: year,
         },
       })
-      .then((res) => {
-        let presenceData = [
-          {
-            name: 'hadir',
-            value: res.Hadir,
-          },
-          {
-            name: 'telat',
-            value: res.Telat,
-          },
-          {
-            name: 'izin',
-            value: res.Izin,
-          },
-          {
-            name: 'sakit',
-            value: res.Sakit,
-          },
-          {
-            name: 'cuti',
-            value: res.Cuti,
-          },
-          {
-            name: 'sppd',
-            value: res.SPPD,
-          },
-        ];
-
-        let workData = [
-          {
-            name: 'WFO',
-            value: res.WFO,
-          },
-          {
-            name: 'WFh',
-            value: res.WFH,
-          },
-          {
-            name: 'Satelit',
-            value: res.Satelit,
-          },
-        ];
-        dispatch(dataWork(workData));
-        dispatch(dataPresence(presenceData));
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(dataWork(response.data.work));
+          dispatch(dataPresence(response.data.presence));
+        }
       })
       .catch((err) => {
         ToastHandler('error', err?.response?.data?.message ?? 'error');
@@ -146,6 +107,7 @@ export default function Presensi({ history }) {
     const timeOut = setTimeout(() => {
       getDataReportPersonal(bulan, tahun);
       getDashboardReportPersonal(bulan, tahun);
+      console.log(PRESENCE);
     }, 300);
     return () => {
       clearTimeout(timeOut);
@@ -157,10 +119,10 @@ export default function Presensi({ history }) {
   return (
     <div className="relative mt-4">
       <CardTitlePage goBack={history.goBack} title="presensi" />
-      {Object.entries(presenceToday.dataOut).length > 0 ? (
-        <CardPresence />
-      ) : (
+      {Object.entries(presenceToday.dataOut).length === 0 ? (
         <CardMapCheck />
+      ) : (
+        <CardPresence />
       )}
       {/* Start Filter Month And Year  */}
       <div className="grid grid-cols-2 mt-8 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
@@ -240,7 +202,7 @@ export default function Presensi({ history }) {
           <Download onClick={() => alert('Download excel')} />
         </div>
 
-        {PRESENCE.status === 'ok' && PRESENCE.total > 0 ? (
+        {PRESENCE.total > 0 ? (
           <div className="grid grid-cols-1 overflow-auto hidden-scroll h-full my-4 gap-2 py-4 rounded-lg">
             {isMobile &&
               PRESENCE.data.map((data) => (

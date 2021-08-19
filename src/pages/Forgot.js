@@ -1,14 +1,14 @@
 /** @format */
 
-import { LightningBoltIcon } from "@heroicons/react/outline";
-import Input from "components/atoms/Input";
-import Loading from "components/atoms/Loading";
-import users from "constants/api/users";
-import ToastHandler from "helpers/hooks/toast";
-import useForm from "helpers/hooks/useForm";
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
+import { LightningBoltIcon } from '@heroicons/react/outline';
+import Input from 'components/atoms/Input';
+import Loading from 'components/atoms/Loading';
+import users from 'constants/api/users';
+import ToastHandler from 'helpers/hooks/toast';
+import useForm from 'helpers/hooks/useForm';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 const Forgot = ({ history }) => {
   const [isLoad, setisLoad] = useState(false);
@@ -16,8 +16,8 @@ const Forgot = ({ history }) => {
   const [isOtp, setisOtp] = useState(false);
   const [isUser, setisUser] = useState(true);
   const [state, setState] = useForm({
-    email: "",
-    token: "",
+    email: '',
+    token: '',
   });
 
   function useFocusNext() {
@@ -41,7 +41,7 @@ const Forgot = ({ history }) => {
         // IE 9, 10
         event.preventDefault();
       }
-      if (event.key === "Backspace") {
+      if (event.key === 'Backspace') {
         // Required if the controls can be reordered
         controls.current = controls.current
           .filter((control) => document.body.contains(control))
@@ -60,7 +60,7 @@ const Forgot = ({ history }) => {
     return useCallback((element) => {
       if (element && !controls.current.includes(element)) {
         controls.current.push(element);
-        element.addEventListener("keyup", handler);
+        element.addEventListener('keyup', handler);
       }
     }, []);
   }
@@ -76,12 +76,12 @@ const Forgot = ({ history }) => {
         let message = res.data;
         setisOtp(true);
         setisUser(false);
-        ToastHandler("success", message);
+        ToastHandler('success', message);
         setisConfirm(false);
       })
       .catch((err) => {
         setisConfirm(false);
-        ToastHandler("error", err.data);
+        ToastHandler('error', err.data);
       });
   };
 
@@ -89,7 +89,7 @@ const Forgot = ({ history }) => {
     event.preventDefault();
     setisConfirm(true);
 
-    let str = "";
+    let str = '';
     for (let index = 0; index < event.target.length; index++) {
       str += `${event.target[index].value}`;
     }
@@ -99,12 +99,12 @@ const Forgot = ({ history }) => {
       .verifotp(state)
       .then((res) => {
         setisConfirm(false);
-        ToastHandler("success", res.data);
-        history.push("/");
+        ToastHandler('success', res.data);
+        history.push('/');
       })
       .catch((err) => {
         setisConfirm(false);
-        ToastHandler("error", err.data);
+        ToastHandler('error', err.data);
       });
   };
 
@@ -131,20 +131,20 @@ const Forgot = ({ history }) => {
       <div
         className={`flex flex-col justify-center sm:justify-start bg-white rounded-lg p-6 transition-all duration-500 ease-in-out ${
           isLoad
-            ? "sm:h-1/2 sm:w-2/3 md:w-1/2 h-full w-full opacity-100"
-            : " h-0 opacity-0"
+            ? 'sm:h-1/2 sm:w-2/3 md:w-1/2 h-full w-full opacity-100'
+            : ' h-0 opacity-0'
         }`}>
         <div className="p-2 flex items-center justify-center ml-4 sm:hidden">
           <img
             src={`${process.env.PUBLIC_URL}/assets/svg/ilustrasi_pop.svg`}
             alt="bg"
             className={`transition-all duration-500 ease-in-out${
-              isLoad ? "h-44 " : "h-0 "
+              isLoad ? 'h-44 ' : 'h-0 '
             } `}
           />
         </div>
-        <h1 className="text-4xl font-bold text-apps-primary tracking-wider hidden  mb-12 sm:inline-flex sm:items-center">
-          <LightningBoltIcon className="h-12 w-12" /> POP
+        <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-pink-600 to-red-500 tracking-wider hidden  mb-12 sm:inline-flex sm:items-center">
+          <LightningBoltIcon className="h-12 w-12 text-pink-600" /> Almuazaf
         </h1>
         <div className="flex flex-col gap-4 mt-8 sm:mt-0">
           <h1 className="md:text-3xl text-xl text-apps-text font-semibold">
@@ -176,7 +176,7 @@ const Forgot = ({ history }) => {
             ) : (
               <button
                 type="submit"
-                className="bg-apps-primary p-2 rounded-md text-white font-semibold text-lg w-full -mt-2">
+                className="hover:from-pink-700 hover:to-red-600 transition duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 p-2 rounded-md text-white font-semibold text-lg w-full -mt-2">
                 Submit
               </button>
             )}

@@ -79,13 +79,11 @@ const CheckOut = ({ history }) => {
         if (res.status === 200) {
           ToastHandler('success', res.data);
         }
-        console.log(res);
-        // setTimeout(() => {
-        //   history.push('/');
-        // }, 300);
+        setTimeout(() => {
+          history.push('/');
+        }, 300);
       })
       .catch((err) => {
-        console.log(err.response);
         ToastHandler('error', err?.response?.data);
       });
   };

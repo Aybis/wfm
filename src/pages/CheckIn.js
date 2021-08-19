@@ -86,12 +86,11 @@ const CheckIn = ({ history }) => {
     state.photo = image;
     state.lokasi = address;
     state.jam = dateTime;
-    console.log('data', state);
 
     absensi
       .checkIn(state)
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 201 || response.status === 200) {
           dispatch(isCheckIn(response.data.data));
         }
         ToastHandler('success', response?.data?.message);
@@ -100,7 +99,12 @@ const CheckIn = ({ history }) => {
         }, 300);
       })
       .catch((err) => {
-        ToastHandler('warning', err?.response?.data?.message);
+        if (err.response.status === 400) {
+          let message = err?.response?.data?.message;
+          console.log(message.length);
+          ToastHandler('error', message.toString());
+        }
+        ToastHandler('error', err?.response?.data);
       });
   };
 
@@ -176,7 +180,9 @@ const CheckIn = ({ history }) => {
                 onSubmit={submitFunction}>
                 <div className="flex flex-col gap-2 text-sm">
                   <Label labelName="Lokasi" />
-                  <p className="font-normal text-apps-text w-full">{address}</p>
+                  <p className="text-base text-gray-400 font-light w-full">
+                    {address}
+                  </p>
                 </div>
                 <div
                   className={`grid gap-4 transition-all duration-500 ease-in-out ${
@@ -230,13 +236,13 @@ const CheckIn = ({ history }) => {
                 <div className="flex flex-col gap-2 text-sm ">
                   <label
                     htmlFor="image"
-                    className="text-apps-text font-semibold">
+                    className="text-gray-700 font-semibold">
                     Photo
                     {photo ? (
                       <img
                         src={photo}
                         alt="file"
-                        className=" rounded-lg cursor-pointer mt-2"
+                        className="rounded-lg cursor-pointer mt-2"
                       />
                     ) : (
                       <UserCircleIcon
