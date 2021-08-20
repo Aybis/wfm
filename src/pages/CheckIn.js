@@ -15,10 +15,12 @@ import { isDesktop, isMobile } from 'react-device-detect';
 import { useDispatch, useSelector } from 'react-redux';
 import absensi from '../constants/api/absensi';
 import { isCheckIn } from 'store/actions/presence';
+import LoadingCircle from 'components/atoms/LoadingCircle';
 
 const CheckIn = ({ history }) => {
   const dispatch = useDispatch();
   const [didMount, setDidMount] = useState(false);
+  const [isSubmit, setisSubmit] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [longLat, setlongLat] = useState(null);
@@ -81,6 +83,7 @@ const CheckIn = ({ history }) => {
 
   const submitFunction = (event) => {
     event.preventDefault();
+    setisSubmit(true);
     state.long_lat = longLat;
     state.user_id = users.id;
     state.photo = image;
@@ -92,25 +95,43 @@ const CheckIn = ({ history }) => {
       .then((response) => {
         if (response.status === 201 || response.status === 200) {
           dispatch(isCheckIn(response.data.data));
+          ToastHandler('success', response?.data?.message);
+          setisSubmit(false);
+          setTimeout(() => {
+            history.push('/');
+          }, 300);
         }
-        ToastHandler('success', response?.data?.message);
-        setTimeout(() => {
-          history.push('/');
-        }, 300);
       })
       .catch((err) => {
-        if (err.response.status === 400) {
-          let message = err?.response?.data?.message;
-          console.log(message.length);
-          ToastHandler('error', message.toString());
+        if (err?.message) {
+          ToastHandler(
+            'error',
+            err?.response?.data?.message ?? 'Something happened',
+          );
+        } else {
+          if (err.response.status === 500) {
+            ToastHandler('error', err.response.data.message);
+          } else if (err.response.status === 400) {
+            let message = err?.response?.data?.message;
+            ToastHandler('error', message.toString());
+          } else {
+            ToastHandler(
+              'error',
+              err?.response?.data?.message ?? 'Something happened',
+            );
+          }
+          ToastHandler(
+            'error',
+            err?.response?.data?.message ?? 'Something happened',
+          );
         }
-        ToastHandler('error', err?.response?.data);
+
+        setisSubmit(false);
       });
   };
 
   useEffect(() => {
     setDidMount(true);
-    console.log(users);
     const timeOut = setTimeout(() => {
       setPopUp(true);
     }, 500);
@@ -243,7 +264,7 @@ const CheckIn = ({ history }) => {
                       <img
                         src={photo}
                         alt="file"
-                        className="rounded-lg cursor-pointer mt-2"
+                        className="rounded-lg cursor-pointer mt-2 h-60 object-contain w-full"
                       />
                     ) : (
                       <UserCircleIcon
@@ -263,10 +284,18 @@ const CheckIn = ({ history }) => {
                     onChange={(event) => inputPhoto(event)}
                   />
                 </div>
-                {photo && (
-                  <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white">
-                    Check In
-                  </button>
+
+                {isSubmit ? (
+                  <div className="flex items-center justify-center">
+                    <LoadingCircle />
+                  </div>
+                ) : (
+                  photo &&
+                  state.kondisi && (
+                    <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white">
+                      Check In
+                    </button>
+                  )
                 )}
               </form>
             </div>

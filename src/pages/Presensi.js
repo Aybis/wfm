@@ -107,7 +107,6 @@ export default function Presensi({ history }) {
     const timeOut = setTimeout(() => {
       getDataReportPersonal(bulan, tahun);
       getDashboardReportPersonal(bulan, tahun);
-      console.log(PRESENCE);
     }, 300);
     return () => {
       clearTimeout(timeOut);

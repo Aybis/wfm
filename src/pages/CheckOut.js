@@ -5,6 +5,7 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/solid';
 import Label from 'components/atoms/Label';
+import LoadingCircle from 'components/atoms/LoadingCircle';
 import SetMaps from 'components/atoms/SetMaps';
 import absensi from 'constants/api/absensi';
 import ToastHandler from 'helpers/hooks/toast';
@@ -15,6 +16,7 @@ import { useParams } from 'react-router-dom';
 
 const CheckOut = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
+  const [isSubmit, setisSubmit] = useState(false);
   const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [address, setAddress] = useState(null);
@@ -71,19 +73,22 @@ const CheckOut = ({ history }) => {
 
   const submitFunction = (event) => {
     event.preventDefault();
-
-    console.log(state);
+    setisSubmit(true);
     absensi
       .checkOut(state, id)
       .then((res) => {
-        if (res.status === 200) {
+        if (res.status === 200 || res.status === 201) {
+          setisSubmit(false);
+
           ToastHandler('success', res.data);
+          setTimeout(() => {
+            history.push('/');
+          }, 300);
         }
-        setTimeout(() => {
-          history.push('/');
-        }, 300);
       })
       .catch((err) => {
+        setisSubmit(false);
+
         ToastHandler('error', err?.response?.data);
       });
   };
@@ -178,10 +183,17 @@ const CheckOut = ({ history }) => {
                   onChange={(event) => inputPhoto(event)}
                 />
               </div>
-              {photo && (
-                <button className="p-3 text-lg font-semibold bg-apps-red w-full text-center rounded-lg text-white">
-                  Check Out
-                </button>
+
+              {isSubmit ? (
+                <div className="flex items-center justify-center">
+                  <LoadingCircle />
+                </div>
+              ) : (
+                photo && (
+                  <button className="p-3 text-lg font-semibold bg-apps-red w-full text-center rounded-lg text-white">
+                    Check Out
+                  </button>
+                )
               )}
             </form>
           </div>

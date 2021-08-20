@@ -19,11 +19,11 @@ import absensi from '../constants/api/absensi';
 import apiUser from '../constants/api/users';
 
 const Home = () => {
+  const dispatch = useDispatch();
   const [showModal, setshowModal] = useState(false);
   const [dataUnit, setdataUnit] = useState(false);
   const [dataHoliday, setdataHoliday] = useState(false);
   const users = useSelector((state) => state.users);
-  const dispatch = useDispatch();
 
   const variants = {
     hidden: { opacity: 1, scale: 0 },

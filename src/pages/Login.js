@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { Eye, EyeOff } from 'react-feather';
 import { useDispatch } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -22,6 +23,7 @@ import users from '../constants/api/users';
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
+  const [didMount, setDidMount] = useState(false);
   const [isPassword, setIsPassword] = useState(true);
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -98,6 +100,17 @@ const Login = ({ history }) => {
         setIsSubmit(false);
       });
   };
+
+  useEffect(() => {
+    setDidMount(true);
+    return () => {
+      setDidMount(false);
+    };
+  }, []);
+
+  if (!didMount) {
+    return null;
+  }
 
   return (
     <motion.div className="relative min-h-screen h-full md:h-screen">

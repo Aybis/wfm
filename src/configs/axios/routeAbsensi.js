@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_ABSENSI}`,
-  headers: { 'Access-Control-Allow-Origin': '*' },
+  // headers: { 'Access-Control-Allow-Origin': '*' },
   // timeout: 1000,
 });
 
