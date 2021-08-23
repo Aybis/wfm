@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function CardHeadingDesktop({
   heading,
-  description,
+  subheading,
   link = null,
 }) {
   let customClass = isDesktop ? 'text-center' : 'text-left';
@@ -16,7 +16,7 @@ export default function CardHeadingDesktop({
           className={`text-2xl lg:text-4xl text-gray-700 font-semibold mb-2 `}>
           {heading}
         </h1>
-        <h2 className="text-gray-500 text-sm lg:text-lg">{description}</h2>
+        <h2 className="text-gray-500 text-sm lg:text-lg">{subheading}</h2>
       </div>
 
       {link && (

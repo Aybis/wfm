@@ -26,7 +26,7 @@ export default function MobileHeader() {
   return (
     isMobile && (
       <div className="flex justify-between items-center mb-8 transition-all duration-300 ease-in-out">
-        <div className="flex gap-2 items-center justify-center">
+        <div className="flex gap-3 items-center justify-center">
           <div className="relative">
             {users.image_url ? (
               <img
@@ -35,7 +35,7 @@ export default function MobileHeader() {
                 width={10}
                 src={users.image_url}
                 alt="avatar"
-                className="h-10 w-10 rounded"
+                className="h-10 w-10 rounded-lg"
               />
             ) : (
               <img
@@ -44,26 +44,25 @@ export default function MobileHeader() {
                 loading="lazy"
                 height={10}
                 width={10}
-                className="h-10 w-10 rounded-full"
+                className="h-10 w-10 rounded-lg"
               />
             )}
           </div>
           <div className="flex flex-col -gap-2">
-            <h2 className="font-semibold text-apps-text transform capitalize">
+            <h2 className="font-semibold text-gray-800 transform capitalize tracking-wide">
               {users?.name?.toLowerCase()}
             </h2>
-            <h3 className="text-xs font-medium text-apps-text transform uppercase">
+            <h3 className="text-sm font-normal text-gray-500 transform uppercase">
               {users?.position?.toLowerCase()}
             </h3>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center text-apps-text text-opacity-50">
-          <div className="block">
+        <div className="flex flex-col justify-center items-center text-gray-700">
+          <div className="flex flex-col items-center">
             <LogoutIcon
-              className="h-5 w-5 cursor-pointer"
+              className="h-8 w-8 rounded-md cursor-pointer p-1"
               onClick={() => logOoutUser()}
             />
-            <p className="text-xs font-medium ">Logout</p>
           </div>
         </div>
       </div>

@@ -79,8 +79,10 @@ const CheckOut = ({ history }) => {
       .then((res) => {
         if (res.status === 200 || res.status === 201) {
           setisSubmit(false);
-
-          ToastHandler('success', res.data);
+          ToastHandler(
+            'success',
+            res?.data?.message ?? 'Anda Berhasil Checkout',
+          );
           setTimeout(() => {
             history.push('/');
           }, 300);
@@ -88,8 +90,28 @@ const CheckOut = ({ history }) => {
       })
       .catch((err) => {
         setisSubmit(false);
-
-        ToastHandler('error', err?.response?.data);
+        if (err?.message) {
+          ToastHandler(
+            'error',
+            err?.response?.data?.message ?? 'Something happened',
+          );
+        } else {
+          if (err.response.status === 500) {
+            ToastHandler('error', err.response.data.message);
+          } else if (err.response.status === 400) {
+            let message = err?.response?.data?.message;
+            ToastHandler('error', message.toString());
+          } else {
+            ToastHandler(
+              'error',
+              err?.response?.data?.message ?? 'Something happened',
+            );
+          }
+          ToastHandler(
+            'error',
+            err?.response?.data?.message ?? 'Something happened',
+          );
+        }
       });
   };
 

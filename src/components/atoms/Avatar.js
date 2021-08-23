@@ -1,8 +1,10 @@
 import { LogoutIcon, UserIcon } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
-function Avatar({ user, logOut }) {
+function Avatar({ logOut }) {
+  const USER = useSelector((state) => state.users);
   const animation = {
     start: {
       y: '-10%',
@@ -58,18 +60,18 @@ function Avatar({ user, logOut }) {
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 1.2 }}
             className=" flex gap-4 items-center justify-center p-3 mr-4">
-            {user.image_url ? (
+            {USER.image_url ? (
               <img
                 loading="lazy"
                 height={10}
                 width={10}
-                src={user.image_url}
+                src={USER.image_url}
                 alt="avatar"
                 className="h-10 w-10 rounded"
               />
             ) : (
               <img
-                src={`https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`}
+                src={`https://ui-avatars.com/api/?name=${USER.name}&background=0062FF&color=fff`}
                 alt="avatar"
                 loading="lazy"
                 height={10}
@@ -78,7 +80,7 @@ function Avatar({ user, logOut }) {
               />
             )}
             <p className="text-apps-text dark:text-gray-100 capitalize font-medium hidden">
-              {user.name}
+              {USER.name}
             </p>
           </motion.div>
         </div>

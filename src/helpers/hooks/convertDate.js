@@ -1,9 +1,16 @@
-export default function convertDate(type, date) {
+export default function convertDate(type, fullDate) {
+  let date = new Date(fullDate);
   let options = {
     month: 'long',
     day: 'numeric',
     weekday: 'long',
     year: 'numeric',
+  };
+  let onlyDay = {
+    weekday: 'long',
+  };
+  let onlyMonth = {
+    month: 'long',
   };
 
   if (type === 'fullDayMonthYear') {
@@ -25,11 +32,11 @@ export default function convertDate(type, date) {
   } else if (type === 'second') {
     return date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`;
   } else if (type === 'day') {
+    return date.toLocaleString('id-ID', onlyDay);
+  } else if (type === 'dateOnly') {
     return date.getDate();
-  } else if (type === 'date') {
-    return date.getDate('id-ID', options);
   } else if (type === 'longMonth') {
-    return date.getMonth('id-ID', options);
+    return date.toLocaleString('id-ID', onlyMonth);
   } else if (type === 'month') {
     return date.getMonth();
   } else if (type === 'fullYear') {

@@ -72,7 +72,6 @@ const Forgot = ({ history }) => {
     users
       .getotp({ email: state.email })
       .then((res) => {
-        console.log(res);
         let message = res.data;
         setisOtp(true);
         setisUser(false);

@@ -3,3 +3,4 @@ export const FETCH_DATA_WORK = 'FETCH_DATA_WORK';
 export const FETCH_DATA = 'FETCH_DATA';
 export const STATUS_DATA = 'STATUS_DATA';
 export const MESSAGE_DATA = 'MESSAGE_DATA';
+export const FETCH_DATA_WEEKLY = 'FETCH_DATA_WEEKLY';

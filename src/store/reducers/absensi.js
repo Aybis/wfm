@@ -4,12 +4,14 @@ import {
   FETCH_DATA,
   STATUS_DATA,
   MESSAGE_DATA,
+  FETCH_DATA_WEEKLY,
 } from 'constants/types/absensi';
 
 const initialState = {
   data: {},
   dataWork: {},
   dataPresence: {},
+  dataWeekly: {},
   total: 0,
   status: 'idle',
   message: '',
@@ -43,6 +45,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         dataWork: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_DATA_WEEKLY:
+      return {
+        ...state,
+        dataWeekly: action.payload ?? {},
         status: 'ok',
       };
 

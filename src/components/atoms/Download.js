@@ -1,5 +1,3 @@
-/** @format */
-
 import { DownloadIcon } from '@heroicons/react/outline';
 import React from 'react';
 

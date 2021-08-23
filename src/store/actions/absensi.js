@@ -1,5 +1,6 @@
 import {
   FETCH_DATA_PRESENCE,
+  FETCH_DATA_WEEKLY,
   FETCH_DATA_WORK,
   FETCH_DATA,
   STATUS_DATA,
@@ -13,6 +14,11 @@ export const dataPresence = (data) => ({
 
 export const dataWork = (data) => ({
   type: FETCH_DATA_WORK,
+  payload: data,
+});
+
+export const dataWeekly = (data) => ({
+  type: FETCH_DATA_WEEKLY,
   payload: data,
 });
 
