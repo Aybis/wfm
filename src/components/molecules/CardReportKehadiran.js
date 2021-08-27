@@ -57,7 +57,9 @@ export default function CardReportKehadiran({ name, hari, value }) {
   return (
     <motion.div
       variants={item}
-      className={`flex flex-none flex-col rounded-md w-1/2 lg:w-full gap-4 p-4 bg-gradient-to-br from-transparent via-gray-50 to-white transform group hover:scale-105 hover:shadow-lg motion-reduce:transform-none transition-all duration-300 ease-in-out`}>
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className={`flex flex-none flex-col rounded-md w-1/2 lg:w-full gap-4 p-4 bg-white`}>
       <div className="flex justify-between items-center">
         <div>
           <p className="text-base md:text-lg font-medium leading-none text-gray-600 capitalize tracking-wide">

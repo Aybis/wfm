@@ -2,7 +2,6 @@ import CardLoading from 'devices/mobile/component/molecules/CardLoading';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 export default function CardKehadiranDekstop() {
   const ABSEN = useSelector((state) => state.presence);
@@ -12,14 +11,11 @@ export default function CardKehadiranDekstop() {
 
   let btnClass = 'bg-blue-400';
   let name = '';
-  let link;
 
   if (Object.entries(ABSEN.data).length === 0) {
-    link = `/check-in`;
     btnClass = 'bg-apps-blue';
     name = 'Check In';
   } else if (Object.entries(ABSEN.dataOut).length === 0) {
-    link = `/check-out/${ABSEN.data.id}`;
     btnClass = 'bg-gradient-to-br from-pink-600 to-red-500';
     name = 'Check Out';
   } else if (Object.entries(ABSEN.dataOut).length > 0) {
@@ -34,6 +30,7 @@ export default function CardKehadiranDekstop() {
       opacity: 1,
     },
   };
+
   return USER && ABSEN.status === 'ok' ? (
     <motion.div variants={item} className="grid grid-cols-2 h-96 max-h-full">
       {/* Start Text  */}
@@ -63,14 +60,11 @@ export default function CardKehadiranDekstop() {
             Budayakan disiplin presensi dari sekarang!
           </h4>
           {!isCheckOut && (
-            <Link
+            <button
               className={`mt-10 inline-flex rounded-lg text-white py-3 px-6 font-bold items-center justify-center ${btnClass} transform hover:scale-110 motion-reduce:transform-none duration-300`}
-              to={{
-                pathname: link,
-                state: USER,
-              }}>
+              onClick={() => alert('Hanya Berlaku untuk Smartphone')}>
               <span className=" text-lg">{name}</span>
-            </Link>
+            </button>
           )}
         </div>
       </motion.div>

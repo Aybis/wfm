@@ -20,8 +20,6 @@ import CardMessageMobile from '../component/molecules/CardMessageMobile';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
 import CardWorkMobile from '../component/molecules/CardWorkMobile';
 import LayoutMobile from '../LayoutMobile';
-import MobileHeader from '../sections/MobileHeader';
-import MobileMenu from '../sections/MobileMenu';
 
 export default function HomePage() {
   const USER = useSelector((state) => state.users);
@@ -88,9 +86,7 @@ export default function HomePage() {
   }
 
   return (
-    <LayoutMobile>
-      <MobileHeader />
-      <MobileMenu />
+    <LayoutMobile isShow>
       {/* Content  */}
 
       {/* Start Modal */}

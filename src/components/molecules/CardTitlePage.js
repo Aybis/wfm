@@ -1,5 +1,3 @@
-/** @format */
-
 import Back from 'components/atoms/Back';
 import React from 'react';
 
@@ -10,7 +8,7 @@ export default function CardTitlePage({ goBack, title }) {
         <Back className="h-16 w-16" link={goBack} />
       </div>
       <div className="flex justify-center">
-        <h1 className="text-2xl lg:text-4xl font-semibold text-gray-700 tracking-wide uppercase">
+        <h1 className="text-2xl lg:text-4xl font-semibold text-gray-800 tracking-wide uppercase">
           {title}
         </h1>
       </div>

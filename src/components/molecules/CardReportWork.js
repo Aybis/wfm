@@ -58,27 +58,22 @@ export default function CardReportWork({ day, name, status }) {
   return (
     <motion.div
       variants={item}
-      className={`flex flex-none flex-col rounded-lg w-2/3 lg:w-full p-4 bg-gradient-to-br from-transparent via-gray-50 to-white transform group hover:scale-105 hover:shadow-lg motion-reduce:transform-none transition-all duration-300 ease-in-out`}>
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className={`flex flex-none flex-col rounded-lg w-2/3 lg:w-full p-4 bg-white`}>
       <div className="flex justify-between">
         <div>
-          <p className="text-base lg:text-xl font-medium leading-none text-gray-500 uppercase">
+          <p className="text-base lg:text-xl font-semibold leading-none text-gray-700 uppercase">
             {name}
           </p>
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold leading-3 text-gray-800 mt-5">
             {day}
           </p>
           <p className="text-gray-600 dark:text-gray-400 text-sm lg:text-base tracking-normal font-normal leading-5 capitalize">
-            {status ? status : 'Krayawan'}
+            {status ? status : 'Karyawan'}
           </p>
         </div>
         <IconName />
-      </div>
-      <div className="flex flex-col">
-        <div className="mt-2.5">
-          <div className="w-full h-1 bg-gray-200 rounded-full">
-            <div className="w-1/3 h-1 bg-apps-primary rounded-full" />
-          </div>
-        </div>
       </div>
     </motion.div>
   );

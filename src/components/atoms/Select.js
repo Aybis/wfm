@@ -40,25 +40,21 @@ export default function Select({
   const selected = items.find((item) => item.props.value === value);
 
   return (
-    <div className="flex flex-col mb-2 z-20">
+    <div className="flex flex-col gap-2 mb-2 lg:mb-4 z-20">
       {labelName && (
         <label
           htmlFor=""
-          className="show text-sm mb-2 text-gray-800 font-semibold">
+          className="text-gray-500 text-sm font-medium tracking-wide">
           {labelName}
         </label>
       )}
       <div className="relative" ref={selectWrapper} onClick={toggleSelect}>
         <div
           className={[
-            'flex justify-between cursor-pointer bg-white focus:outline-none transition-all duration-200 border p-3 pr-4 w-full rounded text-gray-800',
+            'flex justify-between rounded-lg cursor-pointer bg-white focus:border-gray-800  transition-all duration-200 border-2 p-3 pr-4 w-full text-gray-800',
             toggle
-              ? 'border-apps-primary'
-              : `${
-                  border
-                    ? 'border-transparent'
-                    : 'border-apps-gray border-opacity-40'
-                }`,
+              ? 'border-gray-800'
+              : `${border ? 'border-transparent' : 'border-gray-200'}`,
             className,
           ].join(' ')}>
           <span className={value === '' ? 'text-gray-600' : 'text-gray-800'}>
@@ -68,14 +64,14 @@ export default function Select({
         </div>
         <div
           className={[
-            'absolute left-0 bg-white border border-apps-gray border-opacity-40 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg',
+            'absolute left-0 bg-white border-2 border-gray-400 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg',
             toggle ? '' : 'hidden',
           ].join(' ')}>
           {items.map((item, index) => {
             return (
               <div
                 key={index}
-                className={`flex justify-between cursor-pointer px-4 py-2 bg-white transition-all duration-200 hover:bg-apps-primary mx-1 hover:text-white ${
+                className={`group flex justify-between cursor-pointer px-4 py-2 bg-white transition-all duration-200 hover:bg-apps-primary mx-1 rounded-md hover:text-white ${
                   selected.props.value === item.props.value
                     ? 'text-gray-800 font-medium'
                     : 'text-gray-800 text-opacity-40'
@@ -86,7 +82,7 @@ export default function Select({
                 }}>
                 {item.props.children}{' '}
                 {selected.props.value === item.props.value && (
-                  <CheckIcon className="text-apps-primary h-5 w-5" />
+                  <CheckIcon className="text-apps-primary h-5 w-5 group-hover:text-white" />
                 )}
               </div>
             );

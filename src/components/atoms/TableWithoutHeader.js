@@ -39,10 +39,18 @@ export default function TableWithoutHeader({
   const getDateFullOnly = (date) => {
     return date.toLocaleDateString('id-ID', options);
   };
-
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      variants={item}
       className="bg-white mx-4 hover:shadow-lg my-2 transition-all duration-300 ease-in-out flex border-2 border-gray-100 rounded-lg divide-x-2 divide-opacity-20 justify-between p-4">
       {/* <!--         presensi  --> */}
       <div className="flex justify-between gap-4 w-4/5 pr-4">

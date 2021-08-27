@@ -52,14 +52,9 @@ const Login = ({ history }) => {
             // store data user to cookies
             const userCookie = {
               name: details.data.name,
-              user_id: details.data.id,
-              email: details.data.email,
               avatar: details.data.image_url
                 ? details.data.image_url
                 : details.data.thumb_url,
-              unit: details.data.unit,
-              nik: details.data.nik,
-              position: details.data.position,
             };
 
             /**

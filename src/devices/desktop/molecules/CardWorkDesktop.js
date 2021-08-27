@@ -30,28 +30,36 @@ export default function CardWorkDesktop(props) {
 
   const ShowIconDaily = () => {
     if (props.data.kehadiran === 'WFH') {
-      return <HomeIcon className="h-16 w-16  p-2 rounded-lg bg-gray-100" />;
+      return (
+        <HomeIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
+      );
     } else if (props.data.kehadiran === 'WFO') {
       return (
-        <OfficeBuildingIcon className="h-16 w-16  p-2 rounded-lg bg-gray-100" />
+        <OfficeBuildingIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
       );
     } else if (props.data.kehadiran === 'Satelit') {
-      return <GlobeAltIcon className="h-16 w-16  p-2 rounded-lg bg-gray-100" />;
+      return (
+        <GlobeAltIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
+      );
     } else {
-      return <ClockIcon className="h-16 w-16  p-2 rounded-lg bg-gray-100" />;
+      return (
+        <ClockIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
+      );
     }
   };
 
   return (
     <motion.div
       variants={item}
-      className="flex justify-center items-center gap-4 text-coolGray-700 p-2">
+      className={`flex justify-start items-center gap-4 text-coolGray-700 py-2 px-4 rounded-lg ${
+        props.withBg ? 'bg-white shadow-lg' : 'bg-transparent'
+      }`}>
       <ShowIconDaily />
       <div className="flex flex-col text-left">
-        <h2 className="text-lg font-medium text-gray-500">
+        <h2 className="text-base 2xl:text-base font-medium text-gray-500">
           {props.data ? convertDate('day', props.data.created_at) : ''}
         </h2>
-        <h1 className="text-lg font-semibold text-gray-800">
+        <h1 className="text-base 2xl:text-lg font-semibold text-gray-800">
           Work {nameOfKehadiran}
         </h1>
       </div>

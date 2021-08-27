@@ -1,28 +1,45 @@
 export default function convertDate(type, fullDate) {
-  let date = new Date(fullDate);
+  let date = fullDate ? new Date(fullDate) : new Date();
+
   let options = {
     month: 'long',
     day: 'numeric',
     weekday: 'long',
     year: 'numeric',
   };
+
   let onlyDay = {
     weekday: 'long',
   };
+
   let onlyMonth = {
     month: 'long',
   };
 
   if (type === 'fullDayMonthYear') {
     return date.toLocaleDateString('id-ID', options);
+  } else if (type === 'fullDate') {
+    return (
+      date.getFullYear() +
+      '-' +
+      (date.getMonth() + 1) +
+      '-' +
+      date.getDate() +
+      ' ' +
+      date.getHours() +
+      ':' +
+      date.getMinutes() +
+      ':' +
+      date.getSeconds()
+    );
   } else if (type === 'date') {
     return date.toLocaleString('id-ID', options);
   } else if (type === 'fullTime') {
     return (
       date.getHours() +
-      ':' +
-      date.getMinutes() +
-      ':' +
+      ' : ' +
+      (date.getMinutes() > 10 ? date.getMinutes() : `0${date.getMinutes()}`) +
+      ' : ' +
       (date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`)
     );
   } else if (type === 'hours') {
@@ -38,8 +55,10 @@ export default function convertDate(type, fullDate) {
   } else if (type === 'longMonth') {
     return date.toLocaleString('id-ID', onlyMonth);
   } else if (type === 'month') {
-    return date.getMonth();
+    return date.getMonth() + 1;
   } else if (type === 'fullYear') {
     return date.getFullYear();
+  } else if (type === 'hoursMinutes') {
+    return date.getHours() + date.getMinutes() / 100;
   }
 }

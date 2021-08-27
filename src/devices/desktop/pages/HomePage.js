@@ -5,6 +5,7 @@ import CardHeadingDesktop from 'components/molecules/CardHeadingDesktop';
 import CardSelebToday from 'components/molecules/CardSelebToday';
 import CardUnit from 'components/molecules/CardUnit';
 import Carousel from 'components/molecules/Carousel';
+import { setAuthorizationHeader } from 'configs/axios';
 import absensi from 'constants/api/absensi';
 import users from 'constants/api/users';
 import ToastHandler from 'helpers/hooks/toast';
@@ -31,6 +32,9 @@ export default function HomePage() {
   const [showModal, setshowModal] = useState(false);
   const [dataUnit, setdataUnit] = useState(false);
   const dispatch = useDispatch();
+  const session = localStorage['WFM:token']
+    ? JSON.parse(localStorage['WFM:token'])
+    : null;
 
   const reportWeeklyPersonal = () => {
     dispatch(statusData('loading'));
@@ -76,6 +80,7 @@ export default function HomePage() {
   };
 
   const getDataAllUnit = () => {
+    setAuthorizationHeader(`Bearer ${session.token}`);
     users
       .allUnit()
       .then((res) => {
@@ -98,7 +103,6 @@ export default function HomePage() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [USER, dispatch]);
-
   if (!USER?.id) {
     return null;
   }
@@ -165,13 +169,11 @@ export default function HomePage() {
           subheading="Hari Libur di Tahun 2021"
         />
         <TableDesktop>
-          {dataHoliday.length > 0 ? (
-            dataHoliday.map((data, index) => (
-              <ChildTable key={index} data={data} />
-            ))
-          ) : (
-            <p>Tidak Ada</p>
-          )}
+          {dataHoliday.length > 0
+            ? dataHoliday.map((data, index) => (
+                <ChildTable key={Math.random()} data={data} />
+              ))
+            : null}
         </TableDesktop>
       </CardContainer>
       {/* End Section Hari Libur */}

@@ -1,13 +1,14 @@
-import { LightningBoltIcon } from '@heroicons/react/outline';
-import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  UserCircleIcon,
-} from '@heroicons/react/solid';
 import Label from 'components/atoms/Label';
 import LoadingCircle from 'components/atoms/LoadingCircle';
 import SetMaps from 'components/atoms/SetMaps';
+import Compressor from 'compressorjs';
 import absensi from 'constants/api/absensi';
+import ButtonBackAbsensi from 'devices/mobile/component/atoms/ButtonBackAbsensi';
+import ButtonSubmit from 'devices/mobile/component/atoms/ButtonSubmit';
+import CardBarUpFormAbsensi from 'devices/mobile/component/molecules/CardBarUpFormAbsensi';
+import CardInputPhoto from 'devices/mobile/component/molecules/CardInputPhoto';
+import MobileOnly from 'devices/mobile/component/molecules/MobileOnly';
+import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
@@ -46,14 +47,25 @@ const CheckOut = ({ history }) => {
 
   const inputPhoto = (event) => {
     let fileValue = event.target.files[0] ? event.target.files[0] : null;
-    createImage(fileValue);
-
-    if (fileValue) {
-      let source = URL.createObjectURL(fileValue);
-      setPhoto(source);
+    if (!fileValue) {
+      return;
+    } else {
+      new Compressor(fileValue, {
+        quality: 0.5, // 0.6 can also be used, but its not recommended to go below.
+        convertSize: 5000,
+        success: (result) => {
+          // compressedResult has the compressed file.
+          let source = URL.createObjectURL(result);
+          setPhoto(source);
+          // Use the compressed file to upload the images to your server.
+          createImage(result);
+        },
+      });
     }
   };
-
+  const handlerUpForm = () => {
+    setPopUp(!popUp);
+  };
   const createImage = (file) => {
     let reader = new FileReader();
     reader.onload = (e) => {
@@ -131,108 +143,58 @@ const CheckOut = ({ history }) => {
   }
 
   return isMobile ? (
-    <>
-      <div
-        className={`${
-          popUp ? 'pt-20 lg:hidden' : 'pt-0'
-        } transition-all duration-300 ease-in-out`}>
-        <button
-          onClick={history.goBack}
-          className="absolute z-40 left-4 rounded-full transition-all duration-500"
-          style={{ top: `${popUp ? '44%' : '11%'}` }}>
-          <ChevronLeftIcon className="h-8 w-8 bg-white rounded p-1" />
-        </button>
+    <div
+      className={`${
+        popUp ? 'pt-20 lg:hidden' : 'pt-0'
+      } transition-all duration-300 ease-in-out`}>
+      <ButtonBackAbsensi link={history.goBack} popUp={popUp} />
 
-        <SetMaps
-          popup={popUp}
-          sendlongLat={sendlongLat}
-          sendAddress={sendAddress}
+      <SetMaps
+        popup={popUp}
+        sendlongLat={sendlongLat}
+        sendAddress={sendAddress}
+      />
+
+      <motion.div
+        initial={{
+          y: -300,
+        }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6 }}
+        className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-apps-yellow rounded-t-xl z-20 ${
+          popUp ? 'h-1/2' : 'h-5/6 mt-20'
+        }`}>
+        <CardBarUpFormAbsensi
+          handlerUp={handlerUpForm}
+          type="Out"
+          isUp={!popUp}
         />
-
-        <div
-          className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-apps-yellow rounded-t-xl ${
-            popUp ? 'h-1/2' : 'h-5/6 mt-20'
-          }`}>
-          <div className="flex justify-between text-apps-text bg-apps-yellow  px-4 py-2 rounded-t-xl z-10">
-            <div className="inline-flex">
-              <LightningBoltIcon className="h-5 w-5 " />
-              <h4 className="font-light text-sm ml-2">Check Out</h4>
+        <motion.div className="flex flex-col p-4 rounded-t-xl z-10 overflow-y-auto hidden-scroll h-full bg-white ">
+          <form
+            className="flex flex-col gap-4 mt-2 mb-12"
+            onSubmit={submitFunction}>
+            <div className="hidden flex-col gap-2 text-sm">
+              <Label labelName="Lokasi" />
+              <p className="font-normal text-gray-400 w-full">{address}</p>
             </div>
-
-            <ChevronDownIcon
-              className={`mr-2 h-6 w-6 transform transition duration-300 rounded-full ${
-                popUp ? 'rotate-180' : 'rotate-0'
-              }`}
-              onClick={() => setPopUp(!popUp)}
+            <CardInputPhoto
+              photo={photo}
+              handlerChangPhoto={(event) => inputPhoto(event)}
             />
-          </div>
 
-          <div className="flex flex-col p-4 rounded-t-xl z-10 overflow-y-auto hidden-scroll h-full bg-white">
-            <form
-              className="flex flex-col gap-4 mt-2 mb-12"
-              onSubmit={submitFunction}>
-              <div className="flex flex-col gap-2 text-sm">
-                <Label labelName="Lokasi" />
-                <p className="font-normal text-gray-400 w-full">{address}</p>
+            {isSubmit ? (
+              <div className="flex items-center justify-center">
+                <LoadingCircle />
               </div>
-
-              <div className="flex flex-col gap-2 text-sm ">
-                <label
-                  htmlFor="image"
-                  className="text-apps-text text-opacity-70 font-semibold">
-                  Photo
-                  {photo ? (
-                    <img
-                      src={photo}
-                      alt="file"
-                      className=" rounded-lg cursor-pointer mt-2"
-                    />
-                  ) : (
-                    <UserCircleIcon
-                      tabIndex="0"
-                      className="h-64 w-full rounded-lg bg-gray-100 text-gray-400 p-2 cursor-pointer mt-2 pb-12"
-                    />
-                  )}
-                </label>
-
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  capture="camera"
-                  id="image"
-                  className="hidden"
-                  onChange={(event) => inputPhoto(event)}
-                />
-              </div>
-
-              {isSubmit ? (
-                <div className="flex items-center justify-center">
-                  <LoadingCircle />
-                </div>
-              ) : (
-                photo && (
-                  <button className="p-3 text-lg font-semibold bg-apps-red w-full text-center rounded-lg text-white">
-                    Check Out
-                  </button>
-                )
-              )}
-            </form>
-          </div>
-        </div>
-      </div>
-    </>
-  ) : (
-    <div className="hiddden container lg:flex flex-col gap-4 justify-center items-center h-screen transition-all duration-300 ease-in-out">
-      <h1 className="text-4xl font-semibold -mt-8">
-        Maaf halaman ini hanya dapat diakses melalui smartphone dan tablet
-      </h1>
-      <button
-        className="text-xl underline text-blue-600"
-        onClick={history.goBack}>
-        Kembali
-      </button>
+            ) : (
+              photo && <ButtonSubmit type="out" value="Check Out" />
+            )}
+          </form>
+        </motion.div>
+      </motion.div>
     </div>
+  ) : (
+    <MobileOnly />
   );
 };
 

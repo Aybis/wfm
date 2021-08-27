@@ -103,10 +103,10 @@ const SetMaps = ({
     <>
       {showButton && (
         <button
-          className="absolute z-40 right-4 transition-all duration-500 rounded-full"
-          onClick={getLocation}
-          style={{ top: `${popup ? '44%' : '11%'}` }}>
-          <LocationMarkerIcon className="h-8 w-8 bg-white rounded p-1 text-apps-pink" />
+          className="absolute bg-white rounded-lg shadow-md z-10 right-4 transition-all duration-500"
+          style={{ top: `${popup ? '44%' : '11%'}` }}
+          onClick={getLocation}>
+          <LocationMarkerIcon className="h-9 w-9 p-1 text-red-600" />
         </button>
       )}
       <div

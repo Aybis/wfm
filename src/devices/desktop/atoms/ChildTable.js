@@ -12,30 +12,30 @@ export default function ChildTable(props) {
             {convertDate('dateOnly', props.data.tanggal)}
           </div>
           <div className="pl-4">
-            <p className="font-medium">{props.data.nama}</p>
-            <p className="text-xs leading-3 text-gray-600 pt-2">
+            <h4 className="font-medium">{props.data.nama}</h4>
+            <h4 className="text-xs leading-3 text-gray-600 pt-2">
               Libur Nasional
-            </p>
+            </h4>
           </div>
         </div>
       </td>
       <td className="pl-12">
-        <p className="text-sm font-medium leading-none text-gray-800">
+        <h4 className="text-sm font-medium leading-none text-gray-800">
           {convertDate('day', props.data.tanggal)}
-        </p>
-        <p className="text-xs leading-3 text-gray-600 mt-2">
+        </h4>
+        <h4 className="text-xs leading-3 text-gray-600 mt-2">
           {convertDate('longMonth', props.data.tanggal)}
-        </p>
+        </h4>
       </td>
       <td className="pl-12">
-        <p className="font-medium">Active</p>
-        <p className="text-xs leading-3 text-gray-600 mt-2">
+        <h4 className="font-medium">Active</h4>
+        <h4 className="text-xs leading-3 text-gray-600 mt-2">
           Dapat berubah kapanpun
-        </p>
+        </h4>
       </td>
       <td className="pl-20">
-        <p className="font-medium">Selasa</p>
-        <p className="text-xs leading-3 text-gray-600 mt-2">24 Mei 2021</p>
+        <h4 className="font-medium">Selasa</h4>
+        <h4 className="text-xs leading-3 text-gray-600 mt-2">24 Mei 2021</h4>
       </td>
       <td className="pl-16">
         <div className="flex items-center">
@@ -132,10 +132,10 @@ export default function ChildTable(props) {
         {show === 0 && (
           <div className="dropdown-content bg-white shadow w-24 absolute z-30 right-0 mr-6 ">
             <div className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-              <p>Edit</p>
+              <h4>Edit</h4>
             </div>
             <div className="text-xs w-full hover:bg-indigo-700 py-4 px-4 cursor-pointer hover:text-white">
-              <p>Delete</p>
+              <h4>Delete</h4>
             </div>
           </div>
         )}

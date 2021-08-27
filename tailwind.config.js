@@ -900,6 +900,8 @@ module.exports = {
       'focus-within',
       'hover',
       'focus',
+      'active',
+      'checked',
     ],
     backgroundImage: ['responsive'],
     backgroundOpacity: [
@@ -922,6 +924,7 @@ module.exports = {
       'focus-within',
       'hover',
       'focus',
+      'checked',
     ],
     borderOpacity: [
       'responsive',

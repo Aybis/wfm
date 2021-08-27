@@ -20,11 +20,15 @@ function TableDesktop({ children }) {
       <div className="bg-white rounded-lg shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
         <table className="w-full whitespace-nowrap">
           <thead>
-            <tr className="h-16 w-full text-sm leading-none text-gray-800">
-              <th className="font-normal text-left pl-4">Libur</th>
-              <th className="font-normal text-left pl-12">Hari</th>
-              <th className="font-normal text-left pl-12">Status</th>
-              <th className="font-normal text-left pl-20">Updated At</th>
+            <tr className="h-16 w-full text-sm leading-none bg-gray-200 text-gray-800">
+              <th className="font-medium text-base text-left pl-4">Libur</th>
+              <th className="font-medium text-base text-left pl-12">Hari</th>
+              <th className="font-medium text-base text-left pl-12">Status</th>
+              <th className="font-medium text-base text-left pl-20">
+                Updated At
+              </th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody className="w-full">{children}</tbody>

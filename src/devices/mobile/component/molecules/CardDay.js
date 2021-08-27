@@ -1,29 +1,18 @@
 import CardLoading from 'devices/mobile/component/molecules/CardLoading';
 import { motion } from 'framer-motion';
+import convertDate from 'helpers/hooks/convertDate';
 import { useSelector } from 'react-redux';
 
 export default function CardDay() {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
+
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
     },
-  };
-
-  let dateIn = new Date(ABSEN.dataIn.jam);
-  let dateOut = new Date(ABSEN.dataOut.jam);
-
-  const getTimeOnly = (date) => {
-    return (
-      date.getHours() +
-      ':' +
-      date.getMinutes() +
-      ':' +
-      (date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`)
-    );
   };
 
   return USER && ABSEN.status === 'ok' ? (
@@ -34,11 +23,11 @@ export default function CardDay() {
         {/* in */}
         <div className="flex flex-col gap-2 justify-start w-1/3">
           <h2 className="font-bold text-apps-primary text-lg">IN</h2>
-          <h3 className="text-sm lg:text-base font-normal text-gray-500">
-            {ABSEN.dataIn.lokasi ?? 'Home'}
+          <h3 className="text-sm font-normal text-gray-500">
+            {ABSEN.dataIn.lokasi ?? 'Belum Absen'}
           </h3>
           <h3 className="text-sm lg:text-base font-semibold mt-2 text-gray-700">
-            {ABSEN.dataIn.jam ? getTimeOnly(dateIn) : ''}
+            {ABSEN.dataIn.jam ? convertDate('fullTime', ABSEN.dataIn.jam) : ''}
           </h3>
         </div>
         {/* icon */}
@@ -61,14 +50,16 @@ export default function CardDay() {
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
           <h2 className="font-bold text-apps-primary text-lg">
-            {ABSEN.data.kehadiran}
+            {ABSEN.data.kehadiran ?? 'OTW'}
           </h2>
           <h3 className={`text-sm lg:text-base text-gray-500`}>
-            {ABSEN.dataOut.jam ? ABSEN.dataOut.lokasi : 'On Duty'}
+            {ABSEN.dataOut.jam ? ABSEN.dataOut.lokasi : ''}
           </h3>
           <h4
             className={`text-sm lg:text-base font-semibold mt-2 text-gray-700 `}>
-            {ABSEN.dataOut.jam ? getTimeOnly(dateOut) : 'On Duty'}
+            {ABSEN.dataOut.jam
+              ? convertDate('fullTime', ABSEN.dataOut.jam)
+              : ''}
           </h4>
         </div>
       </div>
