@@ -1,5 +1,5 @@
 import Select from 'components/atoms/Select';
-import CardOvertimeApproval from 'components/molecules/CardOvertimeApproval';
+import CardOvertimeApproval from 'devices/desktop/molecules/CardOvertimeApproval';
 import Menu from 'devices/desktop/section/Menu';
 import MobileMenu from 'devices/mobile/sections/MobileMenu';
 import { motion } from 'framer-motion';

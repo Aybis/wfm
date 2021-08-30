@@ -11,14 +11,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function CardReportWork({ day, name, status }) {
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
   const IconName = () => {
     if (name === 'WFH') {
       return (
@@ -53,6 +45,14 @@ export default function CardReportWork({ day, name, status }) {
         <ClockIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-primary rounded-full bg-apps-primary bg-opacity-10 p-2 lg:p-3" />
       );
     }
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
   };
 
   return (

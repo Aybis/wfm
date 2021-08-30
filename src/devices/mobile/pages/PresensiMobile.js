@@ -24,10 +24,10 @@ import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardTitlePageMobile from '../component/molecules/CardTitlePageMobile';
 import LayoutMobile from '../LayoutMobile';
 import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
-import CardReportWork from 'components/molecules/CardReportWork';
 import CardGridMobile from '../component/molecules/CardGridMobile';
 import CardListDay from 'components/molecules/CardListDay';
 import convertDate from 'helpers/hooks/convertDate';
+import CardReportWork from 'devices/desktop/molecules/CardReportWork';
 
 const PresensiMobile = ({ history }) => {
   const USER = useSelector((state) => state.users);

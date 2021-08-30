@@ -46,6 +46,7 @@ export default function TableWithoutHeader({
       opacity: 1,
     },
   };
+
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}

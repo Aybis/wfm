@@ -4,7 +4,7 @@ import MobileMenu from 'section/MobileMenu';
 import Heading from 'components/atoms/Heading';
 import FilterDate from 'components/molecules/FilterDate';
 import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
-import CardReportWork from 'components/molecules/CardReportWork';
+import CardReportWork from 'devices/desktop/molecules/CardReportWork';
 
 const ChartPie = lazy(() => import('components/atoms/ChartPie'));
 const ChartBar = lazy(() => import('components/atoms/ChartBar'));

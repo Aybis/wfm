@@ -4,13 +4,13 @@ import CardTitlePage from 'components/molecules/CardTitlePage';
 import useForm from 'helpers/hooks/useForm';
 import React, { lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import CardReportWork from 'components/molecules/CardReportWork';
-import CardOvertimeApproval from 'components/molecules/CardOvertimeApproval';
+import { isDesktop, isMobile } from 'react-device-detect';
+import LemburanDekstop from 'devices/desktop/pages/LemburanDekstop';
 
-const CardMapCheck = lazy(
-  () => import('components/molecules/CardMapCheck'),
-  500,
-);
+// const CardMapCheck = lazy(
+//   () => import('components/molecules/CardMapCheck'),
+//   500,
+// );
 
 export default function Overtime({ history }) {
   window.scroll(0, 0);
@@ -109,87 +109,9 @@ export default function Overtime({ history }) {
   ];
 
   return (
-    <div className="relative -mt-4">
-      <CardTitlePage goBack={history.goBack} title="Lemburan" />
-
-      <Suspense fallback={<p>Loading ....</p>}>
-        <CardMapCheck
-          status={true}
-          current="WFO"
-          type="in"
-          link="/overtime-in"
-        />
-      </Suspense>
-
-      <div className="grid grid-cols-2 mt-4 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
-        <Select
-          fallbackText={monthNames[bulan]}
-          name="bulan"
-          value={bulan}
-          onClick={setState}>
-          {monthNames.map((item, index) => (
-            <option key={index} value={index + 1}>
-              {item}
-            </option>
-          ))}
-        </Select>
-        <Select
-          fallbackText={`${tahun}`}
-          name="tahun"
-          value={tahun}
-          onClick={setState}>
-          <option value={timeStamp.getFullYear()}>
-            {timeStamp.getFullYear()}
-          </option>
-          <option value="all">All</option>
-        </Select>
-      </div>
-
-      <div className="flex flex-col mt-4">
-        <h2 className="font-semibold text-apps-text lg:text-xl">
-          Laporan Lemburan
-        </h2>
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="overflow-x-auto hidden-scroll flex gap-4 py-3 mt-4 lg:grid lg:grid-cols-4 transition-all duration-300 ease-in-out">
-          {/* card daily */}
-          {workMe.map((item, index) => (
-            <CardReportWork key={index} day={item.hari} name={item.name} />
-          ))}
-          {/* end card daily */}
-        </motion.div>
-      </div>
-
-      <div className="relative mt-8">
-        <div className="flex gap-1 justify-between items-center">
-          <h2 className="font-semibold text-apps-text lg:text-xl">
-            Data Lemburan
-          </h2>
-          <div className="flex justify-center items-center gap-2">
-            <Download onClick={() => alert('Download excel')} />
-            <p className="text-apps-text">Download</p>
-          </div>
-        </div>
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-4 gap-4 mt-8 overflow-auto hidden-scroll h-full">
-          {overtimes.map((item, index) => (
-            <CardOvertimeApproval
-              key={index}
-              date={item.date}
-              hours={item.hours}
-              name={item.name}
-              status={item.status}
-              title={item.title}
-            />
-          ))}
-        </motion.div>
-      </div>
-    </div>
+    <>
+      {isMobile && 'Mobile View'}
+      {isDesktop && <LemburanDekstop history={history} />}
+    </>
   );
 }

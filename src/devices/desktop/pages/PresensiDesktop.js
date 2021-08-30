@@ -1,8 +1,6 @@
 import LoadingCircle from 'components/atoms/LoadingCircle';
 import TableWithoutHeader from 'components/atoms/TableWithoutHeader';
-import CardMapCheck from 'components/molecules/CardMapCheck';
 import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
-import CardReportWork from 'components/molecules/CardReportWork';
 import absensi from 'constants/api/absensi';
 import CardFilterMonthAndYear from 'devices/mobile/component/molecules/CardFilterMonthAndYear';
 import convertDate from 'helpers/hooks/convertDate';
@@ -25,6 +23,8 @@ import {
 import LayoutDekstop from '../LayoutDekstop';
 import CardContainer from '../molecules/CardContainer';
 import CardGridDekstop from '../molecules/CardGridDekstop';
+import CardMapCheck from '../molecules/CardMapCheck';
+import CardReportWork from '../molecules/CardReportWork';
 import CardWorkDesktop from '../molecules/CardWorkDesktop';
 import TitlePageDesktop from '../molecules/TitlePageDesktop';
 
@@ -209,7 +209,9 @@ const PresensiDesktop = ({ history }) => {
                 }></TableWithoutHeader>
             ))
           ) : (
-            <LoadingCircle />
+            <div className="flex justify-center mt-4">
+              <p className="text-gray-500 font-medium">Data Kosong</p>
+            </div>
           )}
         </CardGridDekstop>
       </CardContainer>

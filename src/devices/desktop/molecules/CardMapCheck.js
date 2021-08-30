@@ -1,10 +1,10 @@
 import SetMaps from 'components/atoms/SetMaps';
-import CardKehadiranDekstop from 'devices/desktop/molecules/CardKehadiranDekstop';
 import CardLoading from 'devices/mobile/component/molecules/CardLoading';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
+import CardKehadiranDekstop from './CardKehadiranDekstop';
 
-export default function CardMapCheck() {
+export default function CardMapCheck({ type, link }) {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
 
@@ -32,7 +32,7 @@ export default function CardMapCheck() {
     },
   };
 
-  return USER && ABSEN.status === 'ok' ? (
+  return USER ? (
     <motion.div
       variants={variants}
       initial="hidden"

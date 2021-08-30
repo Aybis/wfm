@@ -1,6 +1,5 @@
 import LoadingCircle from 'components/atoms/LoadingCircle';
 import Modal from 'components/atoms/Modal';
-import CardCeoMessages from 'components/molecules/CardCeoMessages';
 import CardHeadingDesktop from 'components/molecules/CardHeadingDesktop';
 import CardSelebToday from 'components/molecules/CardSelebToday';
 import CardUnit from 'components/molecules/CardUnit';
@@ -19,6 +18,7 @@ import {
 } from 'store/actions/presence';
 import ChildTable from '../atoms/ChildTable';
 import LayoutDekstop from '../LayoutDekstop';
+import CardCeoMessages from '../molecules/CardCeoMessages';
 import CardContainer from '../molecules/CardContainer';
 import CardGridDekstop from '../molecules/CardGridDekstop';
 import CardKehadiranDekstop from '../molecules/CardKehadiranDekstop';

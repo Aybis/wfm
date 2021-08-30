@@ -136,11 +136,16 @@ module.exports = {
       'right-bottom': 'right bottom',
       'right-top': 'right top',
       top: 'top',
+      'pos-0': '0% 0%',
+      'pos-100': '100% 100%',
+      'pos-80': '80% 80%',
     },
     backgroundSize: {
       auto: 'auto',
       cover: 'cover',
       contain: 'contain',
+      'size-100': '100% 100%',
+      'size-200': '200% 200%',
     },
     blur: {
       0: '0',
@@ -912,9 +917,9 @@ module.exports = {
       'hover',
       'focus',
     ],
-    backgroundPosition: ['responsive'],
+    backgroundPosition: ['responsive', 'hover'],
     backgroundRepeat: ['responsive'],
-    backgroundSize: ['responsive'],
+    backgroundSize: ['responsive', 'hover'],
     blur: ['responsive'],
     borderCollapse: ['responsive'],
     borderColor: [

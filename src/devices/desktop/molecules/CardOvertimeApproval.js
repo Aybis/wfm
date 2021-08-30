@@ -46,7 +46,7 @@ export default function CardOvertimeApproval({
       <Link
         to="/details"
         aria-label="detail lembur"
-        className="group flex justify-between bg-white p-4 lg:px-6 rounded-lg lg:flex-col h-auto hover:bg-apps-primary hover:shadow-lg transition-all duration-300 ease-in-out">
+        className=" flex justify-between p-4 lg:px-6 rounded-lg lg:flex-col h-auto bg-gradient-to-br from-white hover:from-coolGray-400 hover:via-coolGray-100 hover:to-coolGray-50 hover:shadow-lg transition-all duration-500 ease-in-out bg-size-200 bg-pos-0 hover:bg-pos-100">
         <div className="flex flex-col gap-3 lg:mt-3 w-3/5 lg:w-full lg:h-32 lg:gap-4 lg:my-2">
           <h1 className="text-sm group-hover:text-white lg:text-base font-medium text-gray-700 capitalize max-h-24">
             {title}

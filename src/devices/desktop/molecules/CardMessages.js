@@ -1,13 +1,15 @@
 import React from 'react';
 
-export default function CardMessages() {
+export default function CardMessages({ name, type }) {
   return (
     <div className="bg-white rounded-lg p-4 w-xs md:w-md lg:w-lg">
       <div className="flex flex-col gap-10 justify-between h-auto xl:max-h-72">
         <div className="bg-gradient-to-br from-lightBlue-400 to-indigo-500 p-4 rounded-lg flex items-center gap-4">
           <img
             loading="lazy"
-            src={`${process.env.PUBLIC_URL}/assets/images/img.jpeg`}
+            src={`https://ui-avatars.com/api/?name=${
+              name ? name : 'Henry Christiadi'
+            }&background=${type === 'ceo' ? '0062FF' : '000'}&color=fff`}
             alt=""
             className={`h-16 w-16 rounded-full p-1`}
           />
