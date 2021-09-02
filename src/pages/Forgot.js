@@ -161,7 +161,7 @@ const Forgot = ({ history }) => {
   return (
     <div className="flex justify-center items-center bg-coolGray-50 h-screen">
       {/* <!--     logo pins --> */}
-      <div className="absolute top-8 right-8">
+      <div className="hidden md:flex md:absolute top-8 right-8">
         <img
           src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
           alt="logo"
@@ -177,10 +177,10 @@ const Forgot = ({ history }) => {
         }`}>
         <div className="p-2 flex items-center justify-center ml-4 sm:hidden">
           <img
-            src={`${process.env.PUBLIC_URL}/assets/svg/ilustrasi_pop.svg`}
+            src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
             alt="bg"
-            className={`transition-all duration-500 ease-in-out${
-              isLoad ? 'h-44 ' : 'h-0 '
+            className={`transition-all duration-500 ease-in-out -mt-14 mb-12 "${
+              isLoad ? 'h-24 w-36  ' : 'h-0 w-0'
             } `}
           />
         </div>
@@ -191,7 +191,7 @@ const Forgot = ({ history }) => {
           <h1 className="md:text-3xl text-2xl text-gray-800 font-bold">
             Forgot Password
           </h1>
-          <h5 className="text-sm lg:text-base text-gray-500 tracking-wide -mt-2 ">
+          <h5 className="text-sm font-light md:font-normal lg:text-base text-gray-500 tracking-wide -mt-2 ">
             Enter your WhatsApp number. We will send you a verification code to
             change your password.
           </h5>
@@ -216,11 +216,13 @@ const Forgot = ({ history }) => {
                 <p className="text-apss-text text-opacity-50">Loading ....</p>
               </div>
             ) : (
-              <button
-                type="submit"
-                className="hover:from-pink-700 hover:to-red-600 transition duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 p-2 rounded-md text-white font-semibold text-lg w-full -mt-2">
-                Submit
-              </button>
+              state.phone.length > 8 && (
+                <button
+                  type="submit"
+                  className="hover:from-pink-700 hover:to-red-600 transition duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 p-2 rounded-md text-white font-semibold text-lg w-full mt-2">
+                  Get OTP
+                </button>
+              )
             )}
           </form>
         )}

@@ -30,7 +30,7 @@ export default function LoginPage({
               src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
               loading="lazy"
               alt="logo"
-              className="h-24 w-36 -mt-14 mb-12 transition-all duration-500 ease-in-out "
+              className="h-24 w-36 -mt-14 mb-12 transition-all duration-500 ease-in-out"
             />
           </ColAnimated>
           <h1 className="text-3xl font-bold tracking-wide text-gray-800">
