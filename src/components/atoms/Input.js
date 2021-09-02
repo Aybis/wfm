@@ -10,6 +10,8 @@ export default function Input({
   labelName,
   inputClassName,
   type,
+  onKeyDown,
+  onKeyUp,
 }) {
   return (
     <div className="flex flex-col gap-2 mb-2 lg:mb-4">
@@ -27,6 +29,8 @@ export default function Input({
         name={name}
         onChange={onChange}
         type={type}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
         autoComplete="off"
         className={[
           'border-2 focus:outline-none transition-all duration-300 ease-in-out border-gray-200 p-3 font-regular rounded-lg  placeholder-gray-300 lg:text-lg',

@@ -41,7 +41,7 @@ export default function CardKehadiran() {
     },
   };
 
-  return USER && ABSEN.status === 'ok' ? (
+  return USER ? (
     <motion.div
       variants={variants}
       initial="hidden"

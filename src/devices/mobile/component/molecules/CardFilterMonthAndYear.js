@@ -2,7 +2,10 @@ import Select from 'components/atoms/Select';
 import useForm from 'helpers/hooks/useForm';
 import React from 'react';
 
-export default function CardFilterMonthAndYear({ handlerOnChange }) {
+export default function CardFilterMonthAndYear({
+  handlerOnChange,
+  border = false,
+}) {
   const timeStamp = new Date();
   const [{ bulan, tahun }, setState] = useForm({
     bulan: new Date().getMonth() + 1,
@@ -31,6 +34,7 @@ export default function CardFilterMonthAndYear({ handlerOnChange }) {
         name="bulan"
         value={bulan}
         onClick={setState}
+        border={border}
         handlerChange={handlerOnChange}>
         {monthNames.map((item, index) => (
           <option key={index} value={index + 1}>
@@ -43,6 +47,7 @@ export default function CardFilterMonthAndYear({ handlerOnChange }) {
         name="tahun"
         value={tahun}
         onClick={setState}
+        border={border}
         handlerChange={handlerOnChange}>
         <option value={timeStamp.getFullYear()}>
           {timeStamp.getFullYear()}

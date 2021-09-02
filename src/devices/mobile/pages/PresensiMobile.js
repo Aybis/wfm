@@ -113,7 +113,7 @@ const PresensiMobile = ({ history }) => {
 
   return (
     <LayoutMobile>
-      <CardTitlePageMobile name="Presensi" link={history.goBack} />
+      <CardTitlePageMobile title="Presensi" link={history.goBack} />
 
       {/* Kehadiran  */}
       <Card>

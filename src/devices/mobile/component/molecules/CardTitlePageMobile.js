@@ -2,7 +2,7 @@ import { ArrowSmLeftIcon } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function CardTitlePageMobile({ link, name }) {
+export default function CardTitlePageMobile({ link, title }) {
   return (
     <motion.div
       initial={{ y: -60, opacity: 0 }}
@@ -17,8 +17,8 @@ export default function CardTitlePageMobile({ link, name }) {
         </button>
       </div>
       <div className="flex col-span-2 justify-center items-center">
-        <h1 className="text-gray-800 text-2xl tracking-wide font-semibold">
-          {name}
+        <h1 className="text-gray-800 text-2xl tracking-wide font-semibold uppercase">
+          {title}
         </h1>
       </div>
       <div></div>
