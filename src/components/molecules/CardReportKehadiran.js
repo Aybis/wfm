@@ -57,7 +57,7 @@ export default function CardReportKehadiran({ name, hari, value }) {
   return (
     <motion.div
       variants={item}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={`flex flex-none flex-col rounded-md w-1/2 lg:w-full gap-4 p-4 bg-white`}>
       <div className="flex justify-between items-center">

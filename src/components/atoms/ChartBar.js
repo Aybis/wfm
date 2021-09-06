@@ -1,82 +1,81 @@
-import React, { useLayoutEffect, useRef } from "react";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import * as am4core from "@amcharts/amcharts4/core";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
 
-am4core.useTheme(am4themes_animated);
+const ChartBar = ({ title }) => {
+  const data = {
+    labels: ['Hadir', 'Sakit', 'Cuti', 'SPPD', 'Cuti'],
+    datasets: [
+      {
+        label: '# of Employee',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+          'rgba(255, 99, 132)',
+          'rgba(54, 162, 235)',
+          'rgba(255, 206, 86)',
+          'rgba(75, 192, 192)',
+          'rgba(153, 102, 255)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-export default function ChartBar({ data, id, title }) {
-  const chart = useRef(null);
-
-  useLayoutEffect(() => {
-    // Create chart instance
-    let chartBar = am4core.create(id, am4charts.XYChart);
-
-    chartBar.marginRight = 400;
-
-    // Add data
-    chartBar.data = data;
-
-    // Create axes Bar
-    let categoryAxis = chartBar.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "status";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 10;
-
-    let titleChart = chartBar.titles.create();
-    titleChart.text = title;
-    titleChart.fontSize = 20;
-    titleChart.marginBottom = 30;
-    titleChart.align = "center";
-
-    let valueAxis = chartBar.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = "Jumlah Karyawan / (Direktorat)";
-    valueAxis.title.fontWeight = 200;
-
-    // Create series
-    let series = chartBar.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = "hadir";
-    series.dataFields.categoryX = "status";
-    series.name = "Hadir";
-    series.tooltipText = "{name}: [bold]{valueY}[/]";
-    series.stacked = true;
-
-    let series2 = chartBar.series.push(new am4charts.ColumnSeries());
-    series2.dataFields.valueY = "tidak hadir";
-    series2.dataFields.categoryX = "status";
-    series2.name = "Tidak Hadir";
-    series2.tooltipText = "{name}: [bold]{valueY}[/]";
-    series2.stacked = true;
-
-    let series3 = chartBar.series.push(new am4charts.ColumnSeries());
-    series3.dataFields.valueY = "terlambat";
-    series3.dataFields.categoryX = "status";
-    series3.name = "Terlambat";
-    series3.tooltipText = "{name}: [bold]{valueY}[/]";
-    series3.stacked = true;
-
-    let series4 = chartBar.series.push(new am4charts.ColumnSeries());
-    series4.dataFields.valueY = "keterangan";
-    series4.dataFields.categoryX = "status";
-    series4.name = "Keterangan";
-    series4.tooltipText = "{name}: [bold]{valueY}[/]";
-    series4.stacked = true;
-    // End axes Bar -===========================
-
-    // Add cursor
-    chartBar.cursor = new am4charts.XYCursor();
-
-    // ...
-    chart.current = chartBar;
-
-    return () => {
-      chartBar.dispose();
-    };
-  }, [data, id, title]);
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Custom Chart Title',
+        padding: {
+          top: 10,
+          bottom: 30,
+        },
+      },
+    },
+    legend: {
+      display: true,
+      position: 'right',
+      align: 'center',
+    },
+    scales: {
+      yAxes: [
+        {
+          grid: {
+            drawBorder: true,
+            display: false,
+          },
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+      xAxes: [
+        {
+          grid: {
+            drawBorder: true,
+            display: false,
+            drawTicks: false,
+          },
+        },
+      ],
+    },
+  };
 
   return (
-    <div
-      className="font-semibold bg-white py-4 text-sm rounded-lg overflow-clip truncate antialiased h-96 w-full"
-      id={id}></div>
+    <div className="flex h-72 lg:h-full ">
+      <div className="relative w-full xl:h-96">
+        <Bar data={data} options={options} />
+      </div>
+    </div>
   );
-}
+};
+
+export default ChartBar;
