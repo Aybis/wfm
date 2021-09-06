@@ -6,12 +6,12 @@ import {
   TrendingDownIcon,
   TrendingUpIcon,
 } from '@heroicons/react/solid';
-import ChartBarGroup from 'components/atoms/ChartBarGroup';
-import ChartDoughnut from 'components/atoms/ChartDoughnut';
-import Table from 'components/molecules/Table';
-import Heading from 'devices/desktop/atoms/Heading';
-import Menu from 'devices/desktop/section/Menu';
-import MobileMenu from 'devices/mobile/sections/MobileMenu';
+import Heading from 'components/devices/desktop/atoms/Heading';
+import Menu from 'components/devices/desktop/section/Menu';
+import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
+import ChartBarGroup from 'components/devices/universal/atoms/ChartBarGroup';
+import ChartDoughnut from 'components/devices/universal/atoms/ChartDoughnut';
+import Table from 'components/devices/universal/molecules/Table';
 import React from 'react';
 import { isDesktop } from 'react-device-detect';
 

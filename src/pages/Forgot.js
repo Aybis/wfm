@@ -1,7 +1,7 @@
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import { CheckIcon, EyeIcon } from '@heroicons/react/solid';
-import Input from 'components/atoms/Input';
-import Loading from 'components/atoms/Loading';
+import Input from 'components/devices/universal/atoms/Input';
+import Loading from 'components/devices/universal/atoms/Loading';
 import users from 'constants/api/users';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';

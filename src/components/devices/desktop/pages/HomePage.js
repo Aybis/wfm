@@ -1,9 +1,9 @@
-import LoadingCircle from 'components/atoms/LoadingCircle';
-import Modal from 'components/atoms/Modal';
-import CardHeadingDesktop from 'components/molecules/CardHeadingDesktop';
-import CardSelebToday from 'components/molecules/CardSelebToday';
-import CardUnit from 'components/molecules/CardUnit';
-import Carousel from 'components/molecules/Carousel';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
+import Modal from 'components/devices/universal/atoms/Modal';
+import CardHeadingDesktop from 'components/devices/universal/molecules/CardHeadingDesktop';
+import CardSelebToday from 'components/devices/universal/molecules/CardSelebToday';
+import CardUnit from 'components/devices/universal/molecules/CardUnit';
+import Carousel from 'components/devices/universal/molecules/Carousel';
 import { setAuthorizationHeader } from 'configs/axios';
 import absensi from 'constants/api/absensi';
 import users from 'constants/api/users';

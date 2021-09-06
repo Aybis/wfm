@@ -1,7 +1,7 @@
-import CardLoading from 'devices/mobile/component/molecules/CardLoading';
 import { motion } from 'framer-motion';
 import convertDate from 'helpers/hooks/convertDate';
 import { useSelector } from 'react-redux';
+import CardLoading from './CardLoading';
 
 export default function CardDay() {
   const ABSEN = useSelector((state) => state.presence);

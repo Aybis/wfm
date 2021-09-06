@@ -1,9 +1,9 @@
-import Textarea from 'components/atoms/Textarea';
-import CardApprover from 'components/molecules/CardApprover';
-import CardMapsInOut from 'components/molecules/CardMapsInOut';
-import CardTime from 'components/molecules/CardTime';
-import CardTitlePage from 'components/molecules/CardTitlePage';
-import LabelValueHorizontal from 'components/molecules/LabelValueHorizontal';
+import Textarea from 'components/devices/universal/atoms/Textarea';
+import CardApprover from 'components/devices/universal/molecules/CardApprover';
+import CardMapsInOut from 'components/devices/universal/molecules/CardMapsInOut';
+import CardTime from 'components/devices/universal/molecules/CardTime';
+import CardTitlePage from 'components/devices/universal/molecules/CardTitlePage';
+import LabelValueHorizontal from 'components/devices/universal/molecules/LabelValueHorizontal';
 import { useEffect } from 'react';
 
 const DetailApproval = ({ history }) => {

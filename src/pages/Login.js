@@ -1,3 +1,5 @@
+import LoginPage from 'components/devices/desktop/pages/LoginPage';
+import LoginMobile from 'components/devices/mobile/pages/LoginPage';
 import { setAuthorizationHeader } from 'configs/axios';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
@@ -7,8 +9,6 @@ import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { populateProfile } from 'store/actions/users';
 import users from '../constants/api/users';
-import LoginDesktop from '../devices/desktop/pages/LoginPage';
-import LoginMobile from '../devices/mobile/pages/LoginPage';
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -98,7 +98,7 @@ const Login = ({ history }) => {
   return (
     <>
       {isDesktop && (
-        <LoginDesktop
+        <LoginPage
           isSubmit={isSubmit}
           username={username}
           password={password}

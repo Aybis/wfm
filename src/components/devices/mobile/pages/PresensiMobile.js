@@ -1,4 +1,3 @@
-import LoadingCircle from 'components/atoms/LoadingCircle';
 import absensi from 'constants/api/absensi';
 import ToastHandler from 'helpers/hooks/toast';
 import React from 'react';
@@ -23,11 +22,12 @@ import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
 import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardTitlePageMobile from '../component/molecules/CardTitlePageMobile';
 import LayoutMobile from '../LayoutMobile';
-import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
 import CardGridMobile from '../component/molecules/CardGridMobile';
-import CardListDay from 'components/molecules/CardListDay';
 import convertDate from 'helpers/hooks/convertDate';
-import CardReportWork from 'devices/desktop/molecules/CardReportWork';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
+import CardListDay from 'components/devices/universal/molecules/CardListDay';
+import CardReportKehadiran from 'components/devices/universal/molecules/CardReportKehadiran';
+import CardReportWork from 'components/devices/desktop/molecules/CardReportWork';
 
 const PresensiMobile = ({ history }) => {
   const USER = useSelector((state) => state.users);

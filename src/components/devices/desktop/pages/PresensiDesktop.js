@@ -1,8 +1,8 @@
-import LoadingCircle from 'components/atoms/LoadingCircle';
-import TableWithoutHeader from 'components/atoms/TableWithoutHeader';
-import CardReportKehadiran from 'components/molecules/CardReportKehadiran';
+import CardFilterMonthAndYear from 'components/devices/mobile/component/molecules/CardFilterMonthAndYear';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
+import TableWithoutHeader from 'components/devices/universal/atoms/TableWithoutHeader';
+import CardReportKehadiran from 'components/devices/universal/molecules/CardReportKehadiran';
 import absensi from 'constants/api/absensi';
-import CardFilterMonthAndYear from 'devices/mobile/component/molecules/CardFilterMonthAndYear';
 import convertDate from 'helpers/hooks/convertDate';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect } from 'react';

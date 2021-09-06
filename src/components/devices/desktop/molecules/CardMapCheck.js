@@ -1,5 +1,5 @@
-import SetMaps from 'components/atoms/SetMaps';
-import CardLoading from 'devices/mobile/component/molecules/CardLoading';
+import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
+import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import CardKehadiranDekstop from './CardKehadiranDekstop';

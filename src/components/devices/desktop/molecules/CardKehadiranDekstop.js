@@ -1,4 +1,4 @@
-import CardLoading from 'devices/mobile/component/molecules/CardLoading';
+import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';

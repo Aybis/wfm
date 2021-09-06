@@ -1,5 +1,4 @@
-import CardFilterMonthAndYear from 'devices/mobile/component/molecules/CardFilterMonthAndYear';
-import convertDate from 'helpers/hooks/convertDate';
+import CardFilterMonthAndYear from 'components/devices/mobile/component/molecules/CardFilterMonthAndYear';
 import React, { lazy, Suspense } from 'react';
 import LayoutDekstop from '../LayoutDekstop';
 import CardContainer from '../molecules/CardContainer';
@@ -13,8 +12,8 @@ const CardMapCheck = lazy(() => import('../molecules/CardMapCheck'), 500);
 
 const LemburanDekstop = ({ history }) => {
   const handlerOnChange = (type, value) => {
-    let month = type === 'bulan' ? value : convertDate('month');
-    let year = type === 'tahun' ? value : convertDate('fullYear');
+    // let month = type === 'bulan' ? value : convertDate('month');
+    // let year = type === 'tahun' ? value : convertDate('fullYear');
   };
 
   return (

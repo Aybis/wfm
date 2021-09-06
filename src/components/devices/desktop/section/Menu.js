@@ -1,4 +1,4 @@
-import Avatar from 'components/atoms/Avatar';
+import Avatar from 'components/devices/universal/atoms/Avatar';
 import { motion } from 'framer-motion';
 import notify from 'helpers/hooks/toast';
 import React from 'react';

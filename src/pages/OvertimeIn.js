@@ -1,8 +1,8 @@
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronLeftIcon } from '@heroicons/react/solid';
-import Input from 'components/atoms/Input';
-import Label from 'components/atoms/Label';
-import SetMaps from 'components/atoms/SetMaps';
+import Input from 'components/devices/universal/atoms/Input';
+import Label from 'components/devices/universal/atoms/Label';
+import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';

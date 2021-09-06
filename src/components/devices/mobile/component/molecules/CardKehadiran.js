@@ -1,4 +1,4 @@
-import SetMaps from 'components/atoms/SetMaps';
+import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -80,7 +80,7 @@ export default function CardKehadiran() {
                 }}
                 className={`p-2 text-white font-medium rounded w-full text-center transition-all duration-300 ease-in-out ${
                   belumAbsen
-                    ? 'bg-apps-primary active:bg-lightBlue-700'
+                    ? 'bg-apps-primary active:bg-sky-700'
                     : 'bg-red-600 active:bg-red-700'
                 }`}>
                 {belumAbsen && 'Check In'}

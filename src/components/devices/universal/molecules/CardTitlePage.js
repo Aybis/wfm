@@ -1,5 +1,5 @@
-import Back from 'components/atoms/Back';
 import React from 'react';
+import Back from '../atoms/Back';
 
 export default function CardTitlePage({ goBack, title }) {
   return (

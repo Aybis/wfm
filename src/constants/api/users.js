@@ -6,7 +6,7 @@ export default {
   getotp: (credentials) => axios.post('auth/otp/generate', credentials),
   verifotp: (credentials) => axios.post('auth/otp/verification', credentials),
   changePassword: (data) => axios.post('auth/otp/change_password', data),
-  allTroops: (page) => axios.get(`crm/inisiasi/won?page=${page}`),
+  allTroops: () => axios.get(`/cms/user/get`),
   details: () => axios.get('auth/token/detail'),
   refresh: () => axios.post('auth/token/refresh'),
   allUnit: () => axios.get('cms/unit/get'),

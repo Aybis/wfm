@@ -1,5 +1,5 @@
-import PresensiDesktop from 'devices/desktop/pages/PresensiDesktop';
-import PresensiMobile from 'devices/mobile/pages/PresensiMobile';
+import PresensiDesktop from 'components/devices/desktop/pages/PresensiDesktop';
+import PresensiMobile from 'components/devices/mobile/pages/PresensiMobile';
 import React from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
 

@@ -1,4 +1,4 @@
-import Select from 'components/atoms/Select';
+import Select from 'components/devices/universal/atoms/Select';
 import useForm from 'helpers/hooks/useForm';
 import React from 'react';
 

@@ -1,4 +1,3 @@
-import LoadingCircle from 'components/atoms/LoadingCircle';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -13,7 +12,8 @@ import {
 } from '@heroicons/react/outline';
 import ColAnimated from '../molecules/ColAnimated';
 import IconOnly from '../atoms/IconOnly';
-import Input from 'components/atoms/Input';
+import Input from 'components/devices/universal/atoms/Input';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 
 export default function LoginPage({
   isSubmit,

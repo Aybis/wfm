@@ -1,7 +1,7 @@
-import Select from 'components/atoms/Select';
-import CardOvertimeApproval from 'devices/desktop/molecules/CardOvertimeApproval';
-import Menu from 'devices/desktop/section/Menu';
-import MobileMenu from 'devices/mobile/sections/MobileMenu';
+import CardOvertimeApproval from 'components/devices/desktop/molecules/CardOvertimeApproval';
+import Menu from 'components/devices/desktop/section/Menu';
+import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
+import Select from 'components/devices/universal/atoms/Select';
 import { motion } from 'framer-motion';
 import useForm from 'helpers/hooks/useForm';
 import React from 'react';

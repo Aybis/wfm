@@ -1,5 +1,5 @@
-import LemburanDekstop from 'devices/desktop/pages/LemburanDekstop';
-import LemburanMobile from 'devices/mobile/pages/LemburanMobile';
+import LemburanDekstop from 'components/devices/desktop/pages/LemburanDekstop';
+import LemburanMobile from 'components/devices/mobile/pages/LemburanMobile';
 import React from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
 

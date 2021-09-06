@@ -1,5 +1,5 @@
-import Modal from 'components/atoms/Modal';
-import Carousel from 'components/molecules/Carousel';
+import Modal from 'components/devices/universal/atoms/Modal';
+import Carousel from 'components/devices/universal/molecules/Carousel';
 import absensi from 'constants/api/absensi';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';

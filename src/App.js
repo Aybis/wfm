@@ -1,4 +1,4 @@
-import LoadingCircle from 'components/atoms/LoadingCircle';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import Authenticated from 'components/Routes/Authenticated';
 import { setAuthorizationHeader } from 'configs/axios';
 import users from 'constants/api/users';

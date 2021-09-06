@@ -1,6 +1,6 @@
-import Input from 'components/atoms/Input';
-import LoadingCircle from 'components/atoms/LoadingCircle';
-import ColAnimated from 'devices/desktop/molecules/ColAnimated';
+import ColAnimated from 'components/devices/desktop/molecules/ColAnimated';
+import Input from 'components/devices/universal/atoms/Input';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
