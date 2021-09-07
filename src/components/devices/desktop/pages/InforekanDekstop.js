@@ -1,3 +1,5 @@
+import { UserCircleIcon } from '@heroicons/react/solid';
+import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import { setAuthorizationHeader } from 'configs/axios';
 import users from 'constants/api/users';
 import { motion } from 'framer-motion';
@@ -9,56 +11,64 @@ import FilterInforekan from '../molecules/FilterInforekan';
 import TitlePageDesktop from '../molecules/TitlePageDesktop';
 
 export default function InforekanDekstop({ history }) {
-  const TOTAL_DATA = 20;
-  const [totalData, setTotalData] = useState(TOTAL_DATA);
+  const [dataList, setdataList] = useState([]);
+  const [items, setitems] = useState(10);
+  const [isLoading, setisLoading] = useState(false);
+  const [didMount, setDidMount] = useState(false);
 
-  const [state, setState] = useState([]);
   const session = localStorage['WFM:token']
     ? JSON.parse(localStorage['WFM:token'])
     : null;
 
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
-  const scrollToEnd = () => {
-    setTotalData(totalData + 20);
-  };
-
-  const getDataEmployee = () => {
-    console.log(totalData);
+  const getDataUser = () => {
     setAuthorizationHeader(`Bearer ${session.token}`);
-
     users
       .allTroops()
       .then((res) => {
-        setState([...state, ...res.data.slice(0, totalData)]);
+        setdataList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  /* code for infinite scroll */
   window.onscroll = function () {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
       document.documentElement.offsetHeight
     ) {
-      setTimeout(() => {
-        scrollToEnd();
-      }, 500);
+      loadMoreData();
     }
   };
+
+  const loadMoreData = () => {
+    if (isLoading) {
+      return;
+    }
+    setisLoading(true);
+    setTimeout(() => {
+      setitems((prev) => {
+        return prev + 10;
+      });
+      setisLoading(false);
+      getDataUser();
+    }, 1000);
+  };
+
   useEffect(() => {
-    getDataEmployee();
+    getDataUser();
+    setDidMount(true);
+    return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalData]);
+  }, [isLoading, items]);
+
+  if (!didMount) {
+    return null;
+  }
 
   return (
-    <LayoutDekstop>
+    <LayoutDekstop moreClass="hidden-scroll">
       <CardContainer>
         <TitlePageDesktop link={history.goBack} title="Inforekan" />
       </CardContainer>
@@ -83,7 +93,7 @@ export default function InforekanDekstop({ history }) {
                 <h1 className="font-bold text-2xl tracking-wider text-gray-800">
                   Henry Christiadi
                 </h1>
-                <h2 className="font-medium mt-1 tracking-wide text-gray-500">
+                <h2 className="mt-1 tracking-wide text-gray-400">
                   Direktur Utama | 720465
                 </h2>
                 <h4 className="text-sm text-gray-500 mt-10 tracking-wider ">
@@ -168,26 +178,28 @@ export default function InforekanDekstop({ history }) {
         </CardGridDekstop>
         {/* Section End Filter Grouping  */}
 
-        <CardGridDekstop moreClass="my-4 pt-4 lg:grid-cols-4 2xl:grid-cols-5">
-          {state.map((data) => (
+        <CardGridDekstop moreClass="my-4 pt-4 lg:grid-cols-4 2xl:grid-cols-5 mb-4">
+          {dataList.slice(0, items).map((data) => (
             <motion.div
-              variants={item}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               key={Math.random()}
               className="flex p-4 flex-col justify-center items-center rounded-lg bg-gray-50 cursor-pointer">
-              <img
-                src="https://i.pravatar.cc/100"
-                alt=""
-                className="h-40 w-40 rounded-full border border-gray-200 p-2"
-              />
-              <h1 className="mt-4 font-semibold text-gray-800 tracking-wide">
-                {data.name}
+              <UserCircleIcon className="h-28 w-28 text-gray-400 border border-gray-200 rounded-full" />
+              <h1 className="mt-4 font-semibold text-gray-800 tracking-wide text-center capitalize">
+                {data.name.toLowerCase()}
               </h1>
               <h1 className="mt-1 text-gray-400">{data.nik}</h1>
             </motion.div>
           ))}
         </CardGridDekstop>
+        {isLoading ? (
+          <div className="flex justify-center items-center">
+            <LoadingCircle />
+          </div>
+        ) : (
+          ''
+        )}
       </CardContainer>
       {/* Section End Report Monthly */}
     </LayoutDekstop>
