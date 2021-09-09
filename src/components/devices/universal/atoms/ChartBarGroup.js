@@ -1,23 +1,39 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const ChartBarGroup = ({ title }) => {
+const ChartBarGroup = ({ title, dataSets }) => {
+  let labelOne = dataSets.map((item) => {
+    return item.wfo;
+  });
+
+  let labelTwo = dataSets.map((item) => {
+    return item.wfh;
+  });
+
+  let labelThree = dataSets.map((item) => {
+    return item.satlit;
+  });
+
   const data = {
-    labels: ['Non.Dir', 'OPS', 'FBS', 'Sales'],
+    // labels: ['Non.Dir', 'Sales', 'OPS', 'FBS'],
+    labels: dataSets.map((item) => {
+      return item.name;
+    }),
+
     datasets: [
       {
         label: 'At Office',
-        data: [12, 19, 3, 5],
+        data: labelOne,
         backgroundColor: '#BFDBFE',
       },
       {
         label: 'At Home',
-        data: [2, 3, 20, 5],
+        data: labelTwo,
         backgroundColor: '#60A5FA',
       },
       {
         label: 'At Satelit',
-        data: [3, 10, 13, 15],
+        data: labelThree,
         backgroundColor: '#2563EB',
       },
     ],

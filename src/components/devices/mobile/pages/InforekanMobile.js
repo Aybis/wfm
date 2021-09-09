@@ -4,6 +4,7 @@ import { setAuthorizationHeader } from 'configs/axios';
 import users from 'constants/api/users';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import Card from '../component/molecules/Card';
 import CardGridMobile from '../component/molecules/CardGridMobile';
 import CardTitlePageMobile from '../component/molecules/CardTitlePageMobile';
 import LayoutMobile from '../LayoutMobile';
@@ -67,6 +68,22 @@ export default function InforekanMobile({ history }) {
   return (
     <LayoutMobile isShow={false}>
       <CardTitlePageMobile title="Inforekan" link={history.goBack} />
+
+      <Card addClass="mb-24">
+        <div className="relative bg-transparent h-24">
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/images/hc2.png`}
+            alt="dirut"
+            className="h-36 absolute left-4 z-10"
+          />
+          <div
+            className="relative top-0 h-36 text-left pl-24 p-2 rounded-l-none rounded-r-xl bg-blue-400 shadow-lg  mr-4"
+            style={{ borderTopLeftRadius: '10rem' }}>
+            <h1>Henry Chrstiadi</h1>
+            <h2>Direktur Utama</h2>
+          </div>
+        </div>
+      </Card>
 
       <CardGridMobile col={2} isHeading heading="Karyawan">
         {dataList.slice(0, items).map((data) => (

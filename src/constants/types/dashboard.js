@@ -1,0 +1,6 @@
+export const FETCH_TIDAK_HADIR = 'FETCH_TIDAK_HADIR';
+export const FETCH_DIREKTORAT = 'FETCH_DIREKTORAT';
+export const FETCH_UNIT = 'FETCH_UNIT';
+export const FETCH_KEHADIRAN = 'FETCH_KEHADIRAN';
+export const MESSAGE_DATA = 'MESSAGE_DATA';
+export const STATUS_DATA = 'STATUS_DATA';

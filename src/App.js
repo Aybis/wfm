@@ -18,7 +18,7 @@ import OvertimeOut from 'pages/OvertimeOut';
 import Presensi from 'pages/Presensi';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect, Route, Router, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { populateProfile } from 'store/actions/users';
 import Gate from './components/Routes/Gate';
@@ -44,23 +44,23 @@ function App() {
           dispatch(populateProfile(details.data));
         })
         .catch((err) => {
-          if (err) {
-            // remove token
-            localStorage.removeItem('WFM:token');
-            // remove cookies
-            document.cookie.split(';').forEach(function (c) {
-              document.cookie = c
-                .replace(/^ +/, '')
-                .replace(
-                  /=.*/,
-                  '=;expires=' + new Date().toUTCString() + ';path=/',
-                );
-            });
-            // redirect link
-            <Redirect push to="/login" />;
-            // reload page
-            window.location.reload();
-          }
+          // if (err) {
+          //   // remove token
+          //   localStorage.removeItem('WFM:token');
+          //   // remove cookies
+          //   document.cookie.split(';').forEach(function (c) {
+          //     document.cookie = c
+          //       .replace(/^ +/, '')
+          //       .replace(
+          //         /=.*/,
+          //         '=;expires=' + new Date().toUTCString() + ';path=/',
+          //       );
+          //   });
+          //   // redirect link
+          //   <Redirect push to="/login" />;
+          //   // reload page
+          //   window.location.reload();
+          // }
         });
     }
   }, [dispatch]);

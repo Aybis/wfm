@@ -10,7 +10,7 @@ import users from 'constants/api/users';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataWeekly, statusData } from 'store/actions/absensi';
+import { dataWeekly, messageData, statusData } from 'store/actions/absensi';
 import {
   isCheckIn,
   messagePresence,
@@ -43,6 +43,7 @@ export default function HomePage() {
       .then((response) => {
         if (response.status === 200) {
           dispatch(dataWeekly(response.data));
+          dispatch(messageData('ok'));
         }
       })
       .catch((error) => {
@@ -107,7 +108,7 @@ export default function HomePage() {
     return null;
   }
 
-  return (
+  return ABSENSI.message === 'ok' ? (
     <LayoutDekstop>
       {/* Start Modal */}
       <Modal
@@ -121,11 +122,15 @@ export default function HomePage() {
       {/* Section Absensi */}
       <CardContainer moreClass="bg-white">
         <CardKehadiranDekstop />
-        <CardGridDekstop col={5}>
-          {Object.values(ABSENSI.dataWeekly)?.map?.((item) => {
-            return <CardWorkDesktop data={item} key={Math.random()} />;
-          })}
-        </CardGridDekstop>
+        {ABSENSI.dataWeekly.length > 0 ? (
+          <CardGridDekstop col={5}>
+            {ABSENSI.dataWeekly.map((item) => {
+              return <CardWorkDesktop data={item} key={Math.random()} />;
+            })}
+          </CardGridDekstop>
+        ) : (
+          ''
+        )}
       </CardContainer>
       {/* End Section Absensi */}
 
@@ -178,5 +183,7 @@ export default function HomePage() {
       </CardContainer>
       {/* End Section Hari Libur */}
     </LayoutDekstop>
+  ) : (
+    ''
   );
 }

@@ -1,60 +1,7 @@
-/* This example requires Tailwind CSS v2.0+ */
-const people = [
-  {
-    name: 'Operation and Regional',
-    hadir: 10,
-    sakit: 5,
-    cuti: 12,
-    sppd: 24,
-    terlambat: 100,
-  },
-  {
-    name: 'CORPORATE AFFAIR',
-    hadir: 10,
-    sakit: 5,
-    cuti: 12,
-    sppd: 24,
-    terlambat: 100,
-  },
-  {
-    name: 'STRATEGIC PLANNING & INVESTMENT',
-    hadir: 10,
-    sakit: 5,
-    cuti: 12,
-    sppd: 24,
-    terlambat: 100,
-  },
-  {
-    name: 'BUSINESS INNOVATION & SOLUTION',
-    hadir: 10,
-    sakit: 5,
-    cuti: 12,
-    sppd: 24,
-    terlambat: 100,
-  },
-  {
-    name: 'ENTERPRISE BUSINESS',
-    hadir: 10,
-    sakit: 5,
-    cuti: 12,
-    sppd: 24,
-    terlambat: 100,
-  },
-  {
-    name: 'GOVERNMENT, POLICE & MILITARY BUSINESS',
-    hadir: 10,
-    sakit: 5,
-    cuti: 12,
-    sppd: 24,
-    terlambat: 100,
-  },
-  // More people...
-];
-
-export default function Table() {
+export default function Table({ dataSet }) {
   return (
     <div className="flex flex-col">
-      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-4">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className=" overflow-hidden sm:rounded-lg">
             <table className="min-w-full divide-y divide-coolGray-200">
@@ -90,49 +37,59 @@ export default function Table() {
                     className="text-center px-6 py-3 text-sm font-medium text-gray-400 capitalize">
                     Sppd
                   </th>
+                  <th
+                    scope="col"
+                    className="text-center px-6 py-3 text-sm font-medium text-gray-400 capitalize">
+                    Total Karyawan
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {people.map((person, personIdx) => (
+                {dataSet.map((data, personIdx) => (
                   <tr
                     key={Math.random()}
                     className={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 capitalize">
-                      {person.name.toLowerCase()}
+                      {data.name.toLowerCase()}
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                       <span
-                        onClick={() => alert(person.hadir)}
+                        onClick={() => alert(data.hadir)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                        {person.hadir}
+                        {data.hadir}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                       <span
-                        onClick={() => alert(person.hadir)}
+                        onClick={() => alert(data.total_karyawan - data.hadir)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                        {person.hadir}
+                        {data.total_karyawan - data.hadir}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                       <span
-                        onClick={() => alert(person.sakit)}
+                        onClick={() => alert(data.sakit)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                        {person.sakit}
+                        {data.sakit}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
                       <span
-                        onClick={() => alert(person.cuti)}
+                        onClick={() => alert(data.cuti)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                        {person.cuti}
+                        {data.cuti}
                       </span>
                     </td>
                     <td className="px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
                       <span
-                        onClick={() => alert(person.terlambat)}
+                        onClick={() => alert(data.sppd)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
-                        {person.terlambat}
+                        {data.sppd}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
+                      <span className="text-gray-600 hover:text-gray-800 transition-all duration-300 cursor-pointer">
+                        {data.total_karyawan}
                       </span>
                     </td>
                   </tr>
