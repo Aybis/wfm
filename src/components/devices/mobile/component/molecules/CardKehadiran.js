@@ -29,23 +29,23 @@ export default function CardKehadiran() {
     return value;
   };
 
-  const variants = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  // const variants = {
+  //   hidden: { opacity: 1, scale: 0 },
+  //   visible: {
+  //     opacity: 1,
+  //     scale: 1,
+  //     transition: {
+  //       delayChildren: 0.2,
+  //       staggerChildren: 0.2,
+  //     },
+  //   },
+  // };
 
   return USER ? (
     <motion.div
-      variants={variants}
-      initial="hidden"
-      animate="visible"
+      // variants={variants}
+      // initial="hidden"
+      // animate="visible"
       className="relative grid grid-cols-1 rounded-md mb-8 mt-8 shadow-lg">
       {!isCheckOut ? (
         <>

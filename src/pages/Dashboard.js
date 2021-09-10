@@ -61,20 +61,20 @@ export default function Dashboard() {
       return y.persentase - x.persentase;
     });
 
-    return sort.map((item, index) => (
+    return sort.slice(0, 6).map((item, index) => (
       <div
         key={Math.random()}
         className="flex border-2 justify-between border-gray-200 gap-4 bg-white rounded-lg py-4 px-8 items-center">
         <h1 className="text-2xl font-bold">{index + 1}</h1>
-        <div className="flex flex-col px-3">
-          <h1 className="font-semibold">{item.name}</h1>
-          <h2 className="text-gray-400 text-sm">
+        <div className="flex flex-col gap-1 md:gap-0 w-2/3 px-3">
+          <h1 className="font-semibold text-sm md:text-base ">{item.name}</h1>
+          <h2 className="text-gray-400 text-xs md:text-sm ">
             {item.persentase > 0 ? item.persentase : 0} % of{' '}
             {item.totalKaryawan} Employee
           </h2>
         </div>
-        <div className="flex text-green-500">
-          <UserGroupIcon className="h-6 w-6 " />
+        <div className="flex justify-center items-center gap-1 text-green-500">
+          <UserGroupIcon className="h-5 w-5 " />
           <span>{item.hadir}</span>
         </div>
       </div>
@@ -92,7 +92,7 @@ export default function Dashboard() {
             {item.name === 'wfo' && 'At Office'}
             {item.name === 'satelit' && 'At Satelit'}
             {item.name === 'telat' && 'Terlambat'}
-            {item.name === 'tidak_hadir' && 'Tidak Hadir'}
+            {item.name === 'tidak_hadir' && 'Belum Hadir'}
           </h4>
           <h1 className="text-2xl tracking-wide sm:text-4xl font-bold text-gray-800">
             {item.value}
@@ -134,7 +134,7 @@ export default function Dashboard() {
   return DASHBOARD.message === 'ok' ? (
     <div className="relative w-full h-screen bg-coolGray-100">
       <div
-        className={`container mx-auto fixed inset-y-0 inset-0 mb-20 lg:mb-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-20 hidden-scroll ${
+        className={`container mx-auto fixed inset-y-0 inset-0 mb:20 lg:mb-10 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-14 md:pb-4 hidden-scroll ${
           isDesktop && 'mt-32'
         }`}>
         {/* Menu For Dekstop Only */}
@@ -147,12 +147,12 @@ export default function Dashboard() {
         </div>
 
         {/* Section Report Harian */}
-        <div className="relative mt-4">
+        <div className="relative mt-4 pb-24 lg:pb-0">
           <Heading heading="Report Harian" />
 
           {/* Report Harian */}
-          <div className="flex overflow-x-auto hidden-scroll sm:grid sm:grid-cols-2 lg:grid-cols-4  gap-4 py-4 mt-4 rounded-lg">
-            {dataCard()}
+          <div className="flex overflow-x-auto hidden-scroll md:grid md:grid-cols-2 lg:grid-cols-4 md:place-content-center  gap-4 py-4 mt-4 rounded-lg">
+            {DASHBOARD.dataKehadiran.length > 0 ? dataCard() : ''}
           </div>
           {/* End Report Harian */}
 
@@ -198,7 +198,6 @@ export default function Dashboard() {
                     Unit Rating
                   </h2>
                 </div>
-
                 <div className="grid grid-cols-1 gap-4">{sortingData()}</div>
               </div>
             </div>

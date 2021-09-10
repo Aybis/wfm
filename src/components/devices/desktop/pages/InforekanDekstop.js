@@ -4,6 +4,15 @@ import { setAuthorizationHeader } from 'configs/axios';
 import users from 'constants/api/users';
 import { motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import {
+  fetchAll,
+  fetchDirektorat,
+  fetchJabatan,
+  fetchSubUnit,
+  fetchUnit,
+} from 'store/actions/employee';
 import LayoutDekstop from '../LayoutDekstop';
 import CardContainer from '../molecules/CardContainer';
 import CardGridDekstop from '../molecules/CardGridDekstop';
@@ -15,6 +24,8 @@ export default function InforekanDekstop({ history }) {
   const [items, setitems] = useState(10);
   const [isLoading, setisLoading] = useState(false);
   const [didMount, setDidMount] = useState(false);
+  const EMPLOYEE = useSelector((state) => state.employee);
+  const dispatch = useDispatch();
 
   const session = localStorage['WFM:token']
     ? JSON.parse(localStorage['WFM:token'])
@@ -25,7 +36,52 @@ export default function InforekanDekstop({ history }) {
     users
       .allTroops()
       .then((res) => {
+        dispatch(fetchAll(res.data));
         setdataList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getListDirektorat = () => {
+    users
+      .allDirektorat()
+      .then((res) => {
+        dispatch(fetchDirektorat(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getListUnit = () => {
+    users
+      .allUnit()
+      .then((res) => {
+        dispatch(fetchUnit(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getListSubUnit = () => {
+    users
+      .allSubUnit()
+      .then((res) => {
+        dispatch(fetchSubUnit(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getListPosition = () => {
+    users
+      .allPosition()
+      .then((res) => {
+        dispatch(fetchJabatan(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -58,6 +114,10 @@ export default function InforekanDekstop({ history }) {
 
   useEffect(() => {
     getDataUser();
+    getListDirektorat();
+    getListPosition();
+    getListSubUnit();
+    getListUnit();
     setDidMount(true);
     return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +147,11 @@ export default function InforekanDekstop({ history }) {
             loading="lazy"
           />
 
-          <div className="bg-gray-50 h-auto md:w-2xl lg:w-4xl xl:w-7xl max-w-7xl rounded-3xl lg:-mt-56 shadow-2xl p-8">
+          <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="bg-gray-50 h-auto md:w-2xl lg:w-4xl xl:w-7xl max-w-7xl rounded-3xl lg:-mt-56 shadow-2xl p-8">
             <div className="grid grid-cols-3">
               <div className="flex flex-col justify-center">
                 <h1 className="font-bold text-2xl tracking-wider text-gray-800">
@@ -164,17 +228,21 @@ export default function InforekanDekstop({ history }) {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </CardContainer>
 
       {/* Section End Report Monthly */}
-      <CardContainer moreClass="mt-12" heading="Employee">
+      <CardContainer
+        moreClass="mt-12"
+        heading="Employee"
+        subheading={`Result : ${dataList.length} Karyawan`}>
+        {dataList.length === 0 && <LoadingCircle />}
         {/* Section Filter Grouping  */}
         <CardGridDekstop
           col={6}
           moreClass="my-8 justify-center items-center container mx-auto  p-2 divide-x-2 divide-coolGray-100 bg-white rounded-lg shadow-md">
-          <FilterInforekan />
+          <FilterInforekan data={EMPLOYEE} />
         </CardGridDekstop>
         {/* Section End Filter Grouping  */}
 

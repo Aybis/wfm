@@ -1,5 +1,3 @@
-/** @format */
-
 import { ClockIcon, LoginIcon, LogoutIcon } from '@heroicons/react/outline';
 import React from 'react';
 
@@ -21,14 +19,12 @@ export default function CardTime({ title, time }) {
   };
 
   return (
-    <div className="flex gap-2 items-center justify-center">
+    <div className="flex gap-4 items-center justify-center">
       <IconCardTime />
 
       <div className="flex flex-col text-sm">
-        <h4 className="text-apps-text font-medium text-opacity-40 uppercase">
-          {title}
-        </h4>
-        <h6 className=" font-semibold text-apps-text">{time}</h6>
+        <h4 className="text-gray-400 tracking-wide uppercase">{title}</h4>
+        <h6 className=" font-semibold text-gray-800">{time}</h6>
       </div>
     </div>
   );

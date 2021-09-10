@@ -1,10 +1,16 @@
+import CardGridDekstop from 'components/devices/desktop/molecules/CardGridDekstop';
+import Menu from 'components/devices/desktop/section/Menu';
+import HeadingMobile from 'components/devices/mobile/component/atoms/HeadingMobile';
+import Card from 'components/devices/mobile/component/molecules/Card';
+import CardTitlePageMobile from 'components/devices/mobile/component/molecules/CardTitlePageMobile';
 import Textarea from 'components/devices/universal/atoms/Textarea';
 import CardApprover from 'components/devices/universal/molecules/CardApprover';
 import CardMapsInOut from 'components/devices/universal/molecules/CardMapsInOut';
 import CardTime from 'components/devices/universal/molecules/CardTime';
-import CardTitlePage from 'components/devices/universal/molecules/CardTitlePage';
 import LabelValueHorizontal from 'components/devices/universal/molecules/LabelValueHorizontal';
+import useForm from 'helpers/hooks/useForm';
 import { useEffect } from 'react';
+import { isDesktop } from 'react-device-detect';
 
 const DetailApproval = ({ history }) => {
   const markOne = [
@@ -58,6 +64,10 @@ const DetailApproval = ({ history }) => {
     },
   ];
 
+  const [state, setState] = useForm({
+    keterangan: '',
+  });
+
   const reportTime = [
     {
       title: 'in',
@@ -78,25 +88,28 @@ const DetailApproval = ({ history }) => {
   }, []);
 
   return (
-    <div className="relative -mb-20">
-      <CardTitlePage goBack={history.goBack} title="Detail Lemburan" />
+    <div className="flex w-full min-h-screen h-full bg-coolGray-100">
+      <div
+        className={`container mx-auto fixed inset-y-0 inset-0 pb:20 lg:pb-10 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-14 md:pb-4 hidden-scroll ${
+          isDesktop && 'mt-32'
+        }`}>
+        {/* Menu For Dekstop Only */}
+        <Menu />
+        <CardTitlePageMobile link={history.goBack} title="Detail lemburan" />
 
-      <div className="flex flex-col mt-8 gap-4 lg:gap-6">
-        {/* Card Map  */}
-        <div className="flex flex-col w-full bg-white p-4 rounded-md">
-          <h1 className="font-semibold text-apps-text mb-4">
-            Overtime Locations
-          </h1>
-          <div className="rounded-md">
-            <CardMapsInOut mark={markOne} className="w-full min-h-full h-96" />
-          </div>
-        </div>
-        {/* End Card Map */}
-        {/* Card Detail Lemburan  */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="flex flex-col justify-between bg-white rounded-md">
+        <CardGridDekstop col={1} moreClass="mt-4 gap-2 lg:grid-cols-2">
+          <Card addClass="rounded-lg bg-white p-4 lg:col-span-2">
+            <HeadingMobile heading="Location Map" />
+            <div className="rounded-md mt-4">
+              <CardMapsInOut
+                mark={markOne}
+                className="w-full min-h-full h-96"
+              />
+            </div>
+          </Card>
+          <Card addClass="-my-4 flex flex-col justify-between bg-white rounded-md">
             <div className="flex flex-col gap-3 p-4">
-              <h1 className="font-semibold text-apps-text mb-4">
+              <h1 className="font-semibold text-gray-800 mb-4">
                 Overtime Summary
               </h1>
               <LabelValueHorizontal label="Nama" value="Abdul Muchtar Astria" />
@@ -123,10 +136,10 @@ const DetailApproval = ({ history }) => {
                 <CardTime key={index} time={item.time} title={item.title} />
               ))}
             </div>
-          </div>
-          <div className="flex flex-col justify-between bg-white rounded-md">
+          </Card>
+          <Card addClass="-my-4 flex flex-col justify-between bg-white rounded-md">
             <div className="grid grid-cols-1 gap-4 p-4">
-              <h1 className="font-semibold text-apps-text mb-2">
+              <h1 className="font-semibold text-gray-800 mb-2">
                 Overtime Approval
               </h1>
               {dataApproval.map((item, index) => (
@@ -140,9 +153,12 @@ const DetailApproval = ({ history }) => {
                 />
               ))}
             </div>
-          </div>
-          <div className="flex flex-col rounded-md lg:col-start-1 lg:col-end-3 bg-white p-4">
+          </Card>
+          <Card addClass=" lg:col-span-2 flex flex-col rounded-md bg-white p-4">
             <Textarea
+              name="keterangan"
+              value={state.keterangan}
+              onChange={setState}
               inputClassName="W-full"
               labelName="Comment"
               placeholder="Oke..."
@@ -160,9 +176,8 @@ const DetailApproval = ({ history }) => {
                 Approve
               </button>
             </div>
-          </div>
-        </div>
-        {/* End Card Detail Lemburan  */}
+          </Card>
+        </CardGridDekstop>
       </div>
     </div>
   );

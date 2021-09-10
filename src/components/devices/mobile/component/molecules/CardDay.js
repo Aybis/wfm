@@ -7,6 +7,36 @@ export default function CardDay() {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
 
+  let masukPagi = 8.15;
+  let masukSiang = 11.15;
+  let masukMalam = 21.15;
+  let colorClock = 'text-apps-primary';
+  let disiplin = true;
+  let reportTimeOut = 'Disiplin';
+
+  if (
+    ABSEN.data.is_shift <= 1 &&
+    convertDate('hoursMinutes', ABSEN.dataIn.jam) >= masukPagi
+  ) {
+    colorClock = 'text-red-500';
+    reportTimeOut = 'Tidak Disiplin';
+    disiplin = false;
+  } else if (
+    ABSEN.data.is_shift === 2 &&
+    convertDate('hoursMinutes', ABSEN.dataIn.jam) >= masukSiang
+  ) {
+    reportTimeOut = 'Tidak Disiplin';
+    colorClock = 'text-red-500';
+    disiplin = false;
+  } else if (
+    ABSEN.data.is_shift === 3 &&
+    convertDate('hoursMinutes', ABSEN.dataIn.jam) >= masukMalam
+  ) {
+    reportTimeOut = 'Tidak Disiplin';
+    colorClock = 'text-red-500';
+    disiplin = false;
+  }
+
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -26,7 +56,10 @@ export default function CardDay() {
           <h3 className="text-sm font-normal text-gray-500">
             {ABSEN.dataIn.lokasi ?? 'Belum Absen'}
           </h3>
-          <h3 className="text-sm lg:text-base font-semibold mt-2 text-gray-700">
+          <h3
+            className={`text-sm lg:text-base font-semibold mt-2 ${
+              disiplin ? 'text-gray-700' : colorClock
+            }`}>
             {ABSEN.dataIn.jam ? convertDate('fullTime', ABSEN.dataIn.jam) : ''}
           </h3>
         </div>
@@ -34,7 +67,7 @@ export default function CardDay() {
         <div className="flex items-center justify-center w-1/3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-10 w-10 text-apps-primary text-opacity-40 "
+            className={`h-10 w-10 ${colorClock} text-opacity-40`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor">
@@ -50,7 +83,7 @@ export default function CardDay() {
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
           <h2 className="font-bold text-apps-primary text-lg">
-            {ABSEN.data.kehadiran ?? 'OTW'}
+            {ABSEN.data.kehadiran ?? ''}
           </h2>
           <h3 className={`text-sm lg:text-base text-gray-500`}>
             {ABSEN.dataOut.jam ? ABSEN.dataOut.lokasi : ''}
@@ -63,6 +96,11 @@ export default function CardDay() {
           </h4>
         </div>
       </div>
+      {!disiplin && (
+        <div className="bg-gray-50 rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500">
+          {ABSEN.data.keterangan ?? reportTimeOut}
+        </div>
+      )}
     </motion.div>
   ) : (
     <CardLoading />

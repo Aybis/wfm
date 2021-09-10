@@ -77,9 +77,9 @@ export default function Carousel() {
       style={{ top: '50%' }}>
       <span role="img" aria-label={`Arrow ${isLeft ? 'left' : 'right'}`}>
         {isLeft ? (
-          <ChevronLeftIcon className="text-apps-primary h-8 w-8 lg:h-12 lg:w-12 p-1" />
+          <ChevronLeftIcon className="text-black h-8 w-8 lg:h-12 lg:w-12 p-1" />
         ) : (
-          <ChevronRightIcon className="text-apps-primary h-8 w-8 lg:h-12 lg:w-12 p-1" />
+          <ChevronRightIcon className="text-black h-8 w-8 lg:h-12 lg:w-12 p-1" />
         )}
       </span>
     </button>

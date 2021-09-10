@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function CardFlex({ children }) {
+export default function CardScrollHorizontal({ children, moreClass }) {
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -16,7 +16,10 @@ export default function CardFlex({ children }) {
   return (
     <motion.div
       variants={container}
-      className="flex overflow-x-auto hidden-scroll gap-4 mt-4 py-2 transition-all duration-300 ease-in-out">
+      className={[
+        'flex overflow-x-auto hidden-scroll gap-4 mt-4 py-2 transition-all duration-300 ease-in-out',
+        moreClass,
+      ].join(' ')}>
       {children}
     </motion.div>
   );

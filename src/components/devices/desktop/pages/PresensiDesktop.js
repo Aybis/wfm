@@ -125,7 +125,7 @@ const PresensiDesktop = ({ history }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [USER, dispatch]);
 
-  return (
+  return USER ? (
     <LayoutDekstop>
       <CardContainer>
         <TitlePageDesktop link={history.goBack} title="Presensi" />
@@ -142,9 +142,10 @@ const PresensiDesktop = ({ history }) => {
         subheading="List Kerja Mingguan"
         moreClass="-mt-14">
         <CardGridDekstop moreClass="mt-4 py-2" col={5}>
-          {Object.values(ABSENSI.dataWeekly)?.map?.((item) => (
-            <CardWorkDesktop data={item} withBg key={Math.random()} />
-          ))}
+          {ABSENSI.dataWeekly.length > 0 &&
+            ABSENSI.dataWeekly.map((item) => (
+              <CardWorkDesktop data={item} withBg key={Math.random()} />
+            ))}
         </CardGridDekstop>
       </CardContainer>
 
@@ -199,8 +200,11 @@ const PresensiDesktop = ({ history }) => {
                 key={Math.random()}
                 kehadiran={data.kehadiran}
                 kondisi={data.kondisi}
+                is_shift={data.is_shift}
                 locIn={data.detail_absensi[0].lokasi}
                 timeIn={data.detail_absensi[0].jam}
+                keterangan={data.keterangan}
+                status={data.checkout_status}
                 locOut={
                   data.detail_absensi[1] ? data.detail_absensi[1].lokasi : null
                 }
@@ -216,6 +220,8 @@ const PresensiDesktop = ({ history }) => {
         </CardGridDekstop>
       </CardContainer>
     </LayoutDekstop>
+  ) : (
+    ''
   );
 };
 

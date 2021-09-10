@@ -7,10 +7,13 @@ import CardOvertimeApproval from '../molecules/CardOvertimeApproval';
 import CardReportWork from '../molecules/CardReportWork';
 import FilterGroupingLemburanDekstop from '../molecules/FilterGroupingLemburanDekstop';
 import TitlePageDesktop from '../molecules/TitlePageDesktop';
+import dataCeoMessages from 'json/dataCeoMessages';
 
 const CardMapCheck = lazy(() => import('../molecules/CardMapCheck'), 500);
 
 const LemburanDekstop = ({ history }) => {
+  const dataJson = dataCeoMessages;
+
   const handlerOnChange = (type, value) => {
     // let month = type === 'bulan' ? value : convertDate('month');
     // let year = type === 'tahun' ? value : convertDate('fullYear');
@@ -38,13 +41,13 @@ const LemburanDekstop = ({ history }) => {
       <CardContainer
         heading="Report Overtime"
         subheading="Report Lemburan Bulan Ini">
-        <CardGridDekstop moreClass="my-4 pt-4 lg:grid-cols-3 2xl:grid-cols-5">
-          {Array.from({ length: 5 }).map((index) => (
+        <CardGridDekstop col={4} moreClass="my-4 pt-4">
+          {dataJson.dataLemburan.map((data) => (
             <CardReportWork
               key={Math.random()}
-              status="Jam"
-              name="Progress"
-              day={20}
+              day={data.value}
+              name={data.name}
+              status={data.type}
             />
           ))}
         </CardGridDekstop>
@@ -63,14 +66,13 @@ const LemburanDekstop = ({ history }) => {
         {/* Section End Filter Grouping  */}
 
         <CardGridDekstop moreClass="my-4 pt-4 lg:grid-cols-3 2xl:grid-cols-4">
-          {Array.from({ length: 20 }).map((index) => (
+          {dataJson.documentLemburan.map((data) => (
             <CardOvertimeApproval
               key={Math.random()}
-              date="Monday, 17 May"
-              hours="5 : 23"
-              name=""
-              status="progress"
-              title="Make design and flow mobile pop and create backend presensi online"
+              date={data.date}
+              hours={data.time}
+              status={data.status}
+              title={data.title}
             />
           ))}
         </CardGridDekstop>

@@ -1,10 +1,11 @@
 import {
-  ClockIcon,
+  ArchiveIcon,
   LoginIcon,
   LogoutIcon,
   UserIcon,
 } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
+import convertDate from 'helpers/hooks/convertDate';
 import React from 'react';
 
 export default function TableWithoutHeader({
@@ -15,30 +16,37 @@ export default function TableWithoutHeader({
   locOut,
   timeOut,
   kondisi,
+  is_shift,
+  keterangan,
+  status,
 }) {
-  let options = {
-    month: 'long',
-    day: 'numeric',
-    weekday: 'long',
-    year: 'numeric',
-  };
+  let masukPagi = 8.15;
+  let masukSiang = 11.15;
+  let masukMalam = 21.15;
+  let keteranganAbsensi = 'On Time';
+  let colorClock = 'text-apps-primary';
+  let reportTimeOut = 'Disiplin';
 
-  let dateIn = new Date(timeIn);
-  let dateOut = new Date(timeOut);
+  if (is_shift <= 1 && convertDate('hoursMinutes', timeIn) > masukPagi) {
+    keteranganAbsensi = 'Terlambat';
+    colorClock = 'text-red-500';
+    reportTimeOut = 'Tidak Disiplin';
+  } else if (
+    is_shift === 2 &&
+    convertDate('hoursMinutes', timeIn) > masukSiang
+  ) {
+    keteranganAbsensi = 'Terlambat';
+    reportTimeOut = 'Tidak Disiplin';
+    colorClock = 'text-red-500';
+  } else if (
+    is_shift === 3 &&
+    convertDate('hoursMinutes', timeIn) > masukMalam
+  ) {
+    keteranganAbsensi = 'Terlambat';
+    reportTimeOut = 'Tidak Disiplin';
+    colorClock = 'text-red-500';
+  }
 
-  const getTimeOnly = (date) => {
-    return (
-      date.getHours() +
-      ':' +
-      date.getMinutes() +
-      ':' +
-      (date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`)
-    );
-  };
-
-  const getDateFullOnly = (date) => {
-    return date.toLocaleDateString('id-ID', options);
-  };
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -49,8 +57,8 @@ export default function TableWithoutHeader({
 
   return (
     <motion.div
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.85 }}
       variants={item}
       className="bg-white mx-4 hover:shadow-lg my-2 transition-all duration-300 ease-in-out flex border-2 border-gray-100 rounded-lg divide-x-2 divide-opacity-20 justify-between p-4">
       {/* <!--         presensi  --> */}
@@ -63,14 +71,17 @@ export default function TableWithoutHeader({
             <h6 className=" text-sm font-medium text-gray-400 group-hover:text-gray-100">
               {locIn}
             </h6>
+            {keterangan && (
+              <p className="text-sm text-red-500 font-medium">{keterangan}</p>
+            )}
           </div>
 
           <div className="flex flex-col gap-2 justify-center text-right">
             <h4 className="text-sm text-gray-400 group-hover:text-gray-100">
-              {getDateFullOnly(dateIn)}
+              {convertDate('fullDayMonthYear', timeIn)}
             </h4>
             <h6 className="text-sm font-semibold text-gray-800 group-hover:text-white">
-              {getTimeOnly(dateIn)}
+              {convertDate('fullTime', timeIn)}
             </h6>
           </div>
         </div>
@@ -107,21 +118,26 @@ export default function TableWithoutHeader({
         <div className="flex gap-4 w-2/5 text-left">
           <div className="flex flex-col gap-2 justify-center">
             <h4 className="text-sm text-gray-400 group-hover:text-gray-100">
-              {timeOut ? getDateFullOnly(dateOut) : 'On Duty'}
+              {timeOut ? convertDate('fullDayMonthYear', timeOut) : 'On Duty'}
             </h4>
             <h6 className="text-sm font-semibold text-gray-800 group-hover:text-white">
-              {timeOut ? getTimeOnly(dateOut) : 'On Duty'}
+              {timeOut ? convertDate('fullTime', timeOut) : 'On Duty'}
             </h6>
           </div>
           <div
             className={`${
-              timeOut ? '' : 'flex-1'
-            } flex flex-col gap-2 text-right`}>
+              locOut ? '' : 'flex-1'
+            } flex flex-col gap-2 text-right w-full`}>
             <h4 className="font-bold text-gray-800 group-hover:text-white text-lg">
               {kehadiran}
             </h4>
+            <p>{''}</p>
             <h6 className=" text-sm font-medium text-gray-400 group-hover:text-gray-100">
-              {locOut ? locOut : 'On Duty'}
+              {status === 'Normal'
+                ? locOut
+                  ? locOut
+                  : 'On Duty'
+                : reportTimeOut}
             </h6>
           </div>
         </div>
@@ -136,21 +152,29 @@ export default function TableWithoutHeader({
           </h4>
         </div>
         <div className="flex items-center gap-2">
-          <LoginIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
+          <LoginIcon
+            className={`h-6 w-6 ${colorClock} group-hover:text-gray-300`}
+          />
           <h4 className="text-gray-600 group-hover:text-white font-medium">
-            {getTimeOnly(dateIn)}
+            {keteranganAbsensi}
           </h4>
         </div>
         <div className="flex items-center gap-2">
-          <ClockIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
+          <ArchiveIcon
+            className={`h-6 w-6  group-hover:text-gray-300 ${colorClock}`}
+          />
           <h4 className="text-gray-600 group-hover:text-white font-medium">
-            On Time
+            {reportTimeOut}
           </h4>
         </div>
         <div className="flex items-center gap-2">
-          <LogoutIcon className="h-6 w-6 text-apps-primary group-hover:text-gray-300" />
-          <h4 className="text-gray-600 group-hover:text-white font-medium">
-            {timeOut ? getTimeOnly(dateOut) : 'On Duty'}
+          <LogoutIcon
+            className={`h-6 w-6 ${
+              status === 'Normal' ? 'text-apps-primary' : 'text-red-500'
+            } group-hover:text-gray-300`}
+          />
+          <h4 className="text-gray-600 capitalize group-hover:text-white font-medium">
+            {status}
           </h4>
         </div>
       </div>

@@ -37,7 +37,7 @@ export default function CardMapCheck({ type, link }) {
       variants={variants}
       initial="hidden"
       animate="visible"
-      className="relative grid grid-cols-1 rounded-md mb-8 mt-8 shadow-lg">
+      className="relative grid grid-cols-1 rounded-md mb-8 mt-8">
       {!isCheckOut ? (
         <>
           <SetMaps

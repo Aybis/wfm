@@ -30,21 +30,15 @@ export default function CardWorkDesktop(props) {
 
   const ShowIconDaily = () => {
     if (props.data.kehadiran === 'WFH') {
-      return (
-        <HomeIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
-      );
+      return <HomeIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />;
     } else if (props.data.kehadiran === 'WFO') {
       return (
-        <OfficeBuildingIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
+        <OfficeBuildingIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />
       );
     } else if (props.data.kehadiran === 'Satelit') {
-      return (
-        <GlobeAltIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
-      );
+      return <GlobeAltIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />;
     } else {
-      return (
-        <ClockIcon className="xl:h-16 xl:w-16 sm:h-14 sm:w-14  p-2 rounded-lg bg-gray-100" />
-      );
+      return <ClockIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />;
     }
   };
 
@@ -56,10 +50,10 @@ export default function CardWorkDesktop(props) {
       }`}>
       <ShowIconDaily />
       <div className="flex flex-col text-left">
-        <h2 className="text-base 2xl:text-base font-medium text-gray-500">
+        <h2 className="text-sm 2xl:text-base font-medium text-gray-500">
           {props.data ? convertDate('day', props.data.created_at) : ''}
         </h2>
-        <h1 className="text-base 2xl:text-lg font-semibold text-gray-800">
+        <h1 className="text-sm 2xl:text-lg font-semibold text-gray-800">
           Work {nameOfKehadiran}
         </h1>
       </div>

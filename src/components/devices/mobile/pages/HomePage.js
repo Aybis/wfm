@@ -1,6 +1,8 @@
 import Modal from 'components/devices/universal/atoms/Modal';
+import CardTeam from 'components/devices/universal/molecules/CardTeam';
 import Carousel from 'components/devices/universal/molecules/Carousel';
 import absensi from 'constants/api/absensi';
+import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,13 +21,18 @@ import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardMessageMobile from '../component/molecules/CardMessageMobile';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
 import CardWorkMobile from '../component/molecules/CardWorkMobile';
+import dataCeoMessages from 'json/dataCeoMessages';
 import LayoutMobile from '../LayoutMobile';
+import DetailCeoMessage from 'components/devices/desktop/molecules/DetailCeoMessage';
 
 export default function HomePage() {
   const USER = useSelector((state) => state.users);
   const ABSENSI = useSelector((state) => state.absensi);
   const [dataHoliday, setdataHoliday] = useState(false);
   const [showModal, setshowModal] = useState(false);
+  const [showModalCeoMessage, setshowModalCeoMessage] = useState(false);
+  const [detailMessageCeo, setdetailMessageCeo] = useState([]);
+  const dataJson = dataCeoMessages;
   const dispatch = useDispatch();
 
   const reportWeeklyPersonal = () => {
@@ -71,6 +78,40 @@ export default function HomePage() {
       });
   };
 
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const handlerClickSendWa = (data) => {
+    absensi
+      .notifWa({
+        id: data.id,
+        nama_atasan: data.atasan,
+      })
+      .then((res) => {
+        ToastHandler('success', res.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handlerOnClickMessageCEO = (event, data) => {
+    setdetailMessageCeo({
+      date: data.tanggal,
+      message: data.message,
+    });
+    setshowModalCeoMessage(true);
+  };
+
   useEffect(() => {
     window.scroll(0, 0);
     setshowModal(true);
@@ -97,6 +138,15 @@ export default function HomePage() {
         <Carousel />
       </Modal>
       {/* End Modal */}
+
+      {/* Modal CEO Messages */}
+      <Modal
+        title="CEO Messages"
+        isShowModal={() => setshowModalCeoMessage(false)}
+        show={showModalCeoMessage}>
+        <DetailCeoMessage data={detailMessageCeo} />
+      </Modal>
+      {/* End Modal CEO Messages */}
 
       {/* Kehadiran  */}
       <Card>
@@ -137,26 +187,12 @@ export default function HomePage() {
           subheading="Lorem ipsum astafaragus."
         />
         <CardScrollHorizontal>
-          {Array.from({ length: 5 }).map((index) => {
-            return <CardMessageMobile type="ceo" key={Math.random()} />;
-          })}
-        </CardScrollHorizontal>
-      </Card>
-      {/* End CEO Messages */}
-
-      {/* CEO Messages */}
-      <Card>
-        <CardHeadingMobile
-          heading="Selebs Today"
-          subheading="Late of Absence Employee list"
-        />
-        <CardScrollHorizontal>
-          {Array.from({ length: 5 }).map((index) => {
+          {dataJson.dataMessageCeo.map((data) => {
             return (
               <CardMessageMobile
-                name="Abdul Muchtar"
-                message="Maaf telat, tadi pesawatnya abis bensin di karawang."
-                type="seleb"
+                data={data}
+                type="ceo"
+                onClick={handlerOnClickMessageCEO}
                 key={Math.random()}
               />
             );
@@ -164,6 +200,48 @@ export default function HomePage() {
         </CardScrollHorizontal>
       </Card>
       {/* End CEO Messages */}
+
+      {/* Selebs Today */}
+      <Card>
+        <CardHeadingMobile
+          heading="Selebs Today"
+          subheading="Late of Absence Employee list"
+        />
+        <CardScrollHorizontal>
+          {dataJson.dataSelebsToday.map((data) => {
+            return (
+              <CardMessageMobile data={data} type="seleb" key={Math.random()} />
+            );
+          })}
+        </CardScrollHorizontal>
+      </Card>
+      {/* End Selebs Today */}
+
+      {/* Card Team Mate */}
+      <Card>
+        <CardHeadingMobile
+          heading="Teammate"
+          subheading="List Team Member your Unit"
+        />
+        <CardScrollHorizontal>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="visible"
+            className="overflow-x-auto hidden-scroll flex gap-4 p-2">
+            {/* card team */}
+            {dataJson.dataTeamMate.map((team) => (
+              <CardTeam
+                key={Math.random()}
+                data={team}
+                onClick={handlerClickSendWa}
+              />
+            ))}
+            {/* end card team */}
+          </motion.div>
+        </CardScrollHorizontal>
+      </Card>
+      {/* Card Teammate */}
 
       <Card>
         <CardHeadingMobile

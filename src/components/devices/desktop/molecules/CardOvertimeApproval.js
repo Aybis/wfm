@@ -75,7 +75,7 @@ export default function CardOvertimeApproval({
           </h4>
           <ChevronRightIcon className="h-7 w-7 lg:h-8 lg:w-8 bg-apps-primary bg-opacity-10 text-apps-primary group-hover:bg-gray-100 group-hover:bg-opacity-30 group-hover:text-white p-1 rounded" />
         </div>
-        <div className="hidden lg:block border border-gray-50 mx-8 my-4"></div>
+        <div className="hidden lg:block border border-gray-200 mx-8 my-4"></div>
 
         <div className="hidden lg:flex lg:justify-between ">
           <div className="flex flex-col gap-1">

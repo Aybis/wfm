@@ -10,4 +10,7 @@ export default {
   details: () => axios.get('auth/token/detail'),
   refresh: () => axios.post('auth/token/refresh'),
   allUnit: () => axios.get('cms/unit/get'),
+  allDirektorat: () => axios.get('cms/direktorat/get'),
+  allSubUnit: () => axios.get('cms/subunit/get'),
+  allPosition: () => axios.get('cms/position/get'),
 };

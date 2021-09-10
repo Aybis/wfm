@@ -180,11 +180,13 @@ const PresensiMobile = ({ history }) => {
             {ABSENSI.data.map((data) => (
               <CardListDay
                 key={Math.random()}
-                date={data.created_at}
                 type={data.kehadiran}
                 kondisi={data.kondisi}
+                is_shift={data.is_shift}
                 locIn={data.detail_absensi[0].lokasi}
                 timeIn={data.detail_absensi[0].jam}
+                keterangan={data.keterangan}
+                status={data.checkout_status}
                 locOut={
                   data.detail_absensi[1] ? data.detail_absensi[1].lokasi : null
                 }

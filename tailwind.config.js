@@ -1001,7 +1001,7 @@ module.exports = {
     justifySelf: ['responsive'],
     letterSpacing: ['responsive'],
     lineHeight: ['responsive'],
-    listStylePosition: ['responsive'],
+    listStylePosition: ['responsive', 'hover', 'focus'],
     listStyleType: ['responsive'],
     margin: ['responsive'],
     maxHeight: ['responsive'],

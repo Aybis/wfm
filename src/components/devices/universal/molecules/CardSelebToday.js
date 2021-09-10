@@ -1,4 +1,4 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/outline';
 import React, { createRef, useState } from 'react';
 import { isDesktop } from 'react-device-detect';
 import CardTesting from './CardTesting';
@@ -70,9 +70,9 @@ export default function CardSelebToday() {
       style={{ top: '50%' }}>
       <span role="img" aria-label={`Arrow ${isLeft ? 'left' : 'right'}`}>
         {isLeft ? (
-          <ChevronLeftIcon className="text-apps-pink h-8 w-8 lg:h-12 lg:w-12 p-1" />
+          <ArrowLeftIcon className="text-black h-8 w-8 lg:h-10 lg:w-10 p-2" />
         ) : (
-          <ChevronRightIcon className="text-apps-pink h-8 w-8 lg:h-12 lg:w-12 p-1" />
+          <ArrowRightIcon className="text-black h-8 w-8 lg:h-10 lg:w-10 p-2" />
         )}
       </span>
     </button>

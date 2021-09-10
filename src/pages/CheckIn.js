@@ -136,7 +136,7 @@ const CheckIn = ({ history }) => {
       <motion.div className="flex flex-col min-h-screen h-full bg-white">
         <CardBarAbsensi link={history.goBack} />
         <SetMaps
-          popup={popUp}
+          popup={!popUp}
           sendlongLat={sendlongLat}
           sendAddress={sendAddress}
         />

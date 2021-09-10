@@ -49,45 +49,45 @@ export default function Table({ dataSet }) {
                   <tr
                     key={Math.random()}
                     className={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 capitalize">
+                    <td className="px-6 py-4 md:whitespace-nowrap text-sm font-medium text-gray-900 capitalize">
                       {data.name.toLowerCase()}
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-center lg:whitespace-nowrap text-sm text-gray-500">
                       <span
                         onClick={() => alert(data.hadir)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
                         {data.hadir}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-center lg:whitespace-nowrap text-sm text-gray-500">
                       <span
                         onClick={() => alert(data.total_karyawan - data.hadir)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
                         {data.total_karyawan - data.hadir}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-center lg:whitespace-nowrap text-sm text-gray-500">
                       <span
                         onClick={() => alert(data.sakit)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
                         {data.sakit}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 text-center lg:whitespace-nowrap text-sm text-gray-500">
                       <span
                         onClick={() => alert(data.cuti)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
                         {data.cuti}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 text-center lg:whitespace-nowrap text-sm font-medium">
                       <span
                         onClick={() => alert(data.sppd)}
                         className="text-apps-primary hover:text-blue-600 transition-all duration-300 cursor-pointer">
                         {data.sppd}
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-center whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 text-center lg:whitespace-nowrap text-sm font-medium">
                       <span className="text-gray-600 hover:text-gray-800 transition-all duration-300 cursor-pointer">
                         {data.total_karyawan}
                       </span>

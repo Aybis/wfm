@@ -23,4 +23,5 @@ export default {
   overtimeListPersonal: () => axios.get('report-personal'),
   overtimeIn: (data) => axios.post('overtime/check-in/', data),
   overtimeOut: (data) => axios.get('overtime/check-out/', data),
+  notifWa: (data) => axios.post('notifikasi/notif-to-subordinate', data),
 };

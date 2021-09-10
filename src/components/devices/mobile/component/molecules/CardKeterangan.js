@@ -7,11 +7,11 @@ export default function CardKeterangan({ shift = 0, kondisi, children }) {
 
   if (kondisi !== 'sehat' || kondisi === '') {
     console.log(kondisi);
-  } else if (shift <= 1 && convertDate('hoursMinutes') > masukPagi) {
+  } else if (shift <= 1 && convertDate('hoursMinutes') >= masukPagi) {
     console.log(shift);
-  } else if (shift === 2 && convertDate('hoursMinutes') > masukSiang) {
+  } else if (shift === 2 && convertDate('hoursMinutes') >= masukSiang) {
     console.log(shift);
-  } else if (shift === 3 && convertDate('hoursMinutes') > masukMalam) {
+  } else if (shift === 3 && convertDate('hoursMinutes') >= masukMalam) {
     console.log(shift);
   } else {
     return false;
