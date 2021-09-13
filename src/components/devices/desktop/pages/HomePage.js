@@ -168,7 +168,7 @@ export default function HomePage() {
       {/* End Section CEO Message */}
 
       {/* Section Selebs Today */}
-      <CardContainer moreClass="-mt-12">
+      <CardContainer moreClass="-mt-12 hidden">
         <SlideHorizontal
           data={dataSeleb}
           type="seleb"

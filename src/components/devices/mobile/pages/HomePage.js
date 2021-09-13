@@ -202,7 +202,7 @@ export default function HomePage() {
       {/* End CEO Messages */}
 
       {/* Selebs Today */}
-      <Card>
+      <Card addClass="hidden">
         <CardHeadingMobile
           heading="Selebs Today"
           subheading="Late of Absence Employee list"
@@ -218,7 +218,7 @@ export default function HomePage() {
       {/* End Selebs Today */}
 
       {/* Card Team Mate */}
-      <Card>
+      <Card addClass="hidden">
         <CardHeadingMobile
           heading="Teammate"
           subheading="List Team Member your Unit"

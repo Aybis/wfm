@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import CardDoneAbsen from './CardDoneAbsen';
 import CardLoading from './CardLoading';
 
-export default function CardKehadiran() {
+export default function CardKehadiran({ type }) {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
   let link;
@@ -72,21 +72,23 @@ export default function CardKehadiran() {
                 Available
               </span>
             </div>
-            <div className="flex justify-center items-end text-sm ">
-              <Link
-                to={{
-                  pathname: link,
-                  state: USER,
-                }}
-                className={`p-2 text-white font-medium rounded w-full text-center transition-all duration-300 ease-in-out ${
-                  belumAbsen
-                    ? 'bg-apps-primary active:bg-sky-700'
-                    : 'bg-red-600 active:bg-red-700'
-                }`}>
-                {belumAbsen && 'Check In'}
-                {isCheckIn && 'Check Out'}
-              </Link>
-            </div>
+            {type !== 'lemburan' && (
+              <div className="flex justify-center items-end text-sm ">
+                <Link
+                  to={{
+                    pathname: link,
+                    state: USER,
+                  }}
+                  className={`p-2 text-white font-medium rounded w-full text-center transition-all duration-300 ease-in-out ${
+                    belumAbsen
+                      ? 'bg-apps-primary active:bg-sky-700'
+                      : 'bg-red-600 active:bg-red-700'
+                  }`}>
+                  {belumAbsen && 'Check In'}
+                  {isCheckIn && 'Check Out'}
+                </Link>
+              </div>
+            )}
           </div>
         </>
       ) : (
