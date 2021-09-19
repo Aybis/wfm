@@ -11,8 +11,8 @@ import { NavLink } from 'react-router-dom';
 export default function MobileMenu() {
   return (
     isMobile && (
-      <div className="fixed z-30 bottom-8 inset-x-0 ">
-        <div className="bg-white shadow-sm flex justify-between items-center mx-4 mt-4 mb-0 p-2 rounded-2xl ">
+      <div className="fixed z-30 bottom-0 inset-x-0 ">
+        <div className="bg-white shadow-2xl flex justify-between items-center lg:mx-4 mt-4 mb-0 p-2">
           <NavLink
             to="/"
             exact={true}
@@ -26,7 +26,7 @@ export default function MobileMenu() {
             className="rounded-md p-2 text-center text-apps-primary text-opacity-40 hover:bg-apps-card transition-all duration-300 ease-in-out"
             activeClassName="text-apps-primary text-opacity-100 font-semibold">
             <ViewGridIcon className="h-6 w-6 mx-auto" />
-            <p className="text-sm mt-1">Mdodules</p>
+            <p className="text-sm mt-1">Modules</p>
           </NavLink>
           <NavLink
             to="/approval"

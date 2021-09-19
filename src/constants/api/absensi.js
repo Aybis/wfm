@@ -7,12 +7,16 @@ export default {
   checkOut: (data, absensi) => axios.post(`absensi/check-out/${absensi}`, data),
   dailyPersonal: (user) => axios.get(`absensi/daily-personal?user_id=${user}`),
   reportPersonal: (data) => axios.get(`absensi/report-personal`, data),
+  dashboard: () => axios.get('absensi/dashbord-user-daily'),
+
   dashboardReportPersonal: (data) =>
     axios.get(`absensi/dashbord-report-personal`, data),
+
   weeklyPersonal: (user) =>
     axios.get(`absensi/weekly-personal?user_id=${user}`),
-  dashboard: () => axios.get('absensi/dashbord-user-daily'),
-  reportUserByUnit: () => axios.get('absensi/report-user-by-unit'),
+
+  reportUserByUnit: (data) => axios.get(`absensi/report-user-by-unit`, data),
+
   insertHoliday: (data) => axios.post('holiday', data),
   getHoliday: (page) => axios.get(`holiday`),
   deleteHoliday: (holiday) => axios.delete('holiday/', holiday),

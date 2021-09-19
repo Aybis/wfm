@@ -1,5 +1,6 @@
 import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
 import { motion } from 'framer-motion';
+import convertDate from 'helpers/hooks/convertDate';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -7,20 +8,40 @@ export default function CardKehadiranDekstop() {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
 
-  const isCheckOut = Object.entries(ABSEN.dataOut).length > 0;
+  let isCheckOut = false;
+  const dateNow = convertDate('dateOnly');
 
   let btnClass = 'bg-blue-400';
   let name = '';
 
+  // if (Object.entries(ABSEN.data).length === 0) {
+  //   btnClass = 'bg-apps-blue';
+  //   name = 'Check In';
+  // } else if (Object.entries(ABSEN.dataOut).length === 0) {
+  //   btnClass = 'bg-gradient-to-br from-pink-600 to-red-500';
+  //   name = 'Check Out';
+  // } else if (Object.entries(ABSEN.dataOut).length > 0) {
+  //   btnClass = 'bg-apps-blue';
+  //   name = 'Check In';
+  // }
+
   if (Object.entries(ABSEN.data).length === 0) {
     btnClass = 'bg-apps-blue';
     name = 'Check In';
-  } else if (Object.entries(ABSEN.dataOut).length === 0) {
-    btnClass = 'bg-gradient-to-br from-pink-600 to-red-500';
-    name = 'Check Out';
-  } else if (Object.entries(ABSEN.dataOut).length > 0) {
-    btnClass = 'bg-apps-blue';
-    name = 'Check In';
+  } else {
+    if (ABSEN.dataOut.jam) {
+      if (convertDate('dateOnly', ABSEN.dataIn.jam) !== dateNow) {
+        btnClass = 'bg-apps-blue';
+        name = 'Check In';
+      } else {
+        btnClass = 'bg-apps-blue';
+        name = 'Check In';
+        isCheckOut = true;
+      }
+    } else if (ABSEN.dataIn.jam) {
+      btnClass = 'bg-gradient-to-br from-pink-600 to-red-500';
+      name = 'Check Out';
+    }
   }
 
   const item = {

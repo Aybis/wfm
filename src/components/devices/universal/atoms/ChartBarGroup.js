@@ -2,22 +2,32 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 
 const ChartBarGroup = ({ title, dataSets }) => {
-  let labelOne = dataSets.map((item) => {
+  let labelOne = dataSets?.map((item) => {
     return item.wfo;
   });
 
-  let labelTwo = dataSets.map((item) => {
+  let labelTwo = dataSets?.map((item) => {
     return item.wfh;
   });
 
-  let labelThree = dataSets.map((item) => {
+  let labelThree = dataSets?.map((item) => {
     return item.satlit;
   });
 
   const data = {
     // labels: ['Non.Dir', 'Sales', 'OPS', 'FBS'],
-    labels: dataSets.map((item) => {
-      return item.name;
+    labels: dataSets?.map((item) => {
+      if (item.name === 'NON DIREKTORAT') {
+        return 'Non. Dir';
+      } else if (item.name === 'MARKETING & SALES') {
+        return 'Sales';
+      } else if (item.name === 'FINANCE & BUSINESS SUPPORT') {
+        return 'FBS';
+      } else if (item.name === 'OPERATION') {
+        return 'Operation';
+      } else {
+        return item.name;
+      }
     }),
 
     datasets: [

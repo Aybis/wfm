@@ -20,14 +20,6 @@ export default function CardWorkDesktop(props) {
     nameOfKehadiran = 'Day Off';
   }
 
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
   const ShowIconDaily = () => {
     if (props.data.kehadiran === 'WFH') {
       return <HomeIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />;
@@ -44,7 +36,7 @@ export default function CardWorkDesktop(props) {
 
   return (
     <motion.div
-      variants={item}
+      // variants={item}
       className={`flex justify-start items-center gap-4 text-coolGray-700 py-2 px-4 rounded-lg ${
         props.withBg ? 'bg-white shadow-lg' : 'bg-transparent'
       }`}>

@@ -5,7 +5,10 @@ export default function ChildTable(props) {
   const [show, setShow] = useState(null);
 
   return (
-    <tr className="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100">
+    <tr
+      className={`h-20 text-sm leading-none text-gray-800 ${
+        props.personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+      } hover:bg-gray-100 border-b border-t border-gray-100`}>
       <td className="pl-4 cursor-pointer">
         <div className="flex items-center">
           <div className="w-10 h-10 bg-red-500 text-2xl font-semibold flex items-center justify-center text-white">

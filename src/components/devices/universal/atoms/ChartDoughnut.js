@@ -1,16 +1,30 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-const ChartDoughnut = ({ title }) => {
+const ChartDoughnut = ({ title, dataSets }) => {
+  let label = dataSets?.map((item) => {
+    return item.name;
+  });
+
+  let value = dataSets?.map((item) => {
+    return item.value;
+  });
+
   const data = {
-    labels: ['Hadir', 'Tidak Hadir', 'Terlambat'],
+    labels: label,
     datasets: [
       {
-        label: '# of Votes',
-        data: [12, 19, 3],
-        backgroundColor: ['#C7D2FE', '#818CF8', '#4F46E5'],
+        label: '# of Employee',
+        data: value,
+        backgroundColor: [
+          '#6EE7B7',
+          '#93C5FD',
+          '#C4B5FD',
+          '#FCA5A5',
+          '#F9A8D4',
+        ],
         borderColor: ['#fff', '#fff', '#fff'],
-        borderWidth: 4,
+        borderWidth: 2,
       },
     ],
   };

@@ -1,5 +1,9 @@
 import {
   FETCH_TIDAK_HADIR,
+  FETCH_TERLAMBAT,
+  FETCH_TIDAK_CHECKOUT,
+  FETCH_TIDAK_CHECKIN,
+  FETCH_HADIR,
   FETCH_DIREKTORAT,
   FETCH_UNIT,
   FETCH_KEHADIRAN,
@@ -12,6 +16,10 @@ const initialState = {
   dataDirektorat: {},
   dataUnit: {},
   dataKehadiran: {},
+  dataTerlambat: {},
+  dataTidakCheckout: {},
+  dataTidakCheckin: {},
+  dataHadir: {},
   status: 'idle',
   message: '',
 };
@@ -29,6 +37,34 @@ export default function (state = initialState, action) {
       return {
         ...state,
         dataTidakHadir: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_HADIR:
+      return {
+        ...state,
+        dataHadir: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_TERLAMBAT:
+      return {
+        ...state,
+        dataTerlambat: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_TIDAK_CHECKOUT:
+      return {
+        ...state,
+        dataTidakCheckout: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_TIDAK_CHECKIN:
+      return {
+        ...state,
+        dataTidakCheckin: action.payload ?? {},
         status: 'ok',
       };
 
@@ -78,7 +114,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         message: action.payload,
-        status: 'error',
+        status: 'ok',
       };
 
     default:

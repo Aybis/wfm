@@ -18,9 +18,9 @@ function TableDesktop({ children }) {
         </div>
       </div>
       <div className="bg-white rounded-lg shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto">
-        <table className="w-full whitespace-nowrap">
-          <thead>
-            <tr className="h-16 w-full text-sm leading-none bg-gray-200 text-gray-800">
+        <table className="w-full whitespace-nowrap rounded">
+          <thead className="rounded-lg">
+            <tr className="h-16 w-full text-sm leading-none bg-gray-100 text-gray-800 rounded-lg">
               <th className="font-medium text-base text-left pl-4">Libur</th>
               <th className="font-medium text-base text-left pl-12">Hari</th>
               <th className="font-medium text-base text-left pl-12">Status</th>

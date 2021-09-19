@@ -1,5 +1,6 @@
 import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import { motion } from 'framer-motion';
+import convertDate from 'helpers/hooks/convertDate';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,16 +10,28 @@ import CardLoading from './CardLoading';
 export default function CardKehadiran({ type }) {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
+
+  const dateNow = convertDate('dateOnly');
   let link;
+  let belumAbsen;
+  let isCheckIn;
+  let isCheckOut;
 
-  const belumAbsen = Object.entries(ABSEN.data).length === 0;
-  const isCheckIn = Object.entries(ABSEN.dataIn).length > 0;
-  const isCheckOut = Object.entries(ABSEN.dataOut).length > 0;
-
-  if (belumAbsen) {
+  if (Object.entries(ABSEN.data).length === 0) {
+    belumAbsen = true;
     link = `/check-in`;
-  } else if (isCheckIn) {
-    link = `/check-out/${ABSEN.data.id}`;
+  } else {
+    if (ABSEN.dataOut.jam) {
+      if (convertDate('dateOnly', ABSEN.dataIn.jam) !== dateNow) {
+        link = `/check-in`;
+        belumAbsen = true;
+      } else {
+        isCheckOut = true;
+      }
+    } else if (ABSEN.dataIn.jam) {
+      isCheckIn = true;
+      link = `/check-out/${ABSEN.data.id}`;
+    }
   }
 
   const sendAddress = (value) => {
@@ -29,24 +42,8 @@ export default function CardKehadiran({ type }) {
     return value;
   };
 
-  // const variants = {
-  //   hidden: { opacity: 1, scale: 0 },
-  //   visible: {
-  //     opacity: 1,
-  //     scale: 1,
-  //     transition: {
-  //       delayChildren: 0.2,
-  //       staggerChildren: 0.2,
-  //     },
-  //   },
-  // };
-
   return USER ? (
-    <motion.div
-      // variants={variants}
-      // initial="hidden"
-      // animate="visible"
-      className="relative grid grid-cols-1 rounded-md mb-8 mt-8 shadow-lg">
+    <motion.div className="relative grid grid-cols-1 rounded-md mb-8 mt-8 shadow-lg">
       {!isCheckOut ? (
         <>
           <SetMaps
@@ -62,7 +59,7 @@ export default function CardKehadiran({ type }) {
               <h4 className="text-sm text-gray-400">Current</h4>
               <h4 className={`text-sm font-semibold text-gray-700`}>
                 {belumAbsen && 'Belum Absen'}
-                {isCheckIn && ABSEN.data.kehadiran}
+                {isCheckIn && ABSEN?.data?.kehadiran}
               </h4>
             </div>
             <div className="flex flex-col gap-1">

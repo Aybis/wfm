@@ -156,7 +156,7 @@ const PresensiDesktop = ({ history }) => {
       <CardContainer
         heading="Report Presence this Month"
         subheading="Listh Kehadiran Bulan Ini">
-        <CardGridDekstop col={3} moreClass="mt-4 py-2">
+        <CardGridDekstop col={4} moreClass="mt-4 py-2">
           {ABSENSI.dataPresence.length > 0 ? (
             ABSENSI.dataPresence.map((item) => (
               <CardReportKehadiran

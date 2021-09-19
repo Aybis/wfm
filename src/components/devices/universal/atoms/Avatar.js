@@ -60,18 +60,18 @@ function Avatar({ logOut }) {
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 1.2 }}
             className=" flex gap-4 items-center justify-center p-3 mr-4">
-            {USER.image_url ? (
+            {USER?.image_url ? (
               <img
                 loading="lazy"
                 height={10}
                 width={10}
-                src={USER.image_url}
+                src={USER?.image_url}
                 alt="avatar"
                 className="h-10 w-10 rounded"
               />
             ) : (
               <img
-                src={`https://ui-avatars.com/api/?name=${USER.name}&background=0062FF&color=fff`}
+                src={`https://ui-avatars.com/api/?name=${USER?.name}&background=0062FF&color=fff`}
                 alt="avatar"
                 loading="lazy"
                 height={10}
@@ -79,8 +79,8 @@ function Avatar({ logOut }) {
                 className="h-10 w-10 rounded-full"
               />
             )}
-            <p className="text-apps-text dark:text-gray-100 capitalize font-medium hidden">
-              {USER.name}
+            <p className="text-apps-text dark:text-gray-100 capitalize font-medium ">
+              {USER?.name?.toLowerCase()}
             </p>
           </motion.div>
         </div>

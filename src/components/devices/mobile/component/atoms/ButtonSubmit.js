@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 export default function ButtonSubmit({ type, value, moreClass }) {
@@ -12,13 +13,16 @@ export default function ButtonSubmit({ type, value, moreClass }) {
   }
 
   return (
-    <button
+    <motion.button
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
       className={[
         `p-3 text-lg font-semibold  w-full text-center rounded-lg text-white `,
         classBackground,
         moreClass,
       ].join(' ')}>
       {value}
-    </button>
+    </motion.button>
   );
 }

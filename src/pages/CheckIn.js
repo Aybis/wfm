@@ -26,6 +26,7 @@ const CheckIn = ({ history }) => {
   const [photo, setPhoto] = useState(null);
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
+  const [loadPhoto, setloadPhoto] = useState(false);
   const [image, setImage] = useState(null);
   const USER = useSelector((state) => state.users);
   const ABSEN = useSelector((state) => state.presence);
@@ -47,12 +48,14 @@ const CheckIn = ({ history }) => {
     if (!file) {
       return;
     } else {
+      setloadPhoto(true);
       new Compressor(file, {
         quality: 0.5,
         convertSize: 5000,
         success: (result) => {
           setPhoto(URL.createObjectURL(result));
           createImage(result);
+          setloadPhoto(false);
         },
       });
     }
@@ -82,6 +85,9 @@ const CheckIn = ({ history }) => {
     state.photo = image;
     state.lokasi = address;
     state.jam = convertDate('fullDate');
+    if (state.kondisi !== 'sehat') {
+      state.kehadiran = null;
+    }
 
     absensi
       .checkIn(state)
@@ -114,6 +120,7 @@ const CheckIn = ({ history }) => {
           'error',
           err?.response?.data?.message ?? 'Something happened',
         );
+        setisSubmit(false);
       });
   };
   const handlerUpForm = () => {
@@ -201,10 +208,16 @@ const CheckIn = ({ history }) => {
               ) : (
                 <></>
               )}
-              <CardInputPhoto
-                photo={photo}
-                handlerChangPhoto={(event) => inputPhoto(event)}
-              />
+              {loadPhoto ? (
+                <div className="flex justify-center items-center h-40">
+                  <LoadingCircle />
+                </div>
+              ) : (
+                <CardInputPhoto
+                  photo={photo}
+                  handlerChangPhoto={(event) => inputPhoto(event)}
+                />
+              )}
 
               {isSubmit ? (
                 <div className="flex items-center justify-center">

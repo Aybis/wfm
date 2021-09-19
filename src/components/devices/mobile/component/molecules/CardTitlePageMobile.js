@@ -16,12 +16,11 @@ export default function CardTitlePageMobile({ link, title }) {
           <ArrowSmLeftIcon className="h-9 w-9 p-1" />
         </button>
       </div>
-      <div className="flex col-span-2 justify-center items-center">
-        <h1 className="text-gray-800 text-2xl tracking-wide font-semibold uppercase">
+      <div className="flex col-span-3 justify-start items-center">
+        <h1 className="text-gray-800 text-xl tracking-wide font-semibold uppercase">
           {title}
         </h1>
       </div>
-      <div></div>
     </motion.div>
   );
 }

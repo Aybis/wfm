@@ -57,8 +57,8 @@ export default function MobileHeader() {
             </h3>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center text-gray-700">
-          <div className="flex flex-col items-center">
+        <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col items-center text-gray-400">
             <LogoutIcon
               className="h-8 w-8 rounded-md cursor-pointer p-1"
               onClick={() => logOoutUser()}

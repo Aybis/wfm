@@ -107,7 +107,7 @@ const DetailApproval = ({ history }) => {
               />
             </div>
           </Card>
-          <Card addClass="-my-4 flex flex-col justify-between bg-white rounded-md">
+          <Card addClass="lg:-my-4 flex flex-col justify-between bg-white rounded-md">
             <div className="flex flex-col gap-3 p-4">
               <h1 className="font-semibold text-gray-800 mb-4">
                 Overtime Summary
@@ -137,7 +137,7 @@ const DetailApproval = ({ history }) => {
               ))}
             </div>
           </Card>
-          <Card addClass="-my-4 flex flex-col justify-between bg-white rounded-md">
+          <Card addClass="-my-2 lg:-my-4 flex flex-col justify-between bg-white rounded-md">
             <div className="grid grid-cols-1 gap-4 p-4">
               <h1 className="font-semibold text-gray-800 mb-2">
                 Overtime Approval

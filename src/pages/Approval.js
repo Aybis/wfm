@@ -1,136 +1,30 @@
-import CardOvertimeApproval from 'components/devices/desktop/molecules/CardOvertimeApproval';
 import Menu from 'components/devices/desktop/section/Menu';
 import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
-import Select from 'components/devices/universal/atoms/Select';
 import { motion } from 'framer-motion';
-import useForm from 'helpers/hooks/useForm';
 import React from 'react';
 import { isDesktop } from 'react-device-detect';
+import {
+  BrowserRouter as Router,
+  NavLink,
+  Route,
+  Switch,
+  useRouteMatch,
+} from 'react-router-dom';
+import Cuti from './subApproval/Cuti';
+import Lemburan from './subApproval/Lemburan';
+import Reimburse from './subApproval/Reimburse';
+import Sppd from './subApproval/Sppd';
 
 const Approval = () => {
   window.scroll(0, 0);
+  let { path, url } = useRouteMatch();
 
-  const timeStamp = new Date();
-
-  const [{ bulan, tahun }, setState] = useForm({
-    bulan: timeStamp.getMonth() + 1,
-    tahun: timeStamp.getFullYear(),
-  });
-
-  const documents = [
-    {
-      date: 'Wednesday, 19 May',
-      name: 'Abdul Muchtar Astria',
-      title: 'Make design and flow mobile pop',
-      hours: '4:72',
-    },
-    {
-      date: 'Tuesday, 18 May',
-      name: 'Ahmad Fauzi Hanif',
-      title:
-        'Make design and flow mobile pop and create backend presensi online',
-      hours: '7 : 00',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
+  const tabs = [
+    { name: 'Lemburan', href: `${url}` },
+    { name: 'Reimburse', href: `${url}/reimburse` },
+    { name: 'Cuti', href: `${url}/cuti` },
+    { name: 'SPPD', href: `${url}/sppd` },
   ];
-
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
-  const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.09,
-        staggerChildren: 0.05,
-      },
-    },
-  };
 
   return (
     <div className="relative w-full h-screen bg-coolGray-100">
@@ -141,51 +35,59 @@ const Approval = () => {
         {/* Menu For Dekstop Only */}
         <Menu />
         <MobileMenu />
-        <div className="relative">
-          <h2 className="text-gray-700 font-semibold text-2xl lg:text-4xl mt-8 lg:mt-0">
-            List Dokumen Approval
-          </h2>
-        </div>
+        <Router>
+          <div className="relative">
+            <h2 className="text-gray-700 font-semibold text-2xl lg:text-4xl mt-8 lg:mt-0">
+              List Dokumen Approval
+            </h2>
+          </div>
+          {/* Tab Menu */}
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative mt-8 lg:w-1/2 lg:mx-auto ">
+            <div className="bg-coolGray-200 p-2 rounded-lg lg:bg-transparent">
+              <div className="group transition-all duration-300  border-gray-200">
+                <motion.nav
+                  className="-mb-px flex lg:grid lg:grid-cols-4 gap-4"
+                  aria-label="Tabs">
+                  {tabs.map((tab) => (
+                    <NavLink
+                      exact={true}
+                      key={tab.name}
+                      to={tab.href}
+                      activeClassName="text-apps-primary lg:border-apps-primary lg:border-b-2 font-semibold bg-coolGray-50 lg:bg-transparent rounded-lg lg:rounded-none shadow-lg lg:shadow-none transition-all duration-300"
+                      className={
+                        'text-gray-400 w-full p-2 lg:p-4 text-center lg:text-lg text-sm hover:text-apps-primary hover:bg-white transition-all duration-300 rounded-lg lg:border-b-2 lg:border-gray-200 lg:rounded-none'
+                      }>
+                      {tab.name}
+                    </NavLink>
+                  ))}
+                </motion.nav>
+              </div>
+            </div>
+          </motion.div>
 
-        <motion.div className="grid grid-cols-2 mt-8 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
-          <Select
-            fallbackText={monthNames[bulan]}
-            name="bulan"
-            value={bulan}
-            onClick={setState}>
-            {monthNames.map((item, index) => (
-              <option key={index} value={index + 1}>
-                {item}
-              </option>
-            ))}
-          </Select>
-          <Select
-            fallbackText={`${tahun}`}
-            name="tahun"
-            value={tahun}
-            onClick={setState}>
-            <option value={timeStamp.getFullYear()}>
-              {timeStamp.getFullYear()}
-            </option>
-            <option value="all">All</option>
-          </Select>
-        </motion.div>
+          {/* End Tab Menu  */}
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 my-10 lg:grid-cols-4 gap-4 lg:gap-6 ">
-          {documents.map((item, index) => (
-            <CardOvertimeApproval
-              key={index}
-              date={item.date}
-              hours={item.hours}
-              name={item.name}
-              title={item.title}
-            />
-          ))}
-        </motion.div>
+          {/* React Router */}
+          <Switch>
+            <Route exact path={path}>
+              <Lemburan />
+            </Route>
+            <Route exact path={`${path}/reimburse`}>
+              <Reimburse />
+            </Route>
+            <Route exact path={`${path}/cuti`}>
+              <Cuti />
+            </Route>
+            <Route exact path={`${path}/sppd`}>
+              <Sppd />
+            </Route>
+          </Switch>
+          {/* End React Router */}
+        </Router>
       </div>
     </div>
   );

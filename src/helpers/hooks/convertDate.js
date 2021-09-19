@@ -38,16 +38,16 @@ export default function convertDate(type, fullDate) {
     return (
       date.getHours() +
       ' : ' +
-      (date.getMinutes() > 10 ? date.getMinutes() : `0${date.getMinutes()}`) +
+      (date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`) +
       ' : ' +
-      (date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`)
+      (date.getSeconds() > 9 ? date.getSeconds() : `0${date.getSeconds()}`)
     );
   } else if (type === 'hours') {
     return date.getHours();
   } else if (type === 'minutes') {
-    return date.getMinutes() > 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+    return date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
   } else if (type === 'second') {
-    return date.getSeconds() > 10 ? date.getSeconds() : `0${date.getSeconds()}`;
+    return date.getSeconds() > 9 ? date.getSeconds() : `0${date.getSeconds()}`;
   } else if (type === 'day') {
     return date.toLocaleString('id-ID', onlyDay);
   } else if (type === 'dateOnly') {
@@ -60,5 +60,8 @@ export default function convertDate(type, fullDate) {
     return date.getFullYear();
   } else if (type === 'hoursMinutes') {
     return date.getHours() + date.getMinutes() / 100;
+  } else if (type === 'getTime') {
+    let date1 = date.getDate();
+    return date.getTime(date1);
   }
 }

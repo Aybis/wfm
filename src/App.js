@@ -1,8 +1,6 @@
-import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import Authenticated from 'components/Routes/Authenticated';
 import { setAuthorizationHeader } from 'configs/axios';
 import users from 'constants/api/users';
-import { createBrowserHistory } from 'history';
 import Approval from 'pages/Approval';
 import CheckIn from 'pages/CheckIn';
 import CheckOut from 'pages/CheckOut';
@@ -18,7 +16,12 @@ import OvertimeOut from 'pages/OvertimeOut';
 import Presensi from 'pages/Presensi';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Router, Switch, Redirect } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { populateProfile } from 'store/actions/users';
 import Gate from './components/Routes/Gate';
@@ -28,9 +31,6 @@ import Login from './pages/Login';
 
 function App() {
   const dispatch = useDispatch();
-  const history = createBrowserHistory({
-    basename: process.env.PUBLIC_URL,
-  });
 
   useEffect(() => {
     let session = null;
@@ -47,15 +47,7 @@ function App() {
           if (err) {
             // remove token
             localStorage.removeItem('WFM:token');
-            // remove cookies
-            document.cookie.split(';').forEach(function (c) {
-              document.cookie = c
-                .replace(/^ +/, '')
-                .replace(
-                  /=.*/,
-                  '=;expires=' + new Date().toUTCString() + ';path=/',
-                );
-            });
+
             // redirect link
             <Redirect push to="/login" />;
             // reload page
@@ -67,7 +59,7 @@ function App() {
 
   return (
     <>
-      <Router history={history}>
+      <Router>
         <ToastContainer />
 
         <Switch>
@@ -76,16 +68,12 @@ function App() {
           <Route path="/forgot" component={Forgot}></Route>
           {/* Route After Middleware */}
           <Authenticated exact path="/" component={Home}></Authenticated>
-          <Authenticated
-            exact
-            path="/approval"
-            component={Approval}></Authenticated>
+          <Authenticated path="/approval" component={Approval}></Authenticated>
           <Authenticated
             exact
             path="/modules"
             component={Modules}></Authenticated>
           <Authenticated
-            exact
             path="/dashboard"
             component={Dashboard}></Authenticated>
           <Authenticated
@@ -120,13 +108,9 @@ function App() {
             exact
             path="/overtime-out"
             component={OvertimeOut}></Authenticated>
-          ) : (
-          <div className="flex justify-center items-center h-screen bg-dark">
-            <LoadingCircle />
-          </div>
-          );
-          {/* Route After Middleware */}
+
           <Route path="*" component={NotFound}></Route>
+          {/* Route After Middleware */}
         </Switch>
       </Router>
     </>

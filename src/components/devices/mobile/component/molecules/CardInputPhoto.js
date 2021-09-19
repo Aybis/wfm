@@ -10,7 +10,7 @@ export default function CardInputPhoto({ photo, handlerChangPhoto }) {
           <img
             src={photo}
             alt="file"
-            className="rounded-lg cursor-pointer mt-2 h-60 object-cover w-full bg-gray-100"
+            className="rounded-lg cursor-pointer mt-2 h-full object-cover w-full bg-gray-100 mb-4"
           />
         ) : (
           <UserCircleIcon

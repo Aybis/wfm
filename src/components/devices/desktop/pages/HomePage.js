@@ -208,7 +208,7 @@ export default function HomePage() {
         <TableDesktop>
           {dataHoliday.length > 0
             ? dataHoliday.map((data, index) => (
-                <ChildTable key={Math.random()} data={data} />
+                <ChildTable key={Math.random()} personIdx={index} data={data} />
               ))
             : null}
         </TableDesktop>

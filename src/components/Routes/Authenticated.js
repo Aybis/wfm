@@ -1,7 +1,5 @@
-/** @format */
-
-import React from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import React from 'react';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 
 const Authenticated = ({
   component: Component,
@@ -10,8 +8,8 @@ const Authenticated = ({
   location,
   ...rest
 }) => {
-  const ok = localStorage.getItem("WFM:token");
-  localStorage.removeItem("WFM:redirect");
+  const ok = localStorage.getItem('WFM:token');
+  localStorage.removeItem('WFM:redirect');
 
   return (
     <Route
@@ -19,7 +17,7 @@ const Authenticated = ({
       render={(props) =>
         ok ? (
           <Component {...props} />
-        ) : path === "/" ? (
+        ) : path === '/' ? (
           <Redirect to={`/login?path=${location.pathname}`} />
         ) : (
           <Redirect to={`/login?path=${location.pathname}`} />
