@@ -23,8 +23,12 @@ export default function CardTime({ title, time }) {
       <IconCardTime />
 
       <div className="flex flex-col text-sm">
-        <h4 className="text-gray-400 tracking-wide uppercase">{title}</h4>
-        <h6 className=" font-semibold text-gray-800">{time}</h6>
+        <h4 className="text-gray-400 text-sm lg:text-base tracking-wide uppercase">
+          {title}
+        </h4>
+        <h6 className="text-xs lg:text-sm font-semibold text-gray-800">
+          {time}
+        </h6>
       </div>
     </div>
   );

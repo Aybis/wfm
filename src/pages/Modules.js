@@ -23,8 +23,8 @@ const Modules = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        delayChildren: 0.1,
-        staggerChildren: 0.08,
+        delayChildren: 0.08,
+        staggerChildren: 0.05,
       },
     },
   };
@@ -57,7 +57,10 @@ const Modules = () => {
           variants={container}
           initial="hidden"
           animate="visible">
-          <motion.div variants={item} whileHover={{ scale: 1.05 }}>
+          <motion.div
+            variants={item}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}>
             <Link
               to="/presensi"
               className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
@@ -67,7 +70,10 @@ const Modules = () => {
               </h4>
             </Link>
           </motion.div>
-          <motion.div variants={item} whileHover={{ scale: 1.05 }}>
+          <motion.div
+            variants={item}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}>
             <Link
               to="/overtime"
               className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
@@ -77,7 +83,10 @@ const Modules = () => {
               </h4>
             </Link>
           </motion.div>
-          <motion.div variants={item} whileHover={{ scale: 1.05 }}>
+          <motion.div
+            variants={item}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}>
             <Link
               to="/inforekan"
               className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
@@ -88,46 +97,45 @@ const Modules = () => {
             </Link>
           </motion.div>
           <motion.div
+            onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
             <LightningBoltIcon className="p-2 h-16 w-16 text-apps-yellow rounded-lg bg-apps-yellow bg-opacity-10 lg:h-24 lg:w-24" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Hari Libur
             </h4>
           </motion.div>
           <motion.div
+            onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <CashIcon className="p-2 h-16 w-16 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10  lg:h-24 lg:w-24" />
+            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            <CashIcon className="p-2 h-16 w-16 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10  lg:h-24 lg:w-24 text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Reimburse
             </h4>
           </motion.div>
           <motion.div
+            onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <PhoneMissedCallIcon className="p-2 h-16 w-16 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 lg:h-24 lg:w-24" />
+            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            <PhoneMissedCallIcon className="p-2 h-16 w-16 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 lg:h-24 lg:w-24 text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Cuti
             </h4>
           </motion.div>
           <motion.div
             variants={item}
-            whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 lg:h-24 lg:w-24 " />
+            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 lg:h-24 lg:w-24  text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               SPPD
             </h4>
           </motion.div>
           <motion.div
+            onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
-            <KeyIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24 " />
+            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            <KeyIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24  text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Driver
             </h4>
@@ -135,7 +143,7 @@ const Modules = () => {
           <motion.div
             variants={item}
             whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg cursor-pointer">
             <IdentificationIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Me

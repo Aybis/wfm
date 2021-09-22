@@ -1,4 +1,4 @@
-import { ClockIcon } from '@heroicons/react/outline';
+import { ClockIcon, PencilAltIcon } from '@heroicons/react/outline';
 import {
   GlobeAltIcon,
   HomeIcon,
@@ -8,7 +8,12 @@ import { motion } from 'framer-motion';
 import convertDate from 'helpers/hooks/convertDate';
 import React from 'react';
 
-export default function CardWorkMobile({ kehadiran, date, url = '/' }) {
+export default function CardWorkMobile({
+  kehadiran,
+  kondisi = null,
+  date,
+  url = '/',
+}) {
   let nameOfKehadiran;
   if (kehadiran === 'WFH') {
     nameOfKehadiran = 'At Home';
@@ -16,6 +21,8 @@ export default function CardWorkMobile({ kehadiran, date, url = '/' }) {
     nameOfKehadiran = 'At Office';
   } else if (kehadiran === 'Satelit') {
     nameOfKehadiran = 'At Satelit';
+  } else if (kondisi !== null) {
+    nameOfKehadiran = kondisi;
   } else {
     nameOfKehadiran = 'Day Off';
   }
@@ -43,6 +50,12 @@ export default function CardWorkMobile({ kehadiran, date, url = '/' }) {
 
       return (
         <GlobeAltIcon className="h-10 w-10 p-2 text-apps-orange bg-apps-orange bg-opacity-20 rounded-md" />
+      );
+    } else if (kondisi !== null) {
+      nameOfKehadiran = kondisi;
+
+      return (
+        <PencilAltIcon className="h-10 w-10 p-2 text-yellow-500 bg-yellow-400 bg-opacity-20 rounded-md" />
       );
     } else {
       return (

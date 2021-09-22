@@ -171,6 +171,7 @@ export default function HomePage() {
             return (
               <CardWorkMobile
                 kehadiran={item.kehadiran}
+                kondisi={item.kondisi}
                 date={item.created_at}
                 key={Math.random()}
               />

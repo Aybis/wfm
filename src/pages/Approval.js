@@ -4,18 +4,20 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { isDesktop } from 'react-device-detect';
 import {
-  BrowserRouter as Router,
+  Router,
   NavLink,
   Route,
   Switch,
   useRouteMatch,
+  withRouter,
 } from 'react-router-dom';
+
 import Cuti from './subApproval/Cuti';
 import Lemburan from './subApproval/Lemburan';
 import Reimburse from './subApproval/Reimburse';
 import Sppd from './subApproval/Sppd';
 
-const Approval = () => {
+const Approval = ({ history }) => {
   window.scroll(0, 0);
   let { path, url } = useRouteMatch();
 
@@ -35,7 +37,7 @@ const Approval = () => {
         {/* Menu For Dekstop Only */}
         <Menu />
         <MobileMenu />
-        <Router>
+        <Router history={history}>
           <div className="relative">
             <h2 className="text-gray-700 font-semibold text-2xl lg:text-4xl mt-8 lg:mt-0">
               List Dokumen Approval
@@ -93,4 +95,4 @@ const Approval = () => {
   );
 };
 
-export default Approval;
+export default withRouter(Approval);

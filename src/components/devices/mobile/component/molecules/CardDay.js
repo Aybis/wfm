@@ -52,7 +52,7 @@ export default function CardDay() {
     ) : (
       <motion.div
         variants={item}
-        className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 `}>
+        className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 shadow-lg`}>
         <div className={`flex gap-4  w-full p-4 h-auto `}>
           {/* in */}
           <div className="flex flex-col gap-2 justify-start w-1/3">
@@ -89,7 +89,7 @@ export default function CardDay() {
 
           <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
             <h2 className="font-bold text-apps-primary text-lg">
-              {ABSEN.data.kehadiran ?? ''}
+              {ABSEN.data.kehadiran ?? ABSEN.data.kondisi}
             </h2>
             <h3 className={`text-sm lg:text-base text-gray-500`}>
               {ABSEN.dataOut.jam ? ABSEN.dataOut.lokasi : ''}

@@ -90,7 +90,7 @@ const Dashboard = () => {
             <div className="bg-coolGray-200 p-2 rounded-lg lg:bg-transparent">
               <div className="group transition-all duration-300  border-gray-200">
                 <motion.nav
-                  className="-mb-px flex lg:grid lg:grid-cols-4 gap-4"
+                  className="-mb-px flex lg:grid lg:grid-cols-3 gap-4"
                   aria-label="Tabs">
                   {tabs.map((tab) => (
                     <NavLink

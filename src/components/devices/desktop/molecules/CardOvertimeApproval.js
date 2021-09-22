@@ -14,6 +14,7 @@ export default function CardOvertimeApproval({
   date,
   hours,
   status,
+  link = '/details',
 }) {
   let classStatus = 'bg-apps-yellow text-gray-700';
   let valueStatus = 'On Progress';
@@ -44,7 +45,7 @@ export default function CardOvertimeApproval({
   return (
     <motion.div variants={item}>
       <Link
-        to="/details"
+        to={link}
         aria-label="detail lembur"
         className=" flex justify-between p-4 lg:px-6 rounded-lg lg:flex-col h-auto bg-gradient-to-br from-white hover:from-coolGray-400 hover:via-coolGray-100 hover:to-coolGray-50 hover:shadow-lg transition-all duration-500 ease-in-out bg-size-200 bg-pos-0 hover:bg-pos-100">
         <div className="flex flex-col gap-3 lg:mt-3 w-3/5 lg:w-full lg:h-32 lg:gap-4 lg:my-2">

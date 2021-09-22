@@ -95,7 +95,11 @@ const DetailApproval = ({ history }) => {
         }`}>
         {/* Menu For Dekstop Only */}
         <Menu />
-        <CardTitlePageMobile link={history.goBack} title="Detail lemburan" />
+        <CardTitlePageMobile
+          link={history.goBack}
+          title="Detail lemburan"
+          expand
+        />
 
         <CardGridDekstop col={1} moreClass="mt-4 gap-2 lg:grid-cols-2">
           <Card addClass="rounded-lg bg-white p-4 lg:col-span-2">
@@ -107,7 +111,7 @@ const DetailApproval = ({ history }) => {
               />
             </div>
           </Card>
-          <Card addClass="lg:-my-4 flex flex-col justify-between bg-white rounded-md">
+          <Card addClass="-mt-2 lg:-my-4 flex flex-col justify-between bg-white rounded-md">
             <div className="flex flex-col gap-3 p-4">
               <h1 className="font-semibold text-gray-800 mb-4">
                 Overtime Summary
@@ -166,12 +170,12 @@ const DetailApproval = ({ history }) => {
 
             <div className="mt-2">
               <button
-                className="uppercase bg-apps-red p-2 rounded-bl-md text-white font-semibold h-10 rounded w-28"
+                className="bg-apps-red px-6 py-2 hover:bg-red-700 transition-all duration-300 ease-in-out rounded text-white font-medium "
                 onClick={onReject}>
                 Reject
               </button>
               <button
-                className="ml-2 uppercase bg-apps-primary p-2 rounded text-white font-semibold h-10 w-28"
+                className="ml-2 bg-apps-primary px-6 py-2 hover:bg-blue-700 transition-all duration-300 ease-in-out rounded text-white font-medium"
                 onClick={onSubmit}>
                 Approve
               </button>

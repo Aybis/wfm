@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
 import convertDate from 'helpers/hooks/convertDate';
+import { PencilAltIcon } from '@heroicons/react/outline';
 
 export default function CardWorkDesktop(props) {
   let nameOfKehadiran;
@@ -16,6 +17,8 @@ export default function CardWorkDesktop(props) {
     nameOfKehadiran = 'At Office';
   } else if (props.data.kehadiran === 'Satelit') {
     nameOfKehadiran = 'At Satelit';
+  } else if (props.data.kondisi !== null) {
+    nameOfKehadiran = props.data.kondisi;
   } else {
     nameOfKehadiran = 'Day Off';
   }
@@ -29,6 +32,10 @@ export default function CardWorkDesktop(props) {
       );
     } else if (props.data.kehadiran === 'Satelit') {
       return <GlobeAltIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />;
+    } else if (props?.data?.kondisi !== null) {
+      return (
+        <PencilAltIcon className="h-12 w-12  p-2 rounded-lg bg-gray-100" />
+      );
     } else {
       return <ClockIcon className="h-14 w-14  p-2 rounded-lg bg-gray-100" />;
     }
@@ -46,7 +53,9 @@ export default function CardWorkDesktop(props) {
           {props.data ? convertDate('day', props.data.created_at) : ''}
         </h2>
         <h1 className="text-sm 2xl:text-lg font-semibold text-gray-800">
-          Work {nameOfKehadiran}
+          {props.data.kondisi
+            ? `Kondisi ${nameOfKehadiran}`
+            : `Work ${nameOfKehadiran}`}
         </h1>
       </div>
     </motion.div>

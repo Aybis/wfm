@@ -2,8 +2,9 @@ import CardOvertimeApproval from 'components/devices/desktop/molecules/CardOvert
 import CardFilterMonthAndYear from 'components/devices/mobile/component/molecules/CardFilterMonthAndYear';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-export default function Lemburan() {
+const Lemburan = () => {
   const documents = [
     {
       date: 'Wednesday, 19 May',
@@ -119,6 +120,7 @@ export default function Lemburan() {
         className="grid grid-cols-1 my-10 lg:grid-cols-4 gap-4 lg:gap-6 ">
         {documents.map((item, index) => (
           <CardOvertimeApproval
+            link="/details"
             key={index}
             date={item.date}
             hours={item.hours}
@@ -129,4 +131,6 @@ export default function Lemburan() {
       </motion.div>
     </>
   );
-}
+};
+
+export default withRouter(Lemburan);

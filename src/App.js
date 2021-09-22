@@ -1,4 +1,5 @@
 import Authenticated from 'components/Routes/Authenticated';
+import { createBrowserHistory } from 'history';
 import { setAuthorizationHeader } from 'configs/axios';
 import users from 'constants/api/users';
 import Approval from 'pages/Approval';
@@ -16,12 +17,7 @@ import OvertimeOut from 'pages/OvertimeOut';
 import Presensi from 'pages/Presensi';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Router, Redirect, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { populateProfile } from 'store/actions/users';
 import Gate from './components/Routes/Gate';
@@ -31,6 +27,7 @@ import Login from './pages/Login';
 
 function App() {
   const dispatch = useDispatch();
+  const history = createBrowserHistory({ basename: process.env.PUBLIC_URL });
 
   useEffect(() => {
     let session = null;
@@ -59,7 +56,7 @@ function App() {
 
   return (
     <>
-      <Router>
+      <Router history={history}>
         <ToastContainer />
 
         <Switch>
