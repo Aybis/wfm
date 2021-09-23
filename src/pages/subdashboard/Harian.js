@@ -48,6 +48,18 @@ function Harian() {
       setshowModal(true);
       setheaderName('Belum Hadir');
       setlistUser(DASHBOARD?.dataTidakHadir);
+    } else if (name === 'wfh') {
+      setshowModal(true);
+      setheaderName('At Home');
+      setlistUser(DASHBOARD?.dataKehadiranWfh);
+    } else if (name === 'wfo') {
+      setshowModal(true);
+      setheaderName('At Office');
+      setlistUser(DASHBOARD?.dataKehadiranWfo);
+    } else if (name === 'satelit') {
+      setshowModal(true);
+      setheaderName('At Satelit');
+      setlistUser(DASHBOARD?.dataKehadiranSatelit);
     }
   };
 
@@ -103,7 +115,7 @@ function Harian() {
       </h2>
 
       <Modal
-        title={`List Users ${headerName}`}
+        title={`List ${headerName}`}
         isShowModal={() => setshowModal(false)}
         show={showModal}>
         <div className="w-full lg:w-4xl">
@@ -174,22 +186,15 @@ function Harian() {
                 key={Math.random()}
                 onClick={() => handlerClickModal(item.name)}
                 whileHover={{
-                  scale:
-                    item.name === 'telat' || item.name === 'tidak_hadir'
-                      ? 1.08
-                      : 1,
+                  scale: 1.08
                 }}
                 whileTap={{
-                  scale:
-                    item.name === 'telat' || item.name === 'tidak_hadir'
-                      ? 0.95
-                      : 1,
+                  scale: 0.95
                 }}
-                className={` ${
-                  item.name === 'telat' || item.name === 'tidak_hadir'
-                    ? 'cursor-pointer'
-                    : 'cursor-default'
-                } flex justify-between items-center gap-1 w-2/3 sm:w-auto flex-none sm:flex-1 h-auto py-4 px-6 bg-white rounded-lg`}>
+                className={` ${item.name === 'telat' || item.name === 'tidak_hadir'
+                  ? 'cursor-pointer'
+                  : 'cursor-default'
+                  } flex justify-between items-center gap-1 w-2/3 sm:w-auto flex-none sm:flex-1 h-auto py-4 px-6 bg-white rounded-lg`}>
                 <div className="flex flex-col">
                   <h4 className="text-sm sm:text-base font-medium text-gray-400">
                     {item.name === 'wfh' && 'At Home'}

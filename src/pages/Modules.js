@@ -40,9 +40,8 @@ const Modules = () => {
   return (
     <div className="relative w-full h-screen bg-coolGray-100">
       <div
-        className={`container mx-auto fixed inset-y-0 inset-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-20 hidden-scroll ${
-          isDesktop && 'mt-24'
-        }`}>
+        className={`container mx-auto fixed inset-y-0 inset-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-20 hidden-scroll ${isDesktop && 'mt-24'
+          }`}>
         {/* Menu For Dekstop Only */}
         <Menu />
         <MobileMenu />
@@ -97,9 +96,22 @@ const Modules = () => {
             </Link>
           </motion.div>
           <motion.div
+            variants={item}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}>
+            <Link
+              to={`/profile`}
+              className="flex flex-col bg-white items-center p-4 justify-center rounded-lg">
+              <IdentificationIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24" />
+              <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
+                Me
+              </h4>
+            </Link>
+          </motion.div>
+          <motion.div
             onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-coolGray-200 items-center p-4 justify-center rounded-lg">
             <LightningBoltIcon className="p-2 h-16 w-16 text-apps-yellow rounded-lg bg-apps-yellow bg-opacity-10 lg:h-24 lg:w-24" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Hari Libur
@@ -108,7 +120,7 @@ const Modules = () => {
           <motion.div
             onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-coolGray-200 items-center p-4 justify-center rounded-lg">
             <CashIcon className="p-2 h-16 w-16 text-apps-purple rounded-lg bg-apps-purple bg-opacity-10  lg:h-24 lg:w-24 text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Reimburse
@@ -117,7 +129,7 @@ const Modules = () => {
           <motion.div
             onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-coolGray-200 items-center p-4 justify-center rounded-lg">
             <PhoneMissedCallIcon className="p-2 h-16 w-16 text-apps-orange rounded-lg bg-apps-orange bg-opacity-10 lg:h-24 lg:w-24 text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Cuti
@@ -125,7 +137,7 @@ const Modules = () => {
           </motion.div>
           <motion.div
             variants={item}
-            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-coolGray-200 items-center p-4 justify-center rounded-lg">
             <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 lg:h-24 lg:w-24  text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               SPPD
@@ -134,21 +146,14 @@ const Modules = () => {
           <motion.div
             onClick={() => alert("Masih On Progress Yah :') ")}
             variants={item}
-            className="flex flex-col bg-coolGray-50 items-center p-4 justify-center rounded-lg">
+            className="flex flex-col bg-coolGray-200 items-center p-4 justify-center rounded-lg">
             <KeyIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24  text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
               Driver
             </h4>
           </motion.div>
-          <motion.div
-            variants={item}
-            whileHover={{ scale: 1.05 }}
-            className="flex flex-col bg-white items-center p-4 justify-center rounded-lg cursor-pointer">
-            <IdentificationIcon className="p-2 h-16 w-16 text-apps-red rounded-lg bg-apps-red bg-opacity-10 lg:h-24 lg:w-24" />
-            <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
-              Me
-            </h4>
-          </motion.div>
+
+
         </motion.div>
       </div>
     </div>

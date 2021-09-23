@@ -28,10 +28,12 @@ import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import CardListDay from 'components/devices/universal/molecules/CardListDay';
 import CardReportKehadiran from 'components/devices/universal/molecules/CardReportKehadiran';
 import CardReportWork from 'components/devices/desktop/molecules/CardReportWork';
+import { useState } from 'react';
 
 const PresensiMobile = ({ history }) => {
   const USER = useSelector((state) => state.users);
   const ABSENSI = useSelector((state) => state.absensi);
+  const [linkDownloadReport, setLinkDownloadReport] = useState(false);
   const dispatch = useDispatch();
 
   const absenToday = () => {
@@ -49,6 +51,21 @@ const PresensiMobile = ({ history }) => {
         ToastHandler('error', error?.response?.data?.message ?? 'error');
       });
   };
+
+  const createLinkDownload = (month, year) => {
+    absensi.exportPersonal({
+      params: {
+        user_id: USER?.id,
+        name: USER?.name,
+        month: month ?? convertDate('month'),
+        year: year ?? convertDate('fullYear'),
+      }
+    }).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
 
   const handlerOnChange = (type, value) => {
     let month = type === 'bulan' ? value : convertDate('month');
@@ -89,10 +106,13 @@ const PresensiMobile = ({ history }) => {
           user_id: USER?.id,
           month: month ?? convertDate('month'),
           year: year ?? convertDate('fullYear'),
+          size: 30
         },
       })
       .then((res) => {
         if (res.status === 200) {
+          console.log(res)
+
           dispatch(getData(res.data.data));
         }
         dispatch(statusData('ok'));
@@ -174,6 +194,8 @@ const PresensiMobile = ({ history }) => {
         <CardHeadingMobile
           heading="Report Absence"
           subheading={`Report Absensi Bulanan`}
+          navigation
+          link={() => createLinkDownload()}
         />
         {ABSENSI.status === 'ok' && ABSENSI.data.length > 0 ? (
           <CardGridMobile>

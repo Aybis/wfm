@@ -2,6 +2,7 @@ import Menu from 'components/devices/desktop/section/Menu';
 import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
 import absensi from 'constants/api/absensi';
 import { motion } from 'framer-motion';
+import convertDate from 'helpers/hooks/convertDate';
 import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';
 import { isDesktop } from 'react-device-detect';
@@ -16,9 +17,12 @@ import {
 import {
   fetchDirektorat,
   fetchKehadiran,
+  fetchSatelit,
   fetchTerlambat,
   fetchTidakHadir,
   fetchUnit,
+  fetchWfh,
+  fetchWfo,
   messageData,
   statusData,
 } from 'store/actions/dashboard';
@@ -35,7 +39,7 @@ const Dashboard = () => {
   const tabs = [
     { name: 'Daily', href: `${url}` },
     { name: 'Monthly', href: `${url}/bulanan` },
-    // { name: 'Karyawan', href: `${url}/karyawan` },
+    { name: 'Karyawan', href: `${url}/karyawan` },
     { name: 'Lemburan', href: `${url}/lemburan` },
   ];
 
@@ -49,6 +53,9 @@ const Dashboard = () => {
         dispatch(fetchUnit(res.data.unit));
         dispatch(fetchTidakHadir(res.data.kehadiran.tidak_hadir.users));
         dispatch(fetchTerlambat(res.data.kehadiran.telat.users));
+        dispatch(fetchWfh(res.data.kehadiran.wfh.users));
+        dispatch(fetchWfo(res.data.kehadiran.wfo.users));
+        dispatch(fetchSatelit(res.data.kehadiran.satelit.users));
         dispatch(messageData('ok'));
       })
       .catch((error) => {
@@ -56,6 +63,21 @@ const Dashboard = () => {
         ToastHandler('error', error?.response?.data?.message ?? 'error');
       });
   };
+
+  const getDataMonthly = (unit, month, year) => {
+    absensi.reportUserByUnit({
+      params: {
+        unit_id: 9,
+        size: 20,
+        month: month ?? convertDate('month'),
+        year: year ?? convertDate('fullYear'),
+      }
+    }).then((response) => {
+      console.log(response)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
 
   useEffect(() => {
     getDataDashboard();
@@ -71,9 +93,8 @@ const Dashboard = () => {
   return (
     <div className="relative w-full min-h-screen h-full bg-coolGray-100 pb-28 md:pb-10 overflow-auto hidden-scroll">
       <div
-        className={`container mx-auto  rounded-xl p-4 lg:p-0 transition-all duration-300 ease-in-out hidden-scroll ${
-          isDesktop && 'mt-28'
-        }`}>
+        className={`container mx-auto  rounded-xl p-4 lg:p-0 transition-all duration-300 ease-in-out hidden-scroll ${isDesktop && 'mt-28'
+          }`}>
         <Menu />
         <MobileMenu />
         <Router>
@@ -90,7 +111,7 @@ const Dashboard = () => {
             <div className="bg-coolGray-200 p-2 rounded-lg lg:bg-transparent">
               <div className="group transition-all duration-300  border-gray-200">
                 <motion.nav
-                  className="-mb-px flex lg:grid lg:grid-cols-3 gap-4"
+                  className={`flex lg:grid lg:grid-cols-${tabs.length} gap-4`}
                   aria-label="Tabs">
                   {tabs.map((tab) => (
                     <NavLink

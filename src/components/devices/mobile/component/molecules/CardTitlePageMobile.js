@@ -17,10 +17,9 @@ export default function CardTitlePageMobile({ link, title, expand }) {
         </button>
       </div>
       <div
-        className={`flex ${
-          expand ? 'col-span-3 justify-start' : 'col-span-2 justify-center '
-        } items-center`}>
-        <h1 className="text-gray-800 text-xl tracking-wide font-semibold uppercase">
+        className={`flex ${expand ? 'col-span-3 justify-start' : 'col-span-2 justify-center '
+          } items-center`}>
+        <h1 className="text-gray-800 text-xl tracking-wide font-bold uppercase">
           {title}
         </h1>
       </div>

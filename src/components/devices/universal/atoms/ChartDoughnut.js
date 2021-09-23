@@ -3,7 +3,19 @@ import { Doughnut } from 'react-chartjs-2';
 
 const ChartDoughnut = ({ title, dataSets }) => {
   let label = dataSets?.map((item) => {
-    return item.name;
+    if (item.name === 'wfh') {
+      return 'WFH';
+    } else if (item.name === 'wfo') {
+      return 'WFO';
+    } else if (item.name === 'satelit') {
+      return 'Satelit';
+    } else if (item.name === 'telat') {
+      return 'Telat';
+    } else if (item.name === 'tidak_hadir') {
+      return 'Tidak Hadir';
+    } else {
+      return item.name;
+    }
   });
 
   let value = dataSets?.map((item) => {

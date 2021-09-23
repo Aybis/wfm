@@ -24,6 +24,7 @@ import Gate from './components/Routes/Gate';
 import Unauthenticated from './pages/401';
 import NotFound from './pages/404';
 import Login from './pages/Login';
+import Profile from 'pages/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -105,6 +106,10 @@ function App() {
             exact
             path="/overtime-out"
             component={OvertimeOut}></Authenticated>
+          <Authenticated
+            exact
+            path="/profile"
+            component={Profile}></Authenticated>
 
           <Route path="*" component={NotFound}></Route>
           {/* Route After Middleware */}

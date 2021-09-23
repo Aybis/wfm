@@ -6,6 +6,9 @@ import {
   FETCH_DIREKTORAT,
   FETCH_UNIT,
   FETCH_KEHADIRAN,
+  FETCH_WFH,
+  FETCH_WFO,
+  FETCH_SATELIT,
   FETCH_HADIR,
   MESSAGE_DATA,
   STATUS_DATA,
@@ -33,6 +36,18 @@ export const fetchKehadiran = (data) => ({
 });
 export const fetchHadir = (data) => ({
   type: FETCH_HADIR,
+  payload: data,
+});
+export const fetchWfh = (data) => ({
+  type: FETCH_WFH,
+  payload: data,
+});
+export const fetchWfo = (data) => ({
+  type: FETCH_WFO,
+  payload: data,
+});
+export const fetchSatelit = (data) => ({
+  type: FETCH_SATELIT,
   payload: data,
 });
 export const fetchTidakCheckout = (data) => ({

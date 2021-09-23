@@ -42,20 +42,10 @@ export default function CardListDay({
     disiplin = false;
   }
 
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
   return (
     <motion.div
-      variants={item}
-      className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 ${
-        border && 'border border-gray-100'
-      }`}>
+      className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 shadow-sm ${border && 'border border-gray-100'
+        }`}>
       {timeIn && (
         <div className=" mx-auto text-center -mt-3">
           <h4 className="p-2 bg-apps-primary text-white font-medium max-w-lg text-sm rounded-md mx-auto ">
@@ -66,8 +56,8 @@ export default function CardListDay({
       <div className={`flex gap-4  w-full p-4 h-auto ${timeIn && '-mt-6'}`}>
         {/* in */}
         <div className="flex flex-col gap-2 justify-start w-1/3">
-          <h2 className="font-bold text-apps-primary text-lg">IN</h2>
-          <h3 className="text-sm lg:text-base font-normal text-gray-500">
+          <h2 className="font-bold text-apps-primary text-sm">IN</h2>
+          <h3 className="text-xs lg:text-base font-normal text-gray-500 tracking-wide">
             {locIn}
           </h3>
           <h3 className="text-sm lg:text-base font-semibold mt-2 text-gray-700">
@@ -93,25 +83,25 @@ export default function CardListDay({
         {/* out  */}
 
         <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
-          <h2 className="font-bold text-apps-primary text-lg">{type}</h2>
-          <h3 className={`text-sm lg:text-base text-gray-500`}>
-            {status === 'Normal'
-              ? locOut
-                ? locOut
-                : 'On Duty'
-              : reportTimeOut}
+          <h2 className="font-bold text-apps-primary text-lg">{type ?? kondisi}</h2>
+          <h3 className={`text-xs lg:text-base text-gray-500 tracking-wide`}>
+            {status === 'Normal' && locOut}
+            {status === 'System' && 'Tidak Disiplin'}
           </h3>
           <h4
-            className={`text-sm lg:text-base font-semibold mt-2 text-gray-700 `}>
+            className={`text-xs lg:text-base font-semibold mt-2 text-gray-700 `}>
             {timeOut ? convertDate('fullTime', timeOut) : 'On Duty'}
           </h4>
         </div>
       </div>
-      {!disiplin && (
-        <div className="bg-gray-50 rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500">
-          {keterangan ?? reportTimeOut}
-        </div>
-      )}
+      {
+        keterangan ? (
+          <div className="bg-gray-50 rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500">
+            {keterangan}
+          </div>
+        ) : ('')
+      }
+
     </motion.div>
   );
 }

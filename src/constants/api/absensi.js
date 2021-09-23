@@ -8,7 +8,7 @@ export default {
   dailyPersonal: (user) => axios.get(`absensi/daily-personal?user_id=${user}`),
   reportPersonal: (data) => axios.get(`absensi/report-personal`, data),
   dashboard: () => axios.get('absensi/dashbord-user-daily'),
-
+  exportPersonal: (data) => axios.get('absensi/export-personal', data),
   dashboardReportPersonal: (data) =>
     axios.get(`absensi/dashbord-report-personal`, data),
 

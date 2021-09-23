@@ -7,6 +7,9 @@ import {
   FETCH_DIREKTORAT,
   FETCH_UNIT,
   FETCH_KEHADIRAN,
+  FETCH_WFH,
+  FETCH_WFO,
+  FETCH_SATELIT,
   MESSAGE_DATA,
   STATUS_DATA,
 } from 'constants/types/dashboard';
@@ -20,6 +23,9 @@ const initialState = {
   dataTidakCheckout: {},
   dataTidakCheckin: {},
   dataHadir: {},
+  dataKehadiranSatelit: {},
+  dataKehadiranWfh: {},
+  dataKehadiranWfo: {},
   status: 'idle',
   message: '',
 };
@@ -44,6 +50,27 @@ export default function (state = initialState, action) {
       return {
         ...state,
         dataHadir: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_WFO:
+      return {
+        ...state,
+        dataKehadiranWfo: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_WFH:
+      return {
+        ...state,
+        dataKehadiranWfh: action.payload ?? {},
+        status: 'ok',
+      };
+
+    case FETCH_SATELIT:
+      return {
+        ...state,
+        dataKehadiranSatelit: action.payload ?? {},
         status: 'ok',
       };
 
@@ -88,15 +115,15 @@ export default function (state = initialState, action) {
         dataKehadiran: [
           {
             name: 'wfh',
-            value: action.payload.wfh,
+            value: action.payload.wfh.value,
           },
           {
             name: 'wfo',
-            value: action.payload.wfo,
+            value: action.payload.wfo.value,
           },
           {
             name: 'satelit',
-            value: action.payload.satelit,
+            value: action.payload.satelit.value,
           },
           {
             name: 'telat',

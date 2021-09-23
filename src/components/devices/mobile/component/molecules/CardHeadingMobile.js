@@ -14,7 +14,7 @@ export default function CardHeadingMobile({
         <HeadingMobile heading={heading} />
         <SubHeadingMobile subheading={subheading} />
       </div>
-      {navigation && <p>Test</p>}
+      {navigation && <p onClick={link} className="cursor-pointer">Download</p>}
     </div>
   );
 }

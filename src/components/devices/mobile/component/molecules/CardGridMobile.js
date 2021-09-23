@@ -7,9 +7,10 @@ export default function CardGridMobile({
   heading,
   subheading,
   col,
+  addClass
 }) {
   return (
-    <div className="relative my-4">
+    <div className={['relative my-4', addClass].join(' ')}>
       {isHeading && (
         <CardHeadingMobile heading={heading} subheading={subheading} />
       )}
