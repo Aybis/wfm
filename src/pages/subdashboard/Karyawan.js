@@ -85,98 +85,125 @@ export default function Karyawan() {
         />
       </div>
 
-      <table className="hidden lg:block w-5xl lg:min-w-full divide-y divide-gray-200 mt-4">
-        <thead className="bg-gray-200 w-5xl">
-          <tr>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              Name
-            </th>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              WFH
-            </th>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              WFO
-            </th>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              Satelit
-            </th>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              Terlambat
-            </th>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              Tidak Hadir
-            </th>
-            <th
-              scope="col"
-              className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
-              Dengan Keterangan
-            </th>
-          </tr>
-        </thead>
+      <div className="flex justify-center items-center container mx-auto">
 
-        <tbody>
-          {state.currentUsers.map((user, personIdx) => (
-            <tr
-              key={Math.random()}
-              className={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-gray-900 capitalize flex flex-col">
-                <h1 className="text-sm font-medium">
-
-                  {user.name.toLowerCase()}
-                </h1>
-                <h1 className="text-xs text-gray-400">
-
-                  {user.unit.toLowerCase()}
-                </h1>
-
-              </td>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
-                {user.wfh}
-              </td>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
-                {user.wfo}
-              </td>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
-                {user.satelit}
-              </td>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
-                {user.telat}
-              </td>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
-                {user.tidak_hadir}
-              </td>
-              <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
-                {user.cuti + user.sppd}
-              </td>
-
+        <table className="hidden lg:block w-full lg:min-w-full divide-y divide-gray-200 mt-4">
+          <thead className="bg-gray-200 w-full">
+            <tr>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                Name
+              </th>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                WFH
+              </th>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                WFO
+              </th>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                Satelit
+              </th>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                Terlambat
+              </th>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                Tidak Hadir
+              </th>
+              <th
+                scope="col"
+                className="lg:px-6 lg:py-3 p-3 text-left text-sm font-medium text-gray-500 capitalize tracking-wide lg:whitespace-nowrap">
+                Dengan Keterangan
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {state.currentUsers.map((user, personIdx) => (
+              <tr
+                key={Math.random()}
+                className={personIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-gray-900 capitalize flex gap-4">
+
+                  {user.image_url ? (
+                    <img
+                      loading="lazy"
+                      height={12}
+                      width={12}
+                      src={user.image_url}
+                      alt="avatar"
+                      className="h-10 w-10 rounded-lg"
+                    />
+                  ) : (
+                    <div className="rounded-lg bg-gray-100 p-2">
+                      <User className="h-8 w-8 text-apps-gray" />
+                    </div>
+                  )}
+                  <div className="flex flex-col">
+                    <h1 className="capitalize text-gray-800 text-sm font-medium tracking-wide">{user.name.toLowerCase()}</h1>
+                    <h1 className="capitalize text-gray-400 text-xs">{user.jabatan.toLowerCase()}</h1>
+                  </div>
+
+
+                </td>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
+                  {user.wfh}
+                </td>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
+                  {user.wfo}
+                </td>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
+                  {user.satelit}
+                </td>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
+                  {user.telat}
+                </td>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
+                  {user.tidak_hadir}
+                </td>
+                <td className="lg:px-6 lg:py-4 px-4 py-2 lg:whitespace-nowrap text-sm text-gray-500 capitalize">
+                  {user.cuti + user.sppd}
+                </td>
+
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <CardGridMobile col={1} addClass="lg:hidden" >
         {state.currentUsers.map((user) => (
           <div key={Math.random()} className="flex flex-col gap-4 p-3 bg-white rounded-lg shadow-sm">
 
             <div className="flex gap-4">
-              <div className="rounded-lg bg-gray-100 p-2">
-                <User className="h-8 w-8 text-apps-gray" />
-              </div>
+
+              {user.image_url ? (
+                <img
+                  loading="lazy"
+                  height={12}
+                  width={12}
+                  src={user.image_url}
+                  alt="avatar"
+                  className="h-10 w-10 rounded-lg"
+                />
+              ) : (
+                <div className="rounded-lg bg-gray-100 p-2">
+                  <User className="h-8 w-8 text-apps-gray" />
+                </div>
+              )}
               <div className="flex flex-col">
                 <h1 className="capitalize text-gray-800 text-sm font-medium tracking-wide">{user.name.toLowerCase()}</h1>
-                <h1 className="capitalize text-gray-400 text-xs">{user.unit.toLowerCase()}</h1>
+                <h1 className="capitalize text-gray-400 text-xs">{user.jabatan.toLowerCase()}</h1>
               </div>
             </div>
 
