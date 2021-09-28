@@ -2,6 +2,7 @@ import {
   ChartBarIcon,
   ClipboardListIcon,
   HomeIcon,
+  UserIcon,
   ViewGridIcon,
 } from '@heroicons/react/outline';
 import React from 'react';
@@ -41,6 +42,13 @@ export default function MobileMenu() {
             activeClassName="text-apps-primary text-opacity-100 font-semibold">
             <ChartBarIcon className="h-5 w-5 mx-auto" />
             <p className="text-xs mt-1">Dashboard</p>
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className="rounded-md p-2 text-center text-apps-primary text-opacity-30 hover:bg-apps-card transition-all duration-300 ease-in-out"
+            activeClassName="text-apps-primary text-opacity-100 font-semibold">
+            <UserIcon className="h-5 w-5 mx-auto" />
+            <p className="text-xs mt-1">Me</p>
           </NavLink>
         </div>
       </div>

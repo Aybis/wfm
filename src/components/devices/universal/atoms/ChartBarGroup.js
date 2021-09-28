@@ -11,7 +11,7 @@ const ChartBarGroup = ({ title, dataSets }) => {
   });
 
   let labelThree = dataSets?.map((item) => {
-    return item.satlit;
+    return item.satelit;
   });
 
   const data = {

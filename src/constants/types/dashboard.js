@@ -11,3 +11,4 @@ export const FETCH_HADIR = 'FETCH_HADIR';
 export const FETCH_WFO = 'FETCH_WFO';
 export const FETCH_WFH = 'FETCH_WFH';
 export const FETCH_SATELIT = 'FETCH_SATELIT';
+export const FETCH_KEHADIRAN_BULANAN = 'FETCH_KEHADIRAN_BULANAN';

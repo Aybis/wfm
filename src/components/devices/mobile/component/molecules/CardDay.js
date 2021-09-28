@@ -61,8 +61,9 @@ export default function CardDay() {
               {ABSEN.dataIn.lokasi ?? 'Belum Absen'}
             </h3>
             <h3
-              className={`text-sm lg:text-base font-semibold mt-2 ${ABSEN?.data?.keterangan ? 'text-red-500' : 'text-gray-600'
-                }`}>
+              className={`text-xs lg:text-base font-semibold mt-2 ${
+                ABSEN?.data?.keterangan ? 'text-red-500' : 'text-gray-600'
+              }`}>
               {ABSEN.dataIn.jam
                 ? convertDate('fullTime', ABSEN.dataIn.jam)
                 : ''}
@@ -94,21 +95,20 @@ export default function CardDay() {
               {ABSEN.dataOut.jam ? ABSEN.dataOut.lokasi : ''}
             </h3>
             <h4
-              className={`text-sm lg:text-base font-semibold mt-2 text-gray-600 `}>
+              className={`text-xs lg:text-base font-semibold mt-2 text-gray-600 `}>
               {ABSEN.dataOut.jam
                 ? convertDate('fullTime', ABSEN.dataOut.jam)
                 : ''}
             </h4>
           </div>
         </div>
-        {
-          ABSEN?.data?.keterangan ? (
-            <div className="bg-gray-50 rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500">
-              {ABSEN.data.keterangan}
-            </div>
-          ) : ('')
-        }
-
+        {ABSEN?.data?.keterangan ? (
+          <div className="bg-gray-50 rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500">
+            {ABSEN.data.keterangan}
+          </div>
+        ) : (
+          ''
+        )}
       </motion.div>
     )
   ) : (

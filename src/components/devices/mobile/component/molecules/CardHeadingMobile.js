@@ -10,11 +10,15 @@ export default function CardHeadingMobile({
 }) {
   return (
     <div className="flex justify-between items-center mt-6">
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <HeadingMobile heading={heading} />
         <SubHeadingMobile subheading={subheading} />
       </div>
-      {navigation && <p onClick={link} className="cursor-pointer">Download</p>}
+      {navigation && (
+        <a href={link} className="cursor-pointer">
+          Download
+        </a>
+      )}
     </div>
   );
 }

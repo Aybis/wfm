@@ -33,7 +33,7 @@ import { useState } from 'react';
 const PresensiMobile = ({ history }) => {
   const USER = useSelector((state) => state.users);
   const ABSENSI = useSelector((state) => state.absensi);
-  const [linkDownloadReport, setLinkDownloadReport] = useState(false);
+  const [linkDownloadReport, setLinkDownloadReport] = useState('#');
   const dispatch = useDispatch();
 
   const absenToday = () => {
@@ -53,25 +53,21 @@ const PresensiMobile = ({ history }) => {
   };
 
   const createLinkDownload = (month, year) => {
-    absensi.exportPersonal({
-      params: {
-        user_id: USER?.id,
-        name: USER?.name,
-        month: month ?? convertDate('month'),
-        year: year ?? convertDate('fullYear'),
-      }
-    }).then((response) => {
-      console.log(response)
-    }).catch((error) => {
-      console.log(error)
-    })
-  }
+    setLinkDownloadReport(
+      `${process.env.REACT_APP_API_ABSENSI}absensi/export-personal?month=${
+        month ?? convertDate('month')
+      }&year=${year ?? convertDate('fullYear')}&user_id=${USER?.id}&name=${
+        USER?.name
+      }`,
+    );
+  };
 
   const handlerOnChange = (type, value) => {
     let month = type === 'bulan' ? value : convertDate('month');
     let year = type === 'tahun' ? value : convertDate('fullYear');
     getDataReportPersonal(month, year);
     getDashboardReportPersonal(month, year);
+    createLinkDownload(month, year);
   };
 
   const getDashboardReportPersonal = (month, year) => {
@@ -106,13 +102,11 @@ const PresensiMobile = ({ history }) => {
           user_id: USER?.id,
           month: month ?? convertDate('month'),
           year: year ?? convertDate('fullYear'),
-          size: 30
+          size: 32,
         },
       })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res)
-
           dispatch(getData(res.data.data));
         }
         dispatch(statusData('ok'));
@@ -128,6 +122,8 @@ const PresensiMobile = ({ history }) => {
     absenToday();
     getDashboardReportPersonal();
     getDataReportPersonal();
+    createLinkDownload();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [USER, dispatch]);
 
@@ -195,7 +191,7 @@ const PresensiMobile = ({ history }) => {
           heading="Report Absence"
           subheading={`Report Absensi Bulanan`}
           navigation
-          link={() => createLinkDownload()}
+          link={linkDownloadReport}
         />
         {ABSENSI.status === 'ok' && ABSENSI.data.length > 0 ? (
           <CardGridMobile>

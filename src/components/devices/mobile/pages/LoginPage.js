@@ -13,11 +13,11 @@ export default function LoginPage({
   onSubmit,
 }) {
   return (
-    <motion.div className="flex items-center justify-center h-full min-h-screen bg-white">
+    <motion.div className="flex items-center justify-center h-auto min-h-screen bg-white">
       <motion.div
         initial={{
-          opacity: 1,
-          y: 400,
+          opacity: 0,
+          y: 500,
         }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

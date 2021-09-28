@@ -17,6 +17,7 @@ import {
 import {
   fetchDirektorat,
   fetchKehadiran,
+  fetchKehadiranBulanan,
   fetchSatelit,
   fetchTerlambat,
   fetchTidakHadir,
@@ -64,24 +65,27 @@ const Dashboard = () => {
       });
   };
 
-  const getDataMonthly = (unit, month, year) => {
-    absensi.reportUserByUnit({
-      params: {
-        unit_id: 9,
-        size: 20,
-        month: month ?? convertDate('month'),
-        year: year ?? convertDate('fullYear'),
-      }
-    }).then((response) => {
-      console.log(response)
-    }).catch(err => {
-      console.log(err)
-    })
-  }
+  const dashboardMonthly = (month, year) => {
+    absensi
+      .dashboardMonthly({
+        params: {
+          month: month ?? convertDate('month'),
+          year: year ?? convertDate('fullYear'),
+        },
+      })
+      .then((response) => {
+        console.log('nmonthly', response);
+        dispatch(fetchKehadiranBulanan(response.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     getDataDashboard();
     setDidMount(true);
+    dashboardMonthly();
     return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -93,8 +97,9 @@ const Dashboard = () => {
   return (
     <div className="relative w-full min-h-screen h-full bg-coolGray-100 pb-28 md:pb-10 overflow-auto hidden-scroll">
       <div
-        className={`container mx-auto  rounded-xl p-4 lg:p-0 transition-all duration-300 ease-in-out hidden-scroll ${isDesktop && 'mt-28'
-          }`}>
+        className={`container mx-auto  rounded-xl p-4 lg:p-0 transition-all duration-300 ease-in-out hidden-scroll ${
+          isDesktop && 'mt-28'
+        }`}>
         <Menu />
         <MobileMenu />
         <Router>

@@ -113,9 +113,9 @@ export default function LoginPage({
           <h1 className="text-4xl font-bold text-gray-800 tracking-wide">
             Login{' '}
           </h1>
-          <h2 className="text-lg tracking-wide text-gray-400">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit vero nihil
-            ad.
+          <h2 className="text-lg font-light tracking-wide text-gray-400">
+            I'm so happy to see. You can continue to login for discipline your
+            presence.
           </h2>
         </div>
         {/* end header form  */}
