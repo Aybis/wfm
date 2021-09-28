@@ -12,6 +12,7 @@ export default function Input({
   type,
   onKeyDown,
   onKeyUp,
+  readOnly,
 }) {
   return (
     <div className="flex flex-col gap-2 mb-2 lg:mb-4">
@@ -19,7 +20,7 @@ export default function Input({
         <label
           htmlFor={name}
           className={[
-            'text-sm lg:text-base font-medium tracking-wide',
+            'text-sm lg:text-base font-medium tracking-wide capitalize',
             error ? 'text-red-600' : 'text-gray-500',
           ].join(' ')}>
           {labelName}
@@ -32,11 +33,17 @@ export default function Input({
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
         autoComplete="off"
+        readOnly={readOnly}
         className={[
           'border-2 focus:outline-none transition-all duration-300 ease-in-out border-gray-200 p-3 font-regular rounded-lg  placeholder-gray-300 lg:text-lg',
+
           error
             ? 'border-red-600 text-red-600'
-            : 'focus:border-gray-800 text-gray-800',
+            : [
+                readOnly
+                  ? 'focus:outline-none focus:border-transparent text-gray-400'
+                  : 'focus:border-gray-800 text-gray-800',
+              ],
           inputClassName,
         ].join(' ')}
         value={value}

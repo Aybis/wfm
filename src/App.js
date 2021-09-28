@@ -25,6 +25,7 @@ import Unauthenticated from './pages/401';
 import NotFound from './pages/404';
 import Login from './pages/Login';
 import Profile from 'pages/Profile';
+import PersonalData from 'pages/PersonalData';
 
 function App() {
   const dispatch = useDispatch();
@@ -113,7 +114,7 @@ function App() {
           <Authenticated
             exact
             path="/personal-data"
-            component={Profile}></Authenticated>
+            component={PersonalData}></Authenticated>
 
           <Route path="*" component={NotFound}></Route>
           {/* Route After Middleware */}

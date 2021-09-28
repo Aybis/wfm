@@ -171,7 +171,7 @@ const CheckOut = ({ history }) => {
         />
         <motion.div className="flex flex-col p-4 rounded-t-xl z-10 overflow-y-auto hidden-scroll h-full bg-white ">
           <form
-            className="flex flex-col gap-4 mt-2 mb-12"
+            className="flex flex-col gap-8 mt-2 mb-12"
             onSubmit={submitFunction}>
             <div className="hidden flex-col gap-2 text-sm">
               <Label labelName="Lokasi" />

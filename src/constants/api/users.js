@@ -10,7 +10,7 @@ export default {
   details: () => axios.get('auth/token/detail'),
   getProfileUser: (id) => axios.get(`cms/user/get?id${id}`),
   getMyProfile: () => axios.get('/user/profile/get'),
-  updateProfile: (data) => axios.post('/cms/user/update', data),
+  updateProfile: (data) => axios.post('/user/profile/update', data),
   refresh: () => axios.post('auth/token/refresh'),
   allUnit: () => axios.get('cms/unit/get'),
   allDirektorat: () => axios.get('cms/direktorat/get'),

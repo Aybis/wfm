@@ -2,11 +2,11 @@ import { ChevronRightIcon } from '@heroicons/react/solid';
 import Menu from 'components/devices/desktop/section/Menu';
 import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
 import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
+import { motion } from 'framer-motion';
 import dataJson from 'json/dataCeoMessages';
 import React, { useEffect } from 'react';
 import { isDesktop } from 'react-device-detect';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 export default function Profile({ history }) {
   const USER = useSelector((state) => state.users);
@@ -81,8 +81,9 @@ export default function Profile({ history }) {
 
         <div className="grid grid-cols-1 gap-4 my-4">
           {menuProfiles.map((menu) => (
-            <Link
-              to={menu.href}
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               className="flex items-center p-6 bg-white w-full rounded-lg"
               key={Math.random()}>
               <div className="min-w-0 flex-1 flex items-center r">
@@ -104,7 +105,7 @@ export default function Profile({ history }) {
                   aria-hidden="true"
                 />
               </div>
-            </Link>
+            </motion.div>
           ))}
         </div>
       </div>

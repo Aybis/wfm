@@ -1,7 +1,11 @@
 import { UserCircleIcon } from '@heroicons/react/solid';
 import React from 'react';
 
-export default function CardInputPhoto({ photo, handlerChangPhoto }) {
+export default function CardInputPhoto({
+  photo,
+  handlerChangPhoto,
+  typePhoto,
+}) {
   return (
     <div className="flex flex-col gap-2 text-sm my-4">
       <label htmlFor="image" className="text-gray-500 font-semibold rounded-lg">
@@ -10,7 +14,9 @@ export default function CardInputPhoto({ photo, handlerChangPhoto }) {
           <img
             src={photo}
             alt="file"
-            className="rounded-lg cursor-pointer mt-2 h-full object-cover w-full bg-gray-100 mb-4"
+            className={`rounded-lg cursor-pointer mt-2 object-cover w-full bg-gray-100 mb-4 ${
+              typePhoto === 'profile' ? 'h-64 shadow-lg rounded-lg' : 'h-full'
+            }`}
           />
         ) : (
           <UserCircleIcon
@@ -19,16 +25,26 @@ export default function CardInputPhoto({ photo, handlerChangPhoto }) {
           />
         )}
       </label>
-
-      <input
-        type="file"
-        name="image"
-        accept="image/*"
-        capture="camera"
-        id="image"
-        className="hidden rounded-lg"
-        onChange={handlerChangPhoto}
-      />
+      {typePhoto === 'profile' ? (
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          id="image"
+          className="hidden rounded-lg"
+          onChange={handlerChangPhoto}
+        />
+      ) : (
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          capture="camera"
+          id="image"
+          className="hidden rounded-lg"
+          onChange={handlerChangPhoto}
+        />
+      )}
     </div>
   );
 }
