@@ -10,9 +10,9 @@ export default function CardKeterangan({ shift = 0, kondisi, children }) {
   } else {
     if (shift <= 1) {
       return convertDate('hoursMinutes') > masukPagi && children;
-    } else if (shift == 2) {
+    } else if (shift === '2') {
       return convertDate('hoursMinutes') > masukSiang && children;
-    } else if (shift == 3) {
+    } else if (shift === '3') {
       return convertDate('hoursMinutes') > masukMalam && children;
     } else {
       return false;

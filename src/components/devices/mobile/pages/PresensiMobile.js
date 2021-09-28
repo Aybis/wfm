@@ -191,6 +191,7 @@ const PresensiMobile = ({ history }) => {
           heading="Report Absence"
           subheading={`Report Absensi Bulanan`}
           navigation
+          type="download"
           link={linkDownloadReport}
         />
         {ABSENSI.status === 'ok' && ABSENSI.data.length > 0 ? (

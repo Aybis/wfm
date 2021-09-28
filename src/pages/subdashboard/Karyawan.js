@@ -1,5 +1,6 @@
 import CardGridMobile from 'components/devices/mobile/component/molecules/CardGridMobile';
 import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
+import Modal from 'components/devices/universal/atoms/Modal';
 import Pagination from 'components/devices/universal/atoms/Pagination';
 import absensi from 'constants/api/absensi';
 import convertDate from 'helpers/hooks/convertDate';
@@ -11,6 +12,9 @@ export default function Karyawan() {
   const [PAGE, setPAGE] = useState(2);
   const [listUser, setlistUser] = useState([]);
   const [totalUsers, settotalUsers] = useState(0);
+  const [selectUser, setselectUser] = useState([]);
+  const [dataAbsensiUser, setdataAbsensiUser] = useState([]);
+  const [showModalDetailAbsensi, setshowModalDetailAbsensi] = useState(false);
 
   const [state, setstate] = useState({
     allUsers: listUser,
@@ -38,19 +42,22 @@ export default function Karyawan() {
       });
   };
 
-  const getDataAbsenPersonal = (user_id, month, year) => {
+  const getDataAbsenPersonal = (user, month, year) => {
+    setshowModalDetailAbsensi(true);
+    setselectUser(user);
     absensi
       .reportPersonal({
         params: {
-          user_id: user_id,
+          user_id: user.id,
           month: month ?? convertDate('month'),
           year: year ?? convertDate('fullYear'),
-          size: 10,
-          page: PAGE,
+          size: 3,
         },
       })
       .then((res) => {
-        console.log(res);
+        console.log('res', res);
+        setdataAbsensiUser(res.data.data);
+        console.log(dataAbsensiUser);
       })
       .catch((err) => {
         ToastHandler('err', err.response);
@@ -75,6 +82,22 @@ export default function Karyawan() {
       <h2 className="text-gray-600 font-medium text-lg lg:text-xl">
         List Karyawan By Unit
       </h2>
+      {/* Modal CEO Messages */}
+      <Modal
+        title={selectUser.name}
+        isShowModal={() => setshowModalDetailAbsensi(false)}
+        show={showModalDetailAbsensi}>
+        {dataAbsensiUser.length > 0 ? (
+          dataAbsensiUser.map((data) => (
+            <div className="flex gap2" key={Math.random()}>
+              {data.kehadiran}
+            </div>
+          ))
+        ) : (
+          <p>Data Kosong</p>
+        )}
+      </Modal>
+      {/* End Modal CEO Messages */}
 
       {/* table untuk dekstop view */}
       <div className="flex justify-center items-center container mx-auto">
@@ -177,7 +200,7 @@ export default function Karyawan() {
         {state.currentUsers.map((user) => (
           <div
             key={Math.random()}
-            onClick={() => getDataAbsenPersonal(user.id)}
+            onClick={() => getDataAbsenPersonal(user)}
             className="flex flex-col gap-4 p-3 bg-white rounded-lg shadow-sm">
             <div className="flex gap-4">
               {user.image_url ? (
