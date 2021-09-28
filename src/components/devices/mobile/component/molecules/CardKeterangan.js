@@ -6,16 +6,16 @@ export default function CardKeterangan({ shift = 0, kondisi, children }) {
   let masukMalam = 21.15;
 
   if (kondisi !== 'sehat' || kondisi === '') {
-    console.log(kondisi);
-  } else if (shift <= 1 && convertDate('hoursMinutes') >= masukPagi) {
-    console.log(shift);
-  } else if (shift === 2 && convertDate('hoursMinutes') >= masukSiang) {
-    console.log(shift);
-  } else if (shift === 3 && convertDate('hoursMinutes') >= masukMalam) {
-    console.log(shift);
+    return children;
   } else {
-    return false;
+    if (shift <= 1) {
+      return convertDate('hoursMinutes') > masukPagi && children;
+    } else if (shift == 2) {
+      return convertDate('hoursMinutes') > masukSiang && children;
+    } else if (shift == 3) {
+      return convertDate('hoursMinutes') > masukMalam && children;
+    } else {
+      return false;
+    }
   }
-
-  return children;
 }
