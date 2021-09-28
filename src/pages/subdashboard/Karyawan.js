@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { User } from 'react-feather';
 
 export default function Karyawan() {
-  const [PAGE, setPAGE] = useState(2);
+  // const [PAGE, setPAGE] = useState(2);
   const [listUser, setlistUser] = useState([]);
   const [totalUsers, settotalUsers] = useState(0);
   const [selectUser, setselectUser] = useState([]);

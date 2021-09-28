@@ -110,6 +110,10 @@ function App() {
             exact
             path="/profile"
             component={Profile}></Authenticated>
+          <Authenticated
+            exact
+            path="/personal-data"
+            component={Profile}></Authenticated>
 
           <Route path="*" component={NotFound}></Route>
           {/* Route After Middleware */}

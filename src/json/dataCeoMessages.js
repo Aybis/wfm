@@ -1,3 +1,9 @@
+import {
+  IdentificationIcon,
+  LogoutIcon,
+  UserGroupIcon,
+  UserIcon,
+} from '@heroicons/react/outline';
 import convertDate from 'helpers/hooks/convertDate';
 // eslint-disable-next-line import/no-anonymous-default-export
 const dataMessageCeo = [
@@ -189,12 +195,40 @@ const documentLemburan = [
   },
 ];
 
+const dataMenuProfiles = [
+  {
+    name: 'Me',
+    detail: 'Personal Data',
+    href: '/personal-data',
+    icon: <UserIcon className="h-12 w-12 text-gray-400 p-2" />,
+  },
+  {
+    name: 'About',
+    detail: 'Setting My Portofolio',
+    href: '/portofolio',
+    icon: <IdentificationIcon className="h-12 w-12 text-gray-400 p-2" />,
+  },
+  {
+    name: 'My Family',
+    detail: 'Data My Family',
+    href: '/family',
+    icon: <UserGroupIcon className="h-12 w-12 text-gray-400 p-2" />,
+  },
+  {
+    name: 'Logout',
+    detail: "Please don't go :(",
+    href: '/',
+    icon: <LogoutIcon className="h-12 w-12 text-gray-400 p-2" />,
+  },
+];
+
 const exportedObject = {
   dataMessageCeo,
   dataSelebsToday,
   dataTeamMate,
   dataLemburan,
   documentLemburan,
+  dataMenuProfiles,
 };
 
 export default exportedObject;
