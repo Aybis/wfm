@@ -52,7 +52,7 @@ export default function CardDay() {
                       convertDate('hoursMinutes', ABSEN.dataOut.jam) -
                       convertDate('hoursMinutes', ABSEN.dataIn.jam)
                     ).toFixed(2) + 'h'
-                  : 'On Duty'}
+                  : `${'-'}`}
               </h4>
             </div>
             <div className="flex flex-col items-end gap-4">
@@ -60,7 +60,7 @@ export default function CardDay() {
                 <span className="bg-white h-2 w-2 rounded-full"></span>
               </div>
               <h2 className="font-medium text-sm text-gray-600">
-                {ABSEN.data.kehadiran ?? ABSEN.d.ata.kondisi}
+                {ABSEN.data.kehadiran ?? ABSEN.data.kondisi}
               </h2>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function CardDay() {
             <h3 className={`text-base lg:text-base font-bold text-gray-800`}>
               {ABSEN.dataOut.jam
                 ? convertDate('timeAm', ABSEN.dataOut.jam)
-                : 'On Duty'}
+                : ''}
             </h3>
             <h3 className={`text-sm text-gray-400 tracking-wide`}>
               {ABSEN.dataOut.jam
