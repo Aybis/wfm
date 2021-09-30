@@ -12,7 +12,6 @@ import convertDate from 'helpers/hooks/convertDate';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
-import { User } from 'react-feather';
 import { useSelector } from 'react-redux';
 
 export default function Karyawan() {
@@ -23,6 +22,9 @@ export default function Karyawan() {
   const [showModalDetailAbsensi, setshowModalDetailAbsensi] = useState(false);
   const [isLoad, setisLoad] = useState(false);
   const [linkDownloadReport, setLinkDownloadReport] = useState('#');
+  const handlerImageError = (event, user) => {
+    event.target.src = `https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`;
+  };
 
   const DATAUNIT = useSelector((state) => state.employee);
 
@@ -241,9 +243,14 @@ export default function Karyawan() {
                       className="h-10 w-10 rounded-lg"
                     />
                   ) : (
-                    <div className="rounded-lg bg-gray-100 p-2">
-                      <User className="h-8 w-8 text-apps-gray" />
-                    </div>
+                    <img
+                      src={`https://ui-avatars.com/api/?name=${user?.name}&background=0062FF&color=fff`}
+                      alt="avatar"
+                      loading="lazy"
+                      height={10}
+                      width={10}
+                      className="h-10 w-10 rounded-lg"
+                    />
                   )}
                   <div className="flex flex-col">
                     <h1 className="capitalize text-gray-800 text-sm font-medium tracking-wide">
@@ -284,7 +291,7 @@ export default function Karyawan() {
       ) : (
         <>
           <CardHeadingMobile
-            subheading={`Result : ${totalUsers}`}
+            subheading={`Result : ${totalUsers} Employees`}
             navigation
             type="download"
             link={linkDownloadReport}
@@ -294,7 +301,7 @@ export default function Karyawan() {
               <div
                 key={Math.random()}
                 onClick={() => getDataAbsenPersonal(user)}
-                className="flex flex-col gap-4 p-3 bg-white rounded-lg shadow-sm">
+                className="flex flex-col gap-4 p-3 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-all duration-300">
                 <div className="flex gap-4">
                   {user.image_url ? (
                     <img
@@ -302,13 +309,19 @@ export default function Karyawan() {
                       height={12}
                       width={12}
                       src={user.image_url}
+                      onError={(event) => handlerImageError(event, user)}
                       alt="avatar"
                       className="h-10 w-10 rounded-lg"
                     />
                   ) : (
-                    <div className="rounded-lg bg-gray-100 p-2">
-                      <User className="h-8 w-8 text-apps-gray" />
-                    </div>
+                    <img
+                      src={`https://ui-avatars.com/api/?name=${user?.name}&background=0062FF&color=fff`}
+                      alt="avatar"
+                      loading="lazy"
+                      height={10}
+                      width={10}
+                      className="h-10 w-10 rounded-lg"
+                    />
                   )}
                   <div className="flex flex-col">
                     <h1 className="capitalize text-gray-800 text-sm font-medium tracking-wide">

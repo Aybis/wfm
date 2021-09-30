@@ -39,10 +39,10 @@ export default function CardDay() {
               <div className="flex justify-center items-center h-4 w-4 rounded-full bg-gray-400">
                 <span className="bg-white h-2 w-2 rounded-full"></span>
               </div>
-              <h2 className="font-medium text-gray-400">IN</h2>
+              <h2 className="font-medium text-sm text-gray-600">IN</h2>
             </div>
             <div className="flex flex-col justify-center items-center px-4 gap-2">
-              <PaperAirplaneIcon className="transform rotate-45 h-7 w-10 text-apps-primary white rounded-full -mt-3" />
+              <PaperAirplaneIcon className="transform rotate-90 h-7 w-10 text-apps-primary white rounded-full -mt-3" />
               <h4
                 className={`text-sm font-semibold text-gray-600 ${
                   ABSEN.dataOut.jam ?? 'animate-pulse'
@@ -59,13 +59,13 @@ export default function CardDay() {
               <div className="flex justify-center items-center h-4 w-4 rounded-full bg-apps-primary">
                 <span className="bg-white h-2 w-2 rounded-full"></span>
               </div>
-              <h2 className="font-medium text-gray-400">
-                {ABSEN.data.kehadiran ?? ABSEN.data.kondisi}
+              <h2 className="font-medium text-sm text-gray-600">
+                {ABSEN.data.kehadiran ?? ABSEN.d.ata.kondisi}
               </h2>
             </div>
           </div>
         </div>
-        <div className="flex justify-between py-2 px-6">
+        <div className="flex justify-between py-4 px-6">
           <div className="flex flex-col justify-center items-start">
             <h3
               className={`text-base lg:text-base font-bold ${
