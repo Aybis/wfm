@@ -7,7 +7,7 @@ export default function LayoutDekstop({ children, moreClass }) {
     isDesktop && (
       <div
         className={[
-          `relative w-full min-h-screen h-full bg-coolGray-100 pb-4`,
+          `relative w-full min-h-screen h-full bg-warmGray-100 pb-4`,
           moreClass,
         ].join(' ')}>
         <div className="inset-y-0 inset-0 rounded-xl pt-20 overflow-auto transition-all duration-300 ease-in-out pb-4">

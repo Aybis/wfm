@@ -16,6 +16,10 @@ export default function convertDate(type, fullDate) {
     month: 'long',
   };
 
+  let dateDay = {
+    weekday: 'short',
+  };
+
   if (type === 'fullDayMonthYear') {
     return date.toLocaleDateString('id-ID', options);
   } else if (type === 'fullDate') {
@@ -63,5 +67,22 @@ export default function convertDate(type, fullDate) {
   } else if (type === 'getTime') {
     let date1 = date.getDate();
     return date.getTime(date1);
+  } else if (type === 'timeAm') {
+    return (
+      date.getHours() +
+      ':' +
+      (date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`) +
+      (date.getHours() > 12 ? ' PM' : ' AM')
+    );
+  } else if (type === 'dateStyle') {
+    return (
+      date.getDate() +
+      '.' +
+      (date.getMonth() + 1) +
+      '.' +
+      date.getFullYear() +
+      ', ' +
+      date.toLocaleString('en-EN', dateDay)
+    );
   }
 }

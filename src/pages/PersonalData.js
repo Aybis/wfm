@@ -28,7 +28,6 @@ const PersonalData = ({ history }) => {
     photo: '',
     email: '',
     nik: '',
-    phone: '',
     position_id: '',
   });
 

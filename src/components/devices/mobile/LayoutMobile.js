@@ -6,7 +6,7 @@ import MobileMenu from './sections/MobileMenu';
 export default function LayoutMobile({ children, isShow = false }) {
   return (
     isMobile && (
-      <div className="relative w-full min-h-screen h-full bg-coolGray-100 pb-12">
+      <div className="relative w-full min-h-screen h-full bg-warmGray-100 pb-12">
         <div className="inset-y-0 inset-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-14">
           {isShow && (
             <>

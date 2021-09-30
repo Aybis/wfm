@@ -29,7 +29,7 @@ const Approval = ({ history }) => {
   ];
 
   return (
-    <div className="relative w-full h-screen bg-coolGray-100">
+    <div className="relative w-full h-screen bg-warmGray-100">
       <div
         className={`container mx-auto fixed inset-y-0 inset-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-20 hidden-scroll ${
           isDesktop && 'mt-24'

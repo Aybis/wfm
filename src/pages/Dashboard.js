@@ -74,7 +74,6 @@ const Dashboard = () => {
         },
       })
       .then((response) => {
-        console.log('nmonthly', response);
         dispatch(fetchKehadiranBulanan(response.data));
       })
       .catch((err) => {
@@ -95,7 +94,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="relative w-full min-h-screen h-full bg-coolGray-100 pb-28 md:pb-10 overflow-auto hidden-scroll">
+    <div className="relative w-full min-h-screen h-full bg-warmGray-100 pb-28 md:pb-10 overflow-auto hidden-scroll">
       <div
         className={`container mx-auto  rounded-xl p-4 lg:p-0 transition-all duration-300 ease-in-out hidden-scroll ${
           isDesktop && 'mt-28'

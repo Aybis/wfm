@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { Children, useState, useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
 import { CheckIcon } from '@heroicons/react/solid';
@@ -51,7 +49,7 @@ export default function Select({
       <div className="relative" ref={selectWrapper} onClick={toggleSelect}>
         <div
           className={[
-            'flex justify-between rounded-lg cursor-pointer bg-white focus:border-gray-800  transition-all duration-200 border-2 p-3 pr-4 w-full text-gray-800',
+            'flex justify-between rounded-md cursor-pointer bg-white focus:border-gray-800  transition-all duration-200 border-2 p-3 pr-4 w-full text-gray-800 capitalize',
             toggle
               ? 'border-gray-800'
               : `${border ? 'border-transparent' : 'border-gray-200'}`,
@@ -64,21 +62,21 @@ export default function Select({
         </div>
         <div
           className={[
-            'absolute left-0 bg-white border-2 border-gray-400 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg',
+            'absolute left-0 bg-white border-2 border-gray-400 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg capitalize',
             toggle ? '' : 'hidden',
           ].join(' ')}>
           {items.map((item, index) => {
             return (
               <div
                 key={index}
-                className={`group flex justify-between cursor-pointer px-4 py-2 bg-white transition-all duration-200 hover:bg-apps-primary mx-1 rounded-md hover:text-white ${
+                className={`group flex justify-between cursor-pointer px-4 py-2 bg-white transition-all duration-200 hover:bg-apps-primary mx-1 rounded-md hover:text-white capitalize ${
                   selected.props.value === item.props.value
                     ? 'text-gray-800 font-medium'
                     : 'text-gray-800 text-opacity-40'
                 }`}
                 onClick={() => {
                   onClick({ target: { name: name, value: item.props.value } });
-                  handlerChange && handlerChange(name, item.props.value);
+                  handlerChange && handlerChange(name, item.props.value, item);
                 }}>
                 {item.props.children}{' '}
                 {selected.props.value === item.props.value && (

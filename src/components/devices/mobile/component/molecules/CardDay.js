@@ -1,3 +1,4 @@
+import { PaperAirplaneIcon } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
 import convertDate from 'helpers/hooks/convertDate';
 import { useSelector } from 'react-redux';
@@ -7,36 +8,6 @@ export default function CardDay() {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
   const dateNow = convertDate('dateOnly');
-
-  // let masukPagi = 8.15;
-  // let masukSiang = 11.15;
-  // let masukMalam = 21.15;
-  // let colorClock = 'text-apps-primary';
-  // let disiplin = true;
-  // let reportTimeOut = 'Disiplin';
-
-  // if (
-  //   ABSEN.data.is_shift <= 1 &&
-  //   convertDate('hoursMinutes', ABSEN.dataIn.jam) >= masukPagi
-  // ) {
-  //   colorClock = 'text-red-500';
-  //   reportTimeOut = 'Tidak Disiplin';
-  //   disiplin = false;
-  // } else if (
-  //   ABSEN.data.is_shift === 2 &&
-  //   convertDate('hoursMinutes', ABSEN.dataIn.jam) >= masukSiang
-  // ) {
-  //   reportTimeOut = 'Tidak Disiplin';
-  //   colorClock = 'text-red-500';
-  //   disiplin = false;
-  // } else if (
-  //   ABSEN.data.is_shift === 3 &&
-  //   convertDate('hoursMinutes', ABSEN.dataIn.jam) >= masukMalam
-  // ) {
-  //   reportTimeOut = 'Tidak Disiplin';
-  //   colorClock = 'text-red-500';
-  //   disiplin = false;
-  // }
 
   const item = {
     hidden: { y: 20, opacity: 0 },
@@ -52,59 +23,91 @@ export default function CardDay() {
     ) : (
       <motion.div
         variants={item}
-        className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 shadow-lg`}>
-        <div className={`flex gap-4  w-full p-4 h-auto `}>
-          {/* in */}
-          <div className="flex flex-col gap-2 justify-start w-1/3">
-            <h2 className="font-bold text-apps-primary text-base">IN</h2>
-            <h3 className="text-xs font-normal text-gray-400 tracking-wide">
-              {ABSEN.dataIn.lokasi ?? 'Belum Absen'}
-            </h3>
+        className={`flex flex-col w-full gap-2 bg-white rounded-xl mt-4 py-2`}>
+        <div className="flex justify-between py-4 px-6">
+          <div
+            className="flex gap-2 absolute inset-x-0 mx-6"
+            style={{ marginTop: '7px' }}>
+            {Array.from({ length: 15 }).map((item) => (
+              <div
+                key={Math.random()}
+                className="border-t-2 bg-gray-200 w-5"></div>
+            ))}
+          </div>
+          <div className="grid grid-cols-3 w-full h-full z-20">
+            <div className="flex flex-col items-start gap-4">
+              <div className="flex justify-center items-center h-4 w-4 rounded-full bg-gray-400">
+                <span className="bg-white h-2 w-2 rounded-full"></span>
+              </div>
+              <h2 className="font-medium text-gray-400">IN</h2>
+            </div>
+            <div className="flex flex-col justify-center items-center px-4 gap-2">
+              <PaperAirplaneIcon className="transform rotate-45 h-7 w-10 text-apps-primary white rounded-full -mt-3" />
+              <h4
+                className={`text-sm font-semibold text-gray-600 ${
+                  ABSEN.dataOut.jam ?? 'animate-pulse'
+                }`}>
+                {ABSEN.dataOut.jam
+                  ? (
+                      convertDate('hoursMinutes', ABSEN.dataOut.jam) -
+                      convertDate('hoursMinutes', ABSEN.dataIn.jam)
+                    ).toFixed(2) + 'h'
+                  : 'On Duty'}
+              </h4>
+            </div>
+            <div className="flex flex-col items-end gap-4">
+              <div className="flex justify-center items-center h-4 w-4 rounded-full bg-apps-primary">
+                <span className="bg-white h-2 w-2 rounded-full"></span>
+              </div>
+              <h2 className="font-medium text-gray-400">
+                {ABSEN.data.kehadiran ?? ABSEN.data.kondisi}
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between py-2 px-6">
+          <div className="flex flex-col justify-center items-start">
             <h3
-              className={`text-xs lg:text-base font-semibold mt-2 ${
-                ABSEN?.data?.keterangan ? 'text-red-500' : 'text-gray-600'
+              className={`text-base lg:text-base font-bold ${
+                ABSEN?.data?.keterangan ? 'text-red-600' : 'text-gray-800'
               }`}>
+              {ABSEN.dataIn.jam ? convertDate('timeAm', ABSEN.dataIn.jam) : ''}
+            </h3>
+            <h3 className={`text-sm tracking-wide text-gray-400`}>
               {ABSEN.dataIn.jam
-                ? convertDate('fullTime', ABSEN.dataIn.jam)
+                ? convertDate('dateStyle', ABSEN.dataIn.jam)
                 : ''}
             </h3>
           </div>
-          {/* icon */}
-          <div className="flex items-center justify-center w-1/3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className={`h-10 w-10 text-apps-primary text-opacity-40`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-              />
-            </svg>
-          </div>
-          {/* out  */}
-
-          <div className="flex flex-col gap-2 text-right w-1/3 justify-between">
-            <h2 className="font-bold text-apps-primary text-base">
-              {ABSEN.data.kehadiran ?? ABSEN.data.kondisi}
-            </h2>
-            <h3 className={`text-xs lg:text-base text-gray-400 tracking-wide`}>
-              {ABSEN.dataOut.jam ? ABSEN.dataOut.lokasi : ''}
-            </h3>
-            <h4
-              className={`text-xs lg:text-base font-semibold mt-2 text-gray-600 `}>
+          <div className="flex flex-col justify-center items-end">
+            <h3 className={`text-base lg:text-base font-bold text-gray-800`}>
               {ABSEN.dataOut.jam
-                ? convertDate('fullTime', ABSEN.dataOut.jam)
+                ? convertDate('timeAm', ABSEN.dataOut.jam)
+                : 'On Duty'}
+            </h3>
+            <h3 className={`text-sm text-gray-400 tracking-wide`}>
+              {ABSEN.dataOut.jam
+                ? convertDate('dateStyle', ABSEN.dataOut.jam)
                 : ''}
-            </h4>
+            </h3>
           </div>
         </div>
         {ABSEN?.data?.keterangan ? (
-          <div className="bg-gray-50 rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500">
-            {ABSEN.data.keterangan}
+          <div className="relative mt-4">
+            <div className="flex justify-center items-center">
+              <div className="h-6 w-6 rounded-full bg-warmGray-100 absolute -left-3"></div>
+              <div className="flex gap-2 absolute inset-x-0 mx-3">
+                {Array.from({ length: 24 }).map((item) => (
+                  <div
+                    key={Math.random()}
+                    className="border-t-2 bg-gray-200 w-2"></div>
+                ))}
+              </div>
+              <div className="h-6 w-6 rounded-full bg-warmGray-100 absolute -right-3"></div>
+            </div>
+            <div className="rounded-b-lg flex w-full justify-center items-center p-2 font-medium text-sm text-red-500 pt-4">
+              {ABSEN.data.keterangan}
+            </div>
           </div>
         ) : (
           ''

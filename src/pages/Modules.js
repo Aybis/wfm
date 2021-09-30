@@ -38,10 +38,11 @@ const Modules = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-coolGray-100">
+    <div className="relative w-full h-screen bg-warmGray-100">
       <div
-        className={`container mx-auto fixed inset-y-0 inset-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-20 hidden-scroll ${isDesktop && 'mt-24'
-          }`}>
+        className={`container mx-auto fixed inset-y-0 inset-0 rounded-xl p-4 overflow-auto transition-all duration-300 ease-in-out pb-20 hidden-scroll ${
+          isDesktop && 'mt-24'
+        }`}>
         {/* Menu For Dekstop Only */}
         <Menu />
         <MobileMenu />
@@ -96,6 +97,7 @@ const Modules = () => {
             </Link>
           </motion.div>
           <motion.div
+            className="hidden"
             variants={item}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}>
@@ -137,6 +139,7 @@ const Modules = () => {
           </motion.div>
           <motion.div
             variants={item}
+            onClick={() => alert("Masih On Progress Yah :') ")}
             className="flex flex-col bg-coolGray-200 items-center p-4 justify-center rounded-lg">
             <MapIcon className="p-2 h-16 w-16 text-apps-text rounded-lg bg-apps-text bg-opacity-10 lg:h-24 lg:w-24  text-opacity-40" />
             <h4 className="font-semibold text-apps-text text-sm text-left mt-2 lg:text-lg">
@@ -152,8 +155,6 @@ const Modules = () => {
               Driver
             </h4>
           </motion.div>
-
-
         </motion.div>
       </div>
     </div>

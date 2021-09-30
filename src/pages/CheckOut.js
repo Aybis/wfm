@@ -187,7 +187,9 @@ const CheckOut = ({ history }) => {
                 <LoadingCircle />
               </div>
             ) : (
-              photo && <ButtonSubmit type="out" value="Check Out" />
+              photo && (
+                <ButtonSubmit type="out" value="Check Out" moreClass="mt-2" />
+              )
             )}
           </form>
         </motion.div>

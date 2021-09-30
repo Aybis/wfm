@@ -44,8 +44,8 @@ export default function CardListDay({
 
   return (
     <motion.div
-      className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 shadow-sm ${
-        border && 'border border-gray-100'
+      className={`flex flex-col w-full gap-4 bg-white rounded-xl mt-4 shadow-md ${
+        border ? 'border border-gray-200' : ''
       }`}>
       {timeIn && (
         <div className=" mx-auto text-center -mt-3">
