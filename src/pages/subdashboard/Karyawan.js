@@ -2,6 +2,7 @@ import CardFilterMonthAndYear from 'components/devices/mobile/component/molecule
 import CardGridMobile from 'components/devices/mobile/component/molecules/CardGridMobile';
 import CardHeadingMobile from 'components/devices/mobile/component/molecules/CardHeadingMobile';
 import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
+import Input from 'components/devices/universal/atoms/Input';
 import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import Modal from 'components/devices/universal/atoms/Modal';
 import Pagination from 'components/devices/universal/atoms/Pagination';
@@ -22,10 +23,6 @@ export default function Karyawan() {
   const [showModalDetailAbsensi, setshowModalDetailAbsensi] = useState(false);
   const [isLoad, setisLoad] = useState(false);
   const [linkDownloadReport, setLinkDownloadReport] = useState('#');
-  const handlerImageError = (event, user) => {
-    event.target.src = `https://ui-avatars.com/api/?name=${user.name}&background=0062FF&color=fff`;
-  };
-
   const DATAUNIT = useSelector((state) => state.employee);
 
   const [filter, setfilter] = useState({
@@ -36,6 +33,8 @@ export default function Karyawan() {
   const [{ unit }, setState] = useForm({
     unit: 2,
   });
+
+  const handlerKeyUp = (event) => {};
 
   const [state, setstate] = useState({
     allUsers: listUser,
@@ -175,6 +174,13 @@ export default function Karyawan() {
               </option>
             ))}
           </Select>
+          <Input
+            name="search"
+            placeholder="Name"
+            type="text"
+            onKeyUp={(e) => handlerKeyUp()}
+            value=""
+          />
         </div>
       ) : (
         <CardLoading />
@@ -303,13 +309,12 @@ export default function Karyawan() {
                 onClick={() => getDataAbsenPersonal(user)}
                 className="flex flex-col gap-4 p-3 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-all duration-300">
                 <div className="flex gap-4">
-                  {user.image_url ? (
+                  {user?.image_url ? (
                     <img
                       loading="lazy"
                       height={12}
                       width={12}
-                      src={user.image_url}
-                      onError={(event) => handlerImageError(event, user)}
+                      src={user?.image_url}
                       alt="avatar"
                       className="h-10 w-10 rounded-lg"
                     />

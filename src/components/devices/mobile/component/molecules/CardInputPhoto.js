@@ -1,4 +1,5 @@
 import { UserCircleIcon } from '@heroicons/react/solid';
+import { motion } from 'framer-motion';
 import React from 'react';
 
 export default function CardInputPhoto({
@@ -7,22 +8,27 @@ export default function CardInputPhoto({
   typePhoto,
 }) {
   return (
-    <div className="flex flex-col gap-2 text-sm my-4">
+    <motion.div whileTap={{ scale: 0.85 }} className="flex flex-col text-sm">
       <label htmlFor="image" className="text-gray-500 font-semibold rounded-lg">
-        Photo
+        {/* Photo */}
         {photo ? (
           <img
             src={photo}
             alt="file"
-            className={`rounded-lg cursor-pointer mt-2 object-cover w-full bg-gray-100 mb-4 ${
-              typePhoto === 'profile' ? 'h-64 shadow-lg rounded-lg' : 'h-full'
+            className={`rounded-lg cursor-pointer w-24 bg-gray-100 mb-4 object-center object-cover ${
+              typePhoto === 'profile' ? 'h-24 shadow-lg rounded-lg' : 'h-24'
             }`}
           />
         ) : (
-          <UserCircleIcon
-            tabIndex="0"
-            className="h-64 w-full rounded-lg bg-gray-100 text-gray-400 p-2 cursor-pointer mt-2 pb-12"
-          />
+          <div className="fle flex-col justify-center items-center">
+            <UserCircleIcon
+              tabIndex="0"
+              className="h-24 w-24 rounded-lg bg-gray-100 text-gray-400 p-2 cursor-pointer pb-12"
+            />
+            <p className="text-xs text-gray-400 -mt-8 ml-4 font-medium">
+              Take a Selfie
+            </p>
+          </div>
         )}
       </label>
       {typePhoto === 'profile' ? (
@@ -45,6 +51,6 @@ export default function CardInputPhoto({
           onChange={handlerChangPhoto}
         />
       )}
-    </div>
+    </motion.div>
   );
 }

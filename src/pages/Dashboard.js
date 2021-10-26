@@ -112,7 +112,7 @@ const Dashboard = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="relative mt-8 lg:w-1/2 lg:mx-auto ">
-            <div className="bg-coolGray-200 p-2 rounded-lg lg:bg-transparent">
+            <div className="bg-warmGray-200 p-2 rounded-lg lg:bg-transparent">
               <div className="group transition-all duration-300  border-gray-200">
                 <motion.nav
                   className={`flex lg:grid lg:grid-cols-${tabs.length} gap-4`}

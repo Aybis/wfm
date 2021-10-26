@@ -82,7 +82,7 @@ export default function convertDate(type, fullDate) {
       '.' +
       date.getFullYear() +
       ', ' +
-      date.toLocaleString('en-EN', dateDay)
+      date.toLocaleString('id-ID', dateDay)
     );
   }
 }

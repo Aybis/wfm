@@ -1,7 +1,10 @@
 import ButtonSubmit from 'components/devices/mobile/component/atoms/ButtonSubmit';
+import ItemTab from 'components/devices/mobile/component/atoms/ItemTab';
+import Card from 'components/devices/mobile/component/molecules/Card';
 import CardBarAbsensi from 'components/devices/mobile/component/molecules/CardBarAbsensi';
 import CardBarUpFormAbsensi from 'components/devices/mobile/component/molecules/CardBarUpFormAbsensi';
 import CardInputPhoto from 'components/devices/mobile/component/molecules/CardInputPhoto';
+import CardKehadiran from 'components/devices/mobile/component/molecules/CardKehadiran';
 import CardKeterangan from 'components/devices/mobile/component/molecules/CardKeterangan';
 import CardListRadio from 'components/devices/mobile/component/molecules/CardListRadio';
 import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
@@ -17,11 +20,13 @@ import { isMobile } from 'react-device-detect';
 import { useDispatch, useSelector } from 'react-redux';
 import { isCheckIn } from 'store/actions/presence';
 import absensi from '../constants/api/absensi';
+import { Switch } from '@headlessui/react';
 
 const CheckIn = ({ history }) => {
   const dispatch = useDispatch();
   const [didMount, setDidMount] = useState(false);
   const [isSubmit, setisSubmit] = useState(false);
+  const [isSelectRadio, setisSelectRadio] = useState(0);
   const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [longLat, setlongLat] = useState(null);
@@ -77,6 +82,11 @@ const CheckIn = ({ history }) => {
     setAddress(value);
   };
 
+  const handlerItemRadio = (event) => {
+    console.log(event.target.name, event.target.value);
+    setisSelectRadio(event.target.value);
+  };
+
   const submitFunction = (event) => {
     event.preventDefault();
     setisSubmit(true);
@@ -85,8 +95,11 @@ const CheckIn = ({ history }) => {
     state.photo = image;
     state.lokasi = address;
     state.jam = convertDate('fullDate');
+
     if (state.kondisi !== 'sehat') {
       state.kehadiran = null;
+    } else {
+      state.keterangan = '';
     }
 
     absensi
@@ -123,6 +136,7 @@ const CheckIn = ({ history }) => {
         setisSubmit(false);
       });
   };
+
   const handlerUpForm = () => {
     setPopUp(!popUp);
   };
@@ -142,96 +156,86 @@ const CheckIn = ({ history }) => {
     isMobile && (
       <motion.div className="flex flex-col min-h-screen h-full bg-white">
         <CardBarAbsensi link={history.goBack} />
-        <SetMaps
-          popup={!popUp}
-          sendlongLat={sendlongLat}
-          sendAddress={sendAddress}
-        />
-        <motion.div
-          initial={{
-            y: -300,
-          }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6 }}
-          className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-apps-yellow rounded-t-xl z-20 ${
-            !popUp ? 'h-1/2' : 'h-5/6 mt-20'
-          }`}>
-          <CardBarUpFormAbsensi
-            handlerUp={handlerUpForm}
-            type="in"
-            isUp={popUp}
+
+        {/* Kehadiran  */}
+        <Card addClass="z-10 mt-24 mx-4">
+          <label
+            htmlFor="Shifting"
+            className="text-sm font-semibold text-warmGray-900 tracking-wide">
+            Lokasi
+          </label>
+          <SetMaps
+            height="100%"
+            className="relative h-52 rounded-lg z-0 mt-2"
+            popup={!popUp}
+            sendlongLat={sendlongLat}
+            sendAddress={sendAddress}
           />
-          <motion.div className="flex flex-col p-4 pb-12 rounded-t-xl z-10 overflow-y-auto hidden-scroll h-full bg-white ">
-            <form action="" className="pb-12" onSubmit={submitFunction}>
-              {USER?.subunit === 'CUSTOMER CARE' && (
-                <CardListRadio
-                  title="Shift"
-                  data={['Pagi', 'Siang', 'Malam']}
-                  setState={setState}
-                  textName="is_shift"
-                />
-              )}
 
-              {USER?.subunit !== 'CUSTOMER CARE' || state.is_shift > 0 ? (
-                <>
-                  <CardListRadio
-                    title="Kondisi"
-                    data={['sehat', 'sakit', 'cuti', 'sppd']}
-                    setState={setState}
-                    textName="kondisi"
-                  />
-                  {state.kondisi === 'sehat' && (
-                    <CardListRadio
-                      title="Kehadiran"
-                      data={['WFO', 'WFH', 'Satelit']}
-                      setState={setState}
-                      textName="kehadiran"
-                    />
-                  )}
+          <div className="bg-white h-auto p-4 rounded-lg z-30 relative mx-4 -mt-12 shadow-lg flex gap-4">
+            <div className="h-24 w-24 rounded-lg flex-none">
+              <CardInputPhoto
+                photo={photo}
+                handlerChangPhoto={(event) => inputPhoto(event)}
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <h1 className="text-sm capitalize text-warmGray-800 font-semibold">
+                {USER.name ? USER.name.toLowerCase() : 'Take a Selfie'}
+              </h1>
+              <p className="text-xs font-light text-warmGray-400 tracking-wide">
+                {address}
+              </p>
+            </div>
+          </div>
+        </Card>
 
-                  <CardKeterangan
-                    shift={state.is_shift}
-                    kondisi={state.kondisi}>
-                    <Textarea
-                      labelName="Keterangan"
-                      name="keterangan"
-                      value={state.keterangan}
-                      onChange={setState}
-                      placeholder={`Alasan ${
-                        state.kondisi === 'sehat' || state.kondisi === ''
-                          ? 'Terlambat'
-                          : state.kondisi
-                      }? `}
-                    />
-                  </CardKeterangan>
-                </>
-              ) : (
-                <></>
-              )}
-              {loadPhoto ? (
-                <div className="flex justify-center items-center h-40">
-                  <LoadingCircle />
-                </div>
-              ) : (
-                <CardInputPhoto
-                  photo={photo}
-                  handlerChangPhoto={(event) => inputPhoto(event)}
-                />
-              )}
+        <Card addClass="mx-4 ">
+          <CardListRadio
+            title="Shifting"
+            data={['Pagi', 'Siang', 'Malam']}
+            setState={setState}
+            textName="is_shift"
+          />
+        </Card>
 
-              {isSubmit ? (
-                <div className="flex items-center justify-center">
-                  <LoadingCircle />
-                </div>
-              ) : (
-                photo &&
-                (state.kehadiran || state.keterangan) &&
-                state.kondisi &&
-                photo && <ButtonSubmit type="in" value="Check In" />
-              )}
-            </form>
-          </motion.div>
-        </motion.div>
+        <Card addClass="mx-4">
+          <CardListRadio
+            title="Kondisi"
+            data={['sehat', 'sakit', 'ijin', 'cuti', 'sppd']}
+            setState={setState}
+            textName="kondisi"
+          />
+        </Card>
+
+        <Card addClass="mx-4">
+          <CardListRadio
+            title="Kehadiran"
+            data={['WFH', 'WFO']}
+            setState={setState}
+            textName="kehadiran"
+          />
+        </Card>
+
+        <Card addClass="mx-4">
+          <CardKeterangan shift={state.is_shift} kondisi={state.kondisi}>
+            <Textarea
+              labelName="Keterangan"
+              name="keterangan"
+              value={state.keterangan}
+              onChange={setState}
+              placeholder={`Alasan ${
+                state.kondisi === 'sehat' || state.kondisi === ''
+                  ? 'Terlambat'
+                  : state.kondisi
+              }? `}
+            />
+          </CardKeterangan>
+        </Card>
+
+        <Card addClass="mx-4 -mt-2">
+          <ButtonSubmit type="in" value="Check In" />
+        </Card>
       </motion.div>
     )
   );
