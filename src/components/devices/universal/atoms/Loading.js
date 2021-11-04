@@ -1,10 +1,17 @@
 import React from 'react';
 
-export default function Loading({ height = 12, width = 12, inputClass }) {
+export default function Loading({
+  height = 12,
+  width = 12,
+  inputClass,
+  color,
+}) {
   return (
     <svg
       className={[
-        `animate-spin -ml-1 mr-3 h-${height} w-${width} text-apps-primary`,
+        `animate-spin -ml-1 mr-3 h-${height} w-${width} ${
+          color ?? 'text-apps-primary'
+        }`,
         inputClass,
       ].join('')}
       xmlns="http://www.w3.org/2000/svg"

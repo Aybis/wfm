@@ -1,9 +1,11 @@
+import DetailCeoMessage from 'components/devices/desktop/molecules/DetailCeoMessage';
 import Modal from 'components/devices/universal/atoms/Modal';
 import CardTeam from 'components/devices/universal/molecules/CardTeam';
 import Carousel from 'components/devices/universal/molecules/Carousel';
 import absensi from 'constants/api/absensi';
 import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
+import dataCeoMessages from 'json/dataCeoMessages';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { dataWeekly, statusData } from 'store/actions/absensi';
@@ -20,14 +22,10 @@ import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
 import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardMessageMobile from '../component/molecules/CardMessageMobile';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
-import CardWorkMobile from '../component/molecules/CardWorkMobile';
-import dataCeoMessages from 'json/dataCeoMessages';
 import LayoutMobile from '../LayoutMobile';
-import DetailCeoMessage from 'components/devices/desktop/molecules/DetailCeoMessage';
 
 export default function HomePage() {
   const USER = useSelector((state) => state.users);
-  const ABSENSI = useSelector((state) => state.absensi);
   const [dataHoliday, setdataHoliday] = useState(false);
   const [showModal, setshowModal] = useState(false);
   const [showModalCeoMessage, setshowModalCeoMessage] = useState(false);
@@ -160,33 +158,9 @@ export default function HomePage() {
       </Card>
       {/* End Daily Absence  */}
 
-      {/* Weekly Report Personal */}
-      <Card>
-        <CardHeadingMobile
-          heading="Report Weekly"
-          subheading="Kehadiran Mingguan Absensi"
-        />
-        <CardScrollHorizontal>
-          {Object.values(ABSENSI.dataWeekly)?.map?.((item) => {
-            return (
-              <CardWorkMobile
-                kehadiran={item.kehadiran}
-                kondisi={item.kondisi}
-                date={item.created_at}
-                key={Math.random()}
-              />
-            );
-          })}
-        </CardScrollHorizontal>
-      </Card>
-      {/* End Weekly Report Personal */}
-
       {/* CEO Messages */}
       <Card>
-        <CardHeadingMobile
-          heading="CEO Messages"
-          subheading="Lorem ipsum astafaragus."
-        />
+        <CardHeadingMobile heading="Pesan CEO" />
         <CardScrollHorizontal>
           {dataJson.dataMessageCeo.map((data) => {
             return (
@@ -220,16 +194,13 @@ export default function HomePage() {
 
       {/* Card Team Mate */}
       <Card addClass="hidden">
-        <CardHeadingMobile
-          heading="Teammate"
-          subheading="List Team Member your Unit"
-        />
+        <CardHeadingMobile heading="Teammate" />
         <CardScrollHorizontal>
           <motion.div
             variants={container}
             initial="hidden"
             animate="visible"
-            className="overflow-x-auto hidden-scroll flex gap-4 p-2">
+            className="overflow-x-auto hidden-scroll flex gap-4 p-2 -mt-2">
             {/* card team */}
             {dataJson.dataTeamMate.map((team) => (
               <CardTeam
@@ -245,10 +216,7 @@ export default function HomePage() {
       {/* Card Teammate */}
 
       <Card>
-        <CardHeadingMobile
-          heading="Day Off"
-          subheading="Day Off this Year list"
-        />
+        <CardHeadingMobile heading="Hari Libur" />
         <CardGridMobile>
           {dataHoliday.length > 0 ? (
             dataHoliday.map((data, index) => (

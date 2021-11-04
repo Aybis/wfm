@@ -1,13 +1,19 @@
+import Loading from 'components/devices/universal/atoms/Loading';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-export default function ButtonSubmit({ type, value, moreClass }) {
+export default function ButtonSubmit({
+  type,
+  value,
+  moreClass,
+  isSubmit = false,
+}) {
   let classBackground;
 
   if (type === 'in') {
-    classBackground = 'bg-gradient-to-br from-lightBlue-400 to-indigo-600';
+    classBackground = 'bg-apps-primary';
   } else if (type === 'out') {
-    classBackground = 'bg-gradient-to-br from-red-500 to-pink-600';
+    classBackground = 'bg-apps-red';
   } else {
     classBackground = 'bg-apps-primary';
   }
@@ -17,12 +23,15 @@ export default function ButtonSubmit({ type, value, moreClass }) {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
+      disabled={isSubmit}
       className={[
-        `p-3 text-lg font-semibold  w-full text-center rounded-lg text-white `,
+        `font-semibold px-8 py-2 text-center mx-auto rounded-lg text-white flex justify-center items-center`,
+        isSubmit && 'bg-opacity-50',
         classBackground,
         moreClass,
       ].join(' ')}>
-      {value}
+      {isSubmit ? <Loading color="text-white" height={6} width={6} /> : ''}
+      <p>{value}</p>
     </motion.button>
   );
 }

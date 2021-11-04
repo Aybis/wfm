@@ -1,3 +1,4 @@
+import { ArrowUpIcon } from '@heroicons/react/outline';
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
 import React from 'react';
@@ -20,12 +21,13 @@ export default function CardInputPhoto({
             }`}
           />
         ) : (
-          <div className="fle flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center bg-gray-100 p-2 rounded-lg">
             <UserCircleIcon
               tabIndex="0"
-              className="h-24 w-24 rounded-lg bg-gray-100 text-gray-400 p-2 cursor-pointer pb-12"
+              className="h-12 text-gray-400 cursor-pointer"
             />
-            <p className="text-xs text-gray-400 -mt-8 ml-4 font-medium">
+            <ArrowUpIcon className="h-3 text-gray-400 animate-bounce mt-2" />
+            <p className="text-xs text-gray-400 text-center tracking-wide font-medium">
               Take a Selfie
             </p>
           </div>

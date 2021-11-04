@@ -67,6 +67,12 @@ export default function CardDay() {
         </div>
         <div className="flex justify-between py-4 px-6">
           <div className="flex flex-col justify-center items-start">
+            {/* <img
+              src={`${process.env.REACT_APP_API_IMAGE_ABSENSI}${ABSEN.dataIn.photo}`}
+              alt={ABSEN.dataIn.photo}
+              className="h-14 w-14 rounded-lg object-center"
+              /> */}
+
             <h3
               className={`text-base lg:text-base font-extrabold ${
                 ABSEN?.data?.keterangan ? 'text-red-600' : 'text-gray-800'

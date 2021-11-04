@@ -1,9 +1,15 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React from 'react';
 import InputRadio from '../atoms/InputRadio';
 
-export default function CardListRadio({ data, title, setState, textName }) {
-  const [isSelected, setisSelected] = useState(0);
+export default function CardListRadio({
+  data,
+  title,
+  setState,
+  textName,
+  handlerOnClick,
+  isSelected = 0,
+}) {
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
@@ -20,11 +26,6 @@ export default function CardListRadio({ data, title, setState, textName }) {
     return string[0].toUpperCase() + string.slice(1);
   }
 
-  const testHandler = (event) => {
-    console.log(event.target.value);
-    setisSelected(event.target.value);
-  };
-
   return (
     <motion.div className="relative">
       <h1 className="text-sm font-semibold text-warmGray-600 tracking-wide">
@@ -38,7 +39,7 @@ export default function CardListRadio({ data, title, setState, textName }) {
         {data.map((item, index) => (
           <InputRadio
             key={index}
-            handlerOnClick={testHandler}
+            handlerOnClick={handlerOnClick}
             selected={isSelected}
             label={textName === 'kondisi' ? capitalize(item) : item}
             name={textName}

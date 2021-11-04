@@ -19,7 +19,6 @@ export default function ItemTab({
           ? 'bg-white text-warmGray-800 shadow-lg'
           : 'bg-warmGray-100 text-warmGray-400'
       } py-2 px-4 rounded-lg font-medium text-sm `}
-      value={label}
     />
   );
 }

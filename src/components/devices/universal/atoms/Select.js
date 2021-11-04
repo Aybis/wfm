@@ -49,7 +49,7 @@ export default function Select({
       <div className="relative" ref={selectWrapper} onClick={toggleSelect}>
         <div
           className={[
-            'flex justify-between rounded-md cursor-pointer bg-white focus:border-gray-800  transition-all duration-200 border-2 p-3 pr-4 w-full text-gray-800 capitalize',
+            'flex justify-between rounded-md cursor-pointer bg-white focus:border-gray-800  transition-all duration-200 border-2 px-4 py-2 pr-4 w-full text-gray-800 capitalize',
             toggle
               ? 'border-gray-800'
               : `${border ? 'border-transparent' : 'border-gray-200'}`,
@@ -62,7 +62,7 @@ export default function Select({
         </div>
         <div
           className={[
-            'absolute left-0 bg-white border-2 border-gray-400 py-3 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg capitalize',
+            'absolute left-0 bg-white border-2 border-gray-400 py-2 w-full rounded-md mt-2 max-h-48 overflow-auto shadow-lg capitalize',
             toggle ? '' : 'hidden',
           ].join(' ')}>
           {items.map((item, index) => {

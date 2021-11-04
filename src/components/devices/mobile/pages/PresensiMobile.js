@@ -1,10 +1,11 @@
 import absensi from 'constants/api/absensi';
+import convertDate from 'helpers/hooks/convertDate';
 import ToastHandler from 'helpers/hooks/toast';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   dataPresence,
+  dataWeekly,
   dataWork,
   getData,
   messageData,
@@ -17,18 +18,14 @@ import {
 } from 'store/actions/presence';
 import Card from '../component/molecules/Card';
 import CardFilterMonthAndYear from '../component/molecules/CardFilterMonthAndYear';
-import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
+import CardGridMobile from '../component/molecules/CardGridMobile';
 import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
 import CardKehadiran from '../component/molecules/CardKehadiran';
+import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
+import CardSummary from '../component/molecules/CardSummary';
 import CardTitlePageMobile from '../component/molecules/CardTitlePageMobile';
+import CardWorkMobile from '../component/molecules/CardWorkMobile';
 import LayoutMobile from '../LayoutMobile';
-import CardGridMobile from '../component/molecules/CardGridMobile';
-import convertDate from 'helpers/hooks/convertDate';
-import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
-import CardListDay from 'components/devices/universal/molecules/CardListDay';
-import CardReportKehadiran from 'components/devices/universal/molecules/CardReportKehadiran';
-import CardReportWork from 'components/devices/desktop/molecules/CardReportWork';
-import { useState } from 'react';
 
 const PresensiMobile = ({ history }) => {
   const USER = useSelector((state) => state.users);
@@ -117,9 +114,24 @@ const PresensiMobile = ({ history }) => {
       });
   };
 
+  const reportWeeklyPersonal = () => {
+    dispatch(statusData('loading'));
+    absensi
+      .weeklyPersonal(USER?.id)
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(dataWeekly(response.data));
+        }
+      })
+      .catch((error) => {
+        ToastHandler('error', error?.response?.data?.message ?? 'error');
+      });
+  };
+
   useEffect(() => {
     window.scroll(0, 0);
     absenToday();
+    reportWeeklyPersonal();
     getDashboardReportPersonal();
     getDataReportPersonal();
     createLinkDownload();
@@ -132,7 +144,7 @@ const PresensiMobile = ({ history }) => {
       <CardTitlePageMobile title="Presensi" link={history.goBack} />
 
       {/* Kehadiran  */}
-      <Card>
+      <Card addClass="-mt-4">
         <CardKehadiran />
       </Card>
       {/* End Kehadiran  */}
@@ -141,79 +153,171 @@ const PresensiMobile = ({ history }) => {
       <CardFilterMonthAndYear handlerOnChange={handlerOnChange} />
       {/* End Filter Month And Year  */}
 
-      {/* Report Presence this Month */}
+      {/* Summary Absensi Bulanan */}
       <Card>
-        <CardHeadingMobile
-          heading="Report Presence"
-          subheading={`Report Kehadiran Absen`}
-        />
-        {ABSENSI.status === 'ok' && ABSENSI.dataPresence.length > 0 ? (
-          <CardScrollHorizontal>
-            {ABSENSI.dataPresence.map((item) => (
-              <CardReportKehadiran
-                key={Math.random()}
-                hari={item.value}
-                name={item.name}
-              />
-            ))}
-          </CardScrollHorizontal>
-        ) : (
-          <LoadingCircle />
-        )}
+        <CardHeadingMobile heading="Summary" />
+        <div className="grid grid-cols-3 gap-6 mt-4 place-items-center">
+          {ABSENSI.dataPresence.length > 0
+            ? ABSENSI.dataPresence.map((item) => (
+                <CardSummary
+                  key={Math.random()}
+                  name={item.name}
+                  value={item.value}
+                  type="Day"
+                />
+              ))
+            : ''}
+        </div>
+        <div className="grid grid-cols-3 gap-6 mt-6 place-items-center">
+          {ABSENSI.dataWork.length > 0
+            ? ABSENSI.dataWork.map((item) => (
+                <CardSummary
+                  key={Math.random()}
+                  name={item.name}
+                  value={item.value}
+                />
+              ))
+            : ''}
+        </div>
       </Card>
-      {/* Report Presence this Month */}
+      {/* End Summary Absensi Bulanan */}
 
-      {/* Report Presence this Month */}
-      <Card>
-        <CardHeadingMobile
-          heading="Report Working"
-          subheading={`Report Kehadiran Kerja`}
-        />
-        {ABSENSI.status === 'ok' && ABSENSI.dataWork.length > 0 ? (
-          <CardScrollHorizontal>
-            {ABSENSI.dataWork.map((item) => (
-              <CardReportWork
-                status="Hari"
+      {/* Weekly Report Personal */}
+      <Card addClass="mt-4">
+        <CardHeadingMobile heading="Data Mingguan" />
+        <CardScrollHorizontal>
+          {Object.values(ABSENSI.dataWeekly)?.map?.((item) => {
+            return (
+              <CardWorkMobile
+                kehadiran={item.kehadiran}
+                kondisi={item.kondisi}
+                date={item.created_at}
+                timeIn={item.detail_absensi[0].jam}
+                timeOut={
+                  item.detail_absensi[1]
+                    ? item.detail_absensi[1].jam
+                    : 'On Duty'
+                }
                 key={Math.random()}
-                day={item.value}
-                name={item.name}
               />
-            ))}
-          </CardScrollHorizontal>
-        ) : (
-          <LoadingCircle />
-        )}
+            );
+          })}
+        </CardScrollHorizontal>
       </Card>
-      {/* Report Presence this Month */}
+      {/* End Weekly Report Personal */}
 
-      <Card>
+      <Card addClass="mt-4">
         <CardHeadingMobile
-          heading="Report Absence"
-          subheading={`Report Absensi Bulanan`}
+          heading="Data Absensi"
           navigation
           type="download"
           link={linkDownloadReport}
         />
         {ABSENSI.status === 'ok' && ABSENSI.data.length > 0 ? (
           <CardGridMobile>
-            {ABSENSI.data.map((data) => (
-              <CardListDay
-                key={Math.random()}
-                type={data.kehadiran}
-                kondisi={data.kondisi}
-                is_shift={data.is_shift}
-                locIn={data.detail_absensi[0].lokasi}
-                timeIn={data.detail_absensi[0].jam}
-                keterangan={data.keterangan}
-                status={data.checkout_status}
-                locOut={
-                  data.detail_absensi[1] ? data.detail_absensi[1].lokasi : null
-                }
-                timeOut={
-                  data.detail_absensi[1] ? data.detail_absensi[1].jam : null
-                }
-              />
-            ))}
+            {ABSENSI.data.map((data) => {
+              let photoIn = data.detail_absensi[0].photo.includes('/')
+                ? data.detail_absensi[0].photo
+                : `${USER?.id}/${data.detail_absensi[0].jam.substring(
+                    0,
+                    10,
+                  )}/in/${data.detail_absensi[0].photo}`;
+              return (
+                <div
+                  key={Math.random()}
+                  className="relative flex flex-col gap-4 bg-white rounded-lg p-4">
+                  <div
+                    className={[
+                      'absolute top-3 right-4 rounded-md text-xs px-2 py-1 ',
+                      data.kehadiran === 'WFH' && 'bg-green-500 text-white',
+                      data.kehadiran === 'WFO' && 'bg-blue-500 text-white',
+                      data.kehadiran === null && 'bg-red-500  text-white',
+                    ].join(' ')}>
+                    {data.kehadiran === 'WFH' && 'At Home'}
+                    {data.kehadiran === 'WFO' && 'At Office'}
+                    {data.kehadiran === null && data.kondisi}
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="flex w-1/6">
+                      <img
+                        src={`${process.env.REACT_APP_API_IMAGE_ABSENSI}/${photoIn}`}
+                        alt={data.detail_absensi[0].photo}
+                        className="h-16 w-16 rounded-md object-center"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `https://ui-avatars.com/api/?name=${USER?.name}&background=F3F3F3&color=000`;
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1 w-5/6">
+                      <p className="text-xs font-medium text-gray-600">
+                        {convertDate(
+                          'fullDayMonthYear',
+                          data.detail_absensi[0].jam,
+                        )}
+                      </p>
+                      <div className="flex items-center">
+                        <p className="text-sm font-semibold text-gray-800">
+                          {convertDate('timeAm', data.detail_absensi[0].jam)}
+                        </p>
+                        <p
+                          className={`text-sm font-medium ml-1 ${
+                            data.kehadiran !== null && data.keterangan
+                              ? 'text-red-500'
+                              : 'text-apps-primary'
+                          }`}>
+                          {data.kehadiran !== null && data.keterangan
+                            ? '- Tidak Disiplin '
+                            : '- Disiplin'}
+                        </p>
+                      </div>
+                      <p className="text-xs font-light text-gray-400">
+                        {data.detail_absensi[0].lokasi}
+                      </p>
+                      <p className="text-xs font-medium text-red-400">
+                        {data.keterangan !== null && data.keterangan}
+                      </p>
+                    </div>
+                  </div>
+                  <hr className="border border-gray-100 rounded-full ml-16" />
+                  {data.detail_absensi[1] ? (
+                    <div className="flex gap-3">
+                      <div className="flex w-1/6 rounded-lg">
+                        <img
+                          src={`${process.env.REACT_APP_API_IMAGE_ABSENSI}/${data.detail_absensi[1].photo}`}
+                          alt={data.detail_absensi[1].photo}
+                          className="h-16 w-16 rounded-lg object-center"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${USER?.name}&background=F3F3F3&color=000`;
+                          }}
+                        />
+                      </div>
+                      <div className="flex flex-col gap-1 w-5/6">
+                        <p className="text-xs font-medium text-gray-600">
+                          {convertDate(
+                            'fullDayMonthYear',
+                            data.detail_absensi[1].jam,
+                          )}
+                        </p>
+                        <p className="text-sm font-semibold text-gray-800">
+                          {convertDate('timeAm', data.detail_absensi[1].jam)}
+                        </p>
+                        <p className="text-xs font-light text-gray-400">
+                          {data.detail_absensi[1].lokasi}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex justify-center items-center">
+                      <h1 className="text-sm font-semibold text-gray-800">
+                        On Duty
+                      </h1>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </CardGridMobile>
         ) : (
           <div className="flex justify-center mt-4">

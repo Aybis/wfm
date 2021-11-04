@@ -13,13 +13,15 @@ export default function CardMessageMobile({ type, data, onClick }) {
   return (
     <motion.div
       variants={item}
-      className="flex bg-white rounded-lg p-4 w-xs flex-none">
-      <div className="flex flex-col gap-6 justify-between h-auto w-full">
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      onClick={(e) => onClick(e, data)}
+      className="flex bg-white rounded-lg p-2 flex-none">
+      <div className="flex flex-col gap-2 justify-between">
         <div
           className={[
-            'p-3 rounded-lg flex items-center gap-4',
-            type === 'ceo' &&
-              'bg-gradient-to-br from-lightBlue-400 to-indigo-500 ',
+            'p-2 rounded-lg flex gap-4',
+            type === 'ceo' && 'bg-white',
             type === 'seleb' && 'bg-gradient-to-br from-pink-600 to-red-500 ',
           ].join(' ')}>
           {type === 'ceo' && (
@@ -30,7 +32,7 @@ export default function CardMessageMobile({ type, data, onClick }) {
               //   name ? name : 'Henry Christiadi'
               // }&background=${type === 'ceo' ? '0062FF' : '000'}&color=fff`}
               alt=""
-              className={`h-16 w-16 rounded-full p-1 object-top object-cover bg-white`}
+              className={`h-16 w-16 rounded-md px-1 pt-1 object-top object-cover bg-warmGray-100`}
             />
           )}
 
@@ -40,23 +42,25 @@ export default function CardMessageMobile({ type, data, onClick }) {
                 data.name ?? 'Anonymous'
               }&background='000'&color=fff`}
               alt=""
-              className="w-12 h-12 p-1 rounded-full bg-white"
+              className="w-12 h-12 px-1 pt-1 rounded-md bg-white"
               loading="lazy"
             />
           )}
 
           <div className="flex flex-col">
-            <h1 className="font-semibold text-white tracking-wide">
+            <h1 className="font-semibold text-gray-800">
               {type === 'ceo' ? 'Henry Christiadi' : 'Anonymous'}
             </h1>
-            <p className=" text-gray-100 text-sm">
+            <p className=" text-gray-400 text-sm font-light">
               {type === 'ceo' ? 'CEO of PINS' : 'IT Management'}
             </p>
           </div>
         </div>
 
-        <div className="text-gray-600 text-left tracking-wide h-1/2 max-h-full">
-          <p>
+        <hr className="border border-gray-100 rounded-full -mt-2 mx-3" />
+
+        <div className="text-gray-600 font-light text-left w-xs px-2">
+          <p className="text-sm">
             {data.title}
             {data.keterangan}
             {data.title && (
@@ -69,7 +73,7 @@ export default function CardMessageMobile({ type, data, onClick }) {
           </p>
         </div>
 
-        <div className="-mt-2 text-sm text-apps-gray text-left">
+        <div className="mt-2 text-xs text-gray-400 px-2 text-left">
           <p>{data.tanggal}</p>
         </div>
       </div>

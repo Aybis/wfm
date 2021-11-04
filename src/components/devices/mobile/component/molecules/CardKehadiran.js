@@ -10,8 +10,8 @@ import CardLoading from './CardLoading';
 export default function CardKehadiran({ type }) {
   const ABSEN = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
-
   const dateNow = convertDate('dateOnly');
+
   let link;
   let belumAbsen;
   let isCheckIn;

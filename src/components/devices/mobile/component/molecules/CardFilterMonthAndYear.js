@@ -33,7 +33,7 @@ export default function CardFilterMonthAndYear({
       initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="grid grid-cols-2 mt-8 lg:mt-14 gap-2 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
+      className="grid grid-cols-2 mt-8 lg:mt-14 gap-2 mx-6 lg:container lg:mx-auto lg:w-1/3 justify-center items-center">
       <Select
         fallbackText={monthNames[bulan]}
         name="bulan"

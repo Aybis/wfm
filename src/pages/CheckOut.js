@@ -1,18 +1,16 @@
-import ButtonBackAbsensi from 'components/devices/mobile/component/atoms/ButtonBackAbsensi';
 import ButtonSubmit from 'components/devices/mobile/component/atoms/ButtonSubmit';
-import CardBarUpFormAbsensi from 'components/devices/mobile/component/molecules/CardBarUpFormAbsensi';
+import Card from 'components/devices/mobile/component/molecules/Card';
+import CardBarAbsensi from 'components/devices/mobile/component/molecules/CardBarAbsensi';
 import CardInputPhoto from 'components/devices/mobile/component/molecules/CardInputPhoto';
 import MobileOnly from 'components/devices/mobile/component/molecules/MobileOnly';
-import Label from 'components/devices/universal/atoms/Label';
-import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
 import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import Compressor from 'compressorjs';
 import absensi from 'constants/api/absensi';
-import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 const CheckOut = ({ history }) => {
@@ -23,6 +21,7 @@ const CheckOut = ({ history }) => {
   const [address, setAddress] = useState(null);
   const { id } = useParams();
   const date = new Date();
+  const USER = useSelector((state) => state.users);
 
   const dateTime =
     date.getFullYear() +
@@ -43,6 +42,7 @@ const CheckOut = ({ history }) => {
     photo: '',
     jam: dateTime,
     absensi_id: id,
+    user_id: USER?.id,
   });
 
   const inputPhoto = (event) => {
@@ -63,9 +63,7 @@ const CheckOut = ({ history }) => {
       });
     }
   };
-  const handlerUpForm = () => {
-    setPopUp(!popUp);
-  };
+
   const createImage = (file) => {
     let reader = new FileReader();
     reader.onload = (e) => {
@@ -86,6 +84,8 @@ const CheckOut = ({ history }) => {
   const submitFunction = (event) => {
     event.preventDefault();
     setisSubmit(true);
+    state.user_id = USER?.id;
+
     absensi
       .checkOut(state, id)
       .then((res) => {
@@ -101,11 +101,12 @@ const CheckOut = ({ history }) => {
         }
       })
       .catch((err) => {
+        console.log(err?.response);
         setisSubmit(false);
         if (err?.message) {
           ToastHandler(
             'error',
-            err?.response?.data?.message ?? 'Something happened',
+            err?.response?.data?.message?.length > 0 && 'Something happened',
           );
         } else {
           if (err.response.status === 500) {
@@ -147,53 +148,54 @@ const CheckOut = ({ history }) => {
       className={`${
         popUp ? 'pt-20 lg:hidden' : 'pt-0'
       } transition-all duration-300 ease-in-out`}>
-      <ButtonBackAbsensi link={history.goBack} popUp={popUp} />
+      <CardBarAbsensi link={history.goBack} />
 
-      <SetMaps
-        popup={popUp}
-        sendlongLat={sendlongLat}
-        sendAddress={sendAddress}
-      />
-
-      <motion.div
-        initial={{
-          y: -300,
-        }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed transition-all duration-500 ease-in-out bottom-0 inset-x-0 bg-apps-yellow rounded-t-xl z-20 ${
-          popUp ? 'h-1/2' : 'h-5/6 mt-20'
-        }`}>
-        <CardBarUpFormAbsensi
-          handlerUp={handlerUpForm}
-          type="Out"
-          isUp={!popUp}
+      {/* Kehadiran  */}
+      <Card addClass="z-10 mt-6 mx-4">
+        <label
+          htmlFor="Shifting"
+          className="text-sm font-semibold text-warmGray-900 tracking-wide">
+          Lokasi
+        </label>
+        <SetMaps
+          height="100%"
+          className="relative h-52 rounded-lg z-0 mt-2"
+          sendlongLat={sendlongLat}
+          sendAddress={sendAddress}
         />
-        <motion.div className="flex flex-col p-4 rounded-t-xl z-10 overflow-y-auto hidden-scroll h-full bg-white ">
-          <form
-            className="flex flex-col gap-8 mt-2 mb-12"
-            onSubmit={submitFunction}>
-            <div className="hidden flex-col gap-2 text-sm">
-              <Label labelName="Lokasi" />
-              <p className="font-normal text-gray-400 w-full">{address}</p>
-            </div>
+
+        <div className="bg-white h-auto p-4 rounded-lg z-30 relative mx-4 -mt-12 shadow-lg flex gap-4">
+          <div className="h-24 w-24 rounded-lg flex-none">
             <CardInputPhoto
               photo={photo}
               handlerChangPhoto={(event) => inputPhoto(event)}
             />
-
-            {isSubmit ? (
-              <div className="flex items-center justify-center">
-                <LoadingCircle />
-              </div>
-            ) : (
-              photo && (
-                <ButtonSubmit type="out" value="Check Out" moreClass="mt-2" />
-              )
-            )}
-          </form>
-        </motion.div>
-      </motion.div>
+          </div>
+          <div className="flex flex-col justify-center items-start gap-2">
+            <h1
+              className={` ${
+                !photo ? 'text-red-500' : 'text-warmGray-800'
+              } text-sm capitalize font-semibold text-left`}>
+              {photo ? USER.name.toLowerCase() : 'Take a Selfie'}
+            </h1>
+            <p className="text-xs font-light text-warmGray-400 tracking-wide">
+              {address}
+            </p>
+          </div>
+        </div>
+      </Card>
+      <form
+        className="flex flex-col gap-8 mt-2 mb-12"
+        onSubmit={submitFunction}>
+        {photo && (
+          <ButtonSubmit
+            type="out"
+            value="Check Out"
+            moreClass="mt-2"
+            isSubmit={isSubmit}
+          />
+        )}
+      </form>
     </div>
   ) : (
     <MobileOnly />
