@@ -1,13 +1,13 @@
 import LoginPage from 'components/devices/desktop/pages/LoginPage';
 import LoginMobile from 'components/devices/mobile/pages/LoginPage';
 import { setAuthorizationHeader } from 'configs/axios';
-import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
 import { isDesktop, isMobile } from 'react-device-detect';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { populateProfile } from 'store/actions/users';
+import swal from 'sweetalert';
 import users from '../constants/api/users';
 
 const Login = ({ history }) => {
@@ -30,7 +30,12 @@ const Login = ({ history }) => {
       .then((res) => {
         // set authorization with bearer token
         setAuthorizationHeader(`Bearer ${res.data.access_token}`);
-        ToastHandler('info', 'Login Success 👋', 1000);
+        swal({
+          title: 'Login berhasil!',
+          icon: 'success',
+          button: 'Close!',
+        });
+        // ToastHandler('success', 'Login Success 👋', 1000);
 
         // api get details users
         users

@@ -16,4 +16,8 @@ export default {
   allDirektorat: () => axios.get('cms/direktorat/get'),
   allSubUnit: () => axios.get('cms/subunit/get'),
   allPosition: () => axios.get('cms/position/get'),
+  listAtasan: (data) => axios.get(`cms/user/get/atasan`, data),
+  listAtasanSemua: (data) => axios.get(`cms/user/get/all/atasan`, data),
+  listBawahan: (data) => axios.get(`cms/user/get/bawahan`, data),
+  listBawahanSemua: (data) => axios.get(`cms/user/get/all/bawahan`, data),
 };

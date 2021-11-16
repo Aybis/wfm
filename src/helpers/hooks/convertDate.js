@@ -37,6 +37,7 @@ export default function convertDate(type, fullDate) {
       date.getSeconds()
     );
   } else if (type === 'date') {
+    // Senin, 15 November 2021
     return date.toLocaleString('id-ID', options);
   } else if (type === 'fullTime') {
     return (
@@ -55,6 +56,7 @@ export default function convertDate(type, fullDate) {
   } else if (type === 'day') {
     return date.toLocaleString('id-ID', onlyDay);
   } else if (type === 'dateOnly') {
+    //12
     return date.getDate();
   } else if (type === 'longMonth') {
     return date.toLocaleString('id-ID', onlyMonth);

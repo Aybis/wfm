@@ -59,7 +59,7 @@ export default function CardReportWork({ day, name, status }) {
     <motion.div
       variants={item}
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.85 }}
       className={`flex flex-none flex-col rounded-lg w-2/3 lg:w-full p-4 bg-white`}>
       <div className="flex justify-between">
         <div>

@@ -1,6 +1,6 @@
 import ColAnimated from 'components/devices/desktop/molecules/ColAnimated';
 import Input from 'components/devices/universal/atoms/Input';
-import LoadingCircle from 'components/devices/universal/atoms/LoadingCircle';
+import Loading from 'components/devices/universal/atoms/Loading';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -60,15 +60,15 @@ export default function LoginPage({
             value={password}
           />
 
-          {isSubmit ? (
-            <div className="flex items-center justify-center">
-              <LoadingCircle />
-            </div>
-          ) : (
-            <button className="hover:from-pink-700 hover:to-red-600 transition-all duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 text-white rounded-md p-2 text-lg md:p-4 md:text-2xl tracking-wider font-semibold mt-4 w-full">
-              Login
-            </button>
-          )}
+          <button
+            disabled={isSubmit}
+            className={[
+              'hover:from-pink-700 hover:to-red-600 transition-all duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 text-white rounded-md p-2 text-lg md:p-4 md:text-2xl tracking-wider font-semibold mt-4 w-full flex justify-center items-center',
+              isSubmit && 'bg-opacity-40',
+            ].join(' ')}>
+            {isSubmit && <Loading color="white" height={6} />}
+            Login
+          </button>
 
           <Link
             to="/forgot"

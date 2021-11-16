@@ -3,22 +3,70 @@ import { ChevronDownIcon, ChevronLeftIcon } from '@heroicons/react/solid';
 import Input from 'components/devices/universal/atoms/Input';
 import Label from 'components/devices/universal/atoms/Label';
 import SetMaps from 'components/devices/universal/atoms/SetMaps';
-import ToastHandler from 'helpers/hooks/toast';
+import { setAuthorizationHeader } from 'configs/axios';
+import absensi from 'constants/api/absensi';
+import users from 'constants/api/users';
+import convertDate from 'helpers/hooks/convertDate';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import swal from 'sweetalert';
 
 const OvertimeIn = ({ history }) => {
+  const USER = useSelector((state) => state.users);
+  const ABSENSI = useSelector((state) => state.presence);
   const [didMount, setDidMount] = useState(false);
   const [popUp, setpopUp] = useState(false);
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
   const [timeStamp, settimeStamp] = useState(null);
+  const [dataAtasan, setdataAtasan] = useState(null);
+
+  const session = JSON.parse(localStorage.getItem('WFM:token'));
 
   const [state, setState] = useForm({
-    longLat: '',
-    address: '',
+    user_id: USER?.id,
+    long_lat: '',
+    lokasi: '',
     subject: '',
+    jam: convertDate('fullDate'),
+    absensi_id: ABSENSI.data.id,
+    approval: [],
+    current: USER?.username,
   });
+
+  const getAtasan = async (id) => {
+    let result;
+    return users
+      .listAtasan({
+        params: {
+          position_id: id,
+        },
+      })
+      .then((response) => {
+        response.map(
+          (item) =>
+            (result = {
+              position: item.atasan.name,
+              id: item.atasan.users[0].id,
+              name: item.atasan.users[0].name,
+              username: item.atasan.users[0].username,
+            }),
+        );
+        return result;
+      })
+      .catch((error) => {
+        return error;
+      });
+  };
+
+  const getDataAtasan = () => {
+    setAuthorizationHeader(`Bearer ${session.token}`);
+
+    getAtasan(USER?.position_id).then(function (response) {
+      setdataAtasan(response);
+    });
+  };
 
   const getHoursAndTime = () => {
     let timeCurrent = new Date();
@@ -35,17 +83,43 @@ const OvertimeIn = ({ history }) => {
     event.preventDefault();
     getHoursAndTime();
 
-    state.longLat = longLat;
-    state.address = address;
-    ToastHandler(
-      'success',
-      `
-      Alamat : ${state.address},
-      Title : ${state.subject},
-      Longitude : ${state.longLat.lng},
-      Latitude : ${state.longLat.lat}
-    `,
-    );
+    state.long_lat = longLat;
+    state.lokasi = address;
+    state.jam = convertDate('fullDate');
+    state.approval = [dataAtasan.username, 'abdul.muchtar'];
+
+    absensi
+      .overtimeIn(state)
+      .then((response) => {
+        swal({
+          title: response.data.message,
+          icon: 'success',
+          button: 'Close!',
+        }).then((val) => {
+          setTimeout(() => {
+            history.push('/');
+          }, 300);
+        });
+
+        setTimeout(() => {
+          history.push('/');
+        }, 300);
+      })
+      .catch((err) => {
+        swal({
+          title: err.response.data.message ?? 'Something happened',
+          icon: 'error',
+          text: err.response.data.message.map((item) => item),
+          button: 'Close!',
+        });
+        console.log(err.response.data.message);
+      });
+
+    // swal({
+    //   title: 'Check In berhasil!',
+    //   icon: 'success',
+    //   button: 'Close!',
+    // });
   };
 
   const sendlongLat = (value) => {
@@ -57,6 +131,7 @@ const OvertimeIn = ({ history }) => {
   };
 
   useEffect(() => {
+    getDataAtasan();
     setDidMount(true);
     const timeOutId = setTimeout(() => {
       setpopUp(true);
@@ -65,6 +140,7 @@ const OvertimeIn = ({ history }) => {
       setDidMount(false);
       clearTimeout(timeOutId);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!didMount) {

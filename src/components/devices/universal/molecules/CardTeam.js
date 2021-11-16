@@ -1,9 +1,11 @@
-import { PaperAirplaneIcon } from '@heroicons/react/solid';
-import { HomeIcon } from '@heroicons/react/solid';
-import React from 'react';
+import { ChatIcon, CheckIcon } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
+import convertDate from 'helpers/hooks/convertDate';
+import React, { useEffect, useState } from 'react';
 
 const CardTeam = ({ data, onClick }) => {
+  const [isNow, setisNow] = useState(false);
+  const [timeCheckIn, settimeCheckIn] = useState('');
   const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -11,6 +13,20 @@ const CardTeam = ({ data, onClick }) => {
       opacity: 1,
     },
   };
+
+  let dateIn = data.absen ? convertDate('date', data.absen) : null;
+  let dateNow = convertDate('date');
+
+  // console.log(dateIn, dateNow);
+
+  useEffect(() => {
+    if (dateIn === dateNow) {
+      setisNow(true);
+      settimeCheckIn(convertDate('timeAm', data.absen));
+    } else {
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <motion.div
@@ -22,32 +38,39 @@ const CardTeam = ({ data, onClick }) => {
           loading="lazy"
           width="24"
           height="24"
-          src={`${process.env.PUBLIC_URL}/assets/images/img.jpeg`}
+          src={data.image}
           alt={data.name}
-          className={`h-24 w-24 rounded-full border p-1 border-opacity-40 ${
-            data.absen ? 'border-apps-primary' : 'border-apps-red'
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = `https://ui-avatars.com/api/?name=${data.name}&background=F3F3F3&color=000`;
+          }}
+          className={`h-24 w-24 rounded-full border-2 p-1 border-opacity-40 ${
+            isNow ? 'border-apps-primary' : 'border-apps-red'
           }`}
         />
-        {data.absen ? (
-          <HomeIcon className=" p-2 text-white h-8 w-8 rounded-full bg-apps-primary text-center -mt-4" />
+        {isNow ? (
+          <CheckIcon className=" p-2 text-white h-8 w-8 rounded-full bg-apps-primary text-center -mt-4" />
         ) : (
-          <div className="-mt-4 ">
-            <PaperAirplaneIcon
-              onClick={() => onClick(data)}
-              className=" p-2 text-white h-8 w-8 rounded-full bg-apps-red transform rotate-45 text-center cursor-pointer hover:bg-red-600"
-            />
-          </div>
+          <motion.div
+            whileTap={{ scale: 0.85 }}
+            className="-mt-4"
+            onClick={() => onClick(data)}>
+            <ChatIcon className=" p-2 text-white h-8 w-8 rounded-full bg-apps-red transform  text-center cursor-pointer hover:bg-red-600" />
+          </motion.div>
         )}
 
-        <h3 className="text-sm font-semibold text-apps-text transform capitalize mt-2">
+        <h3 className="text-sm font-semibold text-warmGray-800 transform capitalize mt-2">
           {data.name.toLowerCase()}
         </h3>
+        <span className="my-1 text-xs font-light text-warmGray-400 capitalize w-40 text-center">
+          {data.position}
+        </span>
 
         <h2
           className={`text-sm font-semibold mt-1 ${
-            data.absen ? 'text-apps-primary ' : 'text-apps-red'
+            isNow ? 'text-apps-primary ' : 'text-apps-red'
           }`}>
-          {data.absen ? data.absen : 'Belum Absen'}
+          {isNow ? timeCheckIn : 'Belum Absen'}
         </h2>
       </div>
     </motion.div>

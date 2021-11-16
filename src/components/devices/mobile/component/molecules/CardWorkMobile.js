@@ -12,6 +12,8 @@ export default function CardWorkMobile({
   kehadiran,
   kondisi = null,
   date,
+  timeIn,
+  timeOut,
   url = '/',
 }) {
   let nameOfKehadiran;
@@ -66,15 +68,35 @@ export default function CardWorkMobile({
   return (
     <motion.div
       variants={item}
-      className={`flex items-center gap-4 flex-none bg-white rounded-md p-3 w-2/3`}>
-      <ShowIconDaily />
+      className={`relative flex-none bg-white rounded-lg p-3 w-40`}>
+      <div
+        className={[
+          'absolute top-2 right-2 p-1 rounded-md bg-opacity-20',
+          kehadiran === 'WFH' && 'text-apps-primary bg-apps-primary',
+          kehadiran === 'WFO' && 'text-apps-green bg-apps-green',
+        ].join(' ')}>
+        <h2 className="font-medium text-gray-600 text-xs">{nameOfKehadiran}</h2>
+      </div>
       <div className="flex flex-col items-start justify-center ">
-        <h2 className="text-gray-400 text-sm">
+        <ShowIconDaily />
+        <h2 className="text-gray-800 font-semibold text-sm mt-1">
           {date ? convertDate('day', date) : ''}
         </h2>
-        <h2 className="font-semibold text-gray-700 tracking-wide">
-          {nameOfKehadiran}
-        </h2>
+
+        <div className="flex flex-col gap-1 mt-4 w-full">
+          <div className="flex justify-between">
+            <p className="text-xs font-light text-gray-400">Check In</p>
+            <p className="text-xs font-medium text-gray-600 text-right">
+              {convertDate('timeAm', timeIn)}
+            </p>
+          </div>
+          <div className="flex justify-between">
+            <p className="text-xs font-light text-gray-400">Check Out</p>
+            <p className="text-xs font-medium text-gray-600 text-right">
+              {timeOut ? convertDate('timeAm', timeOut) : 'On Duty'}
+            </p>
+          </div>
+        </div>
       </div>
     </motion.div>
   );

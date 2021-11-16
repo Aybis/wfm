@@ -34,24 +34,26 @@ export default function CardKehadiranLemburan() {
 
           <div className="rounded-b-md grid grid-cols-4 gap-2 bg-white justify-between py-3 px-4 z-10 -mt-5">
             <div className="flex flex-col gap-1">
-              <h4 className="text-sm text-gray-400 font-light">Current</h4>
-              <h4 className={`text-sm font-semibold text-gray-700`}>
+              <h4 className="text-xs text-gray-400 font-light">Current</h4>
+              <h4 className={`text-xs font-semibold text-gray-700`}>
                 {ABSEN.data.kehadiran === 'WFO' && 'At Office'}
                 {ABSEN.data.kehadiran === 'WFH' && 'At Home'}
               </h4>
             </div>
-            <div className="flex flex-col gap-1">
-              <h4 className="text-sm text-gray-400 font-light">Day</h4>
-              <span className={`text-sm font-semibold text-gray-700`}>
-                Weekday
-              </span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <h4 className="text-sm text-gray-400 font-light">Status</h4>
-              <span
-                className={`text-sm font-medium tracking-wide rounded-md text-green-500`}>
-                Available
-              </span>
+            <div className="flex flex-col gap-1 col-span-2">
+              <h4 className="text-xs text-gray-400 font-light">Status</h4>
+              {ABSEN.data.kehadiran === 'WFO' && (
+                <span
+                  className={`text-xs font-medium tracking-wide rounded-md text-green-500`}>
+                  Available
+                </span>
+              )}
+              {ABSEN.data.kehadiran === 'WFH' && (
+                <span
+                  className={`text-xs font-medium tracking-wide rounded-md text-red-500`}>
+                  Not Available
+                </span>
+              )}
             </div>
             <Link
               to="/overtime-in"

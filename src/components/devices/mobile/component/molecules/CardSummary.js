@@ -23,11 +23,11 @@ const CardSummary = ({ name, value, type }) => {
       );
     } else if (name === 'telat') {
       return (
-        <ExclamationCircleIcon className="w-10 h-10 lg:h-16 lg:w-16 text-apps-orange rounded-md bg-white p-2 lg:p-3" />
+        <ExclamationCircleIcon className="w-10 h-10 lg:h-16 lg:w-16 text-amber-500 rounded-md bg-white p-2 lg:p-3" />
       );
     } else if (name === 'sakit') {
       return (
-        <BeakerIcon className="w-10 h-10 lg:h-16 lg:w-16 text-apps-orange rounded-md bg-white p-2 lg:p-3" />
+        <BeakerIcon className="w-10 h-10 lg:h-16 lg:w-16 text-green-500 rounded-md bg-white p-2 lg:p-3" />
       );
     } else if (name === 'izin') {
       return (
@@ -39,15 +39,15 @@ const CardSummary = ({ name, value, type }) => {
       );
     } else if (name === 'sppd') {
       return (
-        <BriefcaseIcon className="w-10 h-10 lg:h-16 lg:w-16 text-apps-green rounded-md bg-white p-2 lg:p-3" />
+        <BriefcaseIcon className="w-10 h-10 lg:h-16 lg:w-16 text-yellow-500 rounded-md bg-white p-2 lg:p-3" />
       );
     } else if (name === 'tidak absen') {
       return (
-        <BriefcaseIcon className="w-10 h-10 lg:h-16 lg:w-16 text-apps-red rounded-md bg-white p-2 lg:p-3" />
+        <BriefcaseIcon className="w-10 h-10 lg:h-16 lg:w-16 text-red-600 rounded-md bg-white p-2 lg:p-3" />
       );
     } else if (name === 'WFH') {
       return (
-        <HomeIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-pink rounded-md bg-white p-2 lg:p-3 " />
+        <HomeIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-primary rounded-md bg-white p-2 lg:p-3 " />
       );
     } else if (name === 'WFO') {
       return (
@@ -55,7 +55,7 @@ const CardSummary = ({ name, value, type }) => {
       );
     } else if (name === 'Satelit') {
       return (
-        <GlobeIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-purple rounded-md bg-white p-2 lg:p-3" />
+        <GlobeIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-pink rounded-md bg-white p-2 lg:p-3" />
       );
     } else if (name === 'Done') {
       return (
@@ -71,7 +71,7 @@ const CardSummary = ({ name, value, type }) => {
       );
     } else if (name === 'Reject') {
       return (
-        <XCircleIcon className="w-10 h-10 lg:w-14 lg:h-14 text-apps-red rounded-md bg-white p-2 lg:p-3" />
+        <XCircleIcon className="w-10 h-10 lg:w-14 lg:h-14 text-red-600 rounded-md bg-white p-2 lg:p-3" />
       );
     } else {
       return (
@@ -83,7 +83,7 @@ const CardSummary = ({ name, value, type }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.95 }}
+      whileTap={{ scale: 0.85 }}
       className="flex rounded-md gap-2">
       <IconName />
       <div className="flex flex-col ">

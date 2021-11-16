@@ -57,7 +57,7 @@ export default function CardMessageMobile({ type, data, onClick }) {
           </div>
         </div>
 
-        <hr className="border border-gray-100 rounded-full -mt-2 mx-3" />
+        <hr className="border-t border-gray-100 rounded-full -mt-2 mx-3" />
 
         <div className="text-gray-600 font-light text-left w-xs px-2">
           <p className="text-sm">

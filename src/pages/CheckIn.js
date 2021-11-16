@@ -219,21 +219,23 @@ const CheckIn = ({ history }) => {
             </>
           )}
 
-          <Card addClass="mx-4">
-            <CardKeterangan shift={state.is_shift} kondisi={state.kondisi}>
-              <Textarea
-                labelName="Keterangan"
-                name="keterangan"
-                value={state.keterangan}
-                onChange={setState}
-                placeholder={`Alasan ${
-                  state.kondisi === 'sehat' || state.kondisi === ''
-                    ? 'Terlambat'
-                    : state.kondisi
-                }? `}
-              />
-            </CardKeterangan>
-          </Card>
+          {state.kondisi.length > 0 && (
+            <Card addClass="mx-4">
+              <CardKeterangan shift={state.is_shift} kondisi={state.kondisi}>
+                <Textarea
+                  labelName="Keterangan"
+                  name="keterangan"
+                  value={state.keterangan}
+                  onChange={setState}
+                  placeholder={`Alasan ${
+                    state.kondisi === 'sehat' || state.kondisi === ''
+                      ? 'Terlambat'
+                      : state.kondisi
+                  }? `}
+                />
+              </CardKeterangan>
+            </Card>
+          )}
 
           <Card addClass="mx-4 mt-6">
             {photo &&

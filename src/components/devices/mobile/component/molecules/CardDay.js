@@ -10,7 +10,7 @@ export default function CardDay() {
   const dateNow = convertDate('dateOnly');
 
   const item = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: -20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
@@ -74,7 +74,7 @@ export default function CardDay() {
               /> */}
 
             <h3
-              className={`text-base lg:text-base font-extrabold ${
+              className={`text-base lg:text-base font-bold ${
                 ABSEN?.data?.keterangan ? 'text-red-600' : 'text-gray-800'
               }`}>
               {ABSEN.dataIn.jam ? convertDate('timeAm', ABSEN.dataIn.jam) : ''}

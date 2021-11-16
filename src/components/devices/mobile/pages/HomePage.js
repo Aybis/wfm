@@ -1,9 +1,7 @@
 import DetailCeoMessage from 'components/devices/desktop/molecules/DetailCeoMessage';
 import Modal from 'components/devices/universal/atoms/Modal';
-import CardTeam from 'components/devices/universal/molecules/CardTeam';
 import Carousel from 'components/devices/universal/molecules/Carousel';
 import absensi from 'constants/api/absensi';
-import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import dataCeoMessages from 'json/dataCeoMessages';
 import React, { useEffect, useState } from 'react';
@@ -22,14 +20,18 @@ import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
 import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardMessageMobile from '../component/molecules/CardMessageMobile';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
+import TeamMate from '../component/molecules/TeamMate';
 import LayoutMobile from '../LayoutMobile';
 
 export default function HomePage() {
   const USER = useSelector((state) => state.users);
+
   const [dataHoliday, setdataHoliday] = useState(false);
   const [showModal, setshowModal] = useState(false);
   const [showModalCeoMessage, setshowModalCeoMessage] = useState(false);
   const [detailMessageCeo, setdetailMessageCeo] = useState([]);
+  const [didMount, setDidMount] = useState(false);
+
   const dataJson = dataCeoMessages;
   const dispatch = useDispatch();
 
@@ -76,32 +78,6 @@ export default function HomePage() {
       });
   };
 
-  const container = {
-    hidden: { opacity: 1, scale: 0 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delayChildren: 0.2,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const handlerClickSendWa = (data) => {
-    absensi
-      .notifWa({
-        id: data.id,
-        nama_atasan: data.atasan,
-      })
-      .then((res) => {
-        ToastHandler('success', res.data.message);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const handlerOnClickMessageCEO = (event, data) => {
     setdetailMessageCeo({
       date: data.tanggal,
@@ -117,10 +93,16 @@ export default function HomePage() {
     reportWeeklyPersonal();
     getDataHoliday();
 
+    setDidMount(true);
+    return () => setDidMount(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [USER, dispatch]);
 
   if (!USER?.id) {
+    return null;
+  }
+
+  if (!didMount) {
     return null;
   }
 
@@ -193,26 +175,7 @@ export default function HomePage() {
       {/* End Selebs Today */}
 
       {/* Card Team Mate */}
-      <Card addClass="hidden">
-        <CardHeadingMobile heading="Teammate" />
-        <CardScrollHorizontal>
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="visible"
-            className="overflow-x-auto hidden-scroll flex gap-4 p-2 -mt-2">
-            {/* card team */}
-            {dataJson.dataTeamMate.map((team) => (
-              <CardTeam
-                key={Math.random()}
-                data={team}
-                onClick={handlerClickSendWa}
-              />
-            ))}
-            {/* end card team */}
-          </motion.div>
-        </CardScrollHorizontal>
-      </Card>
+      <TeamMate />
       {/* Card Teammate */}
 
       <Card>

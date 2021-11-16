@@ -17,6 +17,7 @@ import {
   statusPresence,
 } from 'store/actions/presence';
 import Card from '../component/molecules/Card';
+import CardDay from '../component/molecules/CardDay';
 import CardFilterMonthAndYear from '../component/molecules/CardFilterMonthAndYear';
 import CardGridMobile from '../component/molecules/CardGridMobile';
 import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
@@ -149,6 +150,12 @@ const PresensiMobile = ({ history }) => {
       </Card>
       {/* End Kehadiran  */}
 
+      {/* Daily Absence  */}
+      <Card>
+        <CardDay />
+      </Card>
+      {/* End Daily Absence  */}
+
       {/* Start Filter Month And Year  */}
       <CardFilterMonthAndYear handlerOnChange={handlerOnChange} />
       {/* End Filter Month And Year  */}
@@ -194,9 +201,7 @@ const PresensiMobile = ({ history }) => {
                 date={item.created_at}
                 timeIn={item.detail_absensi[0].jam}
                 timeOut={
-                  item.detail_absensi[1]
-                    ? item.detail_absensi[1].jam
-                    : 'On Duty'
+                  item.detail_absensi[1] ? item.detail_absensi[1].jam : null
                 }
                 key={Math.random()}
               />

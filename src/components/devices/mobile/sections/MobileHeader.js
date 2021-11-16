@@ -1,14 +1,14 @@
 import { LogoutIcon } from '@heroicons/react/outline';
-import notify from 'helpers/hooks/toast';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';
+import swal from 'sweetalert';
 
 export default function MobileHeader() {
   const users = useSelector((state) => state.users);
   const logOoutUser = () => {
-    notify('info', 'Logout success 👋');
+    // notify('success', 'Logout success 👋');
     // remove token
     localStorage.removeItem('WFM:token');
     // remove cookies
@@ -16,6 +16,11 @@ export default function MobileHeader() {
       document.cookie = c
         .replace(/^ +/, '')
         .replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+    });
+    swal({
+      title: 'Logout berhasil!  👋',
+      icon: 'success',
+      button: 'Close!',
     });
     // redirect link
     <Redirect push to="/login" />;

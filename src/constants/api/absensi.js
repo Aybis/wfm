@@ -30,11 +30,17 @@ export default {
   updateHoliday: (holiday) => axios.put('holiday', holiday),
 
   // end point lemburan
-  overtime: (data) => axios.post('overtime', data),
-  overtimeListApproval: () => axios.get('overtime/list-approve'),
-  overtimeListPersonal: () => axios.get('report-personal'),
+  overtime: () => axios.get('overtime/all'),
+  overtimeListApproval: (data) => axios.get('overtime/list-approve', data),
+  overtimeListPersonal: (data) => axios.get('overtime/report-personal', data),
   overtimeIn: (data) => axios.post('overtime/check-in/', data),
   overtimeOut: (data) => axios.get('overtime/check-out/', data),
+
+  // endpoint atasan dan bawahan
+  atasanAll: (data) => axios.get('user/all-atasan', data),
+  atasan: (data) => axios.get('user/atasan', data),
+  bawahanAll: (data) => axios.get('user/all-bawahan', data),
+  bawahan: (data) => axios.get('user/bawahan', data),
 
   // end point push notif to WA
   notifWa: (data) => axios.post('notifikasi/notif-to-subordinate', data),

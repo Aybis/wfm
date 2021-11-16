@@ -11,7 +11,6 @@ import { useSelector } from 'react-redux';
 export default function Profile({ history }) {
   const USER = useSelector((state) => state.users);
   const menuProfiles = dataJson.dataMenuProfiles;
-
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [USER]);
