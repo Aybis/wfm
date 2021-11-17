@@ -4,7 +4,7 @@ import convertDate from 'helpers/hooks/convertDate';
 import React, { useEffect, useState } from 'react';
 import LoadingCircle from '../atoms/LoadingCircle';
 
-const CardTeam = ({ data, onClick, handlerSubmit }) => {
+const CardTeam = ({ data, onClick, handlerSubmit, isAtasan }) => {
   const [isNow, setisNow] = useState(false);
   const [timeCheckIn, settimeCheckIn] = useState('');
   const item = {
@@ -51,7 +51,7 @@ const CardTeam = ({ data, onClick, handlerSubmit }) => {
         />
         {isNow ? (
           <CheckIcon className=" p-2 text-white h-8 w-8 rounded-full bg-apps-primary text-center -mt-4" />
-        ) : (
+        ) : !isAtasan ? (
           <motion.div
             whileTap={{ scale: 0.85 }}
             className="-mt-6 p-2 flex justify-center"
@@ -62,6 +62,10 @@ const CardTeam = ({ data, onClick, handlerSubmit }) => {
               <ChatIcon className=" p-1 text-white h-8 w-8 rounded-full bg-apps-red transform  text-center cursor-pointer hover:bg-red-600" />
             )}
           </motion.div>
+        ) : (
+          <motion.div
+            whileTap={{ scale: 0.85 }}
+            className="-mt-6 p-2 flex justify-center mb-8"></motion.div>
         )}
 
         <h3 className="text-sm font-semibold text-warmGray-800 transform capitalize mt-2">

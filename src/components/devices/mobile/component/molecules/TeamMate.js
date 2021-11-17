@@ -120,11 +120,9 @@ export default function TeamMate() {
 
   const getDataAtasan = () => {
     setAuthorizationHeader(`Bearer ${session.token}`);
-
     getAtasan(USER?.position_id).then(function (response) {
       setdataAtasan(response);
     });
-
     collectBawahan(USER?.position_id).then(function (response) {
       if (response.bawahan.length > 0) {
         let dataBawahan = [];
@@ -188,11 +186,12 @@ export default function TeamMate() {
           {dataAtasan ? (
             <CardTeam
               data={dataAtasan}
+              isAtasan={true}
               onClick={handlerClickSendWa}
               handlerSubmit={notifUser}
             />
           ) : (
-            <p>Loading ....</p>
+            ' '
           )}
           {/* card team */}
           {dataTeamMate.length > 0 &&
