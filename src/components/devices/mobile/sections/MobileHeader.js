@@ -22,10 +22,13 @@ export default function MobileHeader() {
       icon: 'success',
       button: 'Close!',
     });
-    // redirect link
-    <Redirect push to="/login" />;
-    // reload page
-    window.location.reload();
+
+    setTimeout(() => {
+      // redirect link
+      <Redirect push to="/login" />;
+      // reload page
+      window.location.reload();
+    }, 500);
   };
 
   return (

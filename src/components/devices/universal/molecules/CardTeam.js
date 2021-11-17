@@ -2,8 +2,9 @@ import { ChatIcon, CheckIcon } from '@heroicons/react/outline';
 import { motion } from 'framer-motion';
 import convertDate from 'helpers/hooks/convertDate';
 import React, { useEffect, useState } from 'react';
+import LoadingCircle from '../atoms/LoadingCircle';
 
-const CardTeam = ({ data, onClick }) => {
+const CardTeam = ({ data, onClick, handlerSubmit }) => {
   const [isNow, setisNow] = useState(false);
   const [timeCheckIn, settimeCheckIn] = useState('');
   const item = {
@@ -17,13 +18,10 @@ const CardTeam = ({ data, onClick }) => {
   let dateIn = data.absen ? convertDate('date', data.absen) : null;
   let dateNow = convertDate('date');
 
-  // console.log(dateIn, dateNow);
-
   useEffect(() => {
     if (dateIn === dateNow) {
       setisNow(true);
       settimeCheckIn(convertDate('timeAm', data.absen));
-    } else {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -38,13 +36,16 @@ const CardTeam = ({ data, onClick }) => {
           loading="lazy"
           width="24"
           height="24"
-          src={data.image}
+          src={
+            data.image ??
+            `https://ui-avatars.com/api/?name=${data.name}&background=F3F3F3&color=000`
+          }
           alt={data.name}
           onError={(e) => {
-            e.target.onerror = null;
+            e.target.onerror = undefined;
             e.target.src = `https://ui-avatars.com/api/?name=${data.name}&background=F3F3F3&color=000`;
           }}
-          className={`h-24 w-24 rounded-full border-2 p-1 border-opacity-40 ${
+          className={`h-24 w-24 rounded-full border-2 p-1 border-opacity-40 object-cover object-center ${
             isNow ? 'border-apps-primary' : 'border-apps-red'
           }`}
         />
@@ -53,9 +54,13 @@ const CardTeam = ({ data, onClick }) => {
         ) : (
           <motion.div
             whileTap={{ scale: 0.85 }}
-            className="-mt-4"
+            className="-mt-6 p-2 flex justify-center"
             onClick={() => onClick(data)}>
-            <ChatIcon className=" p-2 text-white h-8 w-8 rounded-full bg-apps-red transform  text-center cursor-pointer hover:bg-red-600" />
+            {handlerSubmit?.isLoading && handlerSubmit?.user_id === data.id ? (
+              <LoadingCircle height={4} width={4} />
+            ) : (
+              <ChatIcon className=" p-1 text-white h-8 w-8 rounded-full bg-apps-red transform  text-center cursor-pointer hover:bg-red-600" />
+            )}
           </motion.div>
         )}
 

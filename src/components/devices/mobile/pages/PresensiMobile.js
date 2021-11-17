@@ -80,10 +80,8 @@ const PresensiMobile = ({ history }) => {
         },
       })
       .then((response) => {
-        if (response.status === 200) {
-          dispatch(dataWork(response.data.work));
-          dispatch(dataPresence(response.data.presence));
-        }
+        dispatch(dataWork(response.data.work));
+        dispatch(dataPresence(response.data.presence));
       })
       .catch((err) => {
         ToastHandler('error', err?.response?.data?.message ?? 'error');
@@ -104,9 +102,7 @@ const PresensiMobile = ({ history }) => {
         },
       })
       .then((res) => {
-        if (res.status === 200) {
-          dispatch(getData(res.data.data));
-        }
+        dispatch(getData(res.data.data));
         dispatch(statusData('ok'));
       })
       .catch((err) => {

@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const CheckOut = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
@@ -89,16 +90,15 @@ const CheckOut = ({ history }) => {
     absensi
       .checkOut(state, id)
       .then((res) => {
-        if (res.status === 200 || res.status === 201) {
-          setisSubmit(false);
-          ToastHandler(
-            'success',
-            res?.data?.message ?? 'Anda Berhasil Checkout',
-          );
-          setTimeout(() => {
-            history.push('/');
-          }, 300);
-        }
+        setisSubmit(false);
+        swal({
+          title: res?.data?.message ?? 'Anda Berhasil Checkout',
+          icon: 'success',
+          button: 'Close!',
+        });
+        setTimeout(() => {
+          history.push('/');
+        }, 300);
       })
       .catch((err) => {
         console.log(err?.response);

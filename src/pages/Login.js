@@ -30,11 +30,7 @@ const Login = ({ history }) => {
       .then((res) => {
         // set authorization with bearer token
         setAuthorizationHeader(`Bearer ${res.data.access_token}`);
-        swal({
-          title: 'Login berhasil!',
-          icon: 'success',
-          button: 'Close!',
-        });
+
         // ToastHandler('success', 'Login Success 👋', 1000);
 
         // api get details users
@@ -75,10 +71,17 @@ const Login = ({ history }) => {
             document.cookie = `WFM:user=${JSON.stringify(
               userCookie,
             )}; expires=${expires.toUTCString()}; path:/`;
+            swal({
+              title: 'Login berhasil!',
+              icon: 'success',
+              button: 'Close!',
+            });
 
-            // redirect link
-            history.push(redirect || '/');
-            setIsSubmit(false);
+            setTimeout(() => {
+              // redirect link
+              history.push(redirect || '/');
+              setIsSubmit(false);
+            }, 300);
           })
           .catch((error) => {
             setIsSubmit(false);

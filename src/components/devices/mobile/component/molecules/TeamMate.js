@@ -1,9 +1,9 @@
 import { setAuthorizationHeader } from 'configs/axios';
 import absensi from 'constants/api/absensi';
 import { motion } from 'framer-motion';
-import ToastHandler from 'helpers/hooks/toast';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import swal from 'sweetalert';
 import CardTeam from '../../../universal/molecules/CardTeam';
 import Card from './Card';
 import CardHeadingMobile from './CardHeadingMobile';
@@ -15,6 +15,10 @@ export default function TeamMate() {
   const [dataTeamMate, setdataTeamMate] = useState([]);
   const [dataAtasan, setdataAtasan] = useState(null);
   const [didMount, setDidMount] = useState(false);
+  const [notifUser, setnotifUser] = useState({
+    isLoading: false,
+    user_id: '',
+  });
 
   // const container = {
   //   hidden: { opacity: 1, scale: 0 },
@@ -29,15 +33,32 @@ export default function TeamMate() {
   // };
 
   const handlerClickSendWa = (data) => {
+    setnotifUser({
+      isLoading: true,
+      user_id: data.id,
+    });
     absensi
       .notifWa({
         id: data.id,
         nama_atasan: data.atasan,
       })
       .then((res) => {
-        ToastHandler('success', res.data.message);
+        swal({
+          text: res.data.message,
+          buttons: 'Close',
+          icon: 'success',
+        });
+        // ToastHandler('success', res.data.message);
+        setnotifUser({
+          isLoading: false,
+          user_id: data.id,
+        });
       })
       .catch((err) => {
+        setnotifUser({
+          isLoading: false,
+          user_id: data.id,
+        });
         console.log(err);
       });
   };
@@ -58,7 +79,7 @@ export default function TeamMate() {
               id: item.atasan.users[0].id,
               name: item.atasan.users[0].name,
               image: item.atasan.users[0].image
-                ? item.atasan.users[0].image.url_user
+                ? item.atasan.users[0].image.image_url
                 : `https://ui-avatars.com/api/?name=${item.atasan.users[0].name}&background=F3F3F3&color=000`,
               absen: item.atasan.users[0].absen_today
                 ? item.atasan.users[0].absen_today.detail_absensi[0].jam
@@ -107,7 +128,6 @@ export default function TeamMate() {
     collectBawahan(USER?.position_id).then(function (response) {
       if (response.bawahan.length > 0) {
         let dataBawahan = [];
-        console.log(response);
         response.bawahan.map((listPosition) =>
           listPosition.users.map((user) =>
             dataBawahan.push({
@@ -115,7 +135,7 @@ export default function TeamMate() {
               id: user.id,
               name: user.name,
               image: user.image
-                ? user.image.url_user
+                ? user.image.image_url
                 : `https://ui-avatars.com/api/?name=${user.name}&background=F3F3F3&color=000`,
               absen: user.absen_today
                 ? user.absen_today.detail_absensi[0].jam
@@ -127,6 +147,7 @@ export default function TeamMate() {
       } else {
         collectBawahan(response.atasan_id).then((success) => {
           let dataBawahan = [];
+
           success.bawahan.map((listPosition) =>
             listPosition.users.map((user) =>
               dataBawahan.push({
@@ -134,7 +155,7 @@ export default function TeamMate() {
                 id: user.id,
                 name: user.name,
                 image: user.image
-                  ? user.image.url_user
+                  ? user.image.image_url
                   : `https://ui-avatars.com/api/?name=${user.name}&background=F3F3F3&color=000`,
                 absen: user.absen_today
                   ? user.absen_today.detail_absensi[0].jam
@@ -165,7 +186,11 @@ export default function TeamMate() {
       <CardScrollHorizontal>
         <motion.div className="overflow-x-auto hidden-scroll flex gap-4 p-2 -mt-2">
           {dataAtasan ? (
-            <CardTeam data={dataAtasan} onClick={handlerClickSendWa} />
+            <CardTeam
+              data={dataAtasan}
+              onClick={handlerClickSendWa}
+              handlerSubmit={notifUser}
+            />
           ) : (
             <p>Loading ....</p>
           )}
@@ -175,6 +200,7 @@ export default function TeamMate() {
               <CardTeam
                 key={Math.random()}
                 data={team}
+                handlerSubmit={notifUser}
                 onClick={handlerClickSendWa}
               />
             ))}

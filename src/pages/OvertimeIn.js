@@ -114,12 +114,6 @@ const OvertimeIn = ({ history }) => {
         });
         console.log(err.response.data.message);
       });
-
-    // swal({
-    //   title: 'Check In berhasil!',
-    //   icon: 'success',
-    //   button: 'Close!',
-    // });
   };
 
   const sendlongLat = (value) => {

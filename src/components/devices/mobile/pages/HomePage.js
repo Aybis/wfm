@@ -1,7 +1,9 @@
+import axios from 'axios';
 import DetailCeoMessage from 'components/devices/desktop/molecules/DetailCeoMessage';
 import Modal from 'components/devices/universal/atoms/Modal';
 import Carousel from 'components/devices/universal/molecules/Carousel';
 import absensi from 'constants/api/absensi';
+import { motion } from 'framer-motion';
 import ToastHandler from 'helpers/hooks/toast';
 import dataCeoMessages from 'json/dataCeoMessages';
 import React, { useEffect, useState } from 'react';
@@ -19,13 +21,16 @@ import CardHariLiburMobile from '../component/molecules/CardHariLiburMobile';
 import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
 import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardMessageMobile from '../component/molecules/CardMessageMobile';
+import CardModuleApp from '../component/molecules/CardModuleApp';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
+import SimpleCarousel from '../component/molecules/SimpleCarousel';
 import TeamMate from '../component/molecules/TeamMate';
 import LayoutMobile from '../LayoutMobile';
 
 export default function HomePage() {
   const USER = useSelector((state) => state.users);
-
+  const [dataYoutube, setdataYoutube] = useState([]);
+  const YOUTUBE_PLAYLIST_ITEMS_API = `https://www.googleapis.com/youtube/v3/playlistItems`;
   const [dataHoliday, setdataHoliday] = useState(false);
   const [showModal, setshowModal] = useState(false);
   const [showModalCeoMessage, setshowModalCeoMessage] = useState(false);
@@ -87,8 +92,17 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    axios
+      .get(
+        ` ${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=PLMrgP0P9dmMyLfzSHY7XhX2leEgUZVIJc&key=${process.env.REACT_APP_YOUTUBE_API_KEY} `,
+      )
+      .then((res) => {
+        setdataYoutube(res.data.items);
+      })
+      .catch((err) => {
+        console.log('error yutub', err.response);
+      });
     window.scroll(0, 0);
-    setshowModal(true);
     absensiToday();
     reportWeeklyPersonal();
     getDataHoliday();
@@ -134,11 +148,17 @@ export default function HomePage() {
       </Card>
       {/* End Kehadiran  */}
 
+      <CardModuleApp />
+
       {/* Daily Absence  */}
       <Card>
         <CardDay />
       </Card>
       {/* End Daily Absence  */}
+
+      {/* Carousel */}
+      <SimpleCarousel />
+      {/* End Carousel */}
 
       {/* CEO Messages */}
       <Card>
@@ -158,6 +178,41 @@ export default function HomePage() {
       </Card>
       {/* End CEO Messages */}
 
+      {/* Card Team Mate */}
+      <TeamMate />
+      {/* Card Teammate */}
+
+      {/* Card Yutub */}
+      <div className="relative mt-6">
+        <CardHeadingMobile heading="PINS Radio" />
+        <div className="grid grid-cols-1 gap-4 mt-4">
+          {dataYoutube?.map((item) => (
+            <motion.div
+              whileTap={{ scale: 0.85 }}
+              key={item.id}
+              className="flex gap-4 p-4 bg-white rounded-lg">
+              <img
+                src={item.snippet.thumbnails.high?.url}
+                alt={item.id}
+                className="h-24 w-24 rounded-md  object-cover"
+              />
+              <div className="flex flex-col gap-1">
+                <h1 className="text-sm font-medium text-gray-800 capitalize">
+                  {item.snippet.title}
+                </h1>
+                <span className="text-sm font-light text-warmGray-600">
+                  {item.snippet.channelTitle}
+                </span>
+                <span className="text-xs font-light text-warmGray-400">
+                  {item.snippet.description.substring(0, 50) + ' ...'}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+      {/* End Card Yutub */}
+
       {/* Selebs Today */}
       <Card addClass="hidden">
         <CardHeadingMobile
@@ -173,10 +228,6 @@ export default function HomePage() {
         </CardScrollHorizontal>
       </Card>
       {/* End Selebs Today */}
-
-      {/* Card Team Mate */}
-      <TeamMate />
-      {/* Card Teammate */}
 
       <Card>
         <CardHeadingMobile heading="Hari Libur" />

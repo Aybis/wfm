@@ -1,7 +1,8 @@
+import axios from 'axios';
 import Menu from 'components/devices/desktop/section/Menu';
 import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { isDesktop } from 'react-device-detect';
 import {
   Router,
@@ -18,6 +19,8 @@ import Reimburse from './subApproval/Reimburse';
 import Sppd from './subApproval/Sppd';
 
 const Approval = ({ history }) => {
+  const YOUTUBE_PLAYLIST_ITEMS_API = `https://www.googleapis.com/youtube/v3/playlistItems`;
+
   window.scroll(0, 0);
   let { path, url } = useRouteMatch();
 
@@ -27,6 +30,21 @@ const Approval = ({ history }) => {
     { name: 'Cuti', href: `${url}/cuti` },
     { name: 'SPPD', href: `${url}/sppd` },
   ];
+
+  useEffect(() => {
+    axios
+      .get(
+        // `${YOUTUBE_PLAYLIST_ITEMS_API}?key=${process.env.REACT_APP_YOUTUBE_API_KEY}`,
+        ` ${YOUTUBE_PLAYLIST_ITEMS_API}?part=snippet&maxResults=50&playlistId=PLMrgP0P9dmMyLfzSHY7XhX2leEgUZVIJc&key=${process.env.REACT_APP_YOUTUBE_API_KEY} `,
+      )
+      .then((res) => {
+        console.log('success yutub', res);
+      })
+      .catch((err) => {
+        console.log('error yutub', err.response);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative w-full h-screen bg-warmGray-100">

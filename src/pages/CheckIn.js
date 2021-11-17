@@ -14,9 +14,9 @@ import ToastHandler from 'helpers/hooks/toast';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isCheckIn } from 'store/actions/presence';
-import { useSelector } from 'react-redux';
+import swal from 'sweetalert';
 
 const CheckIn = ({ history }) => {
   const dispatch = useDispatch();
@@ -95,14 +95,17 @@ const CheckIn = ({ history }) => {
     absensi
       .checkIn(state)
       .then((response) => {
-        if (response.status === 201 || response.status === 200) {
-          dispatch(isCheckIn(response.data.data));
-          ToastHandler('success', response?.data?.message);
-          setisSubmit(false);
-          setTimeout(() => {
-            history.push('/');
-          }, 300);
-        }
+        dispatch(isCheckIn(response.data.data));
+        // ToastHandler('success', response?.data?.message);
+        swal({
+          title: response?.data?.message,
+          icon: 'success',
+          button: 'Close!',
+        });
+        setisSubmit(false);
+        setTimeout(() => {
+          history.push('/');
+        }, 300);
       })
       .catch((err) => {
         if (err.response.status === 500) {

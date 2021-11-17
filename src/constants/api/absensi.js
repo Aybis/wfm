@@ -37,10 +37,10 @@ export default {
   overtimeOut: (data) => axios.get('overtime/check-out/', data),
 
   // endpoint atasan dan bawahan
-  atasanAll: (data) => axios.get('user/all-atasan', data),
-  atasan: (data) => axios.get('user/atasan', data),
-  bawahanAll: (data) => axios.get('user/all-bawahan', data),
-  bawahan: (data) => axios.get('user/bawahan', data),
+  atasanAll: (data) => axios.get('user/supervisors', data),
+  atasan: (data) => axios.get('user/supervisor', data),
+  bawahanAll: (data) => axios.get('user/subordinates', data),
+  bawahan: (data) => axios.get('user/subordinate', data),
 
   // end point push notif to WA
   notifWa: (data) => axios.post('notifikasi/notif-to-subordinate', data),

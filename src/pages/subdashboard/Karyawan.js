@@ -77,6 +77,7 @@ export default function Karyawan() {
         },
       })
       .then((response) => {
+        console.log(response);
         setisLoad(true);
         setlistUser(response.data);
         setTimeout(() => {
