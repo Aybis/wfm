@@ -48,10 +48,10 @@ export default function CardMessageMobile({ type, data, onClick }) {
           )}
 
           <div className="flex flex-col">
-            <h1 className="font-semibold text-gray-800">
+            <h1 className="font-semibold text-warmGray-800">
               {type === 'ceo' ? 'Henry Christiadi' : 'Anonymous'}
             </h1>
-            <p className=" text-gray-400 text-sm font-light">
+            <p className=" text-warmGray-600 text-sm font-normal">
               {type === 'ceo' ? 'CEO of PINS' : 'IT Management'}
             </p>
           </div>

@@ -1,4 +1,4 @@
-import { ChatIcon, CheckIcon } from '@heroicons/react/outline';
+import { ChatIcon, CheckIcon, StarIcon } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
 import convertDate from 'helpers/hooks/convertDate';
 import React, { useEffect, useState } from 'react';
@@ -31,7 +31,7 @@ const CardTeam = ({ data, onClick, handlerSubmit, isAtasan }) => {
       variants={item}
       className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg lg:w-1/5 p-4 bg-white`}
       style={{ minWidth: '10rem' }}>
-      <div className="flex flex-col items-center">
+      <div className={`flex flex-col items-center `}>
         <img
           loading="lazy"
           width="24"
@@ -63,9 +63,9 @@ const CardTeam = ({ data, onClick, handlerSubmit, isAtasan }) => {
             )}
           </motion.div>
         ) : (
-          <motion.div
-            whileTap={{ scale: 0.85 }}
-            className="-mt-6 p-2 flex justify-center mb-8"></motion.div>
+          <motion.div className="-mt-6 p-2 flex justify-center">
+            <StarIcon className=" p-1 text-white h-8 w-8 rounded-full bg-apps-yellow transform  text-center cursor-pointer hover:bg-yellow-600" />
+          </motion.div>
         )}
 
         <h3 className="text-sm font-semibold text-warmGray-800 transform capitalize mt-2">

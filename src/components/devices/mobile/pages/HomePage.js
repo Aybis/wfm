@@ -91,6 +91,13 @@ export default function HomePage() {
     setshowModalCeoMessage(true);
   };
 
+  const handlerClickYoutube = (event, data) => {
+    const linkYoutube = 'https://www.youtube.com/watch';
+    // console.log(data);
+    // window.location.href = `${linkYoutube}?v=${data}`;
+    window.open(`${linkYoutube}?v=${data}`, '_blank').focus();
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -148,17 +155,17 @@ export default function HomePage() {
       </Card>
       {/* End Kehadiran  */}
 
-      <CardModuleApp />
-
-      {/* Daily Absence  */}
-      <Card>
-        <CardDay />
-      </Card>
-      {/* End Daily Absence  */}
-
       {/* Carousel */}
       <SimpleCarousel />
       {/* End Carousel */}
+
+      <CardModuleApp />
+
+      {/* Daily Absence  */}
+      <Card addClass="hidden">
+        <CardDay />
+      </Card>
+      {/* End Daily Absence  */}
 
       {/* CEO Messages */}
       <Card>
@@ -185,31 +192,38 @@ export default function HomePage() {
       {/* Card Yutub */}
       <div className="relative mt-6">
         <CardHeadingMobile heading="PINS Radio" />
-        <div className="grid grid-cols-1 gap-4 mt-4">
+        <CardScrollHorizontal>
           {dataYoutube?.map((item) => (
             <motion.div
-              whileTap={{ scale: 0.85 }}
+              onClick={(e) =>
+                handlerClickYoutube(e, item.snippet.resourceId.videoId)
+              }
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.1 }}
               key={item.id}
-              className="flex gap-4 p-4 bg-white rounded-lg">
+              className="flex flex-col flex-none w-64 px-4 pt-4 bg-white rounded-md">
               <img
                 src={item.snippet.thumbnails.high?.url}
                 alt={item.id}
-                className="h-24 w-24 rounded-md  object-cover"
+                className="h-44 rounded-md"
               />
-              <div className="flex flex-col gap-1">
-                <h1 className="text-sm font-medium text-gray-800 capitalize">
+              <div className="flex flex-col mt-2">
+                <h1 className="text-sm font-semibold text-gray-800 capitalize">
                   {item.snippet.title}
                 </h1>
-                <span className="text-sm font-light text-warmGray-600">
+                <span className="text-xs font-normal text-warmGray-800 mt-2">
                   {item.snippet.channelTitle}
                 </span>
-                <span className="text-xs font-light text-warmGray-400">
-                  {item.snippet.description.substring(0, 50) + ' ...'}
+                <span className="text-xs font-light text-warmGray-400 tracking-wide mt-1 pb-2">
+                  {item.snippet.description.substring(0, 100) + ' ...'}
                 </span>
               </div>
             </motion.div>
           ))}
-        </div>
+        </CardScrollHorizontal>
+        {/* <div className="grid grid-cols-1 gap-4 mt-4">
+         
+        </div> */}
       </div>
       {/* End Card Yutub */}
 

@@ -1,43 +1,62 @@
-import React, { Component } from 'react';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
+import CardHeadingMobile from './CardHeadingMobile';
+import ModalImage from './ModalImage';
 
-export default class SimpleCarousel extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 2,
-      slidesToScroll: 1,
-      nextArrow: false,
-      prevArrow: false,
-    };
-    return (
-      <div className="mx-5 hidden">
-        <h2 className="-mx-2"> Single Item</h2>
-        <Slider className="w-full flex gap-4 mx-2" {...settings}>
-          <div className="rounded-lg p-2">
-            <div className="bg-red-200 p-4 rounded-lg">
-              <h3>1</h3>
+const SimpleCarousel = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+
+  const [showModal, setshowModal] = useState(false);
+  const [sourceImage, setsourceImage] = useState(null);
+  const images = [
+    `${process.env.PUBLIC_URL}/assets/images/1.jpeg`,
+    `${process.env.PUBLIC_URL}/assets/images/2.jpeg`,
+    `${process.env.PUBLIC_URL}/assets/images/3.jpeg`,
+    `${process.env.PUBLIC_URL}/assets/images/4.png`,
+  ];
+
+  const handlerClickShowModalImage = (event, image) => {
+    console.log(image);
+    setsourceImage(image);
+    setshowModal(true);
+  };
+
+  return (
+    <div className="mb-12">
+      <CardHeadingMobile heading="Headlines" />
+      <ModalImage
+        open={showModal}
+        handlerClose={() => setshowModal(false)}
+        src={sourceImage}
+      />
+      <Slider className="w-full flex gap-4  -mb-2 mt-4" {...settings}>
+        {images.map((image) => (
+          <motion.div
+            onClick={(event) => handlerClickShowModalImage(event, image)}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.85 }}
+            key={Math.random()}
+            className="rounded-lg p-2">
+            <div className=" rounded-lg">
+              <img
+                alt={image}
+                src={image}
+                className="bg-black bg-opacity-5 w-full object-contain max-h-44 lg:max-h-full lg:h-108 rounded-md"
+              />
             </div>
-          </div>
-          <div className="rounded-lg p-2">
-            <div className="bg-blue-200 p-4 rounded-lg">
-              <h3>2</h3>
-            </div>
-          </div>
-          <div className="rounded-lg p-2">
-            <div className="bg-yellow-200 p-4 rounded-lg">
-              <h3>3</h3>
-            </div>
-          </div>
-          <div className="rounded-lg p-2">
-            <div className="bg-indigo-200 p-4 rounded-lg">
-              <h3>4</h3>
-            </div>
-          </div>
-        </Slider>
-      </div>
-    );
-  }
-}
+          </motion.div>
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
+export default SimpleCarousel;

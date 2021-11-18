@@ -9,20 +9,11 @@ export default function CardDay() {
   const USER = useSelector((state) => state.users);
   const dateNow = convertDate('dateOnly');
 
-  const item = {
-    hidden: { y: -20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
-
   return USER && ABSEN.status === 'ok' ? (
     convertDate('dateOnly', ABSEN.dataOut.jam) !== dateNow ? (
       ''
     ) : (
       <motion.div
-        variants={item}
         className={`flex flex-col w-full gap-2 bg-white rounded-xl mt-4 py-2`}>
         <div className="flex justify-between py-4 px-6">
           <div

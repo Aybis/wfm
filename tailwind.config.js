@@ -30,7 +30,7 @@ module.exports = {
       teal: colors.teal,
       emerald: colors.emerald,
       cyan: colors.cyan,
-      lightBlue: colors.lightBlue,
+      lightBlue: colors.sky,
       violet: colors.violet,
       fuchsia: colors.fuchsia,
       rose: colors.rose,

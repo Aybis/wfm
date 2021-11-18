@@ -24,7 +24,7 @@ export default function MobileMenu() {
           </NavLink>
           <NavLink
             to="/modules"
-            className="rounded-md p-2 text-center text-apps-primary text-opacity-30 hover:bg-apps-card transition-all duration-300 ease-in-out"
+            className="hidden rounded-md p-2 text-center text-apps-primary text-opacity-30 hover:bg-apps-card transition-all duration-300 ease-in-out"
             activeClassName="text-apps-primary text-opacity-100 font-semibold">
             <ViewGridIcon className="h-5 w-5 mx-auto" />
             <p className="text-xs mt-1">Modules</p>
