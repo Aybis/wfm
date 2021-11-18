@@ -209,7 +209,7 @@ const PresensiMobile = ({ history }) => {
 
       <Card addClass="mt-4">
         <CardHeadingMobile
-          heading="Data Absensi"
+          heading="Data Bulanan"
           navigation
           type="download"
           link={linkDownloadReport}

@@ -19,7 +19,7 @@ import CardDay from '../component/molecules/CardDay';
 import CardGridMobile from '../component/molecules/CardGridMobile';
 import CardHariLiburMobile from '../component/molecules/CardHariLiburMobile';
 import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
-import CardKehadiran from '../component/molecules/CardKehadiran';
+// import CardKehadiran from '../component/molecules/CardKehadiran';
 import CardMessageMobile from '../component/molecules/CardMessageMobile';
 import CardModuleApp from '../component/molecules/CardModuleApp';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
@@ -130,6 +130,23 @@ export default function HomePage() {
   return (
     <LayoutMobile isShow>
       {/* Content  */}
+      <div className="flex flex-col -mt-2">
+        <h1 className="text-xl font-semibold text-warmGray-700 tracking-wide hidden">
+          <small>Welcome back,</small>
+          {USER.username.replace('.', ' ')}
+        </h1>
+        <h1 className="text-xl tracking-tight  text-gray-900 sm:text-5xl md:text-6xl">
+          <span className="block xl:inline font-normal">Welcome back, </span>{' '}
+          <span className="block text-gray-800 tracking-wide xl:inline font-bold capitalize">
+            {USER.name.toLowerCase().replace('.', ' ')}
+          </span>
+        </h1>
+        <span className="text-sm font-light text-warmGray-500 mt-2 hidden">
+          Ayoo Implementasikan{' '}
+          <b className="text-warmGray-600 font-bold">Core Value AKHLAK </b>{' '}
+          dalam kehidupan dan pekerjaan sehari-hari !!!
+        </span>
+      </div>
 
       {/* Start Modal */}
       <Modal
@@ -150,13 +167,13 @@ export default function HomePage() {
       {/* End Modal CEO Messages */}
 
       {/* Kehadiran  */}
-      <Card>
+      {/* <Card>
         <CardKehadiran />
-      </Card>
+      </Card> */}
       {/* End Kehadiran  */}
 
       {/* Carousel */}
-      <SimpleCarousel />
+      <SimpleCarousel></SimpleCarousel>
       {/* End Carousel */}
 
       <CardModuleApp />

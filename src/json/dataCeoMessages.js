@@ -1,6 +1,5 @@
 import {
   IdentificationIcon,
-  LogoutIcon,
   UserGroupIcon,
   UserIcon,
 } from '@heroicons/react/outline';
@@ -213,12 +212,6 @@ const dataMenuProfiles = [
     detail: 'Data My Family',
     href: '/family',
     icon: <UserGroupIcon className="h-12 w-12 text-gray-400 p-2" />,
-  },
-  {
-    name: 'Logout',
-    detail: "Please don't go :(",
-    href: '/',
-    icon: <LogoutIcon className="h-12 w-12 text-gray-400 p-2" />,
   },
 ];
 

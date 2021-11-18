@@ -186,15 +186,16 @@ function Harian() {
                 key={Math.random()}
                 onClick={() => handlerClickModal(item.name)}
                 whileHover={{
-                  scale: 1.08
+                  scale: 1.08,
                 }}
                 whileTap={{
-                  scale: 0.95
+                  scale: 0.95,
                 }}
-                className={` ${item.name === 'telat' || item.name === 'tidak_hadir'
-                  ? 'cursor-pointer'
-                  : 'cursor-default'
-                  } flex justify-between items-center gap-1 w-2/3 sm:w-auto flex-none sm:flex-1 h-auto py-4 px-6 bg-white rounded-lg`}>
+                className={` ${
+                  item.name === 'telat' || item.name === 'tidak_hadir'
+                    ? 'cursor-pointer'
+                    : 'cursor-default'
+                } flex justify-between items-center gap-1 w-2/3 sm:w-auto flex-none sm:flex-1 h-auto py-4 px-6 bg-white rounded-lg`}>
                 <div className="flex flex-col">
                   <h4 className="text-sm sm:text-base font-medium text-gray-400">
                     {item.name === 'wfh' && 'At Home'}

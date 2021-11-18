@@ -13,7 +13,7 @@ export default function MobileMenu() {
   return (
     isMobile && (
       <div className="fixed z-30 bottom-0 inset-x-0 ">
-        <div className="bg-white shadow-2xl flex justify-between items-center lg:mx-4 px-6 mb-0 py-1 border-t-2 border-coolGray-100">
+        <div className="bg-white shadow-2xl flex justify-evenly items-center lg:mx-4 px-6 mb-0 py-1 border-t-2 border-coolGray-100">
           <NavLink
             to="/"
             exact={true}
@@ -45,7 +45,7 @@ export default function MobileMenu() {
           </NavLink>
           <NavLink
             to="/profile"
-            className="rounded-md p-2 text-center text-apps-primary text-opacity-30 hover:bg-apps-card transition-all duration-300 ease-in-out"
+            className="rounded-md p-2 text-center text-apps-primary text-opacity-30 hover:bg-apps-card transition-all duration-300 ease-in-out hidden"
             activeClassName="text-apps-primary text-opacity-100 font-semibold">
             <UserIcon className="h-5 w-5 mx-auto" />
             <p className="text-xs mt-1">Me</p>

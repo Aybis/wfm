@@ -35,7 +35,7 @@ export default function CardModuleApp() {
     },
     {
       name: 'Inforekan',
-      link: '/presence',
+      link: '/inforekan',
       icon: UserGroupIcon,
       isActive: true,
       backgroundColor: 'bg-apps-green bg-opacity-10',
@@ -97,7 +97,7 @@ export default function CardModuleApp() {
 
   return (
     <div className="relative mt-4">
-      <CardHeadingMobile heading="Modules" />
+      <CardHeadingMobile heading="" />
 
       <div className="grid grid-cols-4 gap-4 mt-4">
         {modules.map((module) => (

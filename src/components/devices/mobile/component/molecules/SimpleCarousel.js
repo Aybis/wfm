@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import CardHeadingMobile from './CardHeadingMobile';
 import ModalImage from './ModalImage';
 
 const SimpleCarousel = () => {
@@ -15,7 +14,7 @@ const SimpleCarousel = () => {
   };
 
   const [showModal, setshowModal] = useState(false);
-  const [sourceImage, setsourceImage] = useState(null);
+  const [sourceImage, setsourceImage] = useState(undefined);
   const images = [
     `${process.env.PUBLIC_URL}/assets/images/1.jpeg`,
     `${process.env.PUBLIC_URL}/assets/images/2.jpeg`,
@@ -23,15 +22,13 @@ const SimpleCarousel = () => {
     `${process.env.PUBLIC_URL}/assets/images/4.png`,
   ];
 
-  const handlerClickShowModalImage = (event, image) => {
-    console.log(image);
+  const handlerClickShowModalImage = (image) => {
     setsourceImage(image);
     setshowModal(true);
   };
 
   return (
     <div className="mb-12">
-      <CardHeadingMobile heading="Headlines" />
       <ModalImage
         open={showModal}
         handlerClose={() => setshowModal(false)}
@@ -40,7 +37,7 @@ const SimpleCarousel = () => {
       <Slider className="w-full flex gap-4  -mb-2 mt-4" {...settings}>
         {images.map((image) => (
           <motion.div
-            onClick={(event) => handlerClickShowModalImage(event, image)}
+            onClick={() => handlerClickShowModalImage(image)}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.85 }}
             key={Math.random()}
