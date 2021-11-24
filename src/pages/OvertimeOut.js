@@ -3,50 +3,50 @@ import { ChevronDownIcon, ChevronLeftIcon } from '@heroicons/react/solid';
 import Label from 'components/devices/universal/atoms/Label';
 import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import Textarea from 'components/devices/universal/atoms/Textarea';
-import ToastHandler from 'helpers/hooks/toast';
+import absensi from 'constants/api/absensi';
+import convertDate from 'helpers/hooks/convertDate';
 import useForm from 'helpers/hooks/useForm';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const OvertimeOut = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
   const [popup, setpopup] = useState(false);
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
-  const [timeStamp, settimeStamp] = useState(null);
+  const LEMBURAN = useSelector((state) => state.lemburan);
+  const { id } = useParams();
 
   const [state, setState] = useForm({
-    longLat: '',
-    address: '',
+    long_lat: '',
+    lokasi: '',
     subject: '',
-    keterangan: '',
+    detail: '',
+    jam: convertDate('fullDate'),
   });
-
-  const getHoursAndTime = () => {
-    let timeCurrent = new Date();
-    settimeStamp(
-      `${timeCurrent.getHours()} : ${
-        timeCurrent.getMinutes() < 10
-          ? `0${timeCurrent.getMinutes()}`
-          : timeCurrent.getMinutes()
-      }`,
-    );
-  };
 
   const submitFunction = (event) => {
     event.preventDefault();
-    getHoursAndTime();
-
-    state.longLat = longLat;
-    state.address = address;
-    ToastHandler(
-      'success',
-      `
-      Alamat : ${state.address},
-      Title : ${state.subject},
-      Longitude : ${state.longLat.lng},
-      Latitude : ${state.longLat.lat}
-    `,
-    );
+    state.long_lat = longLat;
+    state.lokasi = address;
+    absensi
+      .overtimeOut(state, id)
+      .then((response) => {
+        swal({
+          title: response.data.message,
+          icon: 'success',
+        });
+        history.push('/overtime');
+      })
+      .catch((err) => {
+        console.log(err.response);
+        swal({
+          title: err.response.data.message ?? 'Something Hapenned!',
+          icon: 'error',
+        });
+      });
   };
 
   const sendlongLat = (value) => {
@@ -59,9 +59,11 @@ const OvertimeOut = ({ history }) => {
 
   useEffect(() => {
     setDidMount(true);
+
     const timeOut = setTimeout(() => {
       setpopup(true);
     }, 500);
+
     return () => {
       setDidMount(false);
       clearTimeout(timeOut);
@@ -127,15 +129,15 @@ const OvertimeOut = ({ history }) => {
               <div className="flex flex-col gap-2 text-sm">
                 <Label name="subject" labelName="Subject" />
                 <p className="font-medium text-gray-800 w-full">
-                  Membuat Aplikasi POP
+                  {LEMBURAN?.dataLemburanToday.subject}
                 </p>
               </div>
 
               <Textarea
                 labelName="Keterangan"
-                name="keterangan"
+                name="detail"
                 placeholder="Detail Pekerjaan Lembur ?"
-                value={state.keterangan}
+                value={state.detail}
                 onChange={setState}
               />
 
@@ -143,18 +145,15 @@ const OvertimeOut = ({ history }) => {
                 <div className="flex flex-col  gap-1">
                   <Label labelName="Start Overtime" />
                   <h4 className="text-gray-800 text-sm font-semibold">
-                    19 : 32
+                    {convertDate('timeAm', LEMBURAN?.checkIn.jam)}
                   </h4>
                 </div>
                 <div className="flex flex-col gap-1">
                   <Label labelName="Finish Overtime" />
-                  <h4 className="text-gray-800 text-sm font-semibold">
-                    {timeStamp}
-                  </h4>
                 </div>
               </div>
 
-              {state.keterangan && (
+              {state.detail && (
                 <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white mt-2">
                   Finish
                 </button>

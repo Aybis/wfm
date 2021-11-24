@@ -1,72 +1,86 @@
-import { ChevronRightIcon } from '@heroicons/react/outline';
-import SetMaps from 'components/devices/universal/atoms/SetMaps';
+import { ChevronRightIcon } from '@heroicons/react/solid';
+import CardOvertimeApproval from 'components/devices/desktop/molecules/CardOvertimeApproval';
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import CardDoneAbsen from './CardDoneAbsen';
-import CardLoading from './CardLoading';
+import { useHistory } from 'react-router';
 
 export default function CardKehadiranLemburan() {
-  const ABSEN = useSelector((state) => state.presence);
+  const ABSENSI = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
-  let isCheckOut;
+  const LEMBURAN = useSelector((state) => state.lemburan);
+  const history = useHistory();
 
-  const sendAddress = (value) => {
-    return value;
+  const handlerClickGotoPage = () => {
+    if (ABSENSI?.dataOut?.jam) {
+      history.push('/overtime-in');
+    } else {
+      history.push(`/check-out/${ABSENSI?.data?.id}`);
+    }
   };
 
-  const sendLonglat = (value) => {
-    return value;
-  };
-
-  return USER ? (
-    <motion.div className="relative grid grid-cols-1 rounded-md mb-8 mt-8 shadow-lg">
-      {!isCheckOut ? (
-        <>
-          <SetMaps
-            height="100%"
-            className="relative h-28 lg:h-64 rounded-t-lg z-0 shadow-md border-2 border-gray-300"
-            sendAddress={sendAddress}
-            sendlongLat={sendLonglat}
-            showButton={false}
-          />
-
-          <div className="rounded-b-md grid grid-cols-4 gap-2 bg-white justify-between py-3 px-4 z-10 -mt-5">
-            <div className="flex flex-col gap-1">
-              <h4 className="text-xs text-gray-400 font-light">Current</h4>
-              <h4 className={`text-xs font-semibold text-gray-700`}>
-                {ABSEN.data.kehadiran === 'WFO' && 'At Office'}
-                {ABSEN.data.kehadiran === 'WFH' && 'At Home'}
-              </h4>
-            </div>
-            <div className="flex flex-col gap-1 col-span-2">
-              <h4 className="text-xs text-gray-400 font-light">Status</h4>
-              {ABSEN.data.kehadiran === 'WFO' && (
-                <span
-                  className={`text-xs font-medium tracking-wide rounded-md text-green-500`}>
-                  Available
-                </span>
-              )}
-              {ABSEN.data.kehadiran === 'WFH' && (
-                <span
-                  className={`text-xs font-medium tracking-wide rounded-md text-red-500`}>
-                  Not Available
-                </span>
-              )}
-            </div>
-            <Link
-              to="/overtime-in"
-              className="flex justify-center items-center text-sm ">
-              <ChevronRightIcon className="h-7 w-7 lg:h-8 lg:w-8 bg-apps-primary bg-opacity-10 text-apps-primary group-hover:bg-gray-100 group-hover:bg-opacity-30 group-hover:text-white p-1 rounded" />
-            </Link>
-          </div>
-        </>
-      ) : (
-        <CardDoneAbsen />
-      )}
-    </motion.div>
+  return Object.values(LEMBURAN?.checkIn).length > 0 ? (
+    Object.values(LEMBURAN.checkOut).length > 0 ? (
+      <div className="mt-20 relative mb-4">
+        <CardOvertimeApproval
+          date={LEMBURAN.checkIn.jam}
+          status={LEMBURAN.dataLemburanToday.status}
+          title={LEMBURAN.dataLemburanToday.subject}
+          timeIn={LEMBURAN.checkIn.jam}
+          timeOut={LEMBURAN?.checkOut?.jam}
+          isSend={true}
+        />
+      </div>
+    ) : (
+      <div className="mt-20 relative mb-4">
+        <CardOvertimeApproval
+          date={LEMBURAN.checkIn.jam}
+          status={LEMBURAN.dataLemburanToday.status}
+          title={LEMBURAN.dataLemburanToday.subject}
+          timeIn={LEMBURAN.checkIn.jam}
+          timeOut={LEMBURAN?.checkOut?.jam}
+          link={`/overtime-out/${LEMBURAN.dataLemburanToday.id}`}
+        />
+      </div>
+    )
   ) : (
-    <CardLoading />
+    <motion.div
+      whileTap={ABSENSI?.dataOut?.jam && { scale: 0.9 }}
+      onClick={() => handlerClickGotoPage()}
+      className="relative mt-20 mb-4">
+      <div className="flex bg-white rounded-lg p-4">
+        <div className="flex justify-center items-start gap-4 w-4/5 ">
+          <div className="bg-gray-500 bg-opacity-10 rounded-md p-2">
+            <img
+              src={
+                USER?.image_url
+                  ? USER.image_url
+                  : `https://ui-avatars.com/api/?name=${USER?.name}&background=F3F3F3&color=000`
+              }
+              alt="myProfile"
+              className="rounded-md h-10 w-10"
+            />
+          </div>
+          <div className="flex flex-col gap-1 flex-1">
+            <h1 className="font-semibold text-gray-800 capitalize">
+              {USER?.name?.toLowerCase()}
+            </h1>
+            <p className="text-gray-500 text-xs font-light">
+              {ABSENSI?.dataOut?.jam
+                ? 'Anda dapat mengajukan lembur sekarang!'
+                : 'Silahkan checkout terlebih dahulu.'}
+            </p>
+          </div>
+        </div>
+
+        <div className={`p-1 flex justify-end items-center w-1/5`}>
+          <ChevronRightIcon
+            className={`${
+              ABSENSI?.dataOut?.jam ? 'text-gray-800' : 'text-gray-800'
+            } h-10 p-1`}
+          />
+        </div>
+      </div>
+    </motion.div>
   );
 }

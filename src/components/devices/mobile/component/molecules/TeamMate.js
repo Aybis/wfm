@@ -37,10 +37,11 @@ export default function TeamMate() {
       isLoading: true,
       user_id: data.id,
     });
+
     absensi
       .notifWa({
         id: data.id,
-        nama_atasan: data.atasan,
+        nama_atasan: dataAtasan.name,
       })
       .then((res) => {
         swal({
@@ -59,7 +60,11 @@ export default function TeamMate() {
           isLoading: false,
           user_id: data.id,
         });
-        console.log(err);
+        swal({
+          text: err.response.data.message ?? 'Something happened',
+          buttons: 'Close',
+          icon: 'error',
+        });
       });
   };
 

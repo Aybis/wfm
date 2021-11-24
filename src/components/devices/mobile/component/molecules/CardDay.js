@@ -70,7 +70,7 @@ export default function CardDay() {
               }`}>
               {ABSEN.dataIn.jam ? convertDate('timeAm', ABSEN.dataIn.jam) : ''}
             </h3>
-            <h3 className={`text-sm font-semibold tracking-wide text-gray-400`}>
+            <h3 className={`text-sm font-semibold text-gray-400`}>
               {ABSEN.dataIn.jam
                 ? convertDate('dateStyle', ABSEN.dataIn.jam)
                 : ''}
@@ -82,7 +82,7 @@ export default function CardDay() {
                 ? convertDate('timeAm', ABSEN.dataOut.jam)
                 : ''}
             </h3>
-            <h3 className={`text-sm text-gray-400 tracking-wide`}>
+            <h3 className={`text-sm font-semibold text-gray-400`}>
               {ABSEN.dataOut.jam
                 ? convertDate('dateStyle', ABSEN.dataOut.jam)
                 : ''}

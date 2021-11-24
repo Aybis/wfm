@@ -5,7 +5,7 @@ export default function FilterInforekan(props) {
         <label htmlFor="Status" className="text-gray-400 font-medium">
           Direktorat
         </label>
-        <select className="p-2 border-none text-gray-800 font-semibold tracking-wide focus:outline-none">
+        <select className="p-2 border-none text-gray-800 font-semibold  focus:outline-none">
           <option value="all">All</option>
           {props.data.dataDirektorat.length > 0
             ? props.data.dataDirektorat.map((item) => (
@@ -20,7 +20,7 @@ export default function FilterInforekan(props) {
         <label htmlFor="Status" className="text-gray-400 font-medium">
           Unit
         </label>
-        <select className="p-2 border-none text-gray-800 font-semibold tracking-wide">
+        <select className="p-2 border-none text-gray-800 font-semibold ">
           <option value="all">All</option>
           {props.data.dataUnit.length > 0
             ? props.data.dataUnit.map((item) => (
@@ -36,7 +36,7 @@ export default function FilterInforekan(props) {
         <label htmlFor="Status" className="text-gray-400 font-medium">
           Sub Unit
         </label>
-        <select className="p-2 border-none text-gray-800 font-semibold tracking-wide">
+        <select className="p-2 border-none text-gray-800 font-semibold ">
           <option value="all">All</option>
           {props.data.dataSubUnit.length > 0
             ? props.data.dataSubUnit.map((item) => (
@@ -52,7 +52,7 @@ export default function FilterInforekan(props) {
         <label htmlFor="Status" className="text-gray-400 font-medium">
           Jabatan
         </label>
-        <select className="p-2 border-none text-gray-800 font-semibold tracking-wide">
+        <select className="p-2 border-none text-gray-800 font-semibold ">
           <option value="atasan">Atasan</option>
           <option value="all">All</option>
           <option value="hr">HR</option>

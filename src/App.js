@@ -105,7 +105,7 @@ function App() {
             component={OvertimeIn}></Authenticated>
           <Authenticated
             exact
-            path="/overtime-out"
+            path="/overtime-out/:id"
             component={OvertimeOut}></Authenticated>
           <Authenticated
             exact

@@ -18,14 +18,14 @@ export default function CardMessages({ type = 'ceo', onClick, data }) {
               />
 
               <div className="flex flex-col gap-1">
-                <h1 className="font-semibold text-white tracking-wider text-xl capitalize">
+                <h1 className="font-semibold text-white text-xl capitalize">
                   Henry Christiadi
                 </h1>
                 <p className="text-sm text-gray-100">CEO of PINS</p>
               </div>
             </div>
 
-            <div className="text-gray-600 text-left tracking-wide text-lg">
+            <div className="text-gray-600 text-left text-lg">
               <p>
                 {data.title}
                 <button

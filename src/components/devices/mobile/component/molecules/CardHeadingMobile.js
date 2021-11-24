@@ -19,7 +19,7 @@ export default function CardHeadingMobile({
       {navigation && (
         <a
           href={link}
-          className="cursor-pointer text-xs text-apps-primary tracking-wide flex gap-1">
+          className="cursor-pointer text-xs text-apps-primary  flex gap-1">
           {type === 'download' ? (
             <span className="flex gap-1">
               <DownloadIcon className="h-4 w-4 " />

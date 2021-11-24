@@ -27,7 +27,7 @@ export default function CardInputPhoto({
               className="h-12 text-gray-400 cursor-pointer"
             />
             <ArrowUpIcon className="h-3 text-gray-400 animate-bounce mt-2" />
-            <p className="text-xs text-gray-400 text-center tracking-wide font-medium">
+            <p className="text-xs text-gray-400 text-center  font-medium">
               Take a Selfie
             </p>
           </div>

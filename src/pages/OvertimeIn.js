@@ -86,7 +86,7 @@ const OvertimeIn = ({ history }) => {
     state.long_lat = longLat;
     state.lokasi = address;
     state.jam = convertDate('fullDate');
-    state.approval = [dataAtasan.username, 'abdul.muchtar'];
+    state.approval = [dataAtasan.username, 'nia'];
 
     absensi
       .overtimeIn(state)
@@ -97,13 +97,9 @@ const OvertimeIn = ({ history }) => {
           button: 'Close!',
         }).then((val) => {
           setTimeout(() => {
-            history.push('/');
+            history.push('/overtime');
           }, 300);
         });
-
-        setTimeout(() => {
-          history.push('/');
-        }, 300);
       })
       .catch((err) => {
         swal({

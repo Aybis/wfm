@@ -36,7 +36,7 @@ export default function Menu() {
               src="https://tailwindui.com/img/logos/workflow-mark-blue-600.svg"
               alt="logo"
             />
-            <h1 className="text-gray-800 font-bold uppercase tracking-wider text-lg">
+            <h1 className="text-gray-800 font-bold uppercase r text-lg">
               Almuazaf
             </h1>
           </div>
@@ -47,25 +47,25 @@ export default function Menu() {
               to="/"
               exact={true}
               className=" py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary transition-all duration-300 ease-in-out"
-              activeClassName="text-apps-primary font-semibold tracking-wide ">
+              activeClassName="text-apps-primary font-semibold  ">
               Home
             </NavLink>
             <NavLink
               to="/modules"
               className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary transition-all duration-300 ease-in-out"
-              activeClassName="text-apps-primary font-semibold tracking-wide">
+              activeClassName="text-apps-primary font-semibold ">
               Modules
             </NavLink>
             <NavLink
               to="/approval"
               className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary transition-all duration-300 ease-in-out"
-              activeClassName="text-apps-primary font-semibold tracking-wide">
+              activeClassName="text-apps-primary font-semibold ">
               Approval
             </NavLink>
             <NavLink
               to="/dashboard"
               className="py-2 px-6 text-center text-gray-400 rounded hover:bg-apps-card hover:text-apps-primary  transition-all duration-300 ease-in-out"
-              activeClassName="text-apps-primary font-semibold tracking-wide">
+              activeClassName="text-apps-primary font-semibold ">
               Dashboard
             </NavLink>
           </div>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Slider from 'react-slick';
+import HeadingMobile from '../atoms/HeadingMobile';
 import ModalImage from './ModalImage';
 
 const SimpleCarousel = () => {
@@ -28,13 +29,14 @@ const SimpleCarousel = () => {
   };
 
   return (
-    <div className="mb-12">
+    <div className="mb-12 mt-6">
       <ModalImage
         open={showModal}
         handlerClose={() => setshowModal(false)}
         src={sourceImage}
       />
-      <Slider className="w-full flex gap-4  -mb-2 mt-4" {...settings}>
+      <HeadingMobile heading="Berita Minggu Ini" />
+      <Slider className="w-full flex gap-4 -mb-2 mt-2" {...settings}>
         {images.map((image) => (
           <motion.div
             onClick={() => handlerClickShowModalImage(image)}
@@ -46,7 +48,7 @@ const SimpleCarousel = () => {
               <img
                 alt={image}
                 src={image}
-                className="bg-black bg-opacity-5 w-full object-contain max-h-44 lg:max-h-full lg:h-108 rounded-md"
+                className="bg-black bg-opacity-5 w-full object-contain max-h-40 lg:max-h-full lg:h-108 rounded-md"
               />
             </div>
           </motion.div>

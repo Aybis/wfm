@@ -25,6 +25,10 @@ export default function Karyawan() {
   const [linkDownloadReport, setLinkDownloadReport] = useState('#');
   const DATAUNIT = useSelector((state) => state.employee);
 
+  const [form, setform] = useState({
+    search: '',
+  });
+
   const [filter, setfilter] = useState({
     month: convertDate('month'),
     year: convertDate('fullYear'),
@@ -34,7 +38,16 @@ export default function Karyawan() {
     unit: 2,
   });
 
-  const handlerKeyUp = (event) => {};
+  const handlerKeyUp = (event) => {
+    let formSearch = state.currentUsers.filter(
+      (user) => user.name.toLowerCase().indexOf(event.target.value) > -1,
+    );
+    state.currentUsers = formSearch;
+    console.log(formSearch);
+    setform({
+      search: event.target.value,
+    });
+  };
 
   const [state, setstate] = useState({
     allUsers: listUser,
@@ -69,7 +82,7 @@ export default function Karyawan() {
 
   const getDataUserByUnit = (unitid, monthNum, fullYear) => {
     absensi
-      .reportUserByUnit({
+      .fetchDataDashboardByUnit({
         params: {
           unit_id: unitid ? unitid : unit,
           month: monthNum ? monthNum : filter.month,
@@ -77,7 +90,6 @@ export default function Karyawan() {
         },
       })
       .then((response) => {
-        console.log(response);
         setisLoad(true);
         setlistUser(response.data);
         setTimeout(() => {
@@ -94,7 +106,7 @@ export default function Karyawan() {
     setshowModalDetailAbsensi(true);
     setselectUser(user);
     absensi
-      .reportPersonal({
+      .fetchReportPersonal({
         params: {
           user_id: user.id,
           month: month ?? convertDate('month'),
@@ -179,8 +191,8 @@ export default function Karyawan() {
             name="search"
             placeholder="Name"
             type="text"
-            onKeyUp={(e) => handlerKeyUp()}
-            value=""
+            onChange={handlerKeyUp}
+            value={form.search}
           />
         </div>
       ) : (

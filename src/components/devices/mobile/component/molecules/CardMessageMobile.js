@@ -16,7 +16,7 @@ export default function CardMessageMobile({ type, data, onClick }) {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       onClick={(e) => onClick(e, data)}
-      className="flex bg-white rounded-lg p-2 flex-none">
+      className="flex bg-white rounded-xl p-2 flex-none border border-gray-200">
       <div className="flex flex-col gap-2 justify-between">
         <div
           className={[

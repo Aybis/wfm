@@ -1,97 +1,34 @@
 import CardOvertimeApproval from 'components/devices/desktop/molecules/CardOvertimeApproval';
 import CardFilterMonthAndYear from 'components/devices/mobile/component/molecules/CardFilterMonthAndYear';
+import CardLoading from 'components/devices/mobile/component/molecules/CardLoading';
+import absensi from 'constants/api/absensi';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { fetchLemburanByApproval } from 'store/actions/lemburan';
 
 const Lemburan = () => {
-  const documents = [
-    {
-      date: 'Wednesday, 19 May',
-      name: 'Abdul Muchtar Astria',
-      title: 'Make design and flow mobile pop',
-      hours: '4:72',
-    },
-    {
-      date: 'Tuesday, 18 May',
-      name: 'Ahmad Fauzi Hanif',
-      title:
-        'Make design and flow mobile pop and create backend presensi online',
-      hours: '7 : 00',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-    {
-      date: 'Monday, 17 May',
-      name: 'Bayu Respati',
-      title: 'Make design and flow mobile pop',
-      hours: '5 : 23',
-    },
-  ];
+  const LEMBURAN = useSelector((state) => state.lemburan);
+  const USER = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  const getDataLemburanByUser = async (username) => {
+    let result = await absensi
+      .overtimeListApproval({
+        params: {
+          username: username,
+        },
+      })
+      .then((response) => {
+        return response.data.data;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+
+    return result;
+  };
 
   const handlerOnChange = (type, value) => {
     console.log(value);
@@ -108,6 +45,13 @@ const Lemburan = () => {
       },
     },
   };
+
+  useEffect(() => {
+    getDataLemburanByUser(USER?.username).then(function (response) {
+      dispatch(fetchLemburanByApproval(response));
+    });
+  }, [USER, dispatch]);
+
   return (
     <>
       {/* Start Filter Month And Year  */}
@@ -118,16 +62,22 @@ const Lemburan = () => {
         initial="hidden"
         animate="visible"
         className="grid grid-cols-1 my-10 lg:grid-cols-4 gap-4 lg:gap-6 ">
-        {documents.map((item, index) => (
-          <CardOvertimeApproval
-            link="/details"
-            key={index}
-            date={item.date}
-            hours={item.hours}
-            name={item.name}
-            title={item.title}
-          />
-        ))}
+        {LEMBURAN.status === 'idle' ? (
+          <CardLoading />
+        ) : LEMBURAN.dataLemburanByApproval.length > 0 ? (
+          LEMBURAN.dataLemburanByApproval.map((data) => (
+            <CardOvertimeApproval
+              key={Math.random()}
+              date={data.detail_overtime?.[0]?.jam}
+              status={data.status}
+              title={data.subject}
+              timeIn={data.detail_overtime?.[0]?.jam}
+              timeOut={data.detail_overtime?.[1]?.jam}
+            />
+          ))
+        ) : (
+          'Data Kosong'
+        )}
       </motion.div>
     </>
   );

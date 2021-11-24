@@ -7,7 +7,7 @@ export default function Label({ inputClassName, name, labelName }) {
   return (
     <label
       htmlFor={name}
-      className={['text-sm font-semibold text-gray-700', inputClassName].join(
+      className={['text-sm font-medium text-gray-500', inputClassName].join(
         ' ',
       )}>
       {labelName}

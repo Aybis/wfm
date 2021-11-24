@@ -37,7 +37,7 @@ const PresensiDesktop = ({ history }) => {
     dispatch(statusPresence('loading'));
 
     absensi
-      .dailyPersonal(USER?.id)
+      .fetchDailyPersonal(USER?.id)
       .then((response) => {
         if (response.status === 200) {
           dispatch(isCheckIn(response.data));
@@ -60,7 +60,7 @@ const PresensiDesktop = ({ history }) => {
     dispatch(statusData('loading'));
 
     absensi
-      .dashboardReportPersonal({
+      .fetchSummaryPersonal({
         params: {
           user_id: USER?.id,
           month: month ?? convertDate('month'),
@@ -83,7 +83,7 @@ const PresensiDesktop = ({ history }) => {
     dispatch(statusData('loading'));
 
     absensi
-      .reportPersonal({
+      .fetchReportPersonal({
         params: {
           user_id: USER?.id,
           month: month ?? convertDate('month'),
@@ -105,11 +105,13 @@ const PresensiDesktop = ({ history }) => {
   const reportWeeklyPersonal = () => {
     dispatch(statusData('loading'));
     absensi
-      .weeklyPersonal(USER?.id)
+      .fetchWeeklyPersonal({
+        params: {
+          user_id: USER?.id,
+        },
+      })
       .then((response) => {
-        if (response.status === 200) {
-          dispatch(dataWeekly(response.data));
-        }
+        dispatch(dataWeekly(response.data));
       })
       .catch((error) => {
         ToastHandler('error', error?.response?.data?.message ?? 'error');

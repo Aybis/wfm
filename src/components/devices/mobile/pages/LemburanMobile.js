@@ -1,5 +1,4 @@
 import {
-  ChevronRightIcon,
   ClipboardCheckIcon,
   ClipboardListIcon,
   ClockIcon,
@@ -14,7 +13,11 @@ import ToastHandler from 'helpers/hooks/toast';
 import dataCeoMessages from 'json/dataCeoMessages';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {
+  fetchLemburanMonthly,
+  fetchLemburanToday,
+  statusData,
+} from 'store/actions/lemburan';
 import {
   isCheckIn,
   messagePresence,
@@ -24,26 +27,25 @@ import Card from '../component/molecules/Card';
 import CardFilterMonthAndYear from '../component/molecules/CardFilterMonthAndYear';
 import CardGridMobile from '../component/molecules/CardGridMobile';
 import CardHeadingMobile from '../component/molecules/CardHeadingMobile';
+import CardKehadiranLemburan from '../component/molecules/CardKehadiranLemburan';
+import CardLoading from '../component/molecules/CardLoading';
 import CardScrollHorizontal from '../component/molecules/CardScrollHorizontal';
 import CardTitlePageMobile from '../component/molecules/CardTitlePageMobile';
 import LayoutMobile from '../LayoutMobile';
 
 const LemburanMobile = ({ history }) => {
   const dataJson = dataCeoMessages;
-  const ABSENSI = useSelector((state) => state.presence);
   const USER = useSelector((state) => state.users);
-
+  const LEMBURAN = useSelector((state) => state.lemburan);
   const dispatch = useDispatch();
 
   const absenToday = () => {
     dispatch(statusPresence('loading'));
 
     absensi
-      .dailyPersonal(USER?.id)
+      .fetchDailyPersonal(USER?.id)
       .then((response) => {
-        if (response.status === 200) {
-          dispatch(isCheckIn(response.data));
-        }
+        dispatch(isCheckIn(response.data));
       })
       .catch((error) => {
         dispatch(messagePresence(error?.response?.data?.message ?? 'error'));
@@ -51,7 +53,25 @@ const LemburanMobile = ({ history }) => {
       });
   };
 
+  const lemburanToday = async (id) => {
+    dispatch(statusData('Loading'));
+    return absensi
+      .overtimeTodayPersonal({
+        params: {
+          user_id: id,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  };
+
   const getDataLemburan = () => {
+    dispatch(statusData('Loading'));
+
     absensi
       .overtimeListPersonal({
         params: {
@@ -62,63 +82,31 @@ const LemburanMobile = ({ history }) => {
         },
       })
       .then((response) => {
-        console.log('datalembur', response);
+        dispatch(fetchLemburanMonthly(response.data.data));
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log('error lemburan monthly', err.response);
       });
   };
 
   useEffect(() => {
     window.scroll(0, 0);
     absenToday();
+    lemburanToday(USER?.id).then(function (response) {
+      dispatch(fetchLemburanToday(response));
+    });
     getDataLemburan();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [USER]);
+  }, [USER, dispatch]);
 
   return (
-    <LayoutMobile addClass="bg-gradient-to-r from-blue-100 to-warmGray-100 p-0 pb-0">
+    <LayoutMobile addClass="bg-gradient-to-r from-indigo-300 via-warmGray-50 to-warmGray-50 p-0 pb-0">
       <div
-        className="bg-blue-100 h-auto p-4 pb-10 -mt-4 -mx-4 rounded-br-3xl relative"
+        className="bg-gradient-to-br from-blue-100 via-indigo-300 to-blue-200 h-auto p-4 pb-12 -mt-4 -mx-4 rounded-br-3xl relative"
         style={{ borderBottomRightRadius: '3rem' }}>
         {/* Kehadiran  */}
-        <Card addClass="relative mt-20 mb-4">
-          <div className="flex bg-white rounded-lg p-4">
-            <div className="flex justify-center items-start gap-4 w-4/5 ">
-              <div className="bg-apps-gray bg-opacity-10 rounded-md p-2">
-                <img
-                  src={
-                    USER?.image_url
-                      ? USER.image_url
-                      : `https://ui-avatars.com/api/?name=${USER?.name}&background=F3F3F3&color=000`
-                  }
-                  alt="myProfile"
-                  className="rounded-md h-10 w-10"
-                />
-              </div>
-              <div className="flex flex-col gap-1 flex-1">
-                <h1 className="font-semibold text-gray-800 capitalize">
-                  {USER?.name?.toLowerCase()}
-                </h1>
-                <p className="text-gray-500 text-xs font-light">
-                  {ABSENSI?.dataOut?.jam
-                    ? 'Anda dapat mengajukan lembur sekarang!'
-                    : 'Silahkan checkout terlebih dahulu.'}
-                </p>
-              </div>
-            </div>
-
-            <Link
-              to={ABSENSI?.dataOut?.jam ? '/overtime-in' : '#'}
-              className="flex justify-center items-center w-1/5 rounded-md">
-              <ChevronRightIcon
-                className={`${
-                  ABSENSI?.dataOut?.jam ? 'text-apps-primary' : 'text-gray-400'
-                } h-8 p-1`}
-              />
-            </Link>
-          </div>
-        </Card>
+        <CardKehadiranLemburan />
         {/* End Kehadiran  */}
 
         {/* Card Report Bulanan */}
@@ -138,13 +126,13 @@ const LemburanMobile = ({ history }) => {
       </div>
       <CardTitlePageMobile
         title="Lemburan"
-        link={history.goBack}
+        isBack={false}
         moreClass="absolute top-3 mx-2 inset-x-0"
       />
 
       {/* section review */}
       <div
-        className="bg-warmGray-100 relative rounded-tl-3xl -mx-4 px-4 pt-2 pb-20"
+        className="bg-gradient-to-b from-warmGray-50 to-warmGray-100 relative rounded-tl-3xl -mx-4 px-4 pt-2 pb-6"
         style={{ borderTopLeftRadius: '3rem' }}>
         {/* Section Filter Month and Year */}
         <CardFilterMonthAndYear />
@@ -231,15 +219,22 @@ const LemburanMobile = ({ history }) => {
           <CardHeadingMobile heading="Document Review" />
 
           <CardGridMobile>
-            {dataJson.documentLemburan.map((data) => (
-              <CardOvertimeApproval
-                key={Math.random()}
-                date={data.date}
-                hours={data.time}
-                status={data.status}
-                title={data.title}
-              />
-            ))}
+            {LEMBURAN.status === 'idle' ? (
+              <CardLoading />
+            ) : LEMBURAN.dataLemburanMonthly.length > 0 ? (
+              LEMBURAN.dataLemburanMonthly.map((data) => (
+                <CardOvertimeApproval
+                  key={Math.random()}
+                  date={data.detail_overtime?.[0]?.jam}
+                  status={data.status}
+                  title={data.subject}
+                  timeIn={data.detail_overtime?.[0]?.jam}
+                  timeOut={data.detail_overtime?.[1]?.jam}
+                />
+              ))
+            ) : (
+              'Data Kosong'
+            )}
           </CardGridMobile>
         </Card>
         {/* End Section Card Report Overtime this Month */}

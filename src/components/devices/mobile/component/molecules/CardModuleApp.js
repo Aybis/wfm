@@ -7,14 +7,17 @@ import {
   MapIcon,
   PhoneMissedCallIcon,
   UserGroupIcon,
+  ViewGridAddIcon,
 } from '@heroicons/react/solid';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import swal from 'sweetalert';
-import CardHeadingMobile from './CardHeadingMobile';
+import ModalModules from '../atoms/ModalModules';
 
 export default function CardModuleApp() {
+  const [showModal, setshowModal] = useState(false);
+
   const history = useHistory();
   const modules = [
     {
@@ -96,11 +99,9 @@ export default function CardModuleApp() {
   };
 
   return (
-    <div className="relative mt-4">
-      <CardHeadingMobile heading="" />
-
+    <div className="relative mt-16">
       <div className="grid grid-cols-4 gap-4 mt-4">
-        {modules.map((module) => (
+        {modules.slice(0, 3).map((module) => (
           <motion.div
             onClick={(e) => handlerClickGoToPage(e, module)}
             key={Math.random()}
@@ -119,13 +120,31 @@ export default function CardModuleApp() {
                   }`}
                 />
               </span>
-              <span className="text-warmGray-700 text-xs font-medium">
+              <span className="text-warmGray-700 text-xs font-normal">
                 {module.name}
               </span>
             </div>
           </motion.div>
         ))}
+
+        <motion.div
+          onClick={() => setshowModal(true)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.85 }}>
+          <div className="flex flex-col gap-2 justify-center items-center p-2">
+            <span
+              className={`h-10 w-10 rounded-md flex items-center justify-center bg-coolGray-100 p-2`}>
+              <ViewGridAddIcon
+                className={`h-7 w-7 text-opacity-50'
+                  `}
+              />
+            </span>
+            <span className="text-warmGray-500 text-xs font-normal">More</span>
+          </div>
+        </motion.div>
       </div>
+
+      <ModalModules open={showModal} handlerClose={() => setshowModal(false)} />
     </div>
   );
 }

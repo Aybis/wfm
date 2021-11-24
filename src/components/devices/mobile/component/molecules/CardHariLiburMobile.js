@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function CardHariLiburMobile(props) {
   return (
-    <div className="flex gap-4 bg-white rounded-lg h-20 items-center pl-3">
+    <div className="flex gap-4 bg-white rounded-lg h-20 items-center pl-3 border border-gray-200">
       <div className="bg-red-500 text-white w-14 h-14 flex flex-col justify-center items-center gap-2 rounded p-4">
         <h1 className="text-base font-semibold leading-3">
           {convertDate('dateOnly', props.data.tanggal)}

@@ -12,11 +12,11 @@ export default function DetailCeoMessage(props) {
         />
 
         <div className="flex flex-col">
-          <h1 className="font-semibold text-white tracking-wide text-xl capitalize">
+          <h1 className="font-semibold text-white text-xl capitalize">
             Henry Christiadi
           </h1>
           <p className="text-gray-100">CEO of PINS</p>
-          <p className="text-xs font-light text-gray-50 tracking-wide mt-3">
+          <p className="text-xs font-light text-gray-50 mt-3">
             {props.data.date}
           </p>
         </div>

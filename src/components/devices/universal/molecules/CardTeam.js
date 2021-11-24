@@ -29,7 +29,7 @@ const CardTeam = ({ data, onClick, handlerSubmit, isAtasan }) => {
   return (
     <motion.div
       variants={item}
-      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-lg lg:w-1/5 p-4 bg-white`}
+      className={`flex flex-none flex-col justify-between max-w-xl h-auto rounded-xl lg:w-1/5 p-4 bg-white border border-gray-200`}
       style={{ minWidth: '10rem' }}>
       <div className={`flex flex-col items-center `}>
         <img

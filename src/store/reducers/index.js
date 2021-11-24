@@ -4,6 +4,7 @@ import absensi from './absensi';
 import presence from './presence';
 import employee from './employee';
 import dashboard from './dashboard';
+import lemburan from './lemburan';
 
 export default combineReducers({
   users,
@@ -11,4 +12,5 @@ export default combineReducers({
   presence,
   employee,
   dashboard,
+  lemburan,
 });

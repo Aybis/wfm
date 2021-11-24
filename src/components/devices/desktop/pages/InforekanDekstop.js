@@ -81,7 +81,7 @@ export default function InforekanDekstop({ history }) {
       <CardContainer moreClass="-mt-6">
         <div className="grid grid-cols-1 h-auto place-items-center">
           <div className="flex justify-center inset-x-0 absolute top-12">
-            <h1 className="text-2xl font-bold text-gray-800 tracking-wide">
+            <h1 className="text-2xl font-bold text-gray-800 ">
               Board of Directors
             </h1>
           </div>
@@ -99,13 +99,11 @@ export default function InforekanDekstop({ history }) {
             className="bg-gray-50 h-auto md:w-2xl lg:w-4xl xl:w-7xl max-w-7xl rounded-3xl lg:-mt-56 shadow-2xl p-8">
             <div className="grid grid-cols-3">
               <div className="flex flex-col justify-center">
-                <h1 className="font-bold text-2xl tracking-wider text-gray-800">
+                <h1 className="font-bold text-2xl r text-gray-800">
                   Henry Christiadi
                 </h1>
-                <h2 className="mt-1 tracking-wide text-gray-400">
-                  Direktur Utama | 720465
-                </h2>
-                <h4 className="text-sm text-gray-500 mt-10 tracking-wider ">
+                <h2 className="mt-1  text-gray-400">Direktur Utama | 720465</h2>
+                <h4 className="text-sm text-gray-500 mt-10 r ">
                   Henry Christiadi lahir di Pati, pada tahun 1972. Diangkat
                   sebagai Direktur Utama PT PINS Indonesia pada tanggal 4
                   November 2019.
@@ -199,7 +197,7 @@ export default function InforekanDekstop({ history }) {
               key={Math.random()}
               className="flex p-4 flex-col justify-center items-center rounded-lg bg-gray-50 cursor-pointer">
               <UserCircleIcon className="h-28 w-28 text-gray-400 border border-gray-200 rounded-full" />
-              <h1 className="mt-4 font-semibold text-gray-800 tracking-wide text-center capitalize">
+              <h1 className="mt-4 font-semibold text-gray-800  text-center capitalize">
                 {data.name.toLowerCase()}
               </h1>
               <h1 className="mt-1 text-gray-400">{data.nik}</h1>

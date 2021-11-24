@@ -47,7 +47,7 @@ const Dashboard = () => {
   const getDataDashboard = () => {
     dispatch(statusData('loading'));
     absensi
-      .dashboard()
+      .fetchDataDashboardDaily()
       .then((res) => {
         dispatch(fetchKehadiran(res.data.kehadiran));
         dispatch(fetchDirektorat(res.data.dir));
@@ -67,7 +67,7 @@ const Dashboard = () => {
 
   const dashboardMonthly = (month, year) => {
     absensi
-      .dashboardMonthly({
+      .fetchDataDashboardMonthly({
         params: {
           month: month ?? convertDate('month'),
           year: year ?? convertDate('fullYear'),

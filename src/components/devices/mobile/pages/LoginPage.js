@@ -63,8 +63,8 @@ export default function LoginPage({
           <button
             disabled={isSubmit}
             className={[
-              'hover:from-pink-700 hover:to-red-600 transition-all duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 text-white rounded-md p-2 text-lg md:p-4 md:text-2xl tracking-wider font-semibold mt-4 w-full flex justify-center items-center',
-              isSubmit && 'bg-opacity-40',
+              'hover:from-pink-700 hover:to-red-600 transition-all duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 text-white rounded-md p-2 text-lg md:p-4 md:text-2xl font-semibold mt-4 w-full flex justify-center items-center disabled:opacity-40',
+              isSubmit && 'bg-opacity-20',
             ].join(' ')}>
             {isSubmit && <Loading color="white" height={6} />}
             Login

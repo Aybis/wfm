@@ -65,7 +65,7 @@ export default function CardKehadiran({ type }) {
             <div className="flex flex-col gap-1">
               <h4 className="text-sm text-gray-400">Status</h4>
               <span
-                className={`text-sm font-medium tracking-wide rounded-md text-green-500`}>
+                className={`text-sm font-medium  rounded-md text-green-500`}>
                 Available
               </span>
             </div>

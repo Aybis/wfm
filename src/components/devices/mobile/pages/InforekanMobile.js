@@ -69,7 +69,7 @@ export default function InforekanMobile({ history }) {
   }
   return (
     <LayoutMobile isShow={false}>
-      <CardTitlePageMobile title="Inforekan" link={history.goBack} />
+      <CardTitlePageMobile title="Inforekan" link={history.push('/')} />
 
       <Card>
         <HeadingMobile

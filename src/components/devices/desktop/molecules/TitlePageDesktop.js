@@ -17,9 +17,7 @@ export default function TitlePageDesktop({ link, title }) {
         </button>
       </div>
       <div className="flex col-span-2 justify-center items-center">
-        <h1 className="text-gray-800 text-4xl tracking-wide font-bold uppercase">
-          {title}
-        </h1>
+        <h1 className="text-gray-800 text-4xl  font-bold uppercase">{title}</h1>
       </div>
       <div></div>
     </motion.div>

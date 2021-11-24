@@ -10,7 +10,6 @@ import ToastHandler from 'helpers/hooks/toast';
 import dataCeoMessages from 'json/dataCeoMessages';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dataWeekly, messageData, statusData } from 'store/actions/absensi';
 import {
   isCheckIn,
   messagePresence,
@@ -41,26 +40,11 @@ export default function HomePage() {
     ? JSON.parse(localStorage['WFM:token'])
     : null;
 
-  const reportWeeklyPersonal = () => {
-    dispatch(statusData('loading'));
-    absensi
-      .weeklyPersonal(USER?.id)
-      .then((response) => {
-        if (response.status === 200) {
-          dispatch(dataWeekly(response.data));
-          dispatch(messageData('ok'));
-        }
-      })
-      .catch((error) => {
-        ToastHandler('error', error?.response?.data?.message ?? 'error');
-      });
-  };
-
   const absensiToday = () => {
     dispatch(statusPresence('loading'));
 
     absensi
-      .dailyPersonal(USER?.id)
+      .fetchDailyPersonal(USER?.id)
       .then((response) => {
         if (response.status === 200) {
           dispatch(isCheckIn(response.data));
@@ -103,7 +87,6 @@ export default function HomePage() {
     window.scroll(0, 0);
     setshowModal(true);
     absensiToday();
-    reportWeeklyPersonal();
     getDataHoliday();
     getDataAllUnit();
 

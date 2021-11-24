@@ -47,7 +47,7 @@ export default function CardPresence() {
     dispatch(statusPresence('loading'));
 
     absensi
-      .dailyPersonal(users?.id)
+      .fetchDailyPersonal(users?.id)
       .then((res) => {
         if (res.status === 200 && Object.entries(presence.data).length === 0) {
           dispatch(isCheckIn(res.data));

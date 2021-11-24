@@ -110,10 +110,8 @@ export default function LoginPage({
 
         {/* header form  */}
         <div className="flex flex-col gap-3">
-          <h1 className="text-4xl font-bold text-gray-800 tracking-wide">
-            Login{' '}
-          </h1>
-          <h2 className="text-lg font-light tracking-wide text-gray-400">
+          <h1 className="text-4xl font-bold text-gray-800 ">Login </h1>
+          <h2 className="text-lg font-light  text-gray-400">
             I'm so happy to see. You can continue to login for discipline your
             presence.
           </h2>
@@ -151,7 +149,7 @@ export default function LoginPage({
               <LoadingCircle />
             </div>
           ) : (
-            <button className="hover:from-pink-700 hover:to-red-600 transition-all duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 text-white rounded-md p-2 text-lg md:p-4 md:text-2xl tracking-wider font-semibold mt-12 w-full">
+            <button className="hover:from-pink-700 hover:to-red-600 transition-all duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 text-white rounded-md p-2 text-lg md:p-4 md:text-2xl r font-semibold mt-12 w-full">
               Login
             </button>
           )}

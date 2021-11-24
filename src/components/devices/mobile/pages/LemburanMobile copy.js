@@ -15,7 +15,7 @@ const LemburanMobile = ({ history }) => {
   const dataJson = dataCeoMessages;
   return (
     <LayoutMobile>
-      <CardTitlePageMobile title="Lemburan" link={history.goBack} />
+      <CardTitlePageMobile title="Lemburan" isBack={false} />
 
       {/* Kehadiran  */}
       <Card addClass="mb-12">
