@@ -165,11 +165,11 @@ export default function StaticProfile({ isOpen, handlerClose }) {
               </div>
             </div>
             <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
-              <div className="flex-shrink-0 group block">
+              <div
+                className="flex-shrink-0 w-full group block"
+                onClick={() => logOoutUser()}>
                 <div className="flex items-center">
-                  <span
-                    onClick={() => logOoutUser()}
-                    className="p-2 gap-2 rounded-md text-gray-400 text-sm flex justify-center items-center">
+                  <span className="p-2 gap-2 rounded-md text-gray-400 text-sm flex justify-center items-center">
                     <LogoutIcon className="h-6 w-6 text-gray-400" />
                     Logout
                   </span>

@@ -13,7 +13,7 @@ export default function CardTime({ title, time }) {
       );
     } else {
       return (
-        <ClockIcon className="h-9 w-9 bg-apps-green bg-opacity-10 text-apps-green p-2 rounded" />
+        <ClockIcon className="h-9 w-9 bg-apps-green bg-opacity-20 text-apps-green p-2 rounded" />
       );
     }
   };
@@ -23,7 +23,7 @@ export default function CardTime({ title, time }) {
       <IconCardTime />
 
       <div className="flex flex-col text-sm">
-        <h4 className="text-gray-400 text-sm lg:text-base tracking-wide uppercase">
+        <h4 className="text-gray-500 text-sm lg:text-base uppercase">
           {title}
         </h4>
         <h6 className="text-xs lg:text-sm font-semibold text-gray-800">

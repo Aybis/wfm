@@ -17,13 +17,11 @@ import swal from 'sweetalert';
 const CheckOut = ({ history }) => {
   const [didMount, setDidMount] = useState(false);
   const [isSubmit, setisSubmit] = useState(false);
-  const [popUp, setPopUp] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [address, setAddress] = useState(null);
   const { id } = useParams();
   const date = new Date();
   const USER = useSelector((state) => state.users);
-
   const dateTime =
     date.getFullYear() +
     '-' +
@@ -92,16 +90,16 @@ const CheckOut = ({ history }) => {
       .then((res) => {
         setisSubmit(false);
         swal({
-          title: res?.data?.message ?? 'Anda Berhasil Checkout',
+          title: res.data.message,
           icon: 'success',
           button: 'Close!',
+        }).then((val) => {
+          setTimeout(() => {
+            history.goBack();
+          }, 300);
         });
-        setTimeout(() => {
-          history.push('/');
-        }, 300);
       })
       .catch((err) => {
-        console.log(err?.response);
         setisSubmit(false);
         if (err?.message) {
           ToastHandler(
@@ -109,17 +107,6 @@ const CheckOut = ({ history }) => {
             err?.response?.data?.message?.length > 0 && 'Something happened',
           );
         } else {
-          if (err.response.status === 500) {
-            ToastHandler('error', err.response.data.message);
-          } else if (err.response.status === 400) {
-            let message = err?.response?.data?.message;
-            ToastHandler('error', message.toString());
-          } else {
-            ToastHandler(
-              'error',
-              err?.response?.data?.message ?? 'Something happened',
-            );
-          }
           ToastHandler(
             'error',
             err?.response?.data?.message ?? 'Something happened',
@@ -130,12 +117,8 @@ const CheckOut = ({ history }) => {
 
   useEffect(() => {
     setDidMount(true);
-    const timeOut = setTimeout(() => {
-      setPopUp(true);
-    }, 500);
     return () => {
       setDidMount(false);
-      clearInterval(timeOut);
     };
   }, []);
 
@@ -144,10 +127,7 @@ const CheckOut = ({ history }) => {
   }
 
   return isMobile ? (
-    <div
-      className={`${
-        popUp ? 'pt-20 lg:hidden' : 'pt-0'
-      } transition-all duration-300 ease-in-out`}>
+    <div className={`pt-20 transition-all duration-300 ease-in-out`}>
       <CardBarAbsensi link={history.goBack} />
 
       {/* Kehadiran  */}
@@ -159,7 +139,7 @@ const CheckOut = ({ history }) => {
         </label>
         <SetMaps
           height="100%"
-          className="relative h-52 rounded-lg z-0 mt-2"
+          className="relative h-52 rounded-lg z-0 mt-2 shadow-xl"
           sendlongLat={sendlongLat}
           sendAddress={sendAddress}
         />

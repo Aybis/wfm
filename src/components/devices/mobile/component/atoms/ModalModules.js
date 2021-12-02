@@ -141,7 +141,7 @@ export default function ModalModules({ open, handlerClose, children }) {
             leave="ease-in duration-200"
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-            <div className="inline-block align-bottom bg-white rounded-t-2xl p-4 text-left shadow-xl transform transition-all h-auto min-h-full w-full">
+            <div className="inline-block align-bottom bg-white rounded-t-xl border-t-2 border-gray-200 p-4 text-left shadow-xl transform transition-all h-auto min-h-full w-full">
               <div className="p-2">
                 <HeadingMobile heading="List Modules" />
                 <div className="grid grid-cols-3 gap-4 mt-4 -mx-6 pb-10">

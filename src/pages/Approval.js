@@ -1,8 +1,10 @@
 import Menu from 'components/devices/desktop/section/Menu';
 import MobileMenu from 'components/devices/mobile/sections/MobileMenu';
+import absensi from 'constants/api/absensi';
 import { motion } from 'framer-motion';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { isDesktop } from 'react-device-detect';
+import { useSelector } from 'react-redux';
 import {
   NavLink,
   Route,
@@ -17,15 +19,60 @@ import Reimburse from './subApproval/Reimburse';
 import Sppd from './subApproval/Sppd';
 
 const Approval = ({ history }) => {
-  window.scroll(0, 0);
   let { path, url } = useRouteMatch();
+  const USER = useSelector((state) => state.users);
+  const [flagApproval, setflagApproval] = useState({
+    lemburan: 0,
+    reimburse: 0,
+    cuti: 0,
+    sppd: 0,
+  });
 
   const tabs = [
-    { name: 'Lemburan', href: `${url}` },
-    { name: 'Reimburse', href: `${url}/reimburse` },
-    { name: 'Cuti', href: `${url}/cuti` },
-    { name: 'SPPD', href: `${url}/sppd` },
+    { name: 'Lemburan', href: `${url}`, notif: flagApproval.lemburan ?? 0 },
+    {
+      name: 'Reimburse',
+      href: `${url}/reimburse`,
+      notif: flagApproval.reimburse ?? 0,
+    },
+    { name: 'Cuti', href: `${url}/cuti`, notif: flagApproval.cuti ?? 0 },
+    { name: 'SPPD', href: `${url}/sppd`, notif: flagApproval.sppd ?? 0 },
   ];
+
+  const getListLemburanByApproval = async (username) => {
+    return absensi
+      .overtimeListApproval({
+        params: {
+          username: username,
+          month: 'all',
+          size: 100,
+        },
+      })
+      .then((res) => {
+        let filterData = res.data.data.filter(
+          (item) => item.status === 'progress',
+        );
+        return filterData.length;
+      })
+      .catch((err) => {
+        return err.response;
+      });
+  };
+
+  // console.log(flagApproval);
+
+  useEffect(() => {
+    getListLemburanByApproval(USER?.username)
+      .then(function (result) {
+        setflagApproval({
+          lemburan: result,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="relative w-full h-screen bg-warmGray-100">
@@ -48,21 +95,26 @@ const Approval = ({ history }) => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="relative mt-8 lg:w-1/2 lg:mx-auto ">
-            <div className="bg-coolGray-200 p-2 rounded-lg lg:bg-transparent">
-              <div className="group transition-all duration-300  border-gray-200">
+            <div className="lg:bg-coolGray-200 rounded-lg lg:bg-transparent -mx-4 px-4">
+              <div className="group transition-all duration-300  border-red-100">
                 <motion.nav
-                  className="-mb-px flex lg:grid lg:grid-cols-4 gap-4"
+                  className="-mb-px flex lg:grid lg:grid-cols-4 gap-3 overflow-x-auto pb-4"
                   aria-label="Tabs">
                   {tabs.map((tab) => (
                     <NavLink
                       exact={true}
                       key={tab.name}
                       to={tab.href}
-                      activeClassName="text-apps-primary lg:border-apps-primary lg:border-b-2 font-semibold bg-coolGray-50 lg:bg-transparent rounded-lg lg:rounded-none shadow-lg lg:shadow-none transition-all duration-300"
+                      activeClassName="text-gray-900 border-b-2 border-apps-primary lg:border-apps-primary lg:border-b-2 font-semibold lg:bg-coolGray-50 lg:bg-transparent lg:shadow-none transition-all duration-300"
                       className={
-                        'text-gray-400 w-full p-2 lg:p-4 text-center lg:text-lg text-sm hover:text-apps-primary hover:bg-white transition-all duration-300 rounded-lg lg:border-b-2 lg:border-gray-200 lg:rounded-none'
+                        'flex gap-1 justify-center items-center text-gray-400 w-full p-2 lg:p-4 text-center lg:text-lg text-sm hover:text-gray-900 lg:hover:bg-white transition-all duration-300 lg:border-b-2 lg:border-gray-200 lg:rounded-none'
                       }>
                       {tab.name}
+                      {tab.notif > 0 && (
+                        <span className=" bg-red-500 top-0  h-4 w-4 rounded-full text-xs flex items-center justify-center text-white">
+                          {tab.notif}
+                        </span>
+                      )}
                     </NavLink>
                   ))}
                 </motion.nav>

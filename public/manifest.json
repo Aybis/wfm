@@ -1,6 +1,6 @@
 {
-  "short_name": "Almuazaf",
-  "name": "Almuazaf",
+  "short_name": "Simakins",
+  "name": "Sistem Manajemen Aplikasi Karyawan PINS",
   "icons": [
     {
       "src": "icon-120.png",
@@ -40,6 +40,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#F8F9FA",
-  "background_color": "#F8F9FA"
+  "theme_color": "#192657",
+  "background_color": "#192657"
 }

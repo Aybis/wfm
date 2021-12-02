@@ -72,8 +72,8 @@ export default function LoginPage({
 
           <Link
             to="/forgot"
-            className="text-sm font-medium text-gray-400 tracking-wide underline text-center hover:text-gray-700 transition duration-300 mt-8">
-            Forgot password?
+            className="text-sm font-normal text-gray-400 tracking-wide underline text-center hover:text-gray-700 transition duration-300 mt-8">
+            Reset password?
           </Link>
         </form>
       </motion.div>

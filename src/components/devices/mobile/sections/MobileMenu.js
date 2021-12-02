@@ -2,11 +2,13 @@ import {
   ChartBarIcon as Chart,
   ClipboardListIcon as Clipboard,
   HomeIcon as Home,
+  UserIcon,
 } from '@heroicons/react/outline';
 import {
   ChartBarIcon as ChartSolid,
   ClipboardListIcon as ClipboardSolid,
   HomeIcon as HomeSolid,
+  UserIcon as UserSolid,
 } from '@heroicons/react/solid';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
@@ -34,12 +36,18 @@ export default function MobileMenu() {
       icon: Chart,
       iconActive: ChartSolid,
     },
+    {
+      link: '/profile',
+      name: 'Profile',
+      icon: UserIcon,
+      iconActive: UserSolid,
+    },
   ];
 
   return (
     isMobile && (
       <div className="fixed z-30 bottom-0 inset-x-0 ">
-        <div className="bg-white shadow-2xl flex justify-evenly items-center lg:mx-4 px-6 mb-0 py-1 border-t-2 border-gray-200 border-opacity-50">
+        <div className="bg-white shadow-2xl flex justify-between items-center lg:mx-4 px-8 mb-0 py-1 border-t-2 border-gray-200 border-opacity-50">
           {menus.map((menu) => (
             <NavLink
               key={Math.random()}

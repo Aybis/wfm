@@ -5,12 +5,6 @@ export default {
   // collectData
   all: () => axios.get('absensi/all'),
 
-  //dashboard
-  // dashboard: () => axios.get('absensi/dashboard-user-daily'),
-  // reportUserByUnit: (data) => axios.get(`absensi/report-user-by-unit`, data),
-  // dashboardMonthly: (params) =>
-  //   axios.get('absensi/dashboard-user-monthly', params),
-
   // functional absensi
   checkIn: (data) => axios.post('absensi/check-in', data),
   checkOut: (data, absensi) => axios.post(`absensi/check-out/${absensi}`, data),
@@ -31,14 +25,6 @@ export default {
   fetchDataDashboardByUnit: (data) =>
     axios.get('absensi/users/report-by-unit', data),
 
-  // personal
-  // dailyPersonal: (user) => axios.get(`absensi/daily-personal?user_id=${user}`),
-  // reportPersonal: (data) => axios.get(`absensi/report-personal`, data),
-  // dashboardReportPersonal: (data) =>
-  //   axios.get(`absensi/dashboard-report-personal`, data),
-  // weeklyPersonal: (user) =>
-  //   axios.get(`absensi/weekly-personal?user_id=${user}`),
-
   // end point hari libur
   getHoliday: (page) => axios.get(`holiday`),
   insertHoliday: (data) => axios.post('holiday', data),
@@ -50,7 +36,8 @@ export default {
   overtimeTodayPersonal: (data) => axios.get('overtime/today-personal', data),
   overtimeListApproval: (data) => axios.get('overtime/list-approve', data),
   overtimeListPersonal: (data) => axios.get('overtime/report-personal', data),
-
+  overtimeDetail: (id) => axios.get(`overtime/detail`, id),
+  overtimeExportPersonal: (data) => axios.get('overtime/export-personal', data),
   // param username
   overtimeApprove: (data, lemburan) =>
     axios.post(`overtime/approved/${lemburan}`, data),

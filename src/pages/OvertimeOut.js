@@ -1,6 +1,7 @@
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronLeftIcon } from '@heroicons/react/solid';
 import Label from 'components/devices/universal/atoms/Label';
+import Loading from 'components/devices/universal/atoms/Loading';
 import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import Textarea from 'components/devices/universal/atoms/Textarea';
 import absensi from 'constants/api/absensi';
@@ -16,6 +17,7 @@ const OvertimeOut = ({ history }) => {
   const [popup, setpopup] = useState(false);
   const [longLat, setlongLat] = useState(null);
   const [address, setAddress] = useState(null);
+  const [isSubmit, setisSubmit] = useState(false);
   const LEMBURAN = useSelector((state) => state.lemburan);
   const { id } = useParams();
 
@@ -29,23 +31,34 @@ const OvertimeOut = ({ history }) => {
 
   const submitFunction = (event) => {
     event.preventDefault();
+    setisSubmit(true);
     state.long_lat = longLat;
     state.lokasi = address;
     absensi
       .overtimeOut(state, id)
       .then((response) => {
+        setisSubmit(false);
+
         swal({
           title: response.data.message,
           icon: 'success',
+          button: 'Close!',
+        }).then((val) => {
+          setTimeout(() => {
+            history.push('/overtime');
+          }, 300);
         });
-        history.push('/overtime');
       })
       .catch((err) => {
-        console.log(err.response);
+        setisSubmit(false);
+
         swal({
-          title: err.response.data.message ?? 'Something Hapenned!',
+          title: err.response.data.message ?? 'Something happened',
           icon: 'error',
+          text: err.response.data.message.map((item) => item),
+          button: 'Close!',
         });
+        console.log(err.response.data.message);
       });
   };
 
@@ -154,7 +167,12 @@ const OvertimeOut = ({ history }) => {
               </div>
 
               {state.detail && (
-                <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white mt-2">
+                <button
+                  disabled={isSubmit}
+                  className="disabled:opacity-40 flex gap-2 justify-center items-center p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-md text-white mt-2">
+                  {isSubmit && (
+                    <Loading color="text-white" height={6} width={6} />
+                  )}
                   Finish
                 </button>
               )}

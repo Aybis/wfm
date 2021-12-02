@@ -39,6 +39,7 @@ module.exports = {
       warmGray: colors.warmGray,
       pink: colors.pink,
       apps: {
+        login: '#192657',
         primary: '#0062FF',
         red: '#F95050',
         redCard: '#FEE5E5',

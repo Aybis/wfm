@@ -22,7 +22,6 @@ const Bulanan = (props) => {
       (item) => item.name === 'direktorat' && setdataDirektorat(item.value),
     );
   };
-  console.log('dashboard', DASHBOARD);
 
   useEffect(() => {
     dataDirektoratBulanan();

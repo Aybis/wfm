@@ -2,6 +2,7 @@ import { LightningBoltIcon } from '@heroicons/react/outline';
 import { ChevronDownIcon, ChevronLeftIcon } from '@heroicons/react/solid';
 import Input from 'components/devices/universal/atoms/Input';
 import Label from 'components/devices/universal/atoms/Label';
+import Loading from 'components/devices/universal/atoms/Loading';
 import SetMaps from 'components/devices/universal/atoms/SetMaps';
 import { setAuthorizationHeader } from 'configs/axios';
 import absensi from 'constants/api/absensi';
@@ -21,6 +22,7 @@ const OvertimeIn = ({ history }) => {
   const [address, setAddress] = useState(null);
   const [timeStamp, settimeStamp] = useState(null);
   const [dataAtasan, setdataAtasan] = useState(null);
+  const [isSubmit, setisSubmit] = useState(false);
 
   const session = JSON.parse(localStorage.getItem('WFM:token'));
 
@@ -32,7 +34,7 @@ const OvertimeIn = ({ history }) => {
     jam: convertDate('fullDate'),
     absensi_id: ABSENSI.data.id,
     approval: [],
-    current: USER?.username,
+    current: dataAtasan?.username ?? '',
   });
 
   const getAtasan = async (id) => {
@@ -81,11 +83,13 @@ const OvertimeIn = ({ history }) => {
 
   const submitFunction = (event) => {
     event.preventDefault();
+    setisSubmit(true);
     getHoursAndTime();
 
     state.long_lat = longLat;
     state.lokasi = address;
     state.jam = convertDate('fullDate');
+    state.current = dataAtasan?.username;
     state.approval = [dataAtasan.username, 'nia'];
 
     absensi
@@ -214,7 +218,12 @@ const OvertimeIn = ({ history }) => {
               </div>
 
               {state.subject && (
-                <button className="p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-lg text-white mt-2">
+                <button
+                  disabled={isSubmit}
+                  className="flex gap-2 justify-center items-center p-3 text-lg font-semibold bg-apps-primary w-full text-center rounded-md text-white mt-2">
+                  {isSubmit && (
+                    <Loading color="text-white" height={6} width={6} />
+                  )}
                   Start
                 </button>
               )}

@@ -1,4 +1,3 @@
-import { LightningBoltIcon } from '@heroicons/react/outline';
 import { CheckIcon, EyeIcon } from '@heroicons/react/solid';
 import Input from 'components/devices/universal/atoms/Input';
 import Loading from 'components/devices/universal/atoms/Loading';
@@ -175,23 +174,30 @@ const Forgot = ({ history }) => {
             ? 'sm:h-auto sm:w-2/3 md:w-1/2 h-full w-full opacity-100'
             : ' h-0 opacity-0'
         }`}>
-        <div className="p-2 flex items-center justify-center ml-4 sm:hidden">
+        <div className="p-2 flex flex-col items-center justify-center ml-4 sm:hidden">
           <img
-            src={`${process.env.PUBLIC_URL}/assets/images/logo.png`}
+            src={`${process.env.PUBLIC_URL}/assets/images/logo.svg`}
             alt="bg"
-            className={`transition-all duration-500 ease-in-out -mt-14 mb-12 "${
+            className={`transition-all duration-500 ease-in-out -mt-14  "${
               isLoad ? 'h-24 w-36  ' : 'h-0 w-0'
             } `}
           />
+          <h1 className="text-2xl text-coolGray-800 font-bold mt-2 mb-2">
+            SIMAKINS
+          </h1>
         </div>
         <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-pink-600 to-red-500 tracking-wider hidden  mb-12 sm:inline-flex sm:items-center">
-          <LightningBoltIcon className="h-12 w-12 text-pink-600" /> Almuazaf
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/images/simakins.svg`}
+            alt="bg"
+            className={`transition-all duration-500 ease-in-out h-16`}
+          />
         </h1>
         <div className="flex flex-col gap-4 mt-8 sm:mt-0">
-          <h1 className="md:text-3xl text-2xl text-gray-800 font-bold">
-            Forgot Password
+          <h1 className="md:text-3xl text-2xl text-gray-700 font-bold">
+            Reset Password
           </h1>
-          <h5 className="text-sm font-light md:font-normal lg:text-base text-gray-500 tracking-wide -mt-2 ">
+          <h5 className="text-sm font-light md:font-normal lg:text-base text-gray-500 -mt-2 ">
             Enter your WhatsApp number. We will send you a verification code to
             change your password.
           </h5>
@@ -210,19 +216,14 @@ const Forgot = ({ history }) => {
               value={state.phone}
               onChange={setState}
             />
-            {isConfirm ? (
-              <div className="flex items-center justify-center">
-                <Loading height={8} width={8} />
-                <p className="text-apss-text text-opacity-50">Loading ....</p>
-              </div>
-            ) : (
-              state.phone.length > 8 && (
-                <button
-                  type="submit"
-                  className="hover:from-pink-700 hover:to-red-600 transition duration-300 ease-in-out bg-gradient-to-br from-pink-600 to-red-500 p-2 rounded-md text-white font-semibold text-lg w-full mt-2">
-                  Get OTP
-                </button>
-              )
+            {state.phone.length > 8 && (
+              <button
+                type="submit"
+                disabled={isConfirm}
+                className="disabled:opacity-40 flex gap-2 justify-center items-center hover:bg-blueGray-800 transition duration-300 ease-in-out bg-apps-login p-2 rounded-md text-white font-semibold text-lg w-full mt-2">
+                {isConfirm && <Loading color="text-white" height={6} />}
+                Get OTP
+              </button>
             )}
           </form>
         )}
@@ -236,7 +237,7 @@ const Forgot = ({ history }) => {
           onEnter={() => setisOtp(true)}
           onExit={() => setisUser(true)}>
           <form onSubmit={submitVerification}>
-            <div className="grid grid-cols-6 gap-2 lg:mx-24 mb-12 mx-6 transition-all duration-500 ease-in-out">
+            <div className="grid grid-cols-6 gap-2 mt-8 lg:mt-8 lg:mx-24 mb-12 mx-6 transition-all duration-500 ease-in-out">
               {Array.from(Array(6), (item, index) => (
                 <input
                   key={index}
@@ -249,18 +250,14 @@ const Forgot = ({ history }) => {
                 />
               ))}
             </div>
-            {isConfirm ? (
-              <div className="flex items-center justify-center">
-                <Loading height={8} width={8} />
-                <p className="text-apss-text text-opacity-50">Loading ....</p>
-              </div>
-            ) : (
-              <button
-                type="submit"
-                className="bg-apps-primary p-2 rounded-md text-white font-semibold text-lg w-full -mt-2">
-                Verification
-              </button>
-            )}
+
+            <button
+              type="submit"
+              disabled={isConfirm}
+              className="disabled:opacity-40 flex gap-2 justify-center items-center bg-apps-primary p-2 rounded-md text-white font-semibold text-lg w-full -mt-2">
+              {isConfirm && <Loading color="text-white" height={6} />}
+              Verification
+            </button>
           </form>
         </CSSTransition>
         {/* )} */}
@@ -337,7 +334,7 @@ const Forgot = ({ history }) => {
         {/* end form new password */}
         <Link
           to="/login"
-          className="text-gray-400 font-semibold text-sm text-center w-full underline mt-8 hover:text-gray-600 transition-all duration-300">
+          className="text-gray-400 font-normal text-sm text-center w-full underline mt-8 hover:text-gray-600 transition-all duration-300">
           Back to login?
         </Link>
       </div>

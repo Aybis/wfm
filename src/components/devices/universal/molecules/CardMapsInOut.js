@@ -11,8 +11,8 @@ const CardMapsInOut = ({ mark, address, className, height = '100%' }) => {
   const [selected, setSelected] = useState(false);
   const [didMount, setDidMount] = useState(false);
   const [isCenter, setisCenter] = useState({
-    lat: -6.336465,
-    lng: 107.323785,
+    lat: 0,
+    lng: 0,
   });
 
   const [addres, setaddres] = useState('Anda Disini');
@@ -40,11 +40,6 @@ const CardMapsInOut = ({ mark, address, className, height = '100%' }) => {
     width: '100%',
     height: height,
   };
-
-  // const center = {
-  //   lat: -6.336465,
-  //   lng: 107.323785,
-  // };
 
   const options = {
     disableDefaultUI: true,

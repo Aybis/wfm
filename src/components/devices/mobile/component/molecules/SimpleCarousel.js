@@ -40,10 +40,8 @@ const SimpleCarousel = () => {
         {images.map((image) => (
           <motion.div
             onClick={() => handlerClickShowModalImage(image)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.85 }}
             key={Math.random()}
-            className="rounded-lg p-2">
+            className="rounded-lg p-2 cursor-pointer">
             <div className=" rounded-lg">
               <img
                 alt={image}

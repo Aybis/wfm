@@ -17,8 +17,9 @@ export default function CardOvertimeApproval({
   timeIn,
   timeOut,
   status,
-  link = '/details',
+  link = `/details`,
   isSend,
+  idOvertime,
 }) {
   const history = useHistory();
   let classStatus = 'bg-apps-yellow text-gray-700';
@@ -48,21 +49,23 @@ export default function CardOvertimeApproval({
   };
 
   const handlerClickPage = () => {
-    !isSend && history.push(link);
+    idOvertime
+      ? !isSend && history.push(`${link}/${idOvertime}`)
+      : history.push(link);
   };
 
   return (
     <motion.div variants={item}>
       <div
         onClick={handlerClickPage}
-        className=" flex justify-between p-4 lg:px-6 rounded-lg lg:flex-col h-auto bg-gradient-to-br from-white hover:from-coolGray-400 hover:via-coolGray-100 hover:to-coolGray-50 hover:shadow-lg transition-all duration-500 ease-in-out bg-size-200 bg-pos-0 hover:bg-pos-100">
+        className=" flex justify-between p-4 lg:px-6 rounded-lg lg:flex-col h-auto bg-gradient-to-br from-white hover:from-coolGray-400 hover:via-coolGray-100 hover:to-coolGray-50 shadow-lg transition-all duration-500 ease-in-out bg-size-200 bg-pos-0 hover:bg-pos-100">
         <div className="flex flex-col gap-3 lg:mt-3 w-3/5 lg:w-full lg:h-32 lg:gap-4 lg:my-2">
           <h1 className="text-sm group-hover:text-white lg:text-base font-medium text-gray-700 capitalize max-h-24">
             {title}
           </h1>
           <div className="flex flex-col gap-2 lg:gap-2">
             {name && (
-              <h4 className="text-xs group-hover:text-white text-gray-400 lg:text-sm flex gap-2 items-center">
+              <h4 className="text-xs group-hover:text-white text-gray-400 lg:text-sm flex gap-2 items-center capitalize">
                 <UserIcon className="h-4 w-4 lg:h-5 lg:w-5 " />
                 {name}
               </h4>

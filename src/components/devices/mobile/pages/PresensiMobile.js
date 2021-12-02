@@ -33,6 +33,10 @@ const PresensiMobile = ({ history }) => {
   const USER = useSelector((state) => state.users);
   const ABSENSI = useSelector((state) => state.absensi);
   const [linkDownloadReport, setLinkDownloadReport] = useState('#');
+  const [temp, settemp] = useState({
+    month: '',
+    year: '',
+  });
 
   const dispatch = useDispatch();
 
@@ -63,11 +67,25 @@ const PresensiMobile = ({ history }) => {
   };
 
   const handlerOnChange = (type, value) => {
-    let month = type === 'bulan' ? value : convertDate('month');
-    let year = type === 'tahun' ? value : convertDate('fullYear');
-    getDataReportPersonal(month, year);
-    getDashboardReportPersonal(month, year);
-    createLinkDownload(month, year);
+    if (type === 'bulan') {
+      settemp({
+        month: value,
+        year: temp.year,
+      });
+      getDataReportPersonal(value, temp.year);
+      getDashboardReportPersonal(value, temp.year);
+      createLinkDownload(value, temp.year);
+    }
+
+    if (type === 'tahun') {
+      settemp({
+        month: temp.month,
+        year: value,
+      });
+      getDataReportPersonal(temp.month, value);
+      getDashboardReportPersonal(temp.month, value);
+      createLinkDownload(temp.month, value);
+    }
   };
 
   const getDashboardReportPersonal = (month, year) => {
@@ -77,8 +95,8 @@ const PresensiMobile = ({ history }) => {
       .fetchSummaryPersonal({
         params: {
           user_id: USER?.id,
-          month: month ?? convertDate('month'),
-          year: year ?? convertDate('fullYear'),
+          month: month,
+          year: year,
         },
       })
       .then((response) => {
@@ -100,7 +118,7 @@ const PresensiMobile = ({ history }) => {
           user_id: USER?.id,
           month: month ?? convertDate('month'),
           year: year ?? convertDate('fullYear'),
-          size: 32,
+          size: 100,
         },
       })
       .then((res) => {

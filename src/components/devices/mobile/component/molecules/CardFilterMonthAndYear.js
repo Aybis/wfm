@@ -46,6 +46,7 @@ export default function CardFilterMonthAndYear({
             {item}
           </option>
         ))}
+        <option value="all">All</option>
       </Select>
       <Select
         fallbackText={`${tahun}`}
@@ -54,10 +55,12 @@ export default function CardFilterMonthAndYear({
         onClick={setState}
         border={border}
         handlerChange={handlerOnChange}>
+        <option value={timeStamp.getFullYear() - 1}>
+          {timeStamp.getFullYear() - 1}
+        </option>
         <option value={timeStamp.getFullYear()}>
           {timeStamp.getFullYear()}
         </option>
-        <option value="all">All</option>
       </Select>
     </motion.div>
   );

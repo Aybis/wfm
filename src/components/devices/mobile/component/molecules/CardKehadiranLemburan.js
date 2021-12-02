@@ -48,7 +48,7 @@ export default function CardKehadiranLemburan() {
       whileTap={ABSENSI?.dataOut?.jam && { scale: 0.9 }}
       onClick={() => handlerClickGotoPage()}
       className="relative mt-20 mb-4">
-      <div className="flex bg-white rounded-lg p-4">
+      <div className="flex bg-white rounded-lg p-4 shadow-xl">
         <div className="flex justify-center items-start gap-4 w-4/5 ">
           <div className="bg-gray-500 bg-opacity-10 rounded-md p-2">
             <img

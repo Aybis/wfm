@@ -77,7 +77,7 @@ function App() {
             component={Dashboard}></Authenticated>
           <Authenticated
             exact
-            path="/details"
+            path="/details/:id"
             component={DetailApproval}></Authenticated>
           <Authenticated
             exact

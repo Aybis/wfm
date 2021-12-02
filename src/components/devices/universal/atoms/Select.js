@@ -49,7 +49,7 @@ export default function Select({
       <div className="relative" ref={selectWrapper} onClick={toggleSelect}>
         <div
           className={[
-            'flex justify-between rounded-md cursor-pointer bg-white focus:border-gray-800  transition-all duration-200 border-2 px-4 py-2 pr-4 w-full text-gray-800 capitalize',
+            'flex justify-between rounded-md cursor-pointer bg-white focus:border-apps-primary  transition-all duration-200 border-2 px-4 py-2 pr-4 w-full text-gray-800 capitalize',
             toggle
               ? 'border-gray-800'
               : `${border ? 'border-transparent' : 'border-gray-200'}`,

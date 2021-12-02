@@ -15,7 +15,7 @@ export default function CardApprover({ image, name, status, date, time }) {
   return (
     <motion.div
       variants={item}
-      className="flex justify-between p-2 border-b border-gray-200">
+      className="flex justify-between p-2 border-b border-gray-200 ">
       <div className="flex items-center gap-4">
         {image ? (
           <img src={image} alt="approval" className="h-12 w-12 rounded-full" />
@@ -23,12 +23,17 @@ export default function CardApprover({ image, name, status, date, time }) {
           <UserCircleIcon className="h-14 w-14 rounded-full" />
         )}
         <div className="flex flex-col ">
-          <h4 className="text-sm font-semibold text-gray-800">{name}</h4>
+          <h4 className="text-sm font-semibold text-gray-800 capitalize">
+            {name}
+          </h4>
           <h4
-            className={`text-sm font-medium  ${
-              status ? 'text-apps-primary' : 'text-yellow-500'
-            }`}>
-            {`${status ? 'Approve' : 'Progress'}`}
+            className={[
+              'text-sm font-medium capitalize ',
+              status === 'reject' && 'text-red-500',
+              status === 'progress' && 'text-yellow-500',
+              status === 'approve' && 'text-apps-primary',
+            ].join(' ')}>
+            {`${status}`}
           </h4>
           <h4 className="mt-1 text-xs font-light text-gray-400">
             {convertDate('fullDayMonthYear')}
